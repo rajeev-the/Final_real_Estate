@@ -53,11 +53,11 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-lg p-4 flex flex-col items-center space-y-4 md:hidden">
-          <a  href="#" className="text-gray-700">Home</a>
-          <a href="#" className="text-gray-700">Land List</a>
-          <a href="#" className="text-gray-700">Agents</a>
-          <a href="#" className="text-gray-700">Map Service</a>
-          <a href="#" className="text-gray-700">Contact Us</a>
+          <Link to={"/"}  className="text-gray-700">Home</Link>
+          <Link  to={"landlist"} className="text-gray-700">Land List</Link>
+          <Link to={"agents"} className="text-gray-700">Agents</Link>
+          <Link to={"/"} className="text-gray-700">Map Service</Link>
+          <Link  to={"/"}className="text-gray-700">Contact Us</Link>
           <button className="border border-gray-500 px-4 py-2 rounded-lg text-gray-700">
             LogIn
           </button>
