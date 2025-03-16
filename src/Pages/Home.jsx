@@ -77,7 +77,7 @@ const Home = () => {
         </div>
 
         {/* Hot Selling Lands Section */}
-        <div className="flex flex-col gap-4 md:gap-[30px] w-full sm:mt-[150px] mt-[50px] max-w-7xl mx-auto">
+        <div className="flex flex-col gap-4 md:gap-[30px] w-full sm:mt-[150px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
           <h1 className="text-center text-xl font-bold sm:text-3xl text-black">
             Hot Selling Lands in India
           </h1>
