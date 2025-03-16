@@ -19,9 +19,9 @@ const Navbar = () => {
       <ul className="hidden md:flex space-x-14 text-black font-normal" style={{ fontFamily: "Krub, sans-serif" }}>
         {[
           { name: "Home", link: "/" },
-          { name: "Land List", link: "/landlist" },
+          { name: "Land List", link: "landlist" },
           { name: "Map Service", link: "/" },
-          { name: "Agents", link: "/" },
+          { name: "Agents", link: "agents" },
           { name: "Contact Us", link: "/" },
         ].map((item) => (
             <Link
@@ -40,7 +40,7 @@ const Navbar = () => {
         ))}
       </ul>
         {/* Login Button */}
-        <Link  to={"/login"}  style={{ fontFamily: "Krub, sans-serif" }} className="hidden md:block border-2 border-[#826CB0] px-10 py-2 rounded-lg text-black  font-medium">
+        <Link  to={"/login"}  style={{ fontFamily: "Krub, sans-serif" }} className="    transform transition duration-300 ease-in-out hover:scale-105  hidden md:block border-2 border-[#826CB0] px-10 py-2 rounded-lg text-black  font-medium">
           LogIn
         </Link>
       </div>

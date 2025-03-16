@@ -7,10 +7,10 @@ const Layout = () => {
   return (
 <>
     
-    <div className=" h-full w-full ">
+    <div className=" h-full w-full  ">
       
     <Navbar/>
-      <div>
+      <div className="">
         <Outlet /> {/* This renders the current page */}
       </div>
   

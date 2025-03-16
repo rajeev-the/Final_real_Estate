@@ -21,9 +21,9 @@ const Home = () => {
       <div className="min-h-screen w-full relative bg-white pt-3 sm:pt-5 -top-2 sm:-top-5 rounded-t-lg z-10">
         
         {/* Banner Section */}
-        <div className="h-[200px] sm:h-[600px] w-full flex justify-center items-center rounded-lg overflow-hidden">
+        <div className="h-[200px] sm:h-[600px] sm:p-5 p-3 w-full flex justify-center items-center  rounded-lg overflow-hidden">
           <img
-            className="h-full w-full object-cover"
+            className="h-full w-full  rounded-xl object-cover"
             src={desktopBanner}
             alt="Banner"
           />

@@ -6,6 +6,8 @@ import LandList from './Pages/LandList';
 import Login from './Pages/Login';
 import LoginAgent from './Pages/LoginAgent';
 import LoginUser from './Pages/LoginUser';
+import Agents from './Pages/Agents';
+import StateAgenet from './Pages/StateAgenet';
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
           <Route index element={<Home />} /> {/* Default Home Page */}
           <Route path="home" element={<Home />} />
           <Route path="landlist" element={<LandList />} />
+          <Route path='agents' element={<Agents/>} />
+          <Route path='agents/:state' element={<StateAgenet/>} />
         </Route>
         
         <Route path="/login" >

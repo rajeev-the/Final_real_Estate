@@ -40,7 +40,7 @@ const LandList = () => {
  
 
   return (
-    <div className='mt-[5px] p-[15px] h-full w-full    '>
+    <div className='mt-[100px] p-[15px] h-full w-full    '>
 
 {/* --->  This is  Image  section  */}
 <div className='Top-sections  mb-3  px-8 
