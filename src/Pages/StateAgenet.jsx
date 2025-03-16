@@ -7,7 +7,7 @@ const StateAgenet = () => {
     const {state} = useParams()
 
   return (
-    <div className=' w-full mt-[100px] bg-gray-100 sm:p-5 rounded-2xl   gap-[40px] flex  items-center sm:justify-start   justify-center   flex-wrap '>
+    <div className=' w-full mt-[100px] p-2 bg-gray-100 sm:p-5 rounded-2xl   gap-[40px] flex  items-center sm:justify-start   justify-center   flex-wrap '>
     <StateAgents/>
     <StateAgents/>
     <StateAgents/>
