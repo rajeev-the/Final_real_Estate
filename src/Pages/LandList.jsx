@@ -77,10 +77,9 @@ const LandList = () => {
 </Title>
 
 <div className='flex gap-2  justify-evenly'>
-
-   <CustomCard />
-   <CustomCard />
-   <CustomCard />
+<Link to={"/Land/iiid"}> <CustomCard /> </Link>
+<Link to={"/Land/iiid"}> <CustomCard /> </Link>
+<Link to={"/Land/iiid"}> <CustomCard /> </Link>
    <Link to={"/Land/iiid"}> <CustomCard /> </Link>
 
 
