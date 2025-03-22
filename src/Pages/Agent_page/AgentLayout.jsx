@@ -1,15 +1,15 @@
 import React from "react";
- import Navbar from "./componets/Navbar";
- import Footer from "./componets/Footer";
+import AgentNavbar from "../../componets/AgentNavbar";
+import Footer from "../../componets/Footer"
 import { Outlet } from "react-router-dom"; // Outlet renders nested routes
 
-const Layout = () => {
+const AgentLayout = () => {
   return (
-<>
+    <>
     
     <div className=" h-full w-full  ">
       
-    <Navbar/>
+    <AgentNavbar/>
       <div>
         <Outlet /> {/* This renders the current page */}
       </div>
@@ -19,7 +19,7 @@ const Layout = () => {
     
 
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default AgentLayout

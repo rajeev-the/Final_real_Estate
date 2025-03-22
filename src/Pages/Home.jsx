@@ -5,9 +5,10 @@ import GZ from "../assets/GZ.jpeg";
 import HR from "../assets/HR.jpeg";
 import LandCard from "../componets/LandCard"
 
-const Home = () => {
+const Home = ({agent}) => {
   const [show, setShow] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState("Harayana");
+ 
 
 
   const locations = ["Harayana", "Gurugram", "Noida", "Ghaziabad"];
@@ -15,7 +16,12 @@ const Home = () => {
   return (
     <>
       {/* Top Header Bar */}
-      <div className="w-full h-16 sm:h-[102px] bg-[#826CB0] relative z-0"></div>
+
+       {
+        agent ?  <div className="w-full h-16 sm:h-[102px] bg-[#826CB0] relative z-0"></div> :<></>
+
+      }
+     
 
       {/* Main Content */}
       <div className="min-h-screen w-full relative bg-white pt-3 sm:pt-5 -top-2 sm:-top-5 rounded-t-lg z-10">

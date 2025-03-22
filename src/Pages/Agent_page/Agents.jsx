@@ -1,9 +1,9 @@
 import React from 'react'
-import img1 from '../assets/hary.png'
-import img2 from '../assets/Noida.png'
-import img3 from '../assets/gurgram.png'
-import img4 from '../assets/gz.png'
-import BoxAgent from '../componets/BoxAgent'
+import img1 from '../../assets/hary.png'
+import img2 from '../../assets/Noida.png'
+import img3 from '../../assets/gurgram.png'
+import img4 from '../../assets/GZ.png'
+import BoxAgent from '../../componets/BoxAgent'
 
 
 const Agents = () => {

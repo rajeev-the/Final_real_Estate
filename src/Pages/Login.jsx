@@ -19,7 +19,7 @@ const Login = () => {
 
       {/* Buttons */}
       <div className="space-y-4">
-        <Link to={"/home"} className="block w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg text-lg font-semibold shadow-md transition transform hover:scale-105 hover:shadow-lg">
+        <Link to={"user"} className="block w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg text-lg font-semibold shadow-md transition transform hover:scale-105 hover:shadow-lg">
           User Login
         </Link>
         <Link to={"agent"} className="block w-full py-3 px-6 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-lg text-lg font-semibold shadow-md transition transform hover:scale-105 hover:shadow-lg">

@@ -1,11 +1,12 @@
 import React, { useState ,useEffect } from 'react'
 import { Input, Button } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
-import CustomCard  from '../componets/CustomCard '
+import CustomCard  from '../componets/CustomCard'
 import { Typography } from 'antd';
 const { Title } = Typography;
 import xx1 from "../assets/xx1.jpg"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
@@ -56,7 +57,7 @@ const LandList = () => {
 
 {/* --->  This is  first section  */}
 
-<div className='  border-2 border-gray-100 py-6 px-8 rounded-xl mb-3  ml-[18px]  mr-[18px] shadow-sm '  style={{
+<div className='bg-gray-100 sm:mt-5  border-2 border-gray-100 py-6 px-8 rounded-xl mb-3  ml-[18px]  mr-[18px] shadow-sm '  style={{
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow
 }}
 >
@@ -76,10 +77,11 @@ const LandList = () => {
 </Title>
 
 <div className='flex gap-2  justify-evenly'>
+
    <CustomCard />
    <CustomCard />
    <CustomCard />
-   <CustomCard />
+   <Link to={"/Land/iiid"}> <CustomCard /> </Link>
 
 
     </div>   
@@ -118,7 +120,7 @@ const LandList = () => {
 
 
    {/* Third Sections of the Filtering according to state  */}
-   <div className="relative m-[10px] flex gap-3 items-center w-full  justify-end p-4">
+   <div className="relative m-[10px] flex gap-3 items-center w-full   justify-end p-4">
       <Input
       style={{
  width:"400px",
@@ -140,7 +142,7 @@ const LandList = () => {
 
    {/* this the section of state under the land  */}
 
-   <div className='  border-2 border-gray-100 py-6 px-8 rounded-xl mb-3  ml-[18px]  mr-[18px] shadow-sm '  style={{
+   <div className=' bg-gray-100  border-2 border-gray-100 py-6 px-8 rounded-xl mb-3  ml-[18px]  mr-[18px] shadow-sm '  style={{
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow
 }}
 >
