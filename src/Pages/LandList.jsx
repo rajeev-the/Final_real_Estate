@@ -29,10 +29,10 @@ const LandList = () => {
 
   // ✅ Prevent issues when data is undefined
   const groupedProperties = data?.reduce((acc, property) => {
-    if (!acc[property.state]) {
-      acc[property.state] = [];
+    if (!acc[property.state[0]]) {
+      acc[property.state[0]] = [];
     }
-    acc[property.state].push(property);
+    acc[property.state[0]].push(property);
     return acc;
   }, {});
 
