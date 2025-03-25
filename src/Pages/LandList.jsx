@@ -17,7 +17,7 @@ const LandList = () => {
   useEffect(() => {
     const getvalue = async () => {
       try {
-        const res = await axios.get("https://realesatate11.pythonanywhere.com/api/properties/");
+        const res = await axios.get("https://finalbackend111.pythonanywhere.com/api/property/");
         setData(res.data); // ✅ Ensure correct data assignment
       } catch (error) {
         console.error("Error fetching properties:", error);
