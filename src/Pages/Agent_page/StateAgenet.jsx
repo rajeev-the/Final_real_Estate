@@ -1,11 +1,36 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import StateAgents from '../../componets/StateAgents'
+import React, { useEffect, useState } from 'react'
+import { data, Link, useParams } from 'react-router-dom'
+
 import AgentBox from '../../componets/AgentBox'
+import axios from "axios"
 
 const StateAgenet = () => {
  
     const {state} = useParams()
+    const[value,setvalue] = useState();
+    const url = "https://finalbackend111.pythonanywhere.com/api/"
+       
+    useEffect(() => {
+         
+      const getdata = async()=>{
+        try {
+          const res =await axios.get(`${url}agent/`)
+          if(res.status ==200){
+          setvalue(res.data.filter((data)=>data.state == state))
+          }
+          
+        } catch (error) {
+          console.log(error)
+          
+        }       
+        
+      }
+
+      getdata()
+      
+    }, [])
+    
+  
 
   return (
     <div className='w-full mt-[100px] py-8 bg-gray-50 sm:px-8 rounded-3xl shadow-sm border border-gray-100'>
@@ -17,11 +42,19 @@ const StateAgenet = () => {
       </p>
   
       {/* Agent List */}
+      
       <div className='w-full flex flex-col items-center sm:items-start sm:flex-row sm:flex-wrap gap-8 px-4'>
-        <AgentBox />
-        <AgentBox />
-        < AgentBox/>
+        {
+          value?.map((mp,i)=>
+               <AgentBox  key={i} phone_number ={mp.phone_number} clickurl={`/landagent/${mp.id}`}  estate_name={mp.estate_name} language={mp.language}  rating={mp.rating} name={mp.name} img={mp.img} state={mp.state} /> 
+          )
+        }
+     
+        
+      
       </div>
+
+
       {/* Call to Action */}
       <div className='mt-10 text-center'>
         <button className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105'>

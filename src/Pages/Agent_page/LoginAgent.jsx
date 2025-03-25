@@ -1,11 +1,81 @@
 import React,{useState} from 'react'
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { Link } from "react-router-dom";
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import axios from 'axios';
+import { useNavigate ,Link } from 'react-router-dom';
 
 const LoginAgent = () => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
+  const [otpcheck, setOtpCheck] = useState(true);
+  const navigation = useNavigate();
+  const url = "https://finalbackend111.pythonanywhere.com/api/"
+
+
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!phone || phone.trim() === "") {
+        showErrorToast("Please enter a valid phone number.");
+        return;
+    }
+
+    try {
+        const res = await axios.get(`${url}agent/search-by-phone/?phone=${encodeURIComponent(phone)}`);
+
+        if (res.status === 200 && otpcheck) {
+            localStorage.setItem("Agent", JSON.stringify(res.data.agent));
+            showSuccessToast("Successfully Logged In");
+            navigation("/agent");
+        }
+    } catch (error) {
+       
+
+        if (error.response) {
+            if (error.response.status === 400) {
+                showErrorToast("Invalid phone number format. Please try again.");
+            } else if (error.response.status === 404) {
+                showErrorToast("User not found! Please enter a valid phone number.");
+            } else {
+                showErrorToast(error.response.data?.error || "An unexpected error occurred.");
+            }
+        } else {
+            showErrorToast("Something went wrong. Check your internet connection.");
+        }
+    }
+};
+
+  const showSuccessToast = (data1) => {
+    toast.success(data1 , {
+      position: "top-right",
+      autoClose: 3000, // Closes after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const showErrorToast = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 3000, // Closes after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative">
     {/* Background with buildings overlay */}
@@ -13,7 +83,7 @@ const LoginAgent = () => {
       <img 
         src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
         alt="City Background"
-        className="w-full h-full object-cover  blur-sm "
+        className="w-full h-full object-cover blur-sm"
       />
     </div>
   
@@ -66,12 +136,24 @@ const LoginAgent = () => {
             Send OTP
           </button>
   
-         <Link to={"/agent"}> <button   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            Verify OTP
-          </button> </Link>
+         
+            <button onClick={handleSubmit} className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Verify OTP
+            </button>
+          
+        </div>
+  
+        {/* Sign Up Link */}
+        <div className="mt-4 text-center">
+          <p className="text-gray-600">
+            Don't have an account?{" "}
+            <Link to="/signup/agent" className="text-blue-600 font-semibold hover:underline">
+              Sign Up
+            </Link>
+          </p>
         </div>
   
         {/* Security Assurance */}
@@ -84,6 +166,7 @@ const LoginAgent = () => {
       </div>
     </div>
   </div>
+  
   )
 }
 

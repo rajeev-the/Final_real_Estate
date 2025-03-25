@@ -1,0 +1,38 @@
+import axios from "axios";
+import { createContext, useState, useContext, useEffect } from "react";
+
+// 1. Create Context
+const AppContext = createContext();
+
+// 2. Create Provider Component
+export const AppProvider = ({ children }) => {
+  const [property, setProperty] = useState([]);
+  const url = "https://finalbackend111.pythonanywhere.com/api/"
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${url}property/`);
+
+        if (res.status === 200) {
+          setProperty(res.data);
+        }
+      } catch (error) {
+        console.log("Error fetching property data:", error);
+      }
+    };
+
+    fetchData(); // ✅ Call the function inside useEffect
+  }, []);
+
+  return (
+    <AppContext.Provider value={{ property }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+// 3. Custom Hook for easier access
+export const useAppContext = () => {
+  return useContext(AppContext);
+};

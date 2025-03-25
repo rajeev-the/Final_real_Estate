@@ -4,7 +4,10 @@ import { WhatsAppOutlined } from "@ant-design/icons"; // Import WhatsApp icon
 const { Meta } = Card;
 
 const StateAgents = () => {
+  const phoneNumber = "9310650163"; // Replace with your WhatsApp number
+  const whatsappLink = `https://wa.me/${phoneNumber}`;
   return (
+
     <Card
       style={{
         width: 320,
@@ -79,7 +82,9 @@ const StateAgents = () => {
           onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.2)"}
           onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
         >
-          <WhatsAppOutlined />
+          
+      <WhatsAppOutlined style={{ fontSize: "24px", color: "green" }} />
+   
         </div>
       </div>
     </Card>

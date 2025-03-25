@@ -6,7 +6,7 @@ const { Title, Text } = Typography;
 const CustomCard = ({
   property_name,
   acre,
-  acre_price
+  acre_price,img
 
   }) => {
   return (
@@ -48,7 +48,7 @@ const CustomCard = ({
           />
         </div>
       }
-      bodyStyle={{ padding: "15px" }} // Adjust body padding
+      // Adjust body padding
     >
       {/* Location Text */}
       <Text

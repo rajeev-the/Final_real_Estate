@@ -1,16 +1,54 @@
 import React from "react";
 import { Card, Typography , Tooltip  } from "antd"; // Import Ant Design Components
 import { DeleteOutlined } from "@ant-design/icons"; // Import delete icon
+import axios from "axios";
 
 const { Title, Text } = Typography;
 
 const CustomCardDel = ({
   property_name,
   acre,
-  acre_price
+  acre_price,
+  item
 
-  }) => {
+}) => {
+
+  const url = "https://finalbackend111.pythonanywhere.com/api/"
+
+    const handledelete = async(id) => {
+
+      try {
+               
+      const res = await axios.delete(`${url}property/${id}/`)
+     if(res.status === 204){
+        showInfoToast("Successfully Deleted")
+     }
+      window.location.reload()
+
+        
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
+
+      const showInfoToast = (message) => {
+          toast.info(message, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "colored",
+          });
+        };
+    
   return (
+
+
+
     <Card
       hoverable
       style={{
@@ -64,11 +102,12 @@ const CustomCardDel = ({
                 borderRadius: "50%",
                 transition: "0.3s",
               }}
+              onClick={() => handledelete(item)}
             />
           </Tooltip>
         </div>
       }
-      bodyStyle={{ padding: "15px" }}
+     
     >
       {/* Property Location */}
       <Text

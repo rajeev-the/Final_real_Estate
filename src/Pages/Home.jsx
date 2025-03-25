@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import desktopBanner from "../assets/desktop-banner.jpeg";
 import ND from "../assets/ND.jpeg";
 import GZ from "../assets/GZ.jpeg";
 import HR from "../assets/HR.jpeg";
 import LandCard from "../componets/LandCard"
+import {useAppContext } from "../Context/Poperty_context"
+import { Link } from "react-router-dom";
 
 const Home = ({agent}) => {
   const [show, setShow] = useState(true);
-  const [selectedLocation, setSelectedLocation] = useState("Harayana");
+  const[data,setdata] = useState([])
+  const { property } = useAppContext();
+  const [selectedLocation, setSelectedLocation] = useState("Noida");
+  
+  console.log(data)
+
+  useEffect(() => {
  
+  setdata(property.filter((et)=>et.state[0]==selectedLocation))
+
+
+  }, [selectedLocation,property])
+  
+
 
 
   const locations = ["Harayana", "Gurugram", "Noida", "Ghaziabad"];
@@ -106,13 +120,22 @@ const Home = ({agent}) => {
           </div>
 
           {/* Land Cards Carousel */}
-          <div className="flex  [&::-webkit-scrollbar]:hidden scrollbar-none flex-row justify-center items-center overflow-x-auto gap-4 md:gap-[50px] w-full pb-1 p-3 scroll-smooth">
-            <LandCard />
-            <LandCard />
-            <LandCard />
-            <LandCard />
-           
-          </div>
+          <div className="overflow-y-auto h-[500px] max-h-screen scrollbar-none [&::-webkit-scrollbar]:hidden p-3">
+  <div className="flex flex-row  justify-center items-center gap-4 md:gap-[50px] w-full">
+    {data?.slice(0, 4).map((e, i) => (
+      <Link to={`/Land/${e.id}`} key={e.id}>  
+        <LandCard 
+          acre={e.acre} 
+          address={e.address} 
+          acre_price={e.acre_price}  
+          img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"} 
+        /> 
+      </Link>
+    ))}
+  </div>
+</div>
+
+
         </div>
       </div>
     </>

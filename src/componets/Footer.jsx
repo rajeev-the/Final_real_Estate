@@ -10,7 +10,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="relative bg-[#A5B8D3] text-black pt-10 pb-24 px-6 mt-10 rounded-t-3xl">
+    <div className="relative bg-[#A5B8D3] text-black pt-10 pb-24 px-6 mt-12 rounded-t-3xl">
       {/* Footer Content */}
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left   mb-[100px]">
         {footerLinks.map((section, index) => (

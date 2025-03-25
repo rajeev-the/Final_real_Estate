@@ -2,16 +2,35 @@ import React,{useState} from 'react'
 import {UserOutlined} from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import {Tooltip} from "antd"
-
-
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const AgentNavbar = () => {
 
-
+const data = JSON.parse(localStorage.getItem("Agent"))
 
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Place useNavigate here
+
+  const handlelogout =()=>{
+    localStorage.removeItem("Agent")
+    showInfoToast("Logout Successful")
+    navigate("/login")
+
+  }
+  const showInfoToast = (message) => {
+    toast.info(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "colored",
+    });
+  };
+    
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -26,7 +45,7 @@ const AgentNavbar = () => {
         <Link to={""} className="text-white hover:text-gray-300">Home</Link>
         <Link to={"land"} className="text-white hover:text-gray-300">Land</Link>
         <Link to={"holding"} className="text-white hover:text-gray-300">Holding</Link>
-        <Link to={'#'} className="text-white hover:text-gray-300">Contact</Link>
+        <Link to={'contact'} className="text-white hover:text-gray-300">Contact</Link>
       </div>
       <div className="md:hidden">
         <button onClick={toggleMenu} className="text-white focus:outline-none">
@@ -37,9 +56,19 @@ const AgentNavbar = () => {
       </div>
       <div className="hidden md:flex">
        <Tooltip 
-       onClick={ () =>navigator("/login")}
+       
       title={
-      <Link  to={"/login"}> <p className='text-white hover:text-gray-300 font-semibold transition-colors'>Logout </p> </Link>
+        <ul className="p-4 space-y-4">
+        <li className="pb-2">{data.name}</li>
+        <button
+          onClick={handlelogout}
+          className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
+        >
+          Logout
+        </button>
+      </ul>
+
+     
       } 
       style={{
                 position: "absolute",
