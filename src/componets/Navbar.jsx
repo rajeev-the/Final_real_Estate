@@ -11,6 +11,7 @@ const Navbar = ({ data }) => {
   const [active, setActive] = useState("Home"); 
   const [activeuser, setActiveUser] = useState(data ? false : true);
   const navigation = useNavigate();
+  
 
   const handleLogout = () => {
     localStorage.removeItem("User");
@@ -77,7 +78,7 @@ const Navbar = ({ data }) => {
             <Tooltip
               title={
                 <ul className="p-4 space-y-2">
-                  <li className="pb-2">{data.user.name}</li>
+                  <li className="pb-2">{data.user.name ? data.user.name : data.name}</li>
                   <button
                     onClick={handleLogout}
                     className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
