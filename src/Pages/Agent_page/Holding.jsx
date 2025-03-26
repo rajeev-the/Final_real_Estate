@@ -13,6 +13,7 @@ const Holding = () => {
   const [data, setData] = useState([])
   const idData = JSON.parse(localStorage.getItem("Agent"))
   const url = "https://finalbackend111.pythonanywhere.com/api/"
+
   
 
   useEffect(() => {

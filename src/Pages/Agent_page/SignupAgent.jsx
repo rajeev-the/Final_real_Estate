@@ -11,11 +11,12 @@ const SignupAgent = () => {
       const [name,setName] = useState("");
       const [estate,setEstate] = useState("");
       const [file,setFile] = useState(null);
-      const [state,setState] = useState("");
+      const [state,setState] = useState();
       const [selectedLanguages, setSelectedLanguages] = useState([]);
       const [checkuser , setCheckuser] = useState(false)
       const navigation = useNavigate()
       const url = "https://finalbackend111.pythonanywhere.com/api/"
+     
 
       const handleLang = (lang) => (event) => {
         if (event.target.checked) {
@@ -25,52 +26,46 @@ const SignupAgent = () => {
         }
     }
 
-
-    const handleSign = async (e)=>{
-        e.preventDefault();
+    const handleSign = async (e) => {
+      e.preventDefault();
+    
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('estate_name', estate);
+      formData.append('phone_number', phone);
+      formData.append('language', JSON.stringify(selectedLanguages));
+      formData.append('state', JSON.stringify({ state })); // Assuming state is a string from dropdown
+      formData.append('verifications', false); // Default to false as per model
+      formData.append('rating', 0.5); // Send as string to match FloatField
       
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("estate_name", estate);
-        formData.append("phone_number", phone);
-        formData.append("img", file); // Ensure `file` is an actual File object
-        formData.append("language", JSON.stringify(selectedLanguages)); // Convert array to JSON
-        formData.append("verifications", true);
-        formData.append("rating", 0.0);
-        formData.append("state", JSON.stringify(state));
-        try {
-            const res = await axios.post(`${url}agent/`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data", // Required for file uploads
-                },
-            });
-
-            if(res.status ==200){
-                console.log("ok")
-            }
-            setPhone("")
-            setEstate("")
-            setOtp("")
-            setName("")
-            setEstate("")
-            file(null)
-            setSelectedLanguages([])
-            navigation("/agent")
-
-            
-        } catch (error) {
-            console.log(error)
-            
+      if (file) {
+        formData.append('img', file);
+      }
+    
+      try {
+        const res = await axios.post(`${url}agent/`, formData, {
+          "headers": {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        if (res.status === 200 || res.status === 201) {
+          console.log("Registration successful");
+          // Reset form states
+          setName("");
+          setEstate("");
+          setPhone("");
+          setOtp("");
+          setFile(null);
+          setSelectedLanguages([]);
+          navigation("/agent");
         }
-      
-        
 
-    }
-
-    const handlecheckout = async()=>{
-        
-        setCheckuser(true)
-    }
+        localStorage.setItem("Agent", JSON.stringify(res.data));
+      } catch (error) {
+        console.error("Error Response:", error.response?.data || error);
+      }
+    };
 
 
   return (
@@ -147,7 +142,15 @@ const SignupAgent = () => {
                 </svg>
                 <span className="mt-2 text-sm text-gray-600" >  {  file  ?  file.name  : "Upload profile photo" }</span>
               </div>
-              <input type="file"  onChange={(e)=>setFile(e.target.files[0])} className="hidden" />
+              <input 
+  type="file"  
+  onChange={(e) => {
+    console.log("Selected File:", e.target.files[0]); // Debugging
+    setFile(e.target.files[0]);
+  }} 
+  className="hidden" 
+/>
+
             </label>
           </div>
         </div>
@@ -170,7 +173,7 @@ const SignupAgent = () => {
           <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
           <select value={state} onChange={(e)=>setState(e.target.value)} className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
             <option value="">Select your state</option>
-            {['Haryana', 'Noida,Up', 'Gurgram', 'New Delhi'].map((state) => (
+            {['Haryana', 'Noida', 'Gurgram', 'New Delhi'].map((state) => (
               <option   key={state} value={state}>{state}</option>
             ))}
           </select>
@@ -189,7 +192,7 @@ const SignupAgent = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button onClick={handlecheckout} type="button" className="w-full sm:w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
+            <button  type="button" className="w-full sm:w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
               Send OTP
             </button>
             <button onClick={handleSign} className="w-full sm:w-1/2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">

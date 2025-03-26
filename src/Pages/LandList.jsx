@@ -37,7 +37,7 @@ const LandList = () => {
   }, {});
 
   
-         
+        console.log(groupedProperties) 
  
 
   return (

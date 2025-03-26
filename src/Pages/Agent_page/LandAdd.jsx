@@ -23,56 +23,64 @@ const LandAdd = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
+      
       // Create a FormData object
       const formData = new FormData();
-      formData.append("state", JSON.stringify(state));
-      formData.append("address", address);
-      formData.append("district_name", district);
-      formData.append("tehsil_name", tehsil);
-      formData.append("locations_link", location);
-      formData.append("img", file); // Make sure file is a File object, not a URL
-      formData.append("land_category", Category);
-      formData.append("road_width", Road);
-      formData.append("acre", Acre);
-      formData.append("acre_price", AcrePrice);
-      formData.append("available", Available);
-      formData.append("agent", agent.id); // Ensure agent.id is valid
-  
+      
+      // Handle null/empty values according to schema
+      formData.append("state", state ? JSON.stringify(state) : null);
+      formData.append("address", address || "");
+      formData.append("acre_price", AcrePrice ? AcrePrice : null);
+      formData.append("acre", Acre ? Acre : null);
+      formData.append("available", Available); // boolean
+      formData.append("road_width", Road ? Road : null);
+      formData.append("land_category", Category || "");
+      formData.append("district_name", district || "");
+      formData.append("tehsil_name", tehsil || "");
+      formData.append("locations_link", location || "");
+      
+      // Handle file upload properly
+      if (file instanceof File) {
+        formData.append("img", file);
+      } 
+    
+      // Handle agent relationship
+      formData.append("agent", agent?.id || null);
+    
       try {
-          const res = await axios.post(`${url}property/`, formData, {
-              headers: {
-                  "Content-Type": "multipart/form-data", // Required for FormData
-              },
-          });
-  
-          if (res.status === 201) {
-              showSuccessToast("Property added successfully");
-              setValue(res.data);
-          }
-  
-          // Reset form fields
-          setEstate("");
-          setValue([]);
-          setAvailable(false);
+        const res = await axios.post(`${url}property/`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+    
+        if (res.status === 201) {
+          showSuccessToast("Property added successfully");
+          // Reset all form fields
+          setEstate(null);
+          setAddress("");
           setAcrePrice("");
           setAcre("");
-          setFile(null);
+          setAvailable(false);
           setRoad("");
           setCategory("");
           setDistrict("");
-          setAddress("");
           setTehsil("");
           setLocation("");
-          setAgent(null);
-  
+          setFile(null);
+          
+          
           navigate("/agent/holding");
-  
+        }
       } catch (error) {
-          showErrorToast("Error in adding property");
-          console.error("❌ Error:", error.response?.data || error.message);
+        showErrorToast("Error in adding property");
+        console.error("Error details:", {
+          status: error.response?.status,
+          data: error.response?.data,
+          message: error.message
+        });
       }
-  };
+    };
   
       const showSuccessToast = (data1) => {
          toast.success(data1 , {
@@ -102,9 +110,9 @@ const LandAdd = () => {
 
     //  const handleImageChange = (e) => {
     //   const file = e.target.files[0];
-    //   if (file) {
-    //     setImage(file);
-    //   }
+      // if (file) {
+      //   setImage(file);
+      // }
     // };
 
   return (
@@ -204,7 +212,7 @@ const LandAdd = () => {
                  <option value="">Select State</option>
                  <option value={"Noida"} >Noida,Up</option>
                  <option value={"Haryana"} >Haryana</option>
-                 <option value={"New Delhi"}>Delhi</option>
+                 <option value={"Delhi"}>Delhi</option>
                </select>
              </div>
            </div>

@@ -13,11 +13,11 @@ const Home = ({agent}) => {
   const { property } = useAppContext();
   const [selectedLocation, setSelectedLocation] = useState("Noida");
   
-  console.log(data)
+ 
 
   useEffect(() => {
  
-  setdata(property.filter((et)=>et.state[0]==selectedLocation))
+  setdata(property.filter((et)=>et.state==selectedLocation))
 
 
   }, [selectedLocation,property])
