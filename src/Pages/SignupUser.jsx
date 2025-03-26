@@ -48,7 +48,7 @@ let formData = new FormData();
 formData.append("name", name);
 formData.append("phone", phone);
 
-const res = await axios.post("http://127.0.0.1:8000/api/users/", formData);
+const res = await axios.post(`${url}users/`, formData);
 
   if(res.status == 201 && otpres){
     console.log("User Created")
