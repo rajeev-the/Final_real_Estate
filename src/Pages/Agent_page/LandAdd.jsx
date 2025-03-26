@@ -28,7 +28,7 @@ const LandAdd = () => {
       const formData = new FormData();
       
       // Handle null/empty values according to schema
-      formData.append("state", state ? JSON.stringify(state) : null);
+      formData.append("state", state ? JSON.stringify({state}) : null);
       formData.append("address", address || "");
       formData.append("acre_price", AcrePrice ? AcrePrice : null);
       formData.append("acre", Acre ? Acre : null);
