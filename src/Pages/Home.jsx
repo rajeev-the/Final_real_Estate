@@ -26,7 +26,7 @@ const Home = ({agent}) => {
 
 
 
-  const locations = ["Haryana", "Gurugram", "Noida", "Ghaziabad"];
+  const locations = ["Haryana", "Delhi", "Noida", "Ghaziabad"];
   console.log(data)
 
   return (
