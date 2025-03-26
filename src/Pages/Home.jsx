@@ -17,7 +17,7 @@ const Home = ({agent}) => {
 
   useEffect(() => {
  
-  setdata(property.filter((et)=>et.state==selectedLocation))
+  setdata(property.filter((et)=>et.state == selectedLocation))
 
 
   }, [selectedLocation,property])
@@ -25,7 +25,9 @@ const Home = ({agent}) => {
 
 
 
+
   const locations = ["Haryana", "Gurugram", "Noida", "Ghaziabad"];
+  console.log(data)
 
   return (
     <>
