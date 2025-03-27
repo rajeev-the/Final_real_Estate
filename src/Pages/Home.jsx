@@ -6,6 +6,7 @@ import HR from "../assets/HR.jpeg";
 import LandCard from "../componets/LandCard"
 import {useAppContext } from "../Context/Poperty_context"
 import { Link } from "react-router-dom";
+import xxxp from "../assets/xxxp.mp4"
 
 const Home = ({agent}) => {
   const [show, setShow] = useState(true);
@@ -27,7 +28,7 @@ const Home = ({agent}) => {
 
 
   const locations = ["Haryana", "Delhi", "Noida", "Ghaziabad"];
-  console.log(data)
+ 
 
   return (
     <>
@@ -44,11 +45,17 @@ const Home = ({agent}) => {
         
         {/* Banner Section */}
         <div className="h-[200px] sm:h-[600px] sm:p-5 p-3 w-full flex justify-center items-center  rounded-lg overflow-hidden">
-          <img
+          {/* <img
             className="h-full w-full  rounded-xl object-cover"
             src={desktopBanner}
             alt="Banner"
-          />
+          /> */}
+
+          <video 
+           autoPlay 
+           loop 
+           muted
+            src={xxxp}  className="h-full w-full  rounded-xl object-cover"></video>
         </div>
 
         {/* Tabs Section */}
@@ -56,23 +63,26 @@ const Home = ({agent}) => {
           <div className="flex flex-col items-center justify-center gap-8 md:gap-[100px] w-full max-w-7xl mx-auto">
             
             {/* Toggle Buttons */}
-            <div className="flex flex-row items-center justify-center gap-4 md:gap-[80px]">
+            <div className="flex flex-row items-center justify-center gap-4 md:gap-[100px]">
+            <button
+            
+  onClick={() => setShow(true)}
+  className={`text-lg md:text-2xl   font-normal py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 border-3 text-black ${
+    show ? "border-[#826cb0] shadow-md scale-105" : "border-transparent"
+  }`}
+>
+  Top Rate
+</button>
+
               <button
-                onClick={() => setShow(true)}
-                className={`text-lg md:text-2xl font-medium py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 ${
-                  show ? "bg-[#826cb0] text-white shadow-md scale-105" : "bg-white text-black"
-                }`}
-              >
-                Top Rate
-              </button>
-              <button
-                onClick={() => setShow(false)}
-                className={`text-lg md:text-2xl font-medium py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 ${
-                  !show ? "bg-[#826cb0] text-white shadow-md scale-105" : "bg-white text-black"
-                }`}
-              >
-                Recommendation
-              </button>
+  onClick={() => setShow(false)}
+  className={`text-lg md:text-2xl font-normal py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 text-black border-3 ${
+    !show ? "border-[#826cb0] shadow-md scale-105 " : "border-transparent"
+  }`}
+>
+  Recommendation
+</button>
+
             </div>
 
             {/* Tab Content */}
@@ -99,8 +109,8 @@ const Home = ({agent}) => {
         </div>
 
         {/* Hot Selling Lands Section */}
-        <div className="flex flex-col gap-4 md:gap-[30px] w-full sm:mt-[150px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
-          <h1 className="text-center text-xl font-bold sm:text-3xl text-black">
+        <div className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[110px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
+          <h1 className="text-center text-xl   font-medium sm:text-3xl text-black"   style={{ fontFamily: "Krub, sans-serif" }} >
             Hot Selling Lands in India
           </h1>
 
@@ -110,10 +120,10 @@ const Home = ({agent}) => {
               <button
                 key={index}
                 onClick={() => setSelectedLocation(name)}
-                className={`text-sm md:text-lg font-medium py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 ${
+                className={`text-sm  text-black md:text-lg font-medium py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 ${
                   selectedLocation === name
-                    ? "bg-[#826cb0] text-white shadow-md scale-105"
-                    : "bg-white text-black"
+                    ? "  border-2 border-[#826cb0] shadow-md scale-105"
+                    : "border-transparent "
                 }`}
               >
                 {name}
@@ -122,21 +132,24 @@ const Home = ({agent}) => {
           </div>
 
           {/* Land Cards Carousel */}
-          <div className="overflow-y-auto h-[500px] max-h-screen scrollbar-none [&::-webkit-scrollbar]:hidden p-3">
-  <div className="flex flex-row  justify-center items-center gap-4 md:gap-[50px] w-full">
+          <div className="overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden">
+  <div className="flex flex-nowrap justify-start items-center gap-4 md:gap-6 p-4 min-w-min">
     {data?.slice(0, 4).map((e, i) => (
-      <Link to={`/Land/${e.id}`} key={e.id}>  
+      <Link 
+        to={`/Land/${e.id}`} 
+        key={e.id}
+        className="min-w-[300px] md:min-w-[350px] flex-shrink-0 snap-start"  
+      >  
         <LandCard 
           acre={e.acre} 
           address={e.address} 
           acre_price={e.acre_price}  
-          img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"} 
+          img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
         /> 
       </Link>
     ))}
   </div>
 </div>
-
 
         </div>
       </div>

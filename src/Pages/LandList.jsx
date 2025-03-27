@@ -27,17 +27,18 @@ const LandList = () => {
     getvalue();
   }, []);
 
-  // ✅ Prevent issues when data is undefined
-  const groupedProperties = data?.reduce((acc, property) => {
-    if (!acc[property.state[0]]) {
-      acc[property.state[0]] = [];
+  const groupedProperties = (data || []).reduce((acc, property) => {
+    if (property?.state) {  // Ensure state exists
+      if (!acc[property.state]) {
+        acc[property.state] = [];
+      }
+      acc[property.state].push(property);
     }
-    acc[property.state[0]].push(property);
     return acc;
   }, {});
+  
 
   
-        console.log(groupedProperties) 
  
 
   return (
@@ -133,7 +134,7 @@ const LandList = () => {
               textTransform: 'uppercase',
               fontFamily: "'Poppins', sans-serif",
             }}>
-            {groupedProperties[stateId][0].state_name}  
+            {groupedProperties[stateId][0].state}  
           </Title>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {groupedProperties[stateId].map(property => (

@@ -36,7 +36,7 @@ const Navbar = ({ data }) => {
 
   return (
     <>
-    <nav className=" fixed top-0 left-0 w-full z-50 bg-white  rounded-b-lg  py-2 px-6 md:px-12 flex justify-between items-center  " >
+    <nav className=" fixed top-0 left-0 w-full z-50 bg-white  rounded-b-lg  py-2 px-6 md:px-12 flex justify-between items-center   border-b-2  border-[#826CB0] " >
       {/* Logo Section */}
       <div>
         <img src={logoimg} alt="Real Estate Logo" className="h-15 w-15" />

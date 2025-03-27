@@ -9,6 +9,7 @@ const StateAgenet = () => {
     const {state} = useParams()
     const[value,setvalue] = useState();
     const url = "https://finalbackend111.pythonanywhere.com/api/"
+    console.log(value)
        
     useEffect(() => {
          
