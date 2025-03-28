@@ -90,31 +90,33 @@ const Home = ({agent}) => {
               {/* Image Cards - Wider desktop version */}
    
      
-              <div className="relative w-full">
+              <div className="w-full">
   {/* Carousel Container */}
-  <div className='flex snap-x snap-mandatory overflow-x-auto scrollbar-hide gap-4 md:gap-6 w-full pb-6 px-4 sm:px-6'>
+  <div className='flex snap-x snap-mandatory overflow-x-auto scrollbar-hide gap-4 w-full pb-6 px-4'>
     {[ND, GZ, HR].map((img, index) => (
       <div 
         key={index}
-        className='snap-center min-w-[85vw] xs:min-w-[70vw] sm:min-w-[50vw] md:min-w-[40vw] lg:min-w-[30vw] xl:min-w-[25vw] h-[180px] xs:h-[220px] sm:h-[280px] md:h-[350px] rounded-xl md:rounded-2xl flex-shrink-0 transition-all duration-300 hover:scale-[1.02] shadow-md hover:shadow-lg overflow-hidden'
+        className='snap-center min-w-[85vw] h-[220px] rounded-xl flex-shrink-0 transition-transform duration-300 hover:scale-[1.015] overflow-hidden'
       >
         <img 
-          className='h-full w-full object-cover hover:scale-105 transition-transform duration-500'
+          className='h-full w-full object-cover'
           src={img}
-          alt={`Featured Property ${index + 1}`}
+          alt=""
           loading="lazy"
         />
-        {/* Optional overlay with text */}
-       
       </div>
     ))}
   </div>
 
-  {/* Scroll hint for mobile */}
-  <div className="md:hidden flex justify-center mt-2">
-    <div className="w-8 h-1.5 bg-gray-300 rounded-full"></div>
+  {/* Scroll indicator for iPhone */}
+  <div className="flex justify-center mt-2">
+    <div className="w-8 h-1 bg-gray-200 rounded-full">
+      <div className="w-4 h-1 bg-gray-400 rounded-full mx-auto"></div>
+    </div>
   </div>
 </div>
+  {/* Carousel Container */}
+ 
 
    
 
