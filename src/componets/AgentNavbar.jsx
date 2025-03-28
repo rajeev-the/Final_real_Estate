@@ -86,10 +86,13 @@ const data = JSON.parse(localStorage.getItem("Agent"))
     </div>
     {isOpen && (
       <div className="md:hidden">
-        <a href="#" className="block text-white hover:text-gray-300 px-2 py-1">Home</a>
-        <a href="#" className="block text-white hover:text-gray-300 px-2 py-1">About</a>
-        <a href="#" className="block text-white hover:text-gray-300 px-2 py-1">Services</a>
-        <a href="#" className="block text-white hover:text-gray-300 px-2 py-1">Contact</a>
+    
+    <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={""}>Home</Link>
+        <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={"land"}>Land</Link>
+        <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={"holding"}>Holding</Link>
+        <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={"contact"}>contact</Link>
+
+       
       </div>
     )}
   </nav>

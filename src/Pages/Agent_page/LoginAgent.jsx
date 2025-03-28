@@ -104,7 +104,7 @@ const LoginAgent = () => {
           <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
           <div className="border rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
             <PhoneInput
-              country={"us"}
+              country={"in"}
               value={phone}
               onChange={(e) => setPhone(e)}
               inputClass="!border-0 !ring-0 !w-full !py-3 !px-4"

@@ -3,6 +3,9 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Link ,useNavigate } from "react-router-dom";
 import axios from 'axios';
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Spin } from 'antd';
 
 
 const SignupAgent = () => {
@@ -14,6 +17,7 @@ const SignupAgent = () => {
       const [state,setState] = useState();
       const [selectedLanguages, setSelectedLanguages] = useState([]);
       const [checkuser , setCheckuser] = useState(false)
+      
       const navigation = useNavigate()
       const url = "https://finalbackend111.pythonanywhere.com/api/"
      
@@ -51,6 +55,7 @@ const SignupAgent = () => {
     
         if (res.status === 200 || res.status === 201) {
           console.log("Registration successful");
+          showSuccessToast("Agent is created")
           // Reset form states
           setName("");
           setEstate("");
@@ -64,8 +69,35 @@ const SignupAgent = () => {
         localStorage.setItem("Agent", JSON.stringify(res.data));
       } catch (error) {
         console.error("Error Response:", error.response?.data || error);
+        showErrorToast(error.response?.data)
       }
     };
+
+     const showSuccessToast = (data1) => {
+        toast.success(data1 , {
+          position: "top-right",
+          autoClose: 3000, // Closes after 3 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      };
+    
+      const showErrorToast = (message) => {
+        toast.error(message, {
+          position: "top-right",
+          autoClose: 3000, // Closes after 3 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      };
 
 
   return (
@@ -119,14 +151,15 @@ const SignupAgent = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
           <div className="border rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
-            <PhoneInput
-              country={"us"}
-              value={phone}
-              onChange={(e) => setPhone(e)}
-              inputClass="!border-0 !ring-0 !w-full !py-3 !px-4"
-              containerClass="!w-full"
-              dropdownClass="!z-20"
-            />
+          <PhoneInput
+  country="in"
+  value={phone}
+  onChange={setPhone}
+  inputClass="!border-0 !ring-0 !w-full !py-3 !px-4"
+  containerClass="!w-full"
+  dropdownClass="!z-20"
+/>
+
           </div>
         </div>
 
@@ -192,7 +225,7 @@ const SignupAgent = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button  type="button" className="w-full sm:w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
+            <button    className="w-full sm:w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
               Send OTP
             </button>
             <button onClick={handleSign} className="w-full sm:w-1/2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
