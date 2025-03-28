@@ -24,7 +24,7 @@ const Agents = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            filter: "blur(8px)",
+            filter: "blur(4px)",
             transform: "scale(1.1)" // Prevents edge artifacts from blur
         }}
     >
