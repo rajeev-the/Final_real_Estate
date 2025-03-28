@@ -1,84 +1,121 @@
 import React from "react";
-import { Card, Typography } from "antd"; // Import Ant Design Components
+import { Card, Typography  ,Divider} from "antd"; // Import Ant Design Components
 
 const { Title, Text } = Typography;
 
 const CustomCard = ({
   property_name,
   acre,
-  acre_price,img
+  acre_price,img,
+  
 
   }) => {
   return (
-    <Card
-      hoverable
-      style={{
-        width: 280, // Keep width the same
-        border: "1px solid #d9d9d9", // Soft grey border
-        borderRadius: "12px", // Smooth edges
-        overflow: "hidden", // Prevent overflow
-        transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth transition
-      }}
-      cover={
-        <div style={{ position: "relative" }}>
-          {/* Image */}
-          <img
-            alt="Property Image"
-            src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"
-            style={{
-              height: "160px", // Keep size consistent
-              width: "100%", // Full width
-              objectFit: "cover", // Maintain aspect ratio
-              borderTopLeftRadius: "12px",
-              borderTopRightRadius: "12px",
-            }}
-          />
-          {/* Subtle Overlay */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              width: "100%",
-              height: "40px",
-              background:
-                "linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0,0,0,0))",
-              borderBottomLeftRadius: "12px",
-              borderBottomRightRadius: "12px",
-            }}
-          />
-        </div>
-      }
-      // Adjust body padding
-    >
-      {/* Location Text */}
+   
+   <Card
+    hoverable
+    style={{
+      width: 300,
+      border: "1px solid #e8e8e8",
+      borderRadius: "16px",
+      overflow: "hidden",
+      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+      background: "#ffffff",
+    }}
+    cover={
+      <div style={{ position: "relative", overflow: "hidden" }}>
+        <img
+          alt="Property Image"
+          src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"
+          style={{
+            height: "200px",
+            width: "100%",
+            objectFit: "cover",
+            transition: "transform 0.3s ease",
+          }}
+          className="hover:scale-105"
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)",
+          }}
+        />
+  
+      </div>
+    }
+  
+  >
+    <div style={{ marginBottom: "16px" }}>
       <Text
         style={{
           fontSize: "12px",
-          color: "#b48608",
+          color: "#D97706", // Amber-600
           fontWeight: "600",
-          letterSpacing: "0.5px",
+          letterSpacing: "1px",
+          textTransform: "uppercase",
+          marginBottom: "8px",
         }}
       >
-        {  property_name  ?  property_name  :" Gurugram ,Gurugram, Haryana"}
+        {property_name || "Gurugram, Haryana"}
       </Text>
-
-      {/* Title */}
-      <Title level={4} style={{ margin: "8px 0", fontWeight: "bold" }}>
-       {acre ? acre : 5} Acre
+      
+      <Title 
+        level={4} 
+        style={{ 
+          margin: "0 0 12px 0", 
+          fontWeight: "600",
+          fontFamily: "'Playfair Display', serif",
+          color: "#1a1a1a",
+          fontSize: "20px"
+        }}
+      >
+        {acre || 5} Acre Estate
       </Title>
-
-      {/* Price Info */}
+  
+      <Divider style={{ margin: "12px 0", backgroundColor: "#f0f0f0" }} />
+  
+      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <span style={{
+          background: "#D97706", // Amber-600
+          color: "white",
+          borderRadius: "4px",
+          padding: "4px 8px",
+          fontSize: "12px",
+          fontWeight: "500"
+        }}>
+          Price Guide
+        </span>
+        <Text
+          style={{
+            fontSize: "16px",
+            color: "#1a1a1a",
+            fontWeight: "600",
+            letterSpacing: "0.5px"
+          }}
+        >
+          ₹{acre_price || 222} Cr
+        </Text>
+      </div>
+  
       <Text
         style={{
-          fontSize: "14px",
-          color: "#333",
-          fontWeight: "500",
+          fontSize: "12px",
+          color: "#666666",
+          marginTop: "8px",
+          fontWeight: "400"
         }}
       >
-        💰 {acre_price ?  acre_price : 222} Cr/ Acre (Approx.)
+        Per Acre (Approximate)
       </Text>
-    </Card>
+    </div>
+  </Card>
   );
 };
 
 export default CustomCard;
+ 

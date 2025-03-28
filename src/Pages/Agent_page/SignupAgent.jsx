@@ -34,7 +34,7 @@ const SignupAgent = () => {
       formData.append('estate_name', estate);
       formData.append('phone_number', phone);
       formData.append('language', JSON.stringify(selectedLanguages));
-      formData.append('state', JSON.stringify({ state })); // Assuming state is a string from dropdown
+      formData.append('state', JSON.stringify(state )); // Assuming state is a string from dropdown
       formData.append('verifications', false); // Default to false as per model
       formData.append('rating', 0.5); // Send as string to match FloatField
       

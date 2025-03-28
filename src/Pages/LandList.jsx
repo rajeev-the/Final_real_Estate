@@ -4,9 +4,11 @@ import { FilterOutlined } from "@ant-design/icons";
 import CustomCard  from '../componets/CustomCard'
 import { Typography } from 'antd';
 const { Title } = Typography;
-import xx1 from "../assets/xx1.jpg"
+
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { ArrowRightOutlined ,SearchOutlined } from '@ant-design/icons';
+import xx2 from "../assets/mmm.jpg"
 
 
 
@@ -43,114 +45,192 @@ const LandList = () => {
 
   return (
     <div className='mt-[50px] md:mt-[100px] p-2 md:p-[15px] w-full'>
+{/* Hero Image Section */}
+<div className="relative h-[70vh] mb-16 overflow-hidden   rounded-xl">
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/50 to-transparent z-10">
+        <div className="container mx-auto h-full flex items-center px-8">
+          <div className="max-w-2xl space-y-6">
+            {/* Section Label */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-16 h-px bg-amber-600"></div>
+              <span className="text-amber-600 uppercase tracking-widest text-sm">
+                Premium Listings
+              </span>
+            </div>
 
-  {/* Image Section */}
-  <div className='px-2 md:px-8 mb-3'>
-    <img 
-      src={xx1} 
-      alt="Image" 
-      style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}
-      className='rounded-2xl w-full'
-    />
-  </div>
+            {/* Hero Title */}
+            <h1 className="text-5xl font-serif text-white leading-tight mb-4">
+              Heritage Properties <br />
+              <span className="text-amber-600">Curated with Excellence</span>
+            </h1>
 
-  {/* Top Rated Section */}
-  <div className='bg-gray-100 border-2 border-gray-100 py-4 md:py-6 px-4 md:px-8 rounded-xl mb-3 mx-2 md:mx-[18px] shadow-sm' 
-       style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-    
-    <Title level={3} className='text-lg md:text-xl mb-4 md:mb-[50px] text-center md:text-left md:ml-[50px]'
-      style={{ 
-        fontWeight: '700',  
-        color: '#1a1a1a',  
-        letterSpacing: '1.5px',  
-        textTransform: 'uppercase',
-        fontFamily: "'Poppins', sans-serif",
-      }}>
-      Top Rate ⭐️⭐️⭐️ 
-    </Title>
+            {/* Hero Subtitle */}
+            <p className="text-xl text-slate-200 font-light mb-8 max-w-xl">
+              Discover timeless estates with unmatched legacy and modern luxury
+            </p>
 
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
-      {[1,2,3,4].map((_, i) => (
-        <Link key={i} to={"/Land/1"} className='w-full'>
-          <CustomCard />
-        </Link>
-      ))}
-    </div>
-  </div>
-
-  {/* Featured Section */}
-  <div className='bg-gray-100 border-2 border-gray-100 py-4 md:py-6 px-4 md:px-8 rounded-xl mb-3 mx-2 md:mx-[18px] shadow-sm' 
-       style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-    
-    <Title level={3} className='text-lg md:text-xl mb-4 md:mb-[50px] text-center md:text-left md:ml-[50px]'
-      style={{ 
-        fontWeight: '700',  
-        color: '#1a1a1a',  
-        letterSpacing: '1.5px',  
-        textTransform: 'uppercase',
-        fontFamily: "'Poppins', sans-serif",
-      }}>
-      Featured 🏅
-    </Title>
-
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
-      {[1,2,3,4].map((_, i) => (
-        <CustomCard key={i} />
-      ))}
-    </div>
-  </div>
-
-  {/* Search Filter Section */}
-  <div className="relative mx-2 md:mx-[10px] flex flex-col md:flex-row gap-3 items-center w-full p-2 md:p-4">
-    <Input
-      style={{
-        width: "100%",
-        maxWidth: "400px",
-        border: '0.6px solid grey'
-      }}
-      placeholder="Search..."
-      className="pl-2 pr-2 py-3 rounded-full shadow-md focus:ring-2 focus:ring-blue-500"
-    />
-    <Button
-      type="primary"
-      shape="circle"
-      icon={<FilterOutlined />}
-      className="md:absolute md:left-2 bg-blue-500 hover:bg-blue-600 border-none text-white"
-    />
-  </div>
-
-  {/* State Listings Section */}
-  <div className='bg-gray-100 border-2 border-gray-100 py-4 md:py-6 px-4 md:px-8 rounded-xl mb-3 mx-2 md:mx-[18px] shadow-sm' 
-       style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-    
-    <div className='flex flex-col gap-4 md:gap-10'>
-      {Object.keys(groupedProperties).map(stateId => (
-        <div key={stateId} className='flex flex-col'>
-          <Title level={3} className='text-lg md:text-xl mb-4 text-center md:text-left md:ml-[10px]'
-            style={{ 
-              fontWeight: '700',  
-              color: '#1a1a1a',  
-              letterSpacing: '1.5px',  
-              textTransform: 'uppercase',
-              fontFamily: "'Poppins', sans-serif",
-            }}>
-            {groupedProperties[stateId][0].state}  
-          </Title>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
-            {groupedProperties[stateId].map(property => (
-              <CustomCard 
-                key={property.id}
-                property_name={property?.property_name} 
-                acre={property?.acre} 
-                acre_price={property?.acre_price} 
-              />
-            ))}
+            {/* CTA Button */}
+            <button
+            
+              className="bg-amber-600 hover:bg-amber-700 h-14 px-10 rounded-lg flex items-center gap-3 text-lg shadow-xl"
+            >
+              <span>Explore Collections</span>
+              <ArrowRightOutlined />
+            </button>
           </div>
         </div>
-      ))}
+      </div>
+
+      {/* Background Image */}
+      <img src={xx2} alt="" className=' h-full w-full  object-cover  ' />
+     
+      {/* Decorative Pattern Overlay */}
+      <div
+        className="absolute inset-0 z-0 mix-blend-soft-light opacity-20"
+        style={{ backgroundImage: "url('/subtle-pattern.png')" }}
+      ></div>
     </div>
+
+    
+{/* Top Rated Section */}
+<div className='bg-white border border-slate-100 py-8 md:py-12 px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  <div className='flex items-center gap-4 mb-8 md:mb-12'>
+    <div 
+      className='h-px w-16 hidden md:block'
+      style={{ backgroundColor: '#826CB0' }}
+    ></div>
+    <Title 
+      level={3} 
+      className='text-2xl md:text-3xl font-serif !mb-0 !text-slate-800 !font-medium'
+      style={{ borderLeft: '4px solid #826CB0', paddingLeft: '1rem' }}
+    >
+      Top Rated Estates
+      <span className='ml-4' style={{ color: '#826CB0' }}>✦✦✦</span>
+    </Title>
+  </div>
+
+
+  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+    {[1,2,3,4].map((_, i) => (
+      <Link key={i} to={"/Land/1"} className='w-full hover:-translate-y-2 transition-transform duration-300'>
+        <CustomCard 
+          className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
+        />
+      </Link>
+    ))}
   </div>
 </div>
+
+{/* Featured Section */}
+<div className='bg-slate-50 border border-slate-100 py-8 md:py-12 px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 md:mb-12'>
+    <div className='space-y-2'>
+
+      <Title 
+        level={3} 
+        className='text-2xl md:text-3xl font-serif !text-slate-800 !font-medium'
+        style={{ borderLeft: '4px solid #826CB0', paddingLeft: '1rem' }}
+      >
+        Featured Properties
+      </Title>
+    </div>
+    <Button 
+      type="text" 
+      style={{ 
+        color: '#826CB0',
+        border: '2px solid #826CB0',
+        borderRadius: '0.5rem',
+        padding: '0.5rem 1rem',
+        background: 'transparent',
+        transition: 'all 0.3s ease'
+      }}
+      className='flex items-center gap-2 hover:!bg-[#826CB0] hover:!text-white'
+    >
+      View All
+      <ArrowRightOutlined style={{ color: 'inherit' }} />
+    </Button>
+  </div>
+
+
+  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+    {[1,2,3,4].map((_, i) => (
+      <CustomCard 
+        key={i}
+        className="border border-slate-100 hover:shadow-lg transition-all duration-300"
+        badge={
+          <div className='absolute top-4 right-4 bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm'>
+            Featured
+          </div>
+        }
+      />
+    ))}
+  </div>
+</div>
+
+{/* Premium Search Filter */}
+<div className="mx-auto max-w-4xl px-4 mb-16">
+  <div className="relative group">
+    <Input
+      placeholder="Search luxury properties..."
+      prefix={<SearchOutlined className="text-slate-400 !text-lg" />}
+      suffix={
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<FilterOutlined className="!text-white" />}
+          className="!bg-amber-600 !border-none !shadow-lg hover:!bg-amber-700"
+        />
+      }
+      className="h-14 !pl-12 !pr-24 !rounded-2xl !border !border-slate-200 focus:!border-amber-500 hover:!border-amber-400 !text-lg"
+    />
+    <span className="absolute right-28 top-1/2 -translate-y-1/2 text-slate-400">
+      Press <kbd className="ml-1 px-2 py-1 bg-slate-100 rounded">⌘</kbd> + <kbd className="px-2 py-1 bg-slate-100 rounded">K</kbd>
+    </span>
+  </div>
+</div>
+
+{/* State Listings Section - Preserved as requested */}
+
+  {/* ... existing state listings content ... */}
+  <div className='bg-white border border-slate-100 py-8 md:py-12 px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  <div className='flex flex-col gap-8 md:gap-12'>
+    {Object.keys(groupedProperties).map(stateId => (
+      <div key={stateId} className='flex flex-col group'>
+        <div className='flex items-center gap-4 mb-6 md:mb-8'>
+          <div className='hidden md:block w-12 h-px bg-[#826CB0]'></div>
+          <Title level={3} 
+            className='text-xl md:text-2xl font-serif !mb-0 !text-slate-800 !font-medium'
+            style={{
+              borderLeft: '4px solid #826CB0',
+              paddingLeft: '1rem',
+              letterSpacing: '0.05em'
+            }}>
+            {groupedProperties[stateId][0].state}
+            <span className='ml-3 text-[#826CB0] text-lg'>✧</span>
+          </Title>
+        </div>
+        
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+          {groupedProperties[stateId].map(property => (
+            <div key={property.id} className='hover:-translate-y-2 transition-transform duration-300'>
+              <CustomCard 
+                property_name={property?.property_name} 
+                acre={property?.acre} 
+                acre_price={property?.acre_price}
+                className="hover:border-[#826CB0]/20 hover:shadow-lg"
+              />
+            </div>
+          ))}
+        </div>
+        
+        <div className='mt-8 md:mt-12 border-t border-slate-100 group-last:border-0'></div>
+      </div>
+    ))}
+  </div>
+</div>
+</div>
+
   )
 }
 

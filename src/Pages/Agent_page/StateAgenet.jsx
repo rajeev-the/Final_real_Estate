@@ -12,7 +12,7 @@ const StateAgenet = () => {
     console.log(value)
        
     useEffect(() => {
-         
+      window.scrollTo(0, 0);
       const getdata = async()=>{
         try {
           const res =await axios.get(`${url}agent/`)
@@ -28,8 +28,9 @@ const StateAgenet = () => {
       }
 
       getdata()
+     
       
-    }, [])
+    }, [state])
     
   
 
@@ -64,6 +65,7 @@ const StateAgenet = () => {
       </div>
     </div>
   </div>
+ 
   )
 }
 
