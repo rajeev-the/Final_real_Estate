@@ -86,37 +86,71 @@ const Home = ({agent}) => {
             </div>
 
             {/* Tab Content */}
-
-              {/* Image Cards - Wider desktop version */}
-   
-     
-              <div className="w-full">
-  {/* Carousel Container */}
-  <div className='flex snap-x snap-mandatory overflow-x-auto scrollbar-hide gap-4 w-full pb-6 px-4'>
+            <div className="w-full relative">
+  {/* Carousel Container - Now responsive to both device and viewport */}
+  <div className='
+    flex snap-x snap-mandatory overflow-x-auto scrollbar-hide 
+    gap-3 
+    xs:gap-4 
+    sm:gap-4 
+    w-full 
+    pb-6 
+    px-4 
+    sm:px-4
+  '>
     {[ND, GZ, HR].map((img, index) => (
       <div 
         key={index}
-        className='snap-center min-w-[85vw] h-[220px] rounded-xl flex-shrink-0 transition-transform duration-300 hover:scale-[1.015] overflow-hidden'
+        className='
+          snap-center 
+          min-w-[calc(100vw-32px)]  /* Full width minus padding */
+          xs:min-w-[calc(100vw-48px)] 
+          sm:min-w-[45vw] 
+          md:min-w-[30vw] 
+          lg:min-w-[23vw]
+          h-[55vw]  /* Height based on viewport width */
+          xs:h-[50vw]
+          sm:h-[35vw]
+          md:h-[25vw]
+          rounded-xl 
+          flex-shrink-0 
+          overflow-hidden
+          transition-transform duration-300
+          active:scale-95  /* For touch feedback */
+        '
       >
         <img 
-          className='h-full w-full object-cover'
+          className='
+            h-full w-full object-cover
+            /* Disable hover effects on touch devices */
+            @media (hover: hover) {
+              &:hover {
+                transform: scale(1.05);
+              }
+            }
+          '
           src={img}
           alt=""
           loading="lazy"
+          decoding="async"
         />
       </div>
     ))}
   </div>
 
-  {/* Scroll indicator for iPhone */}
-  <div className="flex justify-center mt-2">
-    <div className="w-8 h-1 bg-gray-200 rounded-full">
-      <div className="w-4 h-1 bg-gray-400 rounded-full mx-auto"></div>
+  {/* Dynamic scroll indicator - only shows if scrollable */}
+  <div className="
+    md:hidden 
+    flex justify-center mt-2
+    opacity-0 transition-opacity
+    peer-[.is-scrollable]:opacity-100
+  ">
+    <div className="w-24 h-1 bg-gray-200 rounded-full">
+      <div className="w-1/3 h-1 bg-gray-500 rounded-full mx-auto"></div>
     </div>
   </div>
 </div>
-  {/* Carousel Container */}
- 
+     
 
    
 
