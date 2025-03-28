@@ -88,20 +88,33 @@ const Home = ({agent}) => {
             {/* Tab Content */}
 
               {/* Image Cards - Wider desktop version */}
-    <div className='flex md:flex-row flex-nowrap overflow-x-auto gap-4 md:gap-8 w-full pb-4'>
-      {[ND, GZ, HR].map((img, index) => (
-        <div 
-          key={index}
-          className='min-w-[85vw] md:min-w-0 h-[200px] md:h-[350px]  rounded-lg flex-shrink-0 md:w-[400px]    transition-all duration-300 transform hover:scale-105' 
-        >
-          <img 
-            className='h-full w-full rounded-lg object-cover'
-            src={img}
-            alt={`Card ${index + 1}`}
-          />
-        </div>
-      ))}
-    </div>
+   
+     
+              <div className="relative w-full">
+  {/* Carousel Container */}
+  <div className='flex snap-x snap-mandatory overflow-x-auto scrollbar-hide gap-4 md:gap-6 w-full pb-6 px-4 sm:px-6'>
+    {[ND, GZ, HR].map((img, index) => (
+      <div 
+        key={index}
+        className='snap-center min-w-[85vw] xs:min-w-[70vw] sm:min-w-[50vw] md:min-w-[40vw] lg:min-w-[30vw] xl:min-w-[25vw] h-[180px] xs:h-[220px] sm:h-[280px] md:h-[350px] rounded-xl md:rounded-2xl flex-shrink-0 transition-all duration-300 hover:scale-[1.02] shadow-md hover:shadow-lg overflow-hidden'
+      >
+        <img 
+          className='h-full w-full object-cover hover:scale-105 transition-transform duration-500'
+          src={img}
+          alt={`Featured Property ${index + 1}`}
+          loading="lazy"
+        />
+        {/* Optional overlay with text */}
+       
+      </div>
+    ))}
+  </div>
+
+  {/* Scroll hint for mobile */}
+  <div className="md:hidden flex justify-center mt-2">
+    <div className="w-8 h-1.5 bg-gray-300 rounded-full"></div>
+  </div>
+</div>
 
    
 
