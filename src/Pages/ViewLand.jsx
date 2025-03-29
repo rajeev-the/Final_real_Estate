@@ -8,19 +8,17 @@ import { FaWhatsapp, FaShareAlt, FaMapMarkerAlt, FaChevronRight } from 'react-ic
 const ViewLand = () => {
   const { id } = useParams();
   const { property } = useAppContext();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
 
 
   useEffect(() => {
     if (property) {
-      const selectedLand = property.find((et) => et.id.toString() === id);
+      const selectedLand = property.find((et) => et.id.toString() == id);
       setData(selectedLand || null);
     }
   }, [id, property]);
 
 
-
-  console.log(data)
 
   if (!data) {
     return <div className="text-center  text-gray-600 mt-10">Loading...</div>;
@@ -169,7 +167,7 @@ const ViewLand = () => {
           "></div>
           
           <FaMapMarkerAlt className="w-5 h-5 text-white/90" />
-          View Premium Location
+          View Location
           <FaChevronRight className="w-4 h-4 text-white/90 ml-1" />
         </button>
       </div>

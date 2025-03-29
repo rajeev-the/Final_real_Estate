@@ -7,7 +7,8 @@ import LandCard from "../componets/LandCard"
 import {useAppContext } from "../Context/Poperty_context"
 import { Link } from "react-router-dom";
 import xxxp from "../assets/xxxp.mp4"
-import axios from "axios";
+
+import Realcompo from "../componets/Realcompo"
 
 const Home = ({agent}) => {
   const [show, setShow] = useState(true);
@@ -133,9 +134,8 @@ const Home = ({agent}) => {
 
         {/* Hot Selling Lands Section */}
         <div className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[110px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
-          <h1 className="text-center text-xl   font-medium sm:text-3xl text-black"   style={{ fontFamily: "Krub, sans-serif" }} >
-            Hot Selling Lands in India
-          </h1>
+          
+          <h2 className="text-3xl font-normal text-center text-black mb-5"  style={{ fontFamily: "Krub, sans-serif" }}>  Hot Selling Lands in India</h2>
 
           {/* Location Buttons */}
           <div className="flex flex-wrap justify-center gap-3 md:gap-[100px] mb-4">
@@ -173,6 +173,9 @@ const Home = ({agent}) => {
     ))}
   </div>
 </div>
+
+
+    <Realcompo/>
 
         </div>
       </div>

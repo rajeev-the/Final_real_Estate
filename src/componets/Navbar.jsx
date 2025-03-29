@@ -47,7 +47,7 @@ const Navbar = ({ data }) => {
       <ul className="hidden md:flex space-x-14 text-black font-normal" style={{ fontFamily: "Krub, sans-serif" }}>
         {[
           { name: "Home", link: "/" },
-          { name: "Land List", link: "landlist" },
+          { name: "Land Listing", link: "landlist" },
           { name: "Agents", link: "agents" },
           { name: "Contact Us", link: "contact" },
         ].map((item) => (
@@ -108,7 +108,7 @@ const Navbar = ({ data }) => {
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-lg p-4 flex flex-col items-center space-y-4 md:hidden">
           <Link to={"/"}  className="text-gray-700">Home</Link>
-          <Link  to={"landlist"} className="text-gray-700">Land List</Link>
+          <Link  to={"landlist"} className="text-gray-700">Land Listing</Link>
           <Link to={"agents"} className="text-gray-700">Agents</Link>
          
           <Link  to={"contact"}className="text-gray-700">Contact Us</Link>

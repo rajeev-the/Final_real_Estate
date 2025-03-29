@@ -43,9 +43,9 @@ const LandAgent = () => {
       <div className='w-full flex-wrap   justify-center flex gap-[30px]'>
 
         {
-          data?.map((item)=>(
+          data?.map((item,i)=>(
             
-            <Link key={item} to={"/Land/1"} >
+            <Link key={i} to={`/Land/${item.id}`} >
          <CustomCard acre={item.acre} property_name={item.address} acre_price={item.acre_price} img={item.img}/>
           </Link>
           ))

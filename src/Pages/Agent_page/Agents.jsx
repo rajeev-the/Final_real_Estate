@@ -54,16 +54,19 @@ const Agents = () => {
         </div>
 
         {/* Agents Grid - Responsive adjustments */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-2 sm:p-4">
-            {data.map((item, index) => (
-                <BoxAgent 
-                    key={index} 
-                    image={item.image} 
-                    text={item.text}
-                    className="scale-90 sm:scale-100" // Optional: Slightly reduce size on mobile
-                />
-            ))}
-        </div>
+        <div className="flex justify-center items-center    px-2 sm:px-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-10  ">
+    {data.map((item, index) => (
+      <BoxAgent 
+        key={index} 
+        image={item.image} 
+        text={item.text} 
+        className="scale-90 sm:scale-100"
+      />
+    ))}
+  </div>
+</div>
+
     </div>
 </div>
   )
