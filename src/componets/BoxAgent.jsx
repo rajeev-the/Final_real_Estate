@@ -10,7 +10,7 @@ const BoxAgent = ({ image, text }) => {
   return (
     <Link 
     to={`/agents/${text}`} 
-    className="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 p-6 flex flex-col items-center w-full sm:w-64 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
+    className="bg-white rounded-xl shadow-sm  border border-gray-100 p-6 flex flex-col items-center w-full sm:w-64 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
   >
     {/* Image container with elegant frame */}
     <div className="w-40 h-40 rounded-full bg-gray-50 p-1 border-2 border-gray-200 group-hover:border-[#826CB0] transition-colors duration-300 flex items-center justify-center overflow-hidden">
