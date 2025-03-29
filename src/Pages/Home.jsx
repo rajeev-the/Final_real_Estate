@@ -68,70 +68,99 @@ const Home = ({agent}) => {
         </div>
 
         {/* Tabs Section */}
-        <div className="w-full mt-10 sm:mt-[150px]" style={{ fontFamily: "Krub, sans-serif" }}>
-          <div className="flex flex-col items-center justify-center gap-8 md:gap-[100px] w-full max-w-7xl mx-auto">
-            
-            {/* Toggle Buttons */}
-            <div className="flex flex-row items-center justify-center gap-4 md:gap-[100px]">
-            <button
-            
-  onClick={() => setShow(true)}
-  className={`text-lg md:text-2xl   font-normal py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 border-3 text-black ${
-    show ? "border-[#826cb0] shadow-md scale-105" : "border-transparent"
-  }`}
->
-  Top Rate
-</button>
+        <div className="flex flex-col items-center px-4 sm:mt-[50px] py-8 bg-gradient-to-b from-white to-gray-50">
+  {/* Premium Toggle Buttons */}
+  <div className="flex flex-row items-center justify-center gap-2 md:gap-8 mb-8 relative">
+    <div className="absolute inset-0 flex items-center justify-center -z-10">
+      <div className="h-[2px] w-full max-w-md bg-gray-200 rounded-full"></div>
+    </div>
+    
+    <button
+      onClick={() => setShow(true)}
+      className={`
+        relative z-10 text-lg md:text-xl font-medium py-3 px-6 md:px-8 
+        rounded-full transition-all duration-300 text-[#826cb0]
+        ${show ? 
+          "bg-white shadow-lg border-2 border-[#826cb0] transform scale-105" : 
+          "bg-transparent hover:bg-white/50"
+        }
+      `}
+    >
+      Top Rated
+      {show && (
+        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#826cb0] rotate-45"></div>
+      )}
+    </button>
 
-              <button
-  onClick={() => setShow(false)}
-  className={`text-lg md:text-2xl font-normal py-2 px-4 md:px-[30px] rounded-lg transition-all duration-300 text-black border-3 ${
-    !show ? "border-[#826cb0] shadow-md scale-105 " : "border-transparent"
-  }`}
->
-  Recommendation
-</button>
+    <button
+      onClick={() => setShow(false)}
+      className={`
+        relative z-10 text-lg md:text-xl font-medium py-3 px-6 md:px-8 
+        rounded-full transition-all duration-300 text-[#826cb0]
+        ${!show ? 
+          "bg-white shadow-lg border-2 border-[#826cb0] transform scale-105" : 
+          "bg-transparent hover:bg-white/50"
+        }
+      `}
+    >
+      Recommendations
+      {!show && (
+        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#826cb0] rotate-45"></div>
+      )}
+    </button>
+  </div>
 
-            </div>
+  {/* Premium Carousel Section */}
+  <div className="w-full max-w-7xl  sm:mt-[50px] relative">
+    <div 
+      ref={carouselRef}
+      className="flex snap-x snap-mandatory overflow-x-auto w-full pb-8 scrollbar-hide"
+    >
+      {/* Left Spacer */}
+      <div className="flex-shrink-0 w-[5vw] sm:w-[7vw] md:w-[8vw] lg:w-[10vw]"></div>
 
-
-            <div className="w-full relative">
-      {/* Carousel Container - Scrollbar Completely Hidden */}
-      <div
-        ref={carouselRef}
-        className="
-          flex snap-x snap-mandatory 
-          overflow-x-auto w-full pb-4
-          no-scrollbar scrollbar-hide
-        "
-      >
-        {/* Left Spacer for Centering */}
-        <div className="flex-shrink-0 w-[5vw] sm:w-[7vw] md:w-[8vw] lg:w-[10vw]"></div>
-
-        {/* Carousel Items */}
-        {[ND, GZ, HR].map((img, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 snap-center mx-2 w-[90vw] sm:w-[60vw] md:w-[40vw] lg:w-[25vw]  "
-          >
+      {/* Carousel Items */}
+      {[ND, GZ, HR].map((img, index) => (
+        <div
+          key={index}
+          className="flex-shrink-0 snap-center mx-3 w-[85vw] sm:w-[55vw] md:w-[35vw] lg:w-[22vw] transition-transform duration-300 hover:scale-105"
+        >
+          <div className="relative group overflow-hidden rounded-xl shadow-xl">
             <img
-              className="w-full h-auto aspect-[4/3] rounded-lg object-cover"
+              className="w-full h-auto aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110"
               src={img}
               alt={`Image ${index}`}
               loading="lazy"
               draggable="false"
             />
-          </div>
-        ))}
-
-        {/* Right Spacer for Centering */}
-        <div className="flex-shrink-0 w-[5vw] sm:w-[7vw] md:w-[8vw] lg:w-[10vw]"></div>
-      </div>
-    </div>
-
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-white text-xl font-bold mb-2">
+                  {index === 0 ? "Noida" : index === 1 ? "Ghaziabad" : "Haryana"}
+                </h3>
+                <p className="text-amber-200 font-medium">Explore Properties</p>
+              </div>
+            </div>
           </div>
         </div>
+      ))}
 
+      {/* Right Spacer */}
+      <div className="flex-shrink-0 w-[5vw] sm:w-[7vw] md:w-[8vw] lg:w-[10vw]"></div>
+    </div>
+
+    {/* Navigation Dots (Optional) */}
+    <div className="flex justify-center mt-6 space-x-2">
+      {[ND, GZ, HR].map((_, index) => (
+        <button
+          key={index}
+          className={`w-3 h-3 rounded-full transition-all ${index === 0 ? 'bg-[#826cb0] w-6' : 'bg-gray-300'}`}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+</div>
         {/* Hot Selling Lands Section */}
         <div className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[110px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
           
