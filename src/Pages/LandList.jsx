@@ -5,29 +5,30 @@ import CustomCard  from '../componets/CustomCard'
 import { Typography } from 'antd';
 const { Title } = Typography;
 
-import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined ,SearchOutlined } from '@ant-design/icons';
 import xx2 from "../assets/mmm.jpg"
+import {useAppContext } from "../Context/Poperty_context"
+
 
 
 
 const LandList = () => {
 
-  const [data, setData] = useState([]); // ✅ Initialize as empty array
+  const [data, setData] = useState(); // ✅ Initialize as empty array
+  const [dumy , setDumy] = useState()
+    const { property ,maindata  } = useAppContext();
+    
 
   useEffect(() => {
-    const getvalue = async () => {
-      try {
-        const res = await axios.get("https://finalbackend111.pythonanywhere.com/api/property/");
-        setData(res.data); // ✅ Ensure correct data assignment
-      } catch (error) {
-        console.error("Error fetching properties:", error);
-      }
-    };
+   
 
-    getvalue();
-  }, []);
+    setData(property)
+    setDumy(maindata)
+
+  }, [property,maindata]);
+
 
   const groupedProperties = (data || []).reduce((acc, property) => {
     if (property?.state) {  // Ensure state exists
@@ -112,9 +113,12 @@ const LandList = () => {
 
 
   <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-    {[1,2,3,4].map((_, i) => (
-      <Link key={i} to={"/Land/1"} className='w-full hover:-translate-y-2 transition-transform duration-300'>
+    {dumy?.top_rate.map((f, i) => (
+      <Link key={i} to={`/Land/${f.id}`} className='w-full hover:-translate-y-2 transition-transform duration-300'>
         <CustomCard 
+          property_name={f?.property_name} 
+          acre={f?.acre} 
+          acre_price={f?.acre_price}
           className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
         />
       </Link>
@@ -154,16 +158,15 @@ const LandList = () => {
 
 
   <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-    {[1,2,3,4].map((_, i) => (
-      <CustomCard 
-        key={i}
-        className="border border-slate-100 hover:shadow-lg transition-all duration-300"
-        badge={
-          <div className='absolute top-4 right-4 bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm'>
-            Featured
-          </div>
-        }
-      />
+    {dumy?.featured.map((f, i) => (
+    <Link key={i} to={`/Land/${f.id}`} className='w-full hover:-translate-y-2 transition-transform duration-300'>
+    <CustomCard 
+      property_name={f?.property_name} 
+      acre={f?.acre} 
+      acre_price={f?.acre_price}
+      className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
+    />
+  </Link>
     ))}
   </div>
 </div>
@@ -213,14 +216,14 @@ const LandList = () => {
         
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
           {groupedProperties[stateId].map(property => (
-            <div key={property.id} className='hover:-translate-y-2 transition-transform duration-300'>
-              <CustomCard 
-                property_name={property?.property_name} 
-                acre={property?.acre} 
-                acre_price={property?.acre_price}
-                className="hover:border-[#826CB0]/20 hover:shadow-lg"
-              />
-            </div>
+               <Link key={property?.id} to={`/Land/${property?.id}`} className='w-full hover:-translate-y-2 transition-transform duration-300'>
+               <CustomCard 
+                 property_name={property?.property_name} 
+                 acre={property?.acre} 
+                 acre_price={property?.acre_price}
+                 className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
+               />
+             </Link>
           ))}
         </div>
         

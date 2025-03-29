@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import desktopBanner from "../assets/desktop-banner.jpeg";
 import ND from "../assets/ND.jpeg";
 import GZ from "../assets/GZ.jpeg";
@@ -7,18 +7,26 @@ import LandCard from "../componets/LandCard"
 import {useAppContext } from "../Context/Poperty_context"
 import { Link } from "react-router-dom";
 import xxxp from "../assets/xxxp.mp4"
+import axios from "axios";
 
 const Home = ({agent}) => {
   const [show, setShow] = useState(true);
   const[data,setdata] = useState([])
-  const { property } = useAppContext();
+ 
+  const { property  } = useAppContext();
   const [selectedLocation, setSelectedLocation] = useState("Noida");
+  const carouselRef = useRef(null);
+
+  
   
  
 
   useEffect(() => {
  
   setdata(property.filter((et)=>et.state == selectedLocation))
+
+ 
+ 
 
 
   }, [selectedLocation,property])
@@ -85,74 +93,40 @@ const Home = ({agent}) => {
 
             </div>
 
-            {/* Tab Content */}
+
             <div className="w-full relative">
-  {/* Carousel Container - Now responsive to both device and viewport */}
-  <div className='
-    flex snap-x snap-mandatory overflow-x-auto scrollbar-hide 
-    gap-3 
-    xs:gap-4 
-    sm:gap-4 
-    w-full 
-    pb-6 
-    px-4 
-    sm:px-4
-  '>
-    {[ND, GZ, HR].map((img, index) => (
-      <div 
-        key={index}
-        className='
-          snap-center 
-          min-w-[calc(100vw-32px)]  /* Full width minus padding */
-          xs:min-w-[calc(100vw-48px)] 
-          sm:min-w-[45vw] 
-          md:min-w-[30vw] 
-          lg:min-w-[23vw]
-          h-[55vw]  /* Height based on viewport width */
-          xs:h-[50vw]
-          sm:h-[35vw]
-          md:h-[25vw]
-          rounded-xl 
-          flex-shrink-0 
-          overflow-hidden
-          transition-transform duration-300
-          active:scale-95  /* For touch feedback */
-        '
+      {/* Carousel Container - Scrollbar Completely Hidden */}
+      <div
+        ref={carouselRef}
+        className="
+          flex snap-x snap-mandatory 
+          overflow-x-auto w-full pb-4
+          no-scrollbar scrollbar-hide
+        "
       >
-        <img 
-          className='
-            h-full w-full object-cover
-            /* Disable hover effects on touch devices */
-            @media (hover: hover) {
-              &:hover {
-                transform: scale(1.05);
-              }
-            }
-          '
-          src={img}
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
+        {/* Left Spacer for Centering */}
+        <div className="flex-shrink-0 w-[5vw] sm:w-[7vw] md:w-[8vw] lg:w-[10vw]"></div>
+
+        {/* Carousel Items */}
+        {[ND, GZ, HR].map((img, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 snap-center mx-2 w-[90vw] sm:w-[60vw] md:w-[40vw] lg:w-[25vw]  "
+          >
+            <img
+              className="w-full h-auto aspect-[4/3] rounded-lg object-cover"
+              src={img}
+              alt={`Image ${index}`}
+              loading="lazy"
+              draggable="false"
+            />
+          </div>
+        ))}
+
+        {/* Right Spacer for Centering */}
+        <div className="flex-shrink-0 w-[5vw] sm:w-[7vw] md:w-[8vw] lg:w-[10vw]"></div>
       </div>
-    ))}
-  </div>
-
-  {/* Dynamic scroll indicator - only shows if scrollable */}
-  <div className="
-    md:hidden 
-    flex justify-center mt-2
-    opacity-0 transition-opacity
-    peer-[.is-scrollable]:opacity-100
-  ">
-    <div className="w-24 h-1 bg-gray-200 rounded-full">
-      <div className="w-1/3 h-1 bg-gray-500 rounded-full mx-auto"></div>
     </div>
-  </div>
-</div>
-     
-
-   
 
           </div>
         </div>

@@ -9,7 +9,7 @@ import main from "../../assets/pppp.jpg"
 
 const Agents = () => {
     const data = [
-        { image: img1, text: "Harayana" },
+        { image: img1, text: "Haryana" },
         { image: img3, text: "Gurugram" },
         { image: img2, text: "Noida" },
         { image: img4, text: "Ghaziabad" },

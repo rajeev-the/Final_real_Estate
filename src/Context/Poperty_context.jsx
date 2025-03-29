@@ -7,15 +7,18 @@ const AppContext = createContext();
 // 2. Create Provider Component
 export const AppProvider = ({ children }) => {
   const [property, setProperty] = useState([]);
+  const [maindata , setMaindata] = useState()
   const url = "https://finalbackend111.pythonanywhere.com/api/"
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${url}property/`);
+        const reb = await axios.get(`${url}general_data/`)
+        setMaindata(reb?.data[0])
 
         if (res.status === 200) {
-          setProperty(res.data);
+          setProperty(res?.data);
         }
       } catch (error) {
         console.log("Error fetching property data:", error);
@@ -26,7 +29,7 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ property }}>
+    <AppContext.Provider value={{ property , maindata}}>
       {children}
     </AppContext.Provider>
   );

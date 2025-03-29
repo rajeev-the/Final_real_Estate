@@ -9,7 +9,7 @@ const StateAgenet = () => {
     const {state} = useParams()
     const[value,setvalue] = useState();
     const url = "https://finalbackend111.pythonanywhere.com/api/"
-    console.log(value)
+    
        
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -17,8 +17,10 @@ const StateAgenet = () => {
         try {
           const res =await axios.get(`${url}agent/`)
           if(res.status ==200){
-          setvalue(res.data.filter((data)=>data.state == state))
+          setvalue(res.data?.filter((p)=>p.state ==  state))
+
           }
+          console.log(res.data[9].state)
           
         } catch (error) {
           console.log(error)

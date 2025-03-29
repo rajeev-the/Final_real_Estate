@@ -36,7 +36,7 @@ const App = () => {
           {/* Nested Routes inside Layout */}
           <Route index element={<AppProvider>  <Home agent={true} />  </AppProvider>} /> {/* Default Home Page */}
          <Route path="home" element={   <AppProvider>  <Home  agent={true} />    </AppProvider>   }/>
-          <Route path="landlist" element={<LandList />} />
+          <Route path="landlist" element={ <AppProvider>  <LandList />  </AppProvider> } />
           <Route path='agents' element={<Agents/>} />
           <Route path='contact' element={<ContactUs margin={100} />} />
           <Route path='about' element={<AboutUs/>} />
