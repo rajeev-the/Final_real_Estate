@@ -17,7 +17,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="relative bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-gray-100 pt-20 pb-48 px-6 mt-24 rounded-t-[4rem] shadow-top-lg border-t border-slate-600/30">
+    <div className="relative bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-gray-100 pt-20 pb-48 px-6 mt-19 rounded-t-[4rem] shadow-top-lg border-t border-slate-600/30">
     {/* Footer Content */}
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-40 relative z-10">
       {footerLinks.map((section, index) => (
