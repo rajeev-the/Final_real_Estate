@@ -132,7 +132,7 @@ const Home = ({agent}) => {
         {/* Hot Selling Lands Section */}
         <div  className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[110px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
           
-          <h2 className="sm:text-4xl text-2xl  font-medium text-center text-[#1C2B2D] mb-5"  style={{ fontFamily: "Krub, sans-serif" }}>  Hot Selling Lands in India</h2>
+          <h2 className="sm:text-4xl text-2xl  font-bold text-center text-[#1C2B2D] mb-5"  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>  Hot Selling Lands in India</h2>
 
          {/* Location Buttons */}
 <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6">
@@ -145,7 +145,7 @@ const Home = ({agent}) => {
         ${
           selectedLocation === name
             ? "bg-[#4B2E83] text-white shadow-lg scale-105"
-            : "dark:bg-[#E6D5B8]  text-[#1C2B2D] hover:bg-[#4B2E83] hover:text-white  dark:text-[#1C2B2D] dark:hover:bg-[#6B46C1]"
+            : "dark:bg-[#000000]  text-[white]     hover:text-xl  dark:text-[white] "
         }`}
     >
       {name}

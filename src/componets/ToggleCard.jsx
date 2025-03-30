@@ -5,13 +5,13 @@ const ToggleCard = () => {
 
   return (
     <div className="flex flex-col items-center justify-center sm:mt-10 md:mb-14 relative">
-      <div className="bg-[#E6D5B8] dark:bg-[#E6D5B8] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
+      <div className="bg-[#000000] dark:bg-[#000000] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
         <button
           onClick={() => setActive("top-rated")}
           className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
             active === "top-rated"
               ? "bg-[#4B2E83] text-white shadow-lg"
-              : "text-[#1C2B2D] hover:text-[#4B2E83] dark:text-[#1C2B2D] dark:hover:text-white"
+              : "text-[#1C2B2D] hover:text-[#4B2E83] dark:text-[white] dark:hover:text-white"
           }`}
         >
           Top Rated
@@ -22,7 +22,7 @@ const ToggleCard = () => {
           className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
             active === "suggestions"
               ? "bg-[#4B2E83] text-white shadow-lg"
-              : "text-gray-600 hover:text-[#4B2E83] dark:text-gray-800 dark:hover:text-white"
+              : "text-gray-600 hover:text-[#4B2E83] dark:text-white dark:hover:text-white"
           }`}
         >
           Suggestions

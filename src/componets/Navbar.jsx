@@ -74,7 +74,7 @@ const Navbar = ({ data }) => {
 
   return (
     <>
-    <nav ref={boxRef} className=" fixed top-0 left-0 w-full z-50 dark:bg-[#E6D5B8]  rounded-b-lg  py-2 px-6 md:px-12 flex justify-between items-center    " >
+    <nav ref={boxRef} className=" fixed top-0 left-0 w-full z-50 dark:bg-[#000000]  rounded-b-lg  py-2 px-6 md:px-12 flex justify-between items-center    " >
       {/* Logo Section */}
       <div>
         <img ref={secondRef} src={logoimg} alt="Real Estate Logo" className="sm:h-15 sm:w-15 h-12 w-12   rounded-md" />
@@ -82,7 +82,7 @@ const Navbar = ({ data }) => {
 
       {/* Desktop Menu & Login Button (Pushed to the End) */}
       <div className="flex-1 flex justify-end items-center space-x-14">
-      <ul className="hidden md:flex space-x-14 text-[#1C2B2D] font-medium" style={{ fontFamily: "Krub, sans-serif" }}>
+      <ul className="hidden md:flex space-x-14 text-[white] font-medium" style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>
         {[
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
@@ -95,7 +95,7 @@ const Navbar = ({ data }) => {
             to={item.link}
             onClick={() => setActive(item.name)}
             className={`relative cursor-pointer pb-2 transition duration-300  ${
-              active === item.name ? "text-[#1C2B2D]" : ""
+              active === item.name ? "text-[white]" : ""
             }`}
           >
             {item.name}
