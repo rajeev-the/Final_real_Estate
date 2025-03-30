@@ -18,26 +18,37 @@ const Navbar = ({ data }) => {
   const itemsRef = useRef([]);
   const secondRef = useRef();
   const thridref = useRef()
-  
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.from(boxRef.current, { y: -100, opacity: 1, duration: 1, ease: "expo.out" })
-      .fromTo(
+  
+    tl.from(boxRef.current, { 
+      y: -100, 
+      opacity: 1, 
+      duration: 1, 
+      ease: "expo.out" 
+    });
+  
+    // Ensure isOpen is checked correctly before running animations
+    if (isOpen) {
+      tl.fromTo(
         itemsRef.current,
         { opacity: 0, y: -50 },
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
-      )
-      .fromTo(
-        thridref.current, // Now correctly referenced
-        { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 1, ease: "expo.out" }
-      )
-      .fromTo(
-        secondRef.current,
-        { opacity: 0, scale: 1 },
-        { opacity: 1, y: 0, duration: 1, scale: 1, stagger: 0.1, ease: "expo.out" }
       );
-  }, []);
+    }
+  
+    tl.fromTo(
+      thridref.current, // Now correctly referenced
+      { opacity: 0, y: -50 },
+      { opacity: 1, y: 0, duration: 1, ease: "expo.out" }
+    )
+    .fromTo(
+      secondRef.current,
+      { opacity: 0, scale: 1 },
+      { opacity: 1, y: 0, duration: 1, scale: 1, stagger: 0.1, ease: "expo.out" }
+    );
+  
+  }, [isOpen]); // Dependency added to re-run animation when `isOpen` changes
   
 
   const handleLogout = () => {
