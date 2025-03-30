@@ -36,7 +36,7 @@ const Realcompo = () => {
     
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 className="text-3xl font-normal text-center text-black mb-12"  style={{ fontFamily: "Krub, sans-serif" }}>Real Estate Services</h2>
+      <h2 className=" sm:text-4xl text-2xl  font-medium text-center text-[#1C2B2D]   mb-12"  style={{ fontFamily: "Krub, sans-serif" }}>Real Estate Services</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service, index) => (

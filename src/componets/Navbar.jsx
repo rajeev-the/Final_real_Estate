@@ -1,17 +1,55 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logoimg from '../assets/logoo.jpg';
+import { useGSAP } from "@gsap/react"; 
+import gsap from "gsap";
+
+
 
 const Navbar = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("Home"); 
+  const boxRef = useRef(null);
   const [activeuser, setActiveUser] = useState(data ? false : true);
   const navigation = useNavigate();
+  const itemsRef = useRef([])
+  const secondRef = useRef()
   
+  useGSAP(() => {
+    const tl = gsap.timeline();
+   
+  tl.from(boxRef.current, { y: -100, opacity: 1, duration: 1.5, ease: "power2.out" }).
+    fromTo(
+    itemsRef.current,
+    { opacity: 0, y: -50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power2.out",
+    }
+  ).
+  fromTo(
+    secondRef.current,
+    { opacity: 0, scale:1 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      scale:1,
+      stagger: 0.1,
+      ease: "power2.out",
+    })
+
+
+
+  }, []);
+ 
 
   const handleLogout = () => {
     localStorage.removeItem("User");
@@ -36,27 +74,28 @@ const Navbar = ({ data }) => {
 
   return (
     <>
-    <nav className=" fixed top-0 left-0 w-full z-50 bg-white  rounded-b-lg  py-2 px-6 md:px-12 flex justify-between items-center   border-b-2  border-[#826CB0] " >
+    <nav ref={boxRef} className=" fixed top-0 left-0 w-full z-50 dark:bg-[#E6D5B8]  rounded-b-lg  py-2 px-6 md:px-12 flex justify-between items-center    " >
       {/* Logo Section */}
       <div>
-        <img src={logoimg} alt="Real Estate Logo" className="h-15 w-15" />
+        <img ref={secondRef} src={logoimg} alt="Real Estate Logo" className="sm:h-15 sm:w-15 h-12 w-12   rounded-md" />
       </div>
 
       {/* Desktop Menu & Login Button (Pushed to the End) */}
       <div className="flex-1 flex justify-end items-center space-x-14">
-      <ul className="hidden md:flex space-x-14 text-black font-normal" style={{ fontFamily: "Krub, sans-serif" }}>
+      <ul className="hidden md:flex space-x-14 text-[#1C2B2D] font-medium" style={{ fontFamily: "Krub, sans-serif" }}>
         {[
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
           { name: "Agents", link: "agents" },
           { name: "Contact Us", link: "contact" },
-        ].map((item) => (
+        ].map((item,index) => (
             <Link
+            ref={(el) => (itemsRef.current[index] = el)}
             key={item.name}
             to={item.link}
             onClick={() => setActive(item.name)}
-            className={`relative cursor-pointer pb-2 transition duration-300 ${
-              active === item.name ? "text-black" : ""
+            className={`relative cursor-pointer pb-2 transition duration-300  ${
+              active === item.name ? "text-[#1C2B2D]" : ""
             }`}
           >
             {item.name}
@@ -67,10 +106,10 @@ const Navbar = ({ data }) => {
         ))}
       </ul>
         {/* Login Button */}
-        {   activeuser ? (
+        {  isOpen ?     activeuser ? (
             <Link
               to={"/login"}
-              className="border-2 border-[#826CB0] px-10 py-2 rounded-lg text-black font-medium"
+              className="border-2 border-[#826CB0] px-10 py-2 rounded-lg text-[#1C2B2D] font-medium"
             >
               LogIn
             </Link>
@@ -94,7 +133,7 @@ const Navbar = ({ data }) => {
                 </svg>
               </button>
             </Tooltip>
-          )
+          ): " "
         
         }
       </div>
@@ -106,7 +145,7 @@ const Navbar = ({ data }) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white shadow-lg p-4 flex flex-col items-center space-y-4 md:hidden">
+        <div className="text-[#1C2B2D] absolute top-16 left-0 w-full bg-white shadow-lg p-4 flex flex-col items-center space-y-4 md:hidden">
           <Link to={"/"}  className="text-gray-700">Home</Link>
           <Link  to={"landlist"} className="text-gray-700">Land Listing</Link>
           <Link to={"agents"} className="text-gray-700">Agents</Link>
