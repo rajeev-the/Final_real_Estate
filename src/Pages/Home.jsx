@@ -20,7 +20,7 @@ const Home = ({agent}) => {
   const[data,setdata] = useState([])
  
   const { property  } = useAppContext();
-  const [selectedLocation, setSelectedLocation] = useState("Noida");
+  const [selectedLocation, setSelectedLocation] = useState("Haryana");
   const carouselRef = useRef(null);
   const resvideo = useRef()
   const seoref = useRef(null); // Ref for the cities section
