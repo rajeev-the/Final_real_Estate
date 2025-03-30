@@ -95,10 +95,10 @@ const Home = ({agent}) => {
      
 
       {/* Main Content */}
-      <div className="min-h-screen mt-[80px] w-full relative bg-white pt-3 sm:pt-5 -top-2 sm:-top-5 rounded-t-lg z-10">
+      <div className="min-h-screen mt-[50px] sm:mt-[70px] w-full relative bg-white  ">
         
         {/* Banner Section */}
-        <div className="h-[250px] sm:h-[600px] sm:p-5 p-3 w-full flex justify-center items-center  rounded-lg overflow-hidden">
+        <div className="h-[250px]  sm:h-[600px]  w-full flex justify-center items-center   overflow-hidden">
           {/* <img
             className="h-full w-full  rounded-xl object-cover"
             src={desktopBanner}
@@ -130,7 +130,7 @@ const Home = ({agent}) => {
 
 
         {/* Hot Selling Lands Section */}
-        <div  className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[110px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
+        <div  className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[85px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
           
           <h2 className="sm:text-4xl text-2xl  font-bold text-center text-[#1C2B2D] mb-5"  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>  Hot Selling Lands in India</h2>
 
