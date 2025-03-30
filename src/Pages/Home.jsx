@@ -41,7 +41,7 @@ const Home = ({agent}) => {
       duration: 1,
       stagger: 0.1,
       ease: "power2.out",
-      delay:0.5
+      delay:2.9
     }
   ).fromTo(
     seoref.current,
@@ -51,7 +51,7 @@ const Home = ({agent}) => {
       y: 0,
       duration: 1,
       ease: "power2.out",
-      delay: 0.5
+      delay: 2
     },
     "<+=0.5" // Start 0.5s after previous animation
   );
