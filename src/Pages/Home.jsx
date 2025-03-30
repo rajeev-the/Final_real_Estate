@@ -41,7 +41,7 @@ const Home = ({agent}) => {
       duration: 1,
       stagger: 0.1,
       ease: "power2.out",
-      delay:2.9
+      delay:0.5
     }
   ).fromTo(
     seoref.current,
