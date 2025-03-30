@@ -21,21 +21,21 @@ const Navbar = ({ data }) => {
   
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.from(boxRef.current, { y: -100, opacity: 1, duration: 1, ease: "power2.out" })
+    tl.from(boxRef.current, { y: -100, opacity: 1, duration: 0.6, ease: "power2.out" })
       .fromTo(
         itemsRef.current,
         { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }
       )
       .fromTo(
         thridref.current, // Now correctly referenced
         { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
       )
       .fromTo(
         secondRef.current,
         { opacity: 0, scale: 1 },
-        { opacity: 1, y: 0, duration: 1, scale: 1, stagger: 0.1, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.6, scale: 1, stagger: 0.1, ease: "power2.out" }
       );
   }, []);
   
