@@ -23,7 +23,7 @@ const Realcompo = () => {
           )
         },
         {
-          title: "Land Leasing",
+          title: "Land Lease",
           description: "Streamlined leasing solutions with transparent terms and digital management tools.",
           cta: "View Listings",
           icon: (
