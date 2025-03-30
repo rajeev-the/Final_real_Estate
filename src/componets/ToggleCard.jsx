@@ -11,7 +11,7 @@ const ToggleCard = () => {
           className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
             active === "top-rated"
               ? "bg-[#4B2E83] text-white shadow-lg"
-              : "text-[#1C2B2D] hover:text-[#4B2E83] dark:text-[white] dark:hover:text-white"
+              : "text-white"
           }`}
         >
           Top Rated
@@ -22,7 +22,7 @@ const ToggleCard = () => {
           className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
             active === "suggestions"
               ? "bg-[#4B2E83] text-white shadow-lg"
-              : "bg-gray-600 hover:text-[#4B2E83] text-white "
+              : " text-white "
           }`}
         >
           Suggestions
