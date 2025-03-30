@@ -21,15 +21,15 @@ const Navbar = ({ data }) => {
   useGSAP(() => {
     const tl = gsap.timeline();
   
-   if(isopen){ tl.from(boxRef.current, { 
+    // Animate the Navbar (always runs on mount)
+    tl.from(boxRef.current, { 
       y: -100, 
       opacity: 1, 
       duration: 1, 
       ease: "expo.out" 
     });
-  }
   
-    // Ensure isOpen is checked correctly before running animations
+    // Animate Navigation Items (only when menu is open)
     if (isOpen) {
       tl.fromTo(
         itemsRef.current,
@@ -38,38 +38,26 @@ const Navbar = ({ data }) => {
       );
     }
   
-    tl.fromTo(
-      thridref.current, // Now correctly referenced
-      { opacity: 0, y: -50 },
-      { opacity: 1, y: 0, duration: 1, ease: "expo.out" }
-    )
-    .fromTo(
-      secondRef.current,
-      { opacity: 0, scale: 1 },
-      { opacity: 1, y: 0, duration: 1, scale: 1, stagger: 0.1, ease: "expo.out" }
-    );
+    // Animate Profile/Login Section
+    if (thridref.current) {
+      tl.fromTo(
+        thridref.current,
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: 1, ease: "expo.out" }
+      );
+    }
   
-  }, [isOpen]); // Dependency added to re-run animation when `isOpen` changes
+    // Animate Logo
+    if (secondRef.current) {
+      tl.fromTo(
+        secondRef.current,
+        { opacity: 0, scale: 1 },
+        { opacity: 1, y: 0, duration: 1, scale: 1, stagger: 0.1, ease: "expo.out" }
+      );
+    }
   
-
-  const handleLogout = () => {
-    localStorage.removeItem("User");
-    showInfoToast("Logout Successful");
-    setActiveUser(true);
-    navigation("/login");
-  };
-
-  const showInfoToast = (message) => {
-    toast.info(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-    });
-  };
+  }, [isOpen]); // ✅ Runs only on component mount
+  
 
   return (
     <nav ref={boxRef} className="fixed top-0 left-0 w-full z-50 bg-black py-2 px-6 md:px-12 flex justify-between items-center">
