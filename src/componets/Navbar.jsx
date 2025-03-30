@@ -21,7 +21,7 @@ const Navbar = ({ data }) => {
   
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.from(boxRef.current, { y: -100, opacity: 1, duration: 1.5, ease: "power2.out" })
+    tl.from(boxRef.current, { y: -100, opacity: 1, duration: 1, ease: "power2.out" })
       .fromTo(
         itemsRef.current,
         { opacity: 0, y: -50 },
