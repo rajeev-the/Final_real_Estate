@@ -145,7 +145,7 @@ const Home = ({agent}) => {
         ${
           selectedLocation === name
             ? "bg-[#4B2E83] text-white shadow-lg scale-105"
-            : "dark:bg-[#000000]  bg-[#000000]    hover:text-xl  dark:text-[white] "
+            : "  bg-[#000000]    hover:text-xl text-[white]   "
         }`}
     >
       {name}
