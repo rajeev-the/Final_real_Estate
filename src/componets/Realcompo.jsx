@@ -3,7 +3,7 @@ import React from 'react'
 const Realcompo = () => {
     const services = [
         {
-          title: "Buy a Property ",
+          title: "Buy a Land ",
           description: "A real estate agent can provide you with a clear breakdown of costs so that you can avoid surprise expenses.",
           cta: "Find a local agent",
           icon: (
@@ -13,7 +13,7 @@ const Realcompo = () => {
           )
         },
         {
-          title: "Sell a  Property",
+          title: "Sell a  Land",
           description: "No matter what path you take to sell your home, we can help you navigate a successful sale.",
           cta: "See your options",
           icon: (
@@ -23,7 +23,7 @@ const Realcompo = () => {
           )
         },
         {
-          title: "Rent a  Property",
+          title: "Lease a  Land",
           description: "We're creating a seamless online experience – from shopping on the largest rental network, to applying, to paying rent.",
           cta: "Find rentals",
           icon: (
