@@ -17,6 +17,7 @@ const Navbar = ({ data }) => {
   const navigation = useNavigate();
   const itemsRef = useRef([]);
   const secondRef = useRef();
+  const thridref = useRef()
   
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -27,11 +28,17 @@ const Navbar = ({ data }) => {
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
       )
       .fromTo(
+        thridref.current, // Now correctly referenced
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+      )
+      .fromTo(
         secondRef.current,
         { opacity: 0, scale: 1 },
         { opacity: 1, y: 0, duration: 1, scale: 1, stagger: 0.1, ease: "power2.out" }
       );
   }, []);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("User");
@@ -92,8 +99,11 @@ const Navbar = ({ data }) => {
   
       {/* Login / User Profile */}
      {/* Login / User Profile - Hidden on Mobile */}
+{/* Login / User Profile - Hidden on Mobile */}
+{/* Login / User Profile - Hidden on Mobile */}
 {activeuser ? (
   <Link
+    ref={thridref}  // Attach ref to this element instead
     to={"/login"}
     className="bg-[#4B2E83] hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2 border-[#4B2E83] transition-colors hover:bg-white hover:text-[#4B2E83]"
   >
@@ -102,7 +112,7 @@ const Navbar = ({ data }) => {
 ) : (
   <Tooltip
     title={
-      <div className="p-4 hidden sm:flex space-y-2 bg-white rounded-lg shadow-lg">
+      <div className="p-4 space-y-2 bg-white rounded-lg shadow-lg">
         <li className="pb-2 text-[#4B2E83] list-none">
           {data.user ? data.user.name : data.name}
         </li>
@@ -115,7 +125,10 @@ const Navbar = ({ data }) => {
       </div>
     }
   >
-    <button className="border-2 border-[#4B2E83] hidden sm:flex p-2 rounded-lg transition-colors hover:bg-[#4B2E83]">
+    <button
+      ref={thridref} // Attach ref here instead of inside Tooltip content
+      className="border-2 border-[#4B2E83] hidden sm:flex p-2 rounded-lg transition-colors hover:bg-[#4B2E83]"
+    >
       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
@@ -127,6 +140,7 @@ const Navbar = ({ data }) => {
     </button>
   </Tooltip>
 )}
+
 
   
       {/* Mobile Menu Button */}
@@ -140,7 +154,7 @@ const Navbar = ({ data }) => {
   
     {/* Mobile Menu - Now Placed at the End */}
     {isOpen && (
-      <div className="md:hidden absolute top-full left-0 w-full bg-[#4B2E8] shadow-lg p-4 flex flex-col items-center space-y-4">
+      <div className="md:hidden absolute top-full left-0 w-full bg-[#000000] shadow-lg p-4 flex flex-col items-center space-y-4">
         {[
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
