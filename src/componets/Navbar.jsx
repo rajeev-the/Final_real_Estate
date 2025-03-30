@@ -91,42 +91,43 @@ const Navbar = ({ data }) => {
       </ul>
   
       {/* Login / User Profile */}
-      {    activeuser ? (
-        <Link
-          to={"/login"}
-          className="bg-[#4B2E83] sm:hidden text-white px-6 py-2 rounded-lg font-medium border-2 border-[#4B2E83] transition-colors hover:bg-white hover:text-[#4B2E83]"
+     {/* Login / User Profile - Hidden on Mobile */}
+{activeuser ? (
+  <Link
+    to={"/login"}
+    className="bg-[#4B2E83] hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2 border-[#4B2E83] transition-colors hover:bg-white hover:text-[#4B2E83]"
+  >
+    Log In
+  </Link>
+) : (
+  <Tooltip
+    title={
+      <div className="p-4 hidden sm:flex space-y-2 bg-white rounded-lg shadow-lg">
+        <li className="pb-2 text-[#4B2E83] list-none">
+          {data.user ? data.user.name : data.name}
+        </li>
+        <button
+          onClick={handleLogout}
+          className="mt-2 bg-[#4B2E83] text-white px-4 py-2 rounded-lg w-full transition-colors hover:bg-red-600"
         >
-          Log In
-        </Link>
-      ) : (
-        <Tooltip
-          title={
-            <div className="p-4 space-y-2 bg-white rounded-lg shadow-lg">
-              <li className="pb-2 text-[#4B2E83] list-none">
-                {data.user ? data.user.name : data.name}
-              </li>
-              <button
-                onClick={handleLogout}
-                className="mt-2 sm:hidden bg-[#4B2E83] text-white px-4 py-2 rounded-lg w-full transition-colors hover:bg-red-600"
-              >
-                Logout
-              </button>
-            </div>
-          }
-        >
-          <button className="border-2 border-[#4B2E83] p-2 rounded-lg transition-colors hover:bg-[#4B2E83]">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-          </button>
-        </Tooltip>
-      )
-      }
+          Logout
+        </button>
+      </div>
+    }
+  >
+    <button className="border-2 border-[#4B2E83] hidden sm:flex p-2 rounded-lg transition-colors hover:bg-[#4B2E83]">
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        />
+      </svg>
+    </button>
+  </Tooltip>
+)}
+
   
       {/* Mobile Menu Button */}
       <button 
