@@ -23,7 +23,8 @@ const Home = ({agent}) => {
   const [selectedLocation, setSelectedLocation] = useState("Noida");
   const carouselRef = useRef(null);
   const resvideo = useRef()
-  const seoref = useRef([])
+  const seoref = useRef(null); // Ref for the cities section
+
 
   
   useGSAP(() => {
@@ -42,18 +43,18 @@ const Home = ({agent}) => {
       ease: "power2.out",
       delay:2.6
     }
-  ). fromTo(
-    resvideo.current,
-  { opacity: 0, y: -50 ,  },
-  {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    stagger: 0.1,
-    ease: "power2.out",
-    delay:2.4
-  }
-)
+  ).fromTo(
+    seoref.current,
+    { opacity: 0, y: 100 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      delay: 0.5
+    },
+    "<+=0.5" // Start 0.5s after previous animation
+  );
 
   }, []);
   
@@ -114,7 +115,7 @@ const Home = ({agent}) => {
 
 
 
-        <div className="flex flex-col items-center px-4 py-8 bg-gradient-to-b from-white to-gray-50">
+        <div  ref={seoref} className="flex flex-col items-center px-4 py-8 bg-gradient-to-b from-white to-gray-50">
   {/* Premium Toggle Buttons (unchanged) */}
  <ToggleCard/>
   
@@ -137,7 +138,7 @@ const Home = ({agent}) => {
 <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6">
   {locations.map((name, index) => (
     <button
-    ref={(el) => (seoref.current[index] = el)}
+   
       key={index}
       onClick={() => setSelectedLocation(name)}
       className={`  text-sm md:text-lg font-medium py-1  px-3   md:px-8 rounded-full transition-all duration-300 
