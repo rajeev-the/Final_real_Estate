@@ -51,7 +51,7 @@ const Home = ({agent}) => {
       y: 0,
       duration: 1,
       ease: "power2.out",
-      delay: 2
+      delay: 0.1
     },
     "<+=0.5" // Start 0.5s after previous animation
   );
