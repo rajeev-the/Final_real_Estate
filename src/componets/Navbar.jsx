@@ -21,12 +21,13 @@ const Navbar = ({ data }) => {
   useGSAP(() => {
     const tl = gsap.timeline();
   
-    tl.from(boxRef.current, { 
+   if(isopen){ tl.from(boxRef.current, { 
       y: -100, 
       opacity: 1, 
       duration: 1, 
       ease: "expo.out" 
     });
+  }
   
     // Ensure isOpen is checked correctly before running animations
     if (isOpen) {
