@@ -128,7 +128,7 @@ const Navbar = ({ data }) => {
               }
             >
               <button className="border-2   border-[#826CB0] p-2 rounded-lg  mr-2 sm:mr-0">
-                <svg className="sm:w-6 sm:h-6  w-4 h-4  " fill="none" stroke="black" viewBox="0 0 24 24">
+                <svg className="sm:w-6 sm:h-6  w-4 h-4  " fill="none" stroke="white" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                 </svg>
               </button>
@@ -139,7 +139,7 @@ const Navbar = ({ data }) => {
       </div>
 
       {/* Mobile Menu Toggle */}
-      <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-gray-700">
+      <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white">
         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
       </button>
 
