@@ -206,7 +206,7 @@ const SignupAgent = () => {
           <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
           <select value={state} onChange={(e)=>setState(e.target.value)} className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
             <option value="">Select your state</option>
-            {['Haryana', 'Noida', 'Gurgram', 'New Delhi'].map((state) => (
+            {['Haryana', 'Uttar pradesh', 'Gurgram', 'Delhi','punjab'].map((state) => (
               <option   key={state} value={state}>{state}</option>
             ))}
           </select>

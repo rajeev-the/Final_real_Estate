@@ -4,21 +4,39 @@ import {  useParams } from "react-router-dom";
 import { useAppContext } from "../Context/Poperty_context";
 import { useNavigate } from "react-router-dom";
 import { FaWhatsapp, FaShareAlt, FaMapMarkerAlt, FaChevronRight } from 'react-icons/fa';
+import axios from "axios";
 
 const ViewLand = () => {
   const { id } = useParams();
   const { property } = useAppContext();
-  const [data, setData] = useState();
-
-
+  const url = "https://finalbackend111.pythonanywhere.com/api/";
+  
+  const [data, setData] = useState(null);
+  const [agent, setAgent] = useState(null);
+  
   useEffect(() => {
     if (property) {
-      const selectedLand = property.find((et) => et.id.toString() == id);
+      const selectedLand = property.find((et) => et.id.toString() === id);
       setData(selectedLand || null);
     }
   }, [id, property]);
-
-
+  
+  useEffect(() => {
+    const getAgent = async () => {
+      if (!data?.agent) return;
+  
+      try {
+        const res = await axios.get(`${url}/agent/${data.agent}`);
+        setAgent(res.data);
+      } catch (error) {
+        console.error("Error fetching agent:", error);
+      }
+    };
+  
+    getAgent();
+  }, [data]); // Runs only when data is set
+  
+  
 
   if (!data) {
     return <div className="text-center  text-gray-600 mt-10">Loading...</div>;
@@ -94,6 +112,7 @@ const ViewLand = () => {
             <DetailItem label="Land Category" value={data.land_category} />
             <DetailItem label="Price Range" value={data.price_range} />
             <DetailItem label="Road Width" value={`${data.road_width} ft (${data.road_width_filter})`} />
+            <DetailItem label="Total Price" value={`${data.acre_price*data.acre} Cr `} />
           </div>
 
           <div className="space-y-4">
@@ -112,23 +131,41 @@ const ViewLand = () => {
         </div>
 
         {/* Additional Information Section */}
-        <div className="mt-8 space-y-4">
-          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Additional Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="text-md font-medium text-gray-700 mb-2">Land Facing</h4>
-              <p className="text-gray-600">{data.land_facing || "N/A"}</p>
-            </div>
-            <div>
-              <h4 className="text-md font-medium text-gray-700 mb-2">Nearest Highways</h4>
-              <p className="text-gray-600">{data.nearest_highways || "N/A"}</p>
-            </div>
-          </div>
-          <div className="mt-4">
-            <h4 className="text-md font-medium text-gray-700 mb-2">Property Details</h4>
-            <p className="text-gray-600">{data.details || "No additional details provided"}</p>
-          </div>
-        </div>
+      <div className="mt-8 space-y-4">
+  <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Additional Information</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h4 className="text-md font-medium text-gray-700 mb-2">Land Facing</h4>
+      <p className="text-gray-600">{data.land_facing || "N/A"}</p>
+    </div>
+    <div>
+      <h4 className="text-md font-medium text-gray-700 mb-2">Nearest Highways</h4>
+      <p className="text-gray-600">{data.nearest_highways || "N/A"}</p>
+    </div>
+  </div>
+  <div className="mt-4">
+    <h4 className="text-md font-medium text-gray-700 mb-2">Property Details</h4>
+    <p className="text-gray-600">{data.details || "No additional details provided"}</p>
+  </div>
+</div>
+
+<div className="mt-8 space-y-4">
+  <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Agent Information</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h4 className="text-md font-medium text-gray-700 mb-2">Agent </h4>
+      <p className="text-gray-600">{agent?.name || "N/A"}</p>
+    </div>
+    <div>
+      <h4 className="text-md font-medium text-gray-700 mb-2">Agent Number</h4>
+      <p className="text-gray-600">{agent?.phone_number || "N/A"}</p>
+    </div>
+  </div>
+  <div className="mt-4">
+    <h4 className="text-md font-medium text-gray-700 mb-2">Agent Email</h4>
+    <p className="text-gray-600">{agent?.email || "N/A"}</p>
+  </div>
+</div>
       </div>
 
       {/* Location Button Section */}

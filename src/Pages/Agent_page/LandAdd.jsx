@@ -36,26 +36,24 @@ const LandAdd = () => {
   // Helper functions for derived fields
   const calculateSizeRange = (acreValue) => {
     const acreNum = parseFloat(acreValue) || 0;
-    if (acreNum < 1) return '0-1 acre';
-    if (acreNum < 5) return '1-5 acres';
-    if (acreNum < 10) return '5-10 acres';
-    return '10+ acres';
+    if ( 10> acreNum < 20) return '10-20 Acres';
+    if (3> acreNum < 5) return '3-5 Acres';
+    if (  5>acreNum < 10) return '5-10 Acres';
+    return 'Above 20 Acres';
   };
 
   const calculatePriceRange = (priceValue) => {
     const priceNum = parseInt(priceValue) || 0;
-    if (priceNum < 1000000) return 'Under ₹1M';
-    if (priceNum < 5000000) return '₹1M-5M';
-    if (priceNum < 10000000) return '₹5M-10M';
-    return 'Over ₹10M';
+    if ( 4 > priceNum < 6) return '6-5Cr';
+    return 'Above 10 Cr';
   };
 
   const calculateRoadWidthFilter = (widthValue) => {
     const widthNum = parseInt(widthValue) || 0;
-    if (widthNum < 20) return 'Narrow (<20ft)';
-    if (widthNum < 40) return 'Medium (20-40ft)';
-    if (widthNum < 60) return 'Wide (40-60ft)';
-    return 'Very Wide (60ft+)';
+    if  ( 66 >= widthNum <= 100) return '66 to 100 feet';
+    if (  33 >= widthNum < 66) return '33 to 66 feet';
+    if ( 100 >= widthNum <= 150) return '100 to 150 feet';
+    return '>150+ feet';
   };
 
   const showSuccessToast = (message) => {
@@ -145,29 +143,39 @@ const LandAdd = () => {
     }
 
     try {
-      const res = await axios.post(`${url}property/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      await toast.promise(
+        axios.post(`${url}property/`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }),
+        {
+          pending: "Adding property...",
+          success: "Property added successfully! 🎉",
+          error: "Failed to add property ❌",
+        }
+      ).then((res) => {
+        if (res.status === 201) {
+          // Reset form fields
+          setState("");
+          setAddress("");
+          setAcrePrice("");
+          setAcre("");
+          setAvailable(false);
+          setRoadWidth("");
+          setCategory("");
+          setDistrictName("");
+          setTehsilName("");
+          setLocationsLink("");
+          setFile(null);
+          setLayout(null);
+    
+          // Navigate to agent holdings page
+          navigate("/agent/holding");
+        }
+      }).catch((error) => {
+        console.error("Error adding property:", error);
       });
-
-      if (res.status === 201) {
-        showSuccessToast("Property added successfully");
-        // Reset form
-        setState("");
-        setAddress("");
-        setAcrePrice("");
-        setAcre("");
-        setAvailable(false);
-        setRoadWidth("");
-        setCategory("");
-        setDistrictName("");
-        setTehsilName("");
-        setLocationsLink("");
-        setFile(null);
-        setLayout(null);
-        navigate("/agent/holding");
-      }
     } catch (error) {
       console.error("Error details:", error.response?.data);
       showErrorToast("Error in adding property: " + 

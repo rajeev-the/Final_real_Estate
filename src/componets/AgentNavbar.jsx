@@ -38,7 +38,7 @@ const data = JSON.parse(localStorage.getItem("Agent"))
   return (
     <>          
 
-    <nav className="bg-gray-600 p-4 sm:pb-5 mb-3  ">
+    <nav className="bg-gray-600 p-4 sm:pb-5  ">
     <div className="container mx-auto flex justify-between items-center">
       <div className="text-white text-lg font-bold">Agent</div>
       <div className="hidden md:flex space-x-[60px] ">

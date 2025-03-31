@@ -41,7 +41,7 @@ const Home = ({agent}) => {
       duration: 1,
       stagger: 0.1,
       ease: "power2.out",
-      delay:2.2
+      delay:2.6
     }
   ).fromTo(
     seoref.current,
@@ -81,7 +81,7 @@ const Home = ({agent}) => {
 
 
 
-  const locations = ["Haryana", "Delhi", "Noida", "Ghaziabad"];
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh"];
  
 
   return (
@@ -95,7 +95,7 @@ const Home = ({agent}) => {
      
 
       {/* Main Content */}
-      <div className="min-h-screen mt-[50px] sm:mt-[70px] w-full relative bg-white  ">
+      <div className={`min-h-screen  w-full relative bg-white  ${agent  ?  " mt-[50px] sm:mt-[70px]": ""}`} >
         
         {/* Banner Section */}
         <div className="h-[250px]  sm:h-[600px]  w-full flex justify-center items-center   overflow-hidden">
@@ -109,7 +109,7 @@ const Home = ({agent}) => {
            autoPlay 
            loop 
            muted
-            src={xxxp} ref={resvideo}  className="h-full w-full  rounded-xl object-cover"></video>
+            src={xxxp} ref={resvideo}  className="h-full w-full   object-cover"></video>
         </div>
 
 
