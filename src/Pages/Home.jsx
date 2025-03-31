@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useRef } from "react";
 import desktopBanner from "../assets/desktop-banner.jpeg";
-import ND from "../assets/ND.jpeg";
-import GZ from "../assets/GZ.jpeg";
+import UP from "../assets/UP.jpeg";
+import PN from "../assets/PN.jpeg";
 import HR from "../assets/HR.jpeg";
 import DL from "../assets/DL.jpeg"
 import LandCard from "../componets/LandCard"
@@ -71,8 +71,8 @@ const Home = ({agent}) => {
   }, [selectedLocation,property])
 
   const cities = [
-    { name: "GHAZIABAD", image:GZ, bg: "bg-gradient-to-t from-purple-900 to-blue-300" },
-    { name: "NOIDA", image: ND, bg: "bg-gradient-to-t from-yellow-600 to-amber-300" },
+    { name: "PUNJAB", image:PN, bg: "bg-gradient-to-t from-purple-900 to-blue-300" },
+    { name: "Uttar Pradesh", image: UP, bg: "bg-gradient-to-t from-yellow-600 to-amber-300" },
     { name: "HARYANA", image:HR, bg: "bg-gradient-to-t from-orange-800 to-red-300" },
     { name: "Delhi", image:DL, bg: "bg-gradient-to-t from-green-700 to-teal-300" }
   ];
