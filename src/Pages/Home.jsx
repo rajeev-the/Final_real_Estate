@@ -155,12 +155,12 @@ const Home = ({agent}) => {
 
           {/* Land Cards Carousel */}
           <div className="overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden">
-  <div className="flex flex-nowrap justify-start items-center gap-4 md:gap-6 p-4 min-w-min">
+          <div className="grid grid-cols-2 gap-4 p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
     {data?.slice(0, 4).map((e, i) => (
       <Link 
         to={`/Land/${e.id}`} 
         key={e.id}
-        className="min-w-[300px] md:min-w-[350px] flex-shrink-0 snap-start"  
+        className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
       >  
         <LandCard 
           acre={e.acre} 
@@ -170,7 +170,7 @@ const Home = ({agent}) => {
         /> 
       </Link>
     ))}
-  </div>
+</div>
 </div>
 
 
