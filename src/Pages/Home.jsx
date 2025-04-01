@@ -1,9 +1,9 @@
 import React, { useEffect, useState,useRef } from "react";
 import desktopBanner from "../assets/desktop-banner.jpeg";
 import UP from "../assets/UP.jpeg";
-import PN from "../assets/PN.jpeg";
-import HR from "../assets/HR.jpeg";
-import DL from "../assets/DL.jpeg"
+import PN from "../assets/PN.png";
+import HR from "../assets/HR.jpg";
+import DL from "../assets/DL.jpg"
 import LandCard from "../componets/LandCard"
 import {useAppContext } from "../Context/Poperty_context"
 import { Link } from "react-router-dom";
