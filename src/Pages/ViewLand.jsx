@@ -10,6 +10,7 @@ const ViewLand = () => {
   const { id } = useParams();
   const { property } = useAppContext();
   const url = "https://finalbackend111.pythonanywhere.com/api/";
+  const idData = JSON.parse(localStorage.getItem("Agent"))
   
   const [data, setData] = useState(null);
   const [agent, setAgent] = useState(null);
@@ -82,7 +83,7 @@ const ViewLand = () => {
             <span className="text-white font-medium">Main Property Image</span>
           </div>
         </div>
-        <div className="relative h-64 rounded-lg overflow-hidden shadow-md">
+      {  idData ? <></>  :  <div className="relative h-64 rounded-lg overflow-hidden shadow-md">
           <img 
             src={data?.layout} 
             alt="Property Layout" 
@@ -92,6 +93,9 @@ const ViewLand = () => {
             <span className="text-white font-medium">Property Layout</span>
           </div>
         </div>
+        
+      
+      }
       </div>
 
       {/* Details Section */}

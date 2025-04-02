@@ -3,6 +3,7 @@ import CustomCardDel  from "../../componets/CustomCardDel"
 import axios from 'axios'
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from 'react-router-dom';
 
 
 
@@ -49,8 +50,14 @@ const Holding = () => {
          <div className='flex flex-wrap gap-4   justify-center  items-center'>
          {
             data.map((item)=>(
+              <Link
+              to={`/Land/${item.id}`} 
+              key={item.id}
+              
+              >
               <CustomCardDel item={item.id} key={item.id}   property_name={item.address} acre={item.acre}  acre_price={item.acre_price}
               />
+             </Link>
             ))
          }
          </div>
