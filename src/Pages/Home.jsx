@@ -1,5 +1,4 @@
 import React, { useEffect, useState,useRef } from "react";
-import desktopBanner from "../assets/desktop-banner.jpeg";
 import UP from "../assets/UP.jpg";
 import PN from "../assets/PN.png";
 import HR from "../assets/HR.jpeg";
@@ -7,11 +6,10 @@ import DL from "../assets/DL.jpg"
 import LandCard from "../componets/LandCard"
 import {useAppContext } from "../Context/Poperty_context"
 import { Link } from "react-router-dom";
-import xxxp from "../assets/xxxp.mp4"
+import xxxp from "../assets/xxxp.mp4";
 import CityCard from "../componets/CityCard";
 import Realcompo from "../componets/Realcompo"
 import ToggleCard from "../componets/ToggleCard";
-
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
 

@@ -5,6 +5,7 @@ import CustomCard  from '../componets/CustomCard'
 import { Typography } from 'antd';
 const { Title } = Typography;
 
+import LandCard from '../componets/LandCard';
 
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined ,SearchOutlined } from '@ant-design/icons';
@@ -45,7 +46,7 @@ const LandList = () => {
  
 
   return (
-    <div className='mt-[50px] md:mt-[100px] p-2 md:p-[15px] w-full'>
+    <div className='mt-[50px] md:mt-[100px] sm:p-2 md:p-[15px] w-full'>
 {/* Hero Image Section */}
 <div className="relative h-[70vh] mb-16 overflow-hidden   rounded-xl">
       {/* Gradient Overlay */}
@@ -95,7 +96,7 @@ const LandList = () => {
 
     
 {/* Top Rated Section */}
-<div className='bg-white border border-slate-100 py-8 md:py-12 px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+<div className='bg-white border border-slate-100 py-8  md:py-12 sm:px-6 px-2   md:px-12 rounded-3xl mb-8 sm:mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
   <div className='flex items-center gap-4 mb-8 md:mb-12'>
     <div 
       className='h-px w-16 hidden md:block'
@@ -111,23 +112,28 @@ const LandList = () => {
     </Title>
   </div>
 
-
-  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-    {dumy?.top_rate.map((f, i) => (
-      <Link key={i} to={`/Land/${f.id}`} className='w-full hover:-translate-y-2 transition-transform duration-300'>
-        <CustomCard 
-          property_name={f?.property_name} 
-          acre={f?.acre} 
-          acre_price={f?.acre_price}
-          className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
-        />
-      </Link>
-    ))}
+  {/* Land Cards Carousel */}
+  <div className="overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden">
+    <div className="grid grid-cols-2 sm:gap-4 gap-1  sm:p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
+      {dumy?.top_rate.map((f, i) => (
+        <Link 
+          to={`/Land/${f?.id}`} 
+          key={f?.id}
+          className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
+        >  
+          <LandCard 
+            acre={f?.acre} 
+            address={f?.address} 
+            acre_price={f?.acre_price}  
+            img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
+          /> 
+        </Link>
+      ))}
+    </div>
   </div>
 </div>
-
 {/* Featured Section */}
-<div className='bg-slate-50 border border-slate-100 py-8 md:py-12 px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+<div className='bg-slate-50 border border-slate-100 py-8 md:py-12 sm:px-6  md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
   <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 md:mb-12'>
     <div className='space-y-2'>
 
@@ -157,17 +163,25 @@ const LandList = () => {
   </div>
 
 
-  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+
+
+  <div className='overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden'>
+  <div className="grid grid-cols-2 sm:gap-4 gap-1  sm:p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
     {dumy?.featured.map((f, i) => (
-    <Link key={i} to={`/Land/${f.id}`} className='w-full hover:-translate-y-2 transition-transform duration-300'>
-    <CustomCard 
-      property_name={f?.property_name} 
+    <Link 
+    to={`/Land/${f?.id}`} 
+    key={f?.id}
+    className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
+  >  
+    <LandCard 
       acre={f?.acre} 
-      acre_price={f?.acre_price}
-      className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
-    />
+      address={f?.address} 
+      acre_price={f?.acre_price}  
+      img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
+    /> 
   </Link>
     ))}
+  </div>
   </div>
 </div>
 
@@ -196,7 +210,7 @@ const LandList = () => {
 {/* State Listings Section - Preserved as requested */}
 
   {/* ... existing state listings content ... */}
-  <div className='bg-white border border-slate-100 py-8 md:py-12 px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  <div className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
   <div className='flex flex-col gap-8 md:gap-12'>
     {Object.keys(groupedProperties).map(stateId => (
       <div key={stateId} className='flex flex-col group'>
@@ -214,16 +228,20 @@ const LandList = () => {
           </Title>
         </div>
         
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+        <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6  gap-1.5 '>
           {groupedProperties[stateId].map(property => (
-               <Link key={property?.id} to={`/Land/${property?.id}`} className='w-full hover:-translate-y-2 transition-transform duration-300'>
-               <CustomCard 
-                 property_name={property?.property_name} 
-                 acre={property?.acre} 
-                 acre_price={property?.acre_price}
-                 className="border border-slate-100 hover:border-amber-100 hover:bg-amber-50/20"
-               />
-             </Link>
+                <Link 
+                to={`/Land/${property.id}`} 
+                key={property.id}
+                className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
+              >  
+                <LandCard 
+                  acre={property.acre} 
+                  address={property.address} 
+                  acre_price={property.acre_price}  
+                  img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
+                /> 
+              </Link>
           ))}
         </div>
         
