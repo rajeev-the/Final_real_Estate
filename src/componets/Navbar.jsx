@@ -6,8 +6,9 @@ import { Tooltip } from "antd";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logoimg from '../assets/logoo.jpg';
-import { useGSAP } from "@gsap/react"; 
+import { useGSAP  } from "@gsap/react"; 
 import gsap from "gsap";
+
 
 const Navbar = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,29 @@ const Navbar = ({ data }) => {
       );
     }
   
-  }, [isOpen]); // ✅ Runs only on component mount
+  }, [isOpen]);
+  
+  // ✅ Runs only on component mount
+
+  const handleLogout =()=>{
+    
+      localStorage.removeItem("User")
+      showInfoToast("Logout Successful")
+      navigation("/login")
+  
+    
+  }
+  const showInfoToast = (message) => {
+      toast.info(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+    };
   
 
   return (

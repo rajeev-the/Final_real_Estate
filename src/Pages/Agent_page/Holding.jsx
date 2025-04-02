@@ -51,7 +51,7 @@ const Holding = () => {
          {
             data.map((item)=>(
               <Link
-              to={`/land/${item.id}`} 
+              to={`land/${item.id}`} 
               key={item.id}
               
               >

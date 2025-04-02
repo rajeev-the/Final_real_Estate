@@ -83,7 +83,7 @@ const ViewLand = () => {
             <span className="text-white font-medium">Main Property Image</span>
           </div>
         </div>
-      {  idData ? <></>  :  <div className="relative h-64 rounded-lg overflow-hidden shadow-md">
+      {  idData ?  <div className="relative h-64 rounded-lg overflow-hidden shadow-md">
           <img 
             src={data?.layout} 
             alt="Property Layout" 
@@ -92,7 +92,7 @@ const ViewLand = () => {
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
             <span className="text-white font-medium">Property Layout</span>
           </div>
-        </div>
+        </div> : <></>
         
       
       }

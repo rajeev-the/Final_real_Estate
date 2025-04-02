@@ -66,7 +66,7 @@ const App = () => {
         <Route path="land" element={<LandAdd/>} />
         <Route path="holding" element={<Holding/>} />
         <Route path="contact" element={<ContactUs margin={20}/>} />
-        <Route path='land/:id' element={<AppProvider> <ViewLand/>  </AppProvider>} />
+        <Route path='holding/land/:id' element={<AppProvider>  <ViewLand/>  </AppProvider>} />
         
 
 
