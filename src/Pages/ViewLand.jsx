@@ -10,10 +10,11 @@ const ViewLand = () => {
   const { id } = useParams();
   const { property } = useAppContext();
   const url = "https://finalbackend111.pythonanywhere.com/api/";
-  const idData = JSON.parse(localStorage.getItem("Agent"))
+  const idData = JSON.parse(localStorage.getItem("Agent")) ? true :false
   
   const [data, setData] = useState(null);
   const [agent, setAgent] = useState(null);
+  console.log(idData)
   
   useEffect(() => {
     if (property) {
