@@ -47,6 +47,8 @@ const data = JSON.parse(localStorage.getItem("Agent"))
         <Link to={"holding"} className="text-white hover:text-gray-300">Holding</Link>
         <Link to={'contact'} className="text-white hover:text-gray-300">Contact</Link>
       </div>
+
+      
       <div className="md:hidden">
         <button onClick={toggleMenu} className="text-white focus:outline-none">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +93,7 @@ const data = JSON.parse(localStorage.getItem("Agent"))
         <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={"land"}>Land</Link>
         <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={"holding"}>Holding</Link>
         <Link  className="block text-white hover:text-gray-300 px-2 py-1" to={"contact"}>contact</Link>
+        <button  onClick={handlelogout}  className="block text-white hover:text-gray-300 px-2 py-1"  >Logout</button>
 
        
       </div>

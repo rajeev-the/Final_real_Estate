@@ -197,7 +197,32 @@ const Navbar = ({ data }) => {
           >
             {item.name}
           </Link>
+
+
+
+          
         ))}
+        {activeuser ? (
+      <Link
+        to="/login"
+        onClick={() => setIsOpen(false)}
+        className="w-full text-center py-2 text-white bg-[#4B2E83] hover:bg-[#3a2166] rounded-lg transition-colors"
+      >
+        Log In
+      </Link>
+    ) : (
+      <button
+        onClick={() => {
+          handleLogout();
+          setIsOpen(false);
+        }}
+        className="w-full text-center py-2 text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+      >
+        Logout
+      </button>
+    )}
+
+
       </div>
     )}
   </nav>
