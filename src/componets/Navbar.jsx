@@ -19,6 +19,7 @@ const Navbar = ({ data }) => {
   const itemsRef = useRef([]);
   const secondRef = useRef();
   const thridref = useRef()
+  const forthref = useRef()
   useGSAP(() => {
     const tl = gsap.timeline();
   
@@ -31,9 +32,16 @@ const Navbar = ({ data }) => {
     });
   
     // Animate Navigation Items (only when menu is open)
-    if (isOpen) {
+    if (!isOpen) {
       tl.fromTo(
         itemsRef.current,
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
+      );
+    }
+    if(forthref.current){ 
+      tl.fromTo(
+        forthref.current,
         { opacity: 0, y: -50 },
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
       );
@@ -83,7 +91,7 @@ const Navbar = ({ data }) => {
   
 
   return (
-    <nav ref={boxRef} className="fixed top-0 left-0 w-full z-50 bg-black py-2 px-6 md:px-12 flex justify-between items-center">
+    <nav ref={boxRef} className="fixed top-0 left-0 w-full z-50 bg-black py-2 px-6 md:px-2 flex justify-between items-center">
     {/* Logo */}
     <div>
       <img 
@@ -95,7 +103,7 @@ const Navbar = ({ data }) => {
     </div>
   
     {/* Right Section: Navigation + Login/Profile + Mobile Button */}
-    <div className="flex-1 flex justify-end items-center space-x-6">
+    <div className="flex-1  ml-[40px] flex justify-start items-center space-x-6">
       {/* Navigation Links - Hidden on Small Screens */}
       <ul className="hidden md:flex items-center space-x-6 text-white font-medium">
         {[
@@ -112,7 +120,7 @@ const Navbar = ({ data }) => {
             className={`relative px-4 py-2 transition duration-300 ease-in-out rounded-2xl ${
               active === item.name
                 ? "bg-[#4B2E83] text-white shadow-lg"
-                : "text-white hover:text-[#4B2E83]"
+                : "text-white hover:bg-white/40"
             }`}
           >
             {item.name}
@@ -122,9 +130,22 @@ const Navbar = ({ data }) => {
   
       {/* Login / User Profile */}
      {/* Login / User Profile - Hidden on Mobile */}
-{/* Login / User Profile - Hidden on Mobile */}
-{/* Login / User Profile - Hidden on Mobile */}
-{activeuser ? (
+
+     <div className="flex flex-1 justify-end items-center space-x-4">
+
+     {activeuser ? (
+
+      <>
+
+<Link
+    ref={forthref}  // Attach ref to this element instead
+    to={"/login/agent"}
+    className=" hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2  transition-colors bg-black hover:text-[white]  hover:border-[#4B2E83] "
+  >
+    Sell or Rent Land
+  </Link>
+
+
   <Link
     ref={thridref}  // Attach ref to this element instead
     to={"/login"}
@@ -132,6 +153,13 @@ const Navbar = ({ data }) => {
   >
     Log In
   </Link>
+ 
+
+ 
+
+  </>
+  
+
 ) : (
   <Tooltip
     title={
@@ -163,6 +191,9 @@ const Navbar = ({ data }) => {
     </button>
   </Tooltip>
 )}
+
+     </div>
+
 
 
   

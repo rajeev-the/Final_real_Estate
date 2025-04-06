@@ -16,65 +16,59 @@ import SignupAgent from './Pages/Agent_page/SignupAgent';
 import SignupUser from './Pages/SignupUser';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
-import {AppProvider } from "./Context/Poperty_context"
+import { AppProvider } from "./Context/Poperty_context"
 import LandAgent from './Pages/LandAgent';
 import { ToastContainer } from "react-toastify";
+import { FilterProvider } from './Context/FilterContext';
 import "react-toastify/dist/ReactToastify.css";
-
+import SerachPage from './Pages/SerachPage';
+import Test from './Pages/Test';
 
 const App = () => {
-
   return (
     <>
-      {/* ToastContainer should be here at the top level */}
       <ToastContainer position="top-right" autoClose={3000} />
-      <Routes>
-        {/* Parent Route with Layout */}
-       
-        <Route path="/" element={ <Layout /> }>
-      
-          {/* Nested Routes inside Layout */}
-          <Route index element={<AppProvider>  <Home agent={true} />  </AppProvider>} /> {/* Default Home Page */}
-         <Route path="home" element={   <AppProvider>  <Home  agent={true} />    </AppProvider>   }/>
-          <Route path="landlist" element={ <AppProvider>  <LandList />  </AppProvider> } />
-          <Route path='agents' element={<Agents/>} />
-          <Route path='contact' element={<ContactUs margin={100} />} />
-          <Route path='about' element={<AboutUs/>} />
-          <Route path='landagent/:id' element={<LandAgent/>} />
-          <Route path='agents/:state' element={<StateAgenet/>} />
-          <Route path='land/:id' element={<AppProvider> <ViewLand/>  </AppProvider>} />
-        
-        </Route>
-    
-        
-        <Route path="/login" >
-          {/* Nested Routes inside Layout */}
-          <Route index element={<Login />} /> {/* Default Home Page */}
-          <Route path="agent" element={<LoginAgent />} />
-          <Route path="user" element={  <LoginUser />  } />
-        </Route>
+      <AppProvider>
+        <FilterProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* Home routes */}
+              <Route index element={<Home agent={true} />} />
+              <Route path="home" element={<Home agent={true} />} />
+              <Route path="landlist" element={<LandList />} />
+              <Route path="agents" element={<Agents />} />
+              <Route path="contact" element={<ContactUs margin={100} />} />
+              <Route path="about" element={<AboutUs />} />
+              <Route path="landagent/:id" element={<LandAgent />} />
+              <Route path="agents/:state" element={<StateAgenet />} />
+              <Route path="land/:id" element={<ViewLand />} />
+              <Route path="search" element={<SerachPage />} />
+              <Route path='test' element={<Test/>}/>
+            </Route>
 
-        <Route path="/signup" >
-          {/* Nested Routes inside Layout */}
-       
-          <Route path="agent" element={<SignupAgent />} />
-          <Route path="user" element={    <SignupUser /> } />
-        </Route>
+            {/* Auth routes */}
+            <Route path="/login">
+              <Route index element={<Login />} />
+              <Route path="agent" element={<LoginAgent />} />
+              <Route path="user" element={<LoginUser />} />
+            </Route>
 
-        <Route path='/agent' element={<AgentLayout  />}>
-        <Route index element={ <AppProvider>  <Home agent={false} /> </AppProvider> }  />
-        <Route path="land" element={<LandAdd/>} />
-        <Route path="holding" element={<Holding/>} />
-        <Route path="contact" element={<ContactUs margin={20}/>} />
-        <Route path='holding/land/:id' element={<AppProvider>  <ViewLand/>  </AppProvider>} />
-        
+            <Route path="/signup">
+              <Route path="agent" element={<SignupAgent />} />
+              <Route path="user" element={<SignupUser />} />
+            </Route>
 
-
-        </Route>
-
-
-
-      </Routes>
+            {/* Agent routes */}
+            <Route path="/agent" element={<AgentLayout />}>
+              <Route index element={<Home agent={false} />} />
+              <Route path="land" element={<LandAdd />} />
+              <Route path="holding" element={<Holding />} />
+              <Route path="contact" element={<ContactUs margin={20} />} />
+              <Route path="holding/land/:id" element={<ViewLand />} />
+            </Route>
+          </Routes>
+        </FilterProvider>
+      </AppProvider>
     </>
   );
 };

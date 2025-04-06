@@ -15,20 +15,23 @@ import {useAppContext } from "../Context/Poperty_context"
 
 
 
+
 const LandList = () => {
 
   const [data, setData] = useState(); // ✅ Initialize as empty array
   const [dumy , setDumy] = useState()
     const { property ,maindata  } = useAppContext();
+      const [selectedLocation, setSelectedLocation] = useState("Haryana");
     
 
   useEffect(() => {
    
 
-    setData(property)
+    
+    setData(property.filter((et)=>et.state == selectedLocation))
     setDumy(maindata)
 
-  }, [property,maindata]);
+  }, [property,maindata ,selectedLocation]);
 
 
   const groupedProperties = (data || []).reduce((acc, property) => {
@@ -43,7 +46,7 @@ const LandList = () => {
   
 
   
- 
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh"];
 
   return (
     <div className='mt-[50px] md:mt-[100px] sm:p-2 md:p-[15px] w-full'>
@@ -211,6 +214,25 @@ const LandList = () => {
 
   {/* ... existing state listings content ... */}
   <div className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+
+  <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6">
+  {locations.map((name, index) => (
+    <button
+   
+      key={index}
+      onClick={() => setSelectedLocation(name)}
+      className={`  text-sm md:text-lg font-medium py-1  px-3   md:px-8 rounded-full transition-all duration-300 
+        ${
+          selectedLocation === name
+            ? "bg-[#4B2E83] text-white shadow-lg scale-105"
+            : "  bg-[#000000]    hover:text-xl text-[white]   "
+        }`}
+    >
+      {name}
+    </button>
+  ))}
+</div>
+
   <div className='flex flex-col gap-8 md:gap-12'>
     {Object.keys(groupedProperties).map(stateId => (
       <div key={stateId} className='flex flex-col group'>

@@ -54,17 +54,12 @@ const LandCard = ({ acre, address, acre_price, img }) => {
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
           </svg>
-          Explore Property
+          Explore
         </button>
       </div>
 
       {/* Premium Indicator */}
-      <div className="absolute top-3 md:top-4 right-3 md:right-4 bg-white/90 backdrop-blur-sm 
-                    px-2 md:px-2.5 py-1 rounded-full shadow-sm flex items-center 
-                    border border-[#1C2B2D]/10">
-        <div className="w-2 h-2 bg-[#1C2B2D] rounded-full mr-1 md:mr-2" />
-        <span className="text-[11px] md:text-xs font-medium text-[#1C2B2D]">Exclusive</span>
-      </div>
+     
     </div>
   );
 };

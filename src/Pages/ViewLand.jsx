@@ -5,16 +5,20 @@ import { useAppContext } from "../Context/Poperty_context";
 import { useNavigate } from "react-router-dom";
 import { FaWhatsapp, FaShareAlt, FaMapMarkerAlt, FaChevronRight } from 'react-icons/fa';
 import axios from "axios";
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewLand = () => {
   const { id } = useParams();
   const { property } = useAppContext();
   const url = "https://finalbackend111.pythonanywhere.com/api/";
   const idData = JSON.parse(localStorage.getItem("Agent")) ? true :false
+  const isUser = JSON.parse(localStorage.getItem("User")) 
+  const navigate = useNavigate();
   
   const [data, setData] = useState(null);
   const [agent, setAgent] = useState(null);
-  console.log(idData)
+ 
   
   useEffect(() => {
     if (property) {
@@ -37,7 +41,64 @@ const ViewLand = () => {
   
     getAgent();
   }, [data]); // Runs only when data is set
+
+ const showErrorToast = (message) => {
+       toast.error(message, {
+         position: "top-right",
+         autoClose: 3000, // Closes after 3 seconds
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "colored",
+       });
+     };
+
+  const handleWhatsappClick = async() => {
+    
+    if (!isUser) {
+      
+      showErrorToast("Please login to continue.");
+      navigate("/login");
+      return;
+    }
+
+
+    const phoneNumber = agent?.phone_number || data?.phone_number;
+
+    const message = `${data?.address}
+    ${data?.acre} Acre
+    ${data?.acre_price} Cr/ Acre
+    ${data?.locations_link}
+    ${data?.details}`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    const jsondata = {
+      "phone_User": isUser.User.phone_number,
+      "User_name": isUser.User.name,
+      "Agent_name": agent?.name,
+     "phone_Agent": agent?.phone_number,
+
+    
+  }
+
+  try{
+
+     await axios.post(`${url}add-to-sheet/`,jsondata)
   
+
+  }
+  catch(err){
+    console.log(err)
+  }
+
+  
+    // Remove the '+' and country code if needed or keep full number
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, "_blank");
+  }
   
 
   if (!data) {
@@ -51,7 +112,7 @@ const ViewLand = () => {
       className="max-w-6xl mt-[100px] mx-auto bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
     >
       {/* Header Section */}
-      <div className="bg-[#826CB0] p-6">
+      <div className="bg-[#1C2B2D] p-6">
         <h1 className="text-2xl font-bold text-white mb-2">{data.address}</h1>
         <div className="flex items-center justify-between">
           <div>
@@ -59,12 +120,12 @@ const ViewLand = () => {
             <p className="text-md text-purple-200">₹{data.acre_price} Cr/ Acre</p>
           </div>
           <div className="flex gap-4">
-            <a
-              href="#"
+            <button
+           onClick={handleWhatsappClick}
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full flex items-center gap-2 transition-colors shadow-md"
             >
-              <FaWhatsapp /> WhatsApp
-            </a>
+              <FaWhatsapp   /> WhatsApp
+            </button>
             <button className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-colors shadow-md flex items-center gap-2">
               <FaShareAlt /> Share
             </button>
@@ -72,39 +133,52 @@ const ViewLand = () => {
         </div>
       </div>
 
-      {/* Image Gallery Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-gray-50">
-        <div className="relative h-64 rounded-lg overflow-hidden shadow-md">
-          <img 
-            src={data?.img} 
-            alt="Property" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-            <span className="text-white font-medium">Main Property Image</span>
-          </div>
-        </div>
-      {  idData ?  <div className="relative h-64 rounded-lg overflow-hidden shadow-md">
-          <img 
-            src={data?.layout} 
-            alt="Property Layout" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-            <span className="text-white font-medium">Property Layout</span>
-          </div>
-        </div> : <></>
-        
-      
-      }
+      <div
+  className={`grid gap-4 p-6 bg-gray-50 ${
+    idData ? 'grid-cols-1 md:grid-cols-2' : 'place-items-center'
+  }`}
+>
+  {/* Main Property Image */}
+  <div onClick={()=> window.open(data?.img, "_blank")}  className="relative h-64 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
+    <img 
+      src={data?.img} 
+      alt="Property" 
+      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+      <span className="text-white font-medium">Main Property Image</span>
+    </div>
+    {/* Hover overlay */}
+    <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <span className="text-white text-md font-semibold">Click to full view</span>
+    </div>
+  </div>
+
+  {/* Property Layout Image */}
+  {idData && (
+    <div  onClick={()=> window.open(data?.img, "_blank")} className="relative h-64 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
+      <img 
+        src={data?.layout} 
+        alt="Property Layout" 
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+        <span className="text-white font-medium">Property Layout</span>
       </div>
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className="text-white text-md font-semibold">Click to full view</span>
+      </div>
+    </div>
+  )}
+</div>
 
       {/* Details Section */}
       <div className="p-8">
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-semibold text-gray-800">Exclusive Details</h2>
-            <p className="text-purple-600 font-medium">{data.size_range} • {data.price_range}</p>
+            <p className="text-purple-600 font-medium">•{data.acre_price}Cr • {data.acre} Arc</p>
           </div>
           <div className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
             {data.available ? 'Available' : 'Sold'}
@@ -116,20 +190,21 @@ const ViewLand = () => {
             <DetailItem label="Transaction Type" value={data.sale_or_lease === 'sale' ? 'For Sale' : 'For Lease'} />
             <DetailItem label="Land Category" value={data.land_category} />
             <DetailItem label="Price Range" value={data.price_range} />
-            <DetailItem label="Road Width" value={`${data.road_width} ft (${data.road_width_filter})`} />
+            <DetailItem label="Road Width" value={`${data.road_width} `} />
             <DetailItem label="Total Price" value={`${data.acre_price*data.acre} Cr `} />
           </div>
 
           <div className="space-y-4">
-            <DetailItem label="Land Size" value={`${data.acre} Acre (${data.size_range})`} />
+            <DetailItem label="Land Size" value={`${data.acre} Acre `} />
             <DetailItem label="District" value={data.district_name} />
             <DetailItem label="Tehsil" value={data.tehsil_name} />
-            <DetailItem label="Village" value={data.village_name || "N/A"} />
+            <DetailItem label="State" value={data.state} />
+            <DetailItem label="Zone" value={data.zone || "N/A"} />
+            
           </div>
 
           <div className="space-y-4">
-            <DetailItem label="State" value={data.state} />
-            <DetailItem label="Zone" value={data.zone || "N/A"} />
+            
             <DetailItem label="Distance from Delhi" value={`${data.distance_between_delhi} km`} />
             <DetailItem label="CLU Eligible" value={data.eligible_for_clu ? 'Yes' : 'No'} />
           </div>
@@ -154,23 +229,7 @@ const ViewLand = () => {
   </div>
 </div>
 
-<div className="mt-8 space-y-4">
-  <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Agent Information</h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <h4 className="text-md font-medium text-gray-700 mb-2">Agent </h4>
-      <p className="text-gray-600">{agent?.name || "N/A"}</p>
-    </div>
-    <div>
-      <h4 className="text-md font-medium text-gray-700 mb-2">Agent Number</h4>
-      <p className="text-gray-600">{agent?.phone_number || "N/A"}</p>
-    </div>
-  </div>
-  <div className="mt-4">
-    <h4 className="text-md font-medium text-gray-700 mb-2">Agent Email</h4>
-    <p className="text-gray-600">{agent?.email || "N/A"}</p>
-  </div>
-</div>
+
       </div>
 
       {/* Location Button Section */}

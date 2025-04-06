@@ -12,7 +12,7 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
   const userdata = JSON.parse(localStorage.getItem("User"))
  
   const whatsappLink = phone_number 
-  ? `https://wa.me/${phone_number.slice(2)}` 
+  ? `https://wa.me/${phone_number}` 
   : "#";
 
   // const whatsappLink = `https://wa.me/${9310650163}`
@@ -20,8 +20,8 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
   const onsubmitWhatsapp = async() => {
 
     const jsondata = {
-      "phone_User": userdata.phone_number,
-      "User_name": userdata.name,
+      "phone_User": userdata.User.phone_number,
+      "User_name": userdata.User.name,
       "Agent_name":name,
      "phone_Agent":phone_number,
 

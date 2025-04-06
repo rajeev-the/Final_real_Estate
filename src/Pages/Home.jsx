@@ -13,6 +13,9 @@ import ToggleCard from "../componets/ToggleCard";
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
 
+import Reviewsection from "../componets/Reviewsection"
+import SerachFilter from "../componets/SerachFilter";
+
 const Home = ({agent}) => {
   const [show, setShow] = useState(true);
   const[data,setdata] = useState([])
@@ -21,7 +24,15 @@ const Home = ({agent}) => {
   const [selectedLocation, setSelectedLocation] = useState("Haryana");
   const carouselRef = useRef(null);
   const resvideo = useRef()
-  const seoref = useRef(null); // Ref for the cities section
+  const seoref = useRef(null);
+  const searchcart = useRef(null);
+  
+  // Ref for the cities section
+ 
+
+
+
+
 
 
   
@@ -52,7 +63,29 @@ const Home = ({agent}) => {
       delay: 0
     },
     "<+=0.5" // Start 0.5s after previous animation
-  );
+  ).fromTo(
+    searchcart.current,
+    { opacity: 0, y: -100 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+    
+    },
+    "<+=0.5" // Start 0.5s after previous animation
+  ).fromTo(
+    seoref.current,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      delay: 0.5
+    },
+    "<+=0.5" // Start 0.5s after previous animation
+  )
 
   }, []);
   
@@ -93,22 +126,23 @@ const Home = ({agent}) => {
      
 
       {/* Main Content */}
-      <div className={`min-h-screen  w-full relative bg-white  ${agent  ?  " mt-[50px] sm:mt-[70px]": ""}`} >
+      <div className={`min-h-screen  w-full relative bg-white   ${agent  ?  " mt-[50px] sm:mt-[70px]": " "}`} >
         
-        {/* Banner Section */}
-        <div className="h-[250px]  sm:h-[600px]  w-full flex justify-center items-center   overflow-hidden">
-          {/* <img
-            className="h-full w-full  rounded-xl object-cover"
-            src={desktopBanner}
-            alt="Banner"
-          /> */}
+      <div className="h-[400px] sm:h-[650px] w-full flex justify-center items-center overflow-hidden relative">
+  {/* Video Background */}
+  <video
+    autoPlay
+    loop
+    muted
+    src={xxxp}
+    ref={resvideo}
+    className="h-full w-full object-cover"
+  ></video>
 
-          <video 
-           autoPlay 
-           loop 
-           muted
-            src={xxxp} ref={resvideo}  className="h-full w-full   object-cover"></video>
-        </div>
+  {/* Subtle Overlay */}
+ 
+<SerachFilter searchcart={searchcart}   />
+</div>
 
 
 
@@ -173,6 +207,7 @@ const Home = ({agent}) => {
 
 
     <Realcompo/>
+    <Reviewsection/>
 
         </div>
       </div>

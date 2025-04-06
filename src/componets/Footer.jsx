@@ -17,7 +17,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="relative bg-gradient-to-b from-black to-[#FFDE4D] text-white pt-20 pb-48 px-6 mt-19  border-t border-[#4B2E83]/50">
+    <div className="relative bg-[black]  text-white pt-20 pb-48 px-6 mt-19  border-t border-[#4B2E83]/50    ">
       {/* Footer Content */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-40 relative z-10">
         {footerLinks.map((section, index) => (
@@ -48,7 +48,7 @@ const Footer = () => {
           <img 
             src={logoimg} 
             alt="Company Logo" 
-            className="h-24 w-24 mx-auto mb-6 rounded-xl border-2 border-[#FFDE4D] p-1" 
+            className="h-24 w-24 mx-auto mb-6 rounded-xl border-2  p-1" 
           />
           <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed font-light italic">
             "Crafting exceptional real estate experiences through innovation and integrity."
@@ -68,14 +68,7 @@ const Footer = () => {
       </div>
 
       {/* Cityscape Image with Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 w-full h-[250px] md:h-[350px]">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-[#FFDE4D]/60 to-transparent z-10"></div>
-        <img
-          src={cityscape}
-          alt="Cityscape"
-          className="w-full h-full object-cover object-bottom mix-blend-luminosity opacity-60"
-        />
-      </div>
+    
 
       {/* Copyright Text */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-white/60 text-center z-10">
