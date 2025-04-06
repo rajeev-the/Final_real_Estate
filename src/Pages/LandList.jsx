@@ -60,19 +60,19 @@ const LandList = () => {
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-px bg-amber-600"></div>
               <span className="text-amber-600 uppercase tracking-widest text-sm">
-                Premium Listings
+              Landsathi
               </span>
             </div>
 
             {/* Hero Title */}
             <h1 className="text-5xl font-serif text-white leading-tight mb-4">
-              Heritage Properties <br />
-              <span className="text-amber-600">Curated with Excellence</span>
+            Your Gateway to <br />
+              <span className="text-amber-600"> Verified Land Opportunitiese</span>
             </h1>
 
             {/* Hero Subtitle */}
             <p className="text-xl text-slate-200 font-light mb-8 max-w-xl">
-              Discover timeless estates with unmatched legacy and modern luxury
+              Discover timeless estates with unmatched legacy 
             </p>
 
             {/* CTA Button */}

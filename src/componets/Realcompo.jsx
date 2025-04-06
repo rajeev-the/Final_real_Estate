@@ -13,7 +13,7 @@ const Realcompo = () => {
           )
         },
         {
-          title: "Property Sales",
+          title: "Land Sales",
           description: "Comprehensive sales strategies and market analysis to maximize your property's value.",
           cta: "Explore Options",
           icon: (

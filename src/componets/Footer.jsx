@@ -11,10 +11,10 @@ const Footer = () => {
     { icon: <FaLinkedin />, link: "#", name: "LinkedIn" },
   ];
   const footerLinks = [
-    { title: "COMPANY", links: ["AboutUs", "Careers", "ContactUs", "Blog", "Terms"] },
-    { title: "SOLUTIONS", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
+    { title: "COMPANY", links: ["AboutUs", "Careers", "ContactUs",  "Terms"] },
+    { title: "SOLUTIONS", links: ["landlist", "home", "agents", "ContactUs"] },
     { title: "VISION", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
-    { title: "RESOURCES", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
+    { title: "RESOURCES", links: ["#Punjab", "#Haryana", "#Uttar Pradesh", "#Delhi"] },
   ];
 
   return (

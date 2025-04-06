@@ -18,7 +18,7 @@ const ViewLand = () => {
   
   const [data, setData] = useState(null);
   const [agent, setAgent] = useState(null);
- 
+ console.log("isUser",isUser)
   
   useEffect(() => {
     if (property) {
@@ -75,8 +75,8 @@ const ViewLand = () => {
     
     const encodedMessage = encodeURIComponent(message);
     const jsondata = {
-      "phone_User": isUser.User.phone_number,
-      "User_name": isUser.User.name,
+      "phone_User": isUser.user.phone,
+      "User_name": isUser.user.name,
       "Agent_name": agent?.name,
      "phone_Agent": agent?.phone_number,
 

@@ -7,10 +7,10 @@ const AgentHome = () => {
         {/* Left Content */}
         <div>
           <p className="text-sm font-semibold text-gray-600 uppercase mb-2">
-            Sell or Rent Your Property
+            Sell or Lease Your Land
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Register to post your <br /> property for{" "}
+            Register to post your <br /> Land for{" "}
             <span className="bg-green-500 text-white px-2 py-1 rounded text-base align-middle">
               FREE
             </span>
@@ -23,7 +23,7 @@ const AgentHome = () => {
           <div className="flex flex-wrap gap-8 mb-8">
             <div>
               <p className="text-2xl font-bold text-gray-900">10L+</p>
-              <p className="text-sm text-gray-600">Property Listings</p>
+              <p className="text-sm text-gray-600">Land Listings</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-gray-900">45L+</p>
@@ -37,7 +37,7 @@ const AgentHome = () => {
 
           {/* CTA Button */}
           <button onClick={()=>window.open("/login/agent", '_blank')}  className="bg-[#1C2B2D] text-white text-sm font-semibold px-6 py-3 rounded hover:bg-gray-600 transition">
-            Post your property for FREE
+            Post your Land for FREE
           </button>
 
           {/* WhatsApp */}

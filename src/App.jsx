@@ -22,7 +22,7 @@ import { ToastContainer } from "react-toastify";
 import { FilterProvider } from './Context/FilterContext';
 import "react-toastify/dist/ReactToastify.css";
 import SerachPage from './Pages/SerachPage';
-import Test from './Pages/Test';
+
 import Careers from './Pages/Careers';
 
 const App = () => {
@@ -44,7 +44,7 @@ const App = () => {
               <Route path="agents/:state" element={<StateAgenet />} />
               <Route path="land/:id" element={<ViewLand />} />
               <Route path="search" element={<SerachPage />} />
-              <Route path='test' element={<Test/>}/>
+             
               <Route path='Careers'  element={<Careers/>}/>
             </Route>
 

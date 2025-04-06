@@ -132,18 +132,19 @@ const Navbar = ({ data }) => {
      {/* Login / User Profile - Hidden on Mobile */}
 
      <div className="flex flex-1 justify-end items-center space-x-4">
+     <Link
+    ref={forthref}  // Attach ref to this element instead
+    to={"/login/agent"}
+    className=" hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2  transition-colors bg-black hover:text-[white]  hover:border-[#4B2E83] "
+  >
+    Sell or Lease Land
+  </Link>
 
      {activeuser ? (
 
       <>
 
-<Link
-    ref={forthref}  // Attach ref to this element instead
-    to={"/login/agent"}
-    className=" hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2  transition-colors bg-black hover:text-[white]  hover:border-[#4B2E83] "
-  >
-    Sell Land
-  </Link>
+
 
 
   <Link
@@ -214,6 +215,7 @@ const Navbar = ({ data }) => {
           { name: "Land Listing", link: "landlist" },
           { name: "Agents", link: "agents" },
           { name: "Contact Us", link: "ContactUs" },
+          { name: "Sell or Lease Land", link: "/login/agent" },
         ].map((item) => (
           <Link
             key={item.name}
@@ -233,6 +235,7 @@ const Navbar = ({ data }) => {
 
           
         ))}
+        
         {activeuser ? (
       <Link
         to="/login"
