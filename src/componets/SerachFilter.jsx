@@ -281,7 +281,7 @@ const handleSuggestionClick = (suggestion) => {
     <Listbox.Button className="w-full rounded-xl border border-gray-300 bg-white sm:py-3 py-2  px-4 text-left text-[#1C2B2D] shadow-sm focus:outline-none flex-row    justify-center  items-center">
        <span className= 'text-[10px] sm:text-[11px] md:text-base  '>{selected2.label}</span>
       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3   ">
-         <svg
+      <svg
   xmlns="http://www.w3.org/2000/svg"
   className={`
     h-4 w-4 
@@ -300,6 +300,7 @@ const handleSuggestionClick = (suggestion) => {
     clipRule="evenodd"
   />
 </svg>
+
       </span>
     </Listbox.Button>
     <Listbox.Options className="absolute mt-1 w-full max-h-60 overflow-y-auto rounded-xl bg-white shadow-lg z-[999] text-[10px] sm:text-[11px] md:text-base scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
