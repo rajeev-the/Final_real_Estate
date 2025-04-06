@@ -15,7 +15,7 @@ const Agents = () => {
         { image: img4, text: "Ghaziabad" },
       ];
   return (
-    <div className='w-full min-h-screen md:h-[890px] mt-16 md:mt-[100px] p-4 sm:p-5 rounded-xl md:rounded-2xl relative overflow-hidden'>
+    <div className='w-full min-h-screen md:h-[890px] mt-16 md:mt-[60px] p-4 sm:p-5 rounded-xl md:rounded-2xl relative overflow-hidden'>
     {/* Blurred Background Image */}
     <div 
         className="absolute inset-0 -z-0"

@@ -2,6 +2,7 @@ import React from "react";
 import cityscape from "../assets/footer.png";
 import logoimg from "../assets/logoo.jpg";
 import { FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const socialIcons = [
@@ -10,7 +11,7 @@ const Footer = () => {
     { icon: <FaLinkedin />, link: "#", name: "LinkedIn" },
   ];
   const footerLinks = [
-    { title: "COMPANY", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
+    { title: "COMPANY", links: ["AboutUs", "Careers", "ContactUs", "Blog", "Terms"] },
     { title: "SOLUTIONS", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
     { title: "VISION", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
     { title: "RESOURCES", links: ["About Us", "Careers", "Contact Us", "Blog", "Terms"] },
@@ -28,10 +29,10 @@ const Footer = () => {
             <ul className="space-y-3">
               {section.links.map((link, i) => (
                 <li key={i} className="hover:translate-x-2 transition-all duration-300">
-                  <a href="#" className="flex items-center text-white/80 hover:text-white">
+                  <Link to={`${link}`} className="flex items-center text-white/80 hover:text-white">
                     <span className="mr-2 text-[#4B2E83]">▸</span>
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

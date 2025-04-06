@@ -110,7 +110,7 @@ const Navbar = ({ data }) => {
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
           { name: "Agents", link: "agents" },
-          { name: "Contact Us", link: "contact" },
+          { name: "Contact Us", link: "ContactUs" },
         ].map((item, index) => (
           <Link
             ref={(el) => (itemsRef.current[index] = el)}
@@ -142,7 +142,7 @@ const Navbar = ({ data }) => {
     to={"/login/agent"}
     className=" hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2  transition-colors bg-black hover:text-[white]  hover:border-[#4B2E83] "
   >
-    Sell or Rent Land
+    Sell Land
   </Link>
 
 
@@ -213,7 +213,7 @@ const Navbar = ({ data }) => {
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
           { name: "Agents", link: "agents" },
-          { name: "Contact Us", link: "contact" },
+          { name: "Contact Us", link: "ContactUs" },
         ].map((item) => (
           <Link
             key={item.name}

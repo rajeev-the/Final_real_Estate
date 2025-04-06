@@ -12,6 +12,7 @@ import Realcompo from "../componets/Realcompo"
 import ToggleCard from "../componets/ToggleCard";
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
+import  AgentHome  from "../componets/AgentHome";
 
 import Reviewsection from "../componets/Reviewsection"
 import SerachFilter from "../componets/SerachFilter";
@@ -207,6 +208,7 @@ const Home = ({agent}) => {
 
 
     <Realcompo/>
+  <AgentHome/>
     <Reviewsection/>
 
         </div>

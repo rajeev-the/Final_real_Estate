@@ -23,6 +23,7 @@ import { FilterProvider } from './Context/FilterContext';
 import "react-toastify/dist/ReactToastify.css";
 import SerachPage from './Pages/SerachPage';
 import Test from './Pages/Test';
+import Careers from './Pages/Careers';
 
 const App = () => {
   return (
@@ -37,13 +38,14 @@ const App = () => {
               <Route path="home" element={<Home agent={true} />} />
               <Route path="landlist" element={<LandList />} />
               <Route path="agents" element={<Agents />} />
-              <Route path="contact" element={<ContactUs margin={100} />} />
-              <Route path="about" element={<AboutUs />} />
+              <Route path="ContactUs" element={<ContactUs margin={100} />} />
+              <Route path="AboutUs" element={<AboutUs />} />
               <Route path="landagent/:id" element={<LandAgent />} />
               <Route path="agents/:state" element={<StateAgenet />} />
               <Route path="land/:id" element={<ViewLand />} />
               <Route path="search" element={<SerachPage />} />
               <Route path='test' element={<Test/>}/>
+              <Route path='Careers'  element={<Careers/>}/>
             </Route>
 
             {/* Auth routes */}
