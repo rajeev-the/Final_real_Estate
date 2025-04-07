@@ -133,12 +133,28 @@ const Navbar = ({ data }) => {
 
      <div className="flex flex-1 justify-end items-center space-x-4">
      <Link
-    ref={forthref}  // Attach ref to this element instead
-    to={"/login/agent"}
-    className=" hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2  transition-colors bg-black hover:text-[white]  hover:border-[#4B2E83] "
-  >
-    Sell or Lease Land
-  </Link>
+  ref={forthref}
+  to="/login/agent"
+  className="hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#4B2E83]"
+>
+  <span className="flex items-center  justify-center gap-2">
+    
+    <span>Post Land</span>
+    {/* FREE Badge */}
+    <span className="relative mb-1">
+      <span className="inline-flex items-center bg-[#219653] px-[5px] py-[4px] rounded-[3px] text-white text-[9px] font-bold leading-[6px] overflow-hidden relative">
+        <span className="z-10">FREE</span>
+        <span className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay" />
+        <span
+          className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay"
+          style={{ animationDelay: "1s" }}
+        />
+      </span>
+    </span>
+
+  </span>
+</Link>
+
 
      {activeuser ? (
 
@@ -195,6 +211,28 @@ const Navbar = ({ data }) => {
 
      </div>
 
+     <Link
+  ref={forthref}
+  to="/login/agent"
+  className="md:hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#4B2E83]"
+>
+  <span className="flex items-center  justify-center gap-2">
+    
+    <span>Post Land</span>
+    {/* FREE Badge */}
+    <span className="relative mb-1">
+      <span className="inline-flex items-center bg-[#219653] px-[5px] py-[4px] rounded-[3px] text-white text-[9px] font-bold leading-[6px] overflow-hidden relative">
+        <span className="z-10">FREE</span>
+        <span className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay" />
+        <span
+          className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay"
+          style={{ animationDelay: "1s" }}
+        />
+      </span>
+    </span>
+
+  </span>
+</Link>
 
 
   
@@ -214,8 +252,8 @@ const Navbar = ({ data }) => {
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
           { name: "Agents", link: "agents" },
-          { name: "Contact Us", link: "ContactUs" },
-          { name: "Sell or Lease Land", link: "/login/agent" },
+          { name: "Contact Us", link: "ContactUs" }
+         
         ].map((item) => (
           <Link
             key={item.name}

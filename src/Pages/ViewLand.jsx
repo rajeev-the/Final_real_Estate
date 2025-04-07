@@ -116,8 +116,8 @@ const ViewLand = () => {
         <h1 className="text-2xl font-bold text-white mb-2">{data.address}</h1>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xl font-semibold text-white">{data.acre} Acre</p>
-            <p className="text-md text-purple-200">₹{data.acre_price} Cr/ Acre</p>
+            <p className="text-xl font-semibold text-white">{data.acre} {data.unit_of_land}</p>
+            <p className="text-md text-purple-200">₹{data.acre_price}  {data.money_unit} / {data.unit_of_land}</p>
           </div>
           <div className="flex gap-4">
             <button
@@ -178,7 +178,7 @@ const ViewLand = () => {
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-semibold text-gray-800">Exclusive Details</h2>
-            <p className="text-purple-600 font-medium">•{data.acre_price}Cr • {data.acre} Arc</p>
+            <p className="text-purple-600 font-medium">•{data.acre_price}{data.money_unit} • {data.acre} {data.unit_of_land}</p>
           </div>
           <div className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
             {data.available ? 'Available' : 'Sold'}
@@ -189,23 +189,25 @@ const ViewLand = () => {
           <div className="space-y-4">
             <DetailItem label="Transaction Type" value={data.sale_or_lease === 'sale' ? 'For Sale' : 'For Lease'} />
             <DetailItem label="Land Category" value={data.land_category} />
-            <DetailItem label="Price Range" value={data.price_range} />
+           
             <DetailItem label="Road Width" value={`${data.road_width} `} />
-            <DetailItem label="Total Price" value={`${data.acre_price*data.acre} Cr `} />
+            <DetailItem label="Total Price" value={`${data.acre_price*data.acre} ${data.money_unit} `} />
+            <DetailItem label="Land Size" value={`${data.acre} Acre `} />
           </div>
 
           <div className="space-y-4">
-            <DetailItem label="Land Size" value={`${data.acre} Acre `} />
+         
             <DetailItem label="District" value={data.district_name} />
             <DetailItem label="Tehsil" value={data.tehsil_name} />
             <DetailItem label="State" value={data.state} />
             <DetailItem label="Zone" value={data.zone || "N/A"} />
+            <DetailItem label="Distance from Delhi" value={`${data.distance_between_delhi} km`} />
             
           </div>
 
           <div className="space-y-4">
             
-            <DetailItem label="Distance from Delhi" value={`${data.distance_between_delhi} km`} />
+            
             <DetailItem label="CLU Eligible" value={data.eligible_for_clu ? 'Yes' : 'No'} />
           </div>
         </div>
@@ -233,7 +235,7 @@ const ViewLand = () => {
       </div>
 
       {/* Location Button Section */}
-      <div className="p-6 flex justify-center bg-gradient-to-b from-white to-gray-50/80">
+      {/* <div className="p-6 flex justify-center bg-gradient-to-b from-white to-gray-50/80">
         <button 
           onClick={() => window.open(data.locations_link, "_blank")} 
           className="
@@ -271,7 +273,32 @@ const ViewLand = () => {
           View Location
           <FaChevronRight className="w-4 h-4 text-white/90 ml-1" />
         </button>
-      </div>
+      </div> */}
+
+<div className="w-full flex flex-col items-center gap-4 py-4">
+  {/* Label */}
+  <label className="text-lg font-semibold text-gray-800">
+    📍 Location
+  </label>
+
+  {/* Responsive Map */}
+  <div className="w-full max-w-4xl h-[450px]">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d42157498.47345266!2d60.94156072887267!3d19.69240573692257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff5d23cbb0f%3A0xe1b092d74e10e9c5!2sIndia!5e0!3m2!1sen!2sin!4v1744037809273!5m2!1sen!2sin"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title="India Map"
+    ></iframe>
+  </div>
+</div>
+
+
+    
+
     </div>
  
   );

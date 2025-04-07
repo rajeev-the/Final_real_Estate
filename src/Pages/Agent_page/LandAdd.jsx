@@ -28,33 +28,31 @@ const LandAdd = () => {
   const [nearestHighways, setNearestHighways] = useState("");
   const [details, setDetails] = useState("");
   const [layout, setLayout] = useState(null);
+  const [unitOfLand, setUnitOfLand] = useState('Acres');
+  const [moneyUnit, setMoneyUnit] = useState('Crore');
+  const [footter, setFootter] = useState(null);
 
   const navigate = useNavigate();
   const agent = JSON.parse(localStorage.getItem("Agent"));
   const url = "https://finalbackend111.pythonanywhere.com/api/";
 
   // Helper functions for derived fields
-  const calculateSizeRange = (acreValue) => {
-    const acreNum = parseFloat(acreValue) || 0;
-    if ( 10> acreNum < 20) return '10-20 Acres';
-    if (3> acreNum < 5) return '3-5 Acres';
-    if (  5>acreNum < 10) return '5-10 Acres';
-    return 'Above 20 Acres';
-  };
+  const money_units = [
+    ['Crore', 'Cr'],
+    ['Lakh', 'Lakh'],
+    ['Thousand', 'K']
+  ];
+  
+  const unitofland = [
+    ['Acres', 'Acres'],
+    ['Square Feet', 'Sq.ft'],
+    ['Square Meter', 'Sq.m'],
+    ['Ghaj', 'Ghaj'],
+    ['Yard', 'Yard'],
+  ];
 
-  const calculatePriceRange = (priceValue) => {
-    const priceNum = parseInt(priceValue) || 0;
-    if ( 4 > priceNum < 6) return '6-5Cr';
-    return 'Above 10 Cr';
-  };
 
-  const calculateRoadWidthFilter = (widthValue) => {
-    const widthNum = parseInt(widthValue) || 0;
-    if  ( 66 >= widthNum <= 100) return '66 to 100 feet';
-    if (  33 >= widthNum < 66) return '33 to 66 feet';
-    if ( 100 >= widthNum <= 150) return '100 to 150 feet';
-    return '>150+ feet';
-  };
+ 
 
   const showSuccessToast = (message) => {
     toast.success(message, {
@@ -85,101 +83,77 @@ const LandAdd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate required fields
-    if (!districtName) {
-      showErrorToast("District name is required");
+    // Basic validation
+    if (!state || !districtName || !acrePrice || !acre) {
+      showErrorToast("Please fill in all required fields");
       return;
     }
-
-    // Validate URL format
-    if (locationsLink && !locationsLink.startsWith('http')) {
-      showErrorToast("Please enter a valid URL starting with http:// or https://");
-      return;
-    }
-
-    // Validate numeric fields
-    if (isNaN(parseInt(roadWidth))) {
-      showErrorToast("Road width must be a valid number");
-      return;
-    }
-
-    // Calculate derived fields
-    const sizeRange = calculateSizeRange(acre).slice(0, 120);
-    const priceRange = calculatePriceRange(acrePrice).slice(0, 120);
-    const roadWidthFilter = calculateRoadWidthFilter(roadWidth).slice(0, 120);
-
-    const formData = new FormData();
-    
-    // Append all form fields
-    formData.append("state", state ? JSON.stringify(state) : null);
-    formData.append("address", address);
-    formData.append("acre_price", acrePrice || 0);
-    formData.append("acre", acre || 0);
-    formData.append("available", available);
-    formData.append("road_width", parseInt(roadWidth) || 0);
-    formData.append("land_category", category);
-    formData.append("district_name", districtName);
-    formData.append("tehsil_name", tehsilName);
-    formData.append("locations_link", locationsLink);
-    formData.append("size_range", sizeRange);
-    formData.append("price_range", priceRange);
-    formData.append("road_width_filter", roadWidthFilter);
-    formData.append("village_name", villageName);
-    formData.append("sale_or_lease", saleOrLease);
-    formData.append("eligible_for_clu", eligibleForClu);
-    formData.append("zone", zone);
-    formData.append("land_facing", landFacing);
-    formData.append("nearest_highways", nearestHighways);
-    formData.append("details", details);
-    formData.append("distance_between_delhi", distanceBetweenDelhi || 0);
-    formData.append("agent", agent?.id);
-    
-    // Append images only if they exist
-    if (file) {
-      formData.append("img", file);
-    }
-    if (layout) {
-      formData.append("layout", layout);
-    }
-
+  
     try {
-      await toast.promise(
-        axios.post(`${url}property/`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }),
-        {
-          pending: "Adding property...",
-          success: "Property added successfully! 🎉",
-          error: "Failed to add property ❌",
-        }
-      ).then((res) => {
-        if (res.status === 201) {
-          // Reset form fields
-          setState("");
-          setAddress("");
-          setAcrePrice("");
-          setAcre("");
-          setAvailable(false);
-          setRoadWidth("");
-          setCategory("");
-          setDistrictName("");
-          setTehsilName("");
-          setLocationsLink("");
-          setFile(null);
-          setLayout(null);
+      const formData = new FormData();
+      
+      // Format numbers properly
+      const numericAcrePrice = parseFloat(acrePrice) || 0;
+      const numericAcre = parseFloat(acre) || 0;
+      const numericRoadWidth = parseInt(roadWidth) || 0;
+      const numericFootter = parseInt(footter) || 0;
+      const numericDistance = parseInt(distanceBetweenDelhi) || 0;
+  
+      // Append basic information
+      formData.append("state", state);
+      formData.append("address", address);
+      formData.append("acre_price", numericAcrePrice);
+      formData.append("acre", numericAcre);
+      formData.append("available", available ? "true" : "false");
+      formData.append("road_width", numericRoadWidth);
+      formData.append("land_category", category);
+      formData.append("district_name", districtName);
+      formData.append("tehsil_name", tehsilName);
+      formData.append("locations_link", locationsLink);
+  
+      // Append additional details
+      formData.append("village_name", villageName);
+      formData.append("sale_or_lease", saleOrLease);
+      formData.append("eligible_for_clu", eligibleForClu ? "true" : "false");
+      formData.append("zone", zone);
+      formData.append("land_facing", landFacing);
+      formData.append("nearest_highways", nearestHighways);
+      formData.append("details", details);
+      formData.append("distance_between_delhi", numericDistance);
+      formData.append("agent", agent?.id?.toString());
+  
+      // Append unit information
+      formData.append("unit_of_land", unitOfLand);
+      formData.append("money_unit", moneyUnit);
+      formData.append("footter", numericFootter);
+  
+      // Append files if they exist
+      if (file instanceof File) {
+        formData.append("img", file);
+      }
+      if (layout instanceof File) {
+        formData.append("layout", layout);
+      }
+  
     
-          // Navigate to agent holdings page
-          navigate("/agent/holding");
+  
+      const response = await axios.post(`${url}property/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         }
-      }).catch((error) => {
-        console.error("Error adding property:", error);
       });
+  
+      if (response.status === 201) {
+        showSuccessToast("Property added successfully!");
+        navigate("/agent/holding");
+      }
+  
     } catch (error) {
       console.error("Error details:", error.response?.data);
-      showErrorToast("Error in adding property: " + 
-        (error.response?.data?.message || "Please check all fields"));
+      const errorMessage = error.response?.data?.detail || 
+                          Object.values(error.response?.data || {})[0] || 
+                          "Error adding property";
+      showErrorToast(errorMessage);
     }
   };
 
@@ -224,31 +198,58 @@ const LandAdd = () => {
 
             {/* Basic Info Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Price with Money Unit */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Price per Acre (₹)</label>
-                <input
-                  type="number"
-                  className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter price per acre"
-                  onChange={(e) => setAcrePrice(e.target.value)}
-                  value={acrePrice}
-                  required
-                />
+                <label className="block text-sm font-medium text-gray-700 mb-2">Price per Unit</label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                    placeholder="Enter price"
+                    onChange={(e) => setAcrePrice(e.target.value)}
+                    value={acrePrice}
+                    required
+                  />
+                  <select
+                    value={moneyUnit}
+                    onChange={(e) => setMoneyUnit(e.target.value)}
+                    className="w-1/3 px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                    required
+                  >
+                    {money_units.map((unit) => (
+                      <option key={unit[0]} value={unit[0]}>{unit[1]}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-
+            
+              {/* Area with Land Unit */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Total Acreage</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter total acres"
-                  onChange={(e) => setAcre(e.target.value)}
-                  value={acre}
-                  required
-                />
+                <label className="block text-sm font-medium text-gray-700 mb-2">Total Area</label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    step="0.01"
+                    className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                    placeholder="Enter total area"
+                    onChange={(e) => setAcre(e.target.value)}
+                    value={acre}
+                    required
+                  />
+                  <select
+                    value={unitOfLand}
+                    onChange={(e) => setUnitOfLand(e.target.value)}
+                    className="w-1/3 px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                    required
+                  >
+                    {unitofland.map((unit) => (
+                      <option key={unit[0]} value={unit[0]}>{unit[1]}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-
+            
+              {/* Road Width */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Road Width (feet)</label>
                 <input
@@ -260,7 +261,8 @@ const LandAdd = () => {
                   required
                 />
               </div>
-
+            
+              {/* Land Category */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Land Category</label>
                 <select
@@ -275,6 +277,18 @@ const LandAdd = () => {
                   <option value="Commercial">Commercial</option>
                 </select>
               </div>
+            
+              {/* New Footter Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Footter</label>
+                <input
+                  type="number"
+                  className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                  placeholder="Enter footter"
+                  onChange={(e) => ((e)=> setFootter(e.target.value))}
+                  value={footter}
+                />
+              </div>
             </div>
 
             {/* Location Details */}
@@ -288,10 +302,10 @@ const LandAdd = () => {
                   required
                 >
                   <option value="">Select State</option>
-                  <option value="Noida">Noida, UP</option>
+                  <option value="Uttar Pradesh">Noida, UP</option>
                   <option value="Haryana">Haryana</option>
                   <option value="Delhi">Delhi</option>
-                  <option value="Ghaziabad">Ghaziabad</option>
+                  <option value="Punjab">Punjab</option>
                 </select>
               </div>
 

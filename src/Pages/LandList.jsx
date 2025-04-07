@@ -80,7 +80,7 @@ const LandList = () => {
             
               className="bg-amber-600 hover:bg-amber-700 h-14 px-10 rounded-lg flex items-center gap-3 text-lg shadow-xl"
             >
-              <span>Explore Collections</span>
+              <span>Explore </span>
               <ArrowRightOutlined />
             </button>
           </div>
