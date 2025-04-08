@@ -38,7 +38,7 @@ const SignupAgent = () => {
       formData.append('estate_name', estate);
       formData.append('phone_number', phone);
       formData.append('language', JSON.stringify(selectedLanguages));
-      formData.append('state', JSON.stringify(state )); // Assuming state is a string from dropdown
+      formData.append('state', state ); // Assuming state is a string from dropdown
       formData.append('verifications', false); // Default to false as per model
       formData.append('rating', 0.5); // Send as string to match FloatField
       
@@ -206,7 +206,7 @@ const SignupAgent = () => {
           <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
           <select value={state} onChange={(e)=>setState(e.target.value)} className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
             <option value="">Select your state</option>
-            {['Haryana', 'Uttar pradesh', 'Gurgram', 'Delhi','punjab'].map((state) => (
+            {['Haryana', 'Uttar pradesh', 'Delhi','Punjab'].map((state) => (
               <option   key={state} value={state}>{state}</option>
             ))}
           </select>
