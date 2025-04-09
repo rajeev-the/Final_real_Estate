@@ -13,6 +13,7 @@ import ToggleCard from "../componets/ToggleCard";
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
 import  AgentHome  from "../componets/AgentHome";
+import axios from "axios";
 
 import Reviewsection from "../componets/Reviewsection"
 import SerachFilter from "../componets/SerachFilter";
@@ -114,6 +115,10 @@ const Home = ({agent}) => {
 
 
 
+
+
+
+
   const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh"];
  
 
@@ -165,6 +170,7 @@ const Home = ({agent}) => {
 
         {/* Hot Selling Lands Section */}
         <div  className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[85px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
+        
           
           <h2 className="sm:text-4xl text-2xl  font-bold text-center text-[#1C2B2D] mb-5"  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>  Hot Selling Lands in India</h2>
 

@@ -10,7 +10,7 @@ import { useGSAP  } from "@gsap/react";
 import gsap from "gsap";
 
 
-const Navbar = ({ data }) => {
+const Navbar = ({ data ,openLogin  }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("Home"); 
   const boxRef = useRef(null);
@@ -73,7 +73,7 @@ const Navbar = ({ data }) => {
     
       localStorage.removeItem("User")
       showInfoToast("Logout Successful")
-      navigation("/login")
+      window.location.reload();
   
     
   }
@@ -163,13 +163,13 @@ const Navbar = ({ data }) => {
 
 
 
-  <Link
+  <button
     ref={thridref}  // Attach ref to this element instead
-    to={"/login"}
+    onClick={openLogin}
     className="bg-[#4B2E83] hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2 border-[#4B2E83] transition-colors hover:bg-white hover:text-[#4B2E83]"
   >
     Log In
-  </Link>
+  </button>
  
 
  
@@ -275,13 +275,17 @@ const Navbar = ({ data }) => {
         ))}
         
         {activeuser ? (
-      <Link
-        to="/login"
-        onClick={() => setIsOpen(false)}
+      <button
+       
+        onClick={() => {setIsOpen(false) ;
+          openLogin(true)
+
+
+          }}
         className="w-full text-center py-2 text-white bg-[#4B2E83] hover:bg-[#3a2166] rounded-lg transition-colors"
       >
         Log In
-      </Link>
+      </button>
     ) : (
       <button
         onClick={() => {

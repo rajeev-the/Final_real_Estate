@@ -17,6 +17,7 @@ const SignupAgent = () => {
       const [state,setState] = useState();
       const [selectedLanguages, setSelectedLanguages] = useState([]);
       const [checkuser , setCheckuser] = useState(false)
+       const[cutomerid ,setCustomerid] = useState("")
       
       const navigation = useNavigate()
       const url = "https://finalbackend111.pythonanywhere.com/api/"
@@ -52,8 +53,9 @@ const SignupAgent = () => {
             'Content-Type': 'multipart/form-data',
           },
         });
+        const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
     
-        if (res.status === 200 || res.status === 201) {
+        if (res.status === 200 || res.status === 201 && res2.responseCode === 200 ) {
           console.log("Registration successful");
           showSuccessToast("Agent is created")
           // Reset form states
@@ -64,6 +66,9 @@ const SignupAgent = () => {
           setFile(null);
           setSelectedLanguages([]);
           navigation("/agent");
+        }
+        else{
+          showErrorToast(res2.message || res.data.message);
         }
 
         localStorage.setItem("Agent", JSON.stringify(res.data));
@@ -98,6 +103,42 @@ const SignupAgent = () => {
           theme: "colored",
         });
       };
+
+      
+const validateOtp = async (phonei,verifi,ootp) => {
+  try {
+    const response = await axios.post(`${url}/api/validate_otp/`, {
+      phone: phonei,
+      verificationId: verifi, // from send-otp response
+      code: ootp           // user-entered OTP
+    });
+
+   showSuccessToast('✅ OTP Verified:', response.message)
+  } catch (error) {
+    showErrorToast('❌ Verification failed:', error.response?.data || error.message);
+  }
+};
+ 
+const sendverification = async () => {
+  try {
+    const response = await axios.post(`${url}send-otp/`, {
+      phone: phone.slice(2),
+    });
+
+    if (response.responseCode === 200) {
+      setCustomerid(response.data.verificationId)
+
+      showSuccessToast("OTP sent!");
+    } else {
+      showErrorToast("Unexpected response", response.data);
+    }
+  } catch (err) {
+    console.error("OTP send error:", err);
+    showErrorToast("Failed to send OTP", err.message);
+  }
+};
+
+
 
 
   return (
@@ -225,7 +266,7 @@ const SignupAgent = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button    className="w-full sm:w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
+            <button onClick={sendverification}    className="w-full sm:w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
               Send OTP
             </button>
             <button onClick={handleSign} className="w-full sm:w-1/2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">

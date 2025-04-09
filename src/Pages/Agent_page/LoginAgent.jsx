@@ -51,7 +51,7 @@ const LoginAgent = () => {
   const [otpcheck, setOtpCheck] = useState(true);
   const navigation = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
-
+    const[cutomerid ,setCustomerid] = useState("")
   const url = "https://finalbackend111.pythonanywhere.com/api/"
   const toggleAccordion = (index) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? -1 : index));
@@ -69,11 +69,15 @@ const LoginAgent = () => {
 
     try {
         const res = await axios.get(`${url}agent/search-by-phone/?phone=${encodeURIComponent(phone)}`);
+        const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
 
-        if (res.status === 200 && otpcheck) {
+        if (res.status === 200 && res2.responseCode ===  200) {
             localStorage.setItem("Agent", JSON.stringify(res.data.agent));
             showSuccessToast("Successfully Logged In");
             navigation("/agent");
+        }
+        else{
+          showErrorToast(res2.message || res.data.message);
         }
     } catch (error) {
        
@@ -91,6 +95,42 @@ const LoginAgent = () => {
         }
     }
 };
+const validateOtp = async (phonei,verifi,ootp) => {
+  try {
+    const response = await axios.post(`${url}/api/validate_otp/`, {
+      phone: phonei,
+      verificationId: verifi, // from send-otp response
+      code: ootp           // user-entered OTP
+    });
+
+   showSuccessToast('✅ OTP Verified:', response.message)
+  } catch (error) {
+    showErrorToast('❌ Verification failed:', error.response?.data || error.message);
+  }
+};
+ 
+const sendverification = async () => {
+  try {
+    const response = await axios.post(`${url}send-otp/`, {
+      phone: phone.slice(2),
+    });
+
+    if (response.responseCode === 200) {
+      setCustomerid(response.data.verificationId)
+
+      showSuccessToast("OTP sent!");
+    } else {
+      showErrorToast("Unexpected response", response.data);
+    }
+  } catch (err) {
+    console.error("OTP send error:", err);
+    showErrorToast("Failed to send OTP", err.message);
+  }
+};
+
+
+
+
 
   const showSuccessToast = (data1) => {
     toast.success(data1 , {
@@ -179,8 +219,8 @@ const LoginAgent = () => {
             </div>
   
             {/* Buttons */}
-            <div className="space-y-4">
-              <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
+            <div  className="space-y-4">
+              <button onClick={sendverification} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
