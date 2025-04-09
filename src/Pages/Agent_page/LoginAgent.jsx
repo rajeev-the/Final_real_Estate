@@ -167,17 +167,17 @@ const sendverification = async () => {
         {/* Left Side */}
         <div className="text-white text-center md:text-left p-4 md:p-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-snug">
-            Post Property for Sell or Rent <br /> Online for <span className="text-green-400">FREE</span>
+            Post Land for Sell or Rent <br /> Online for <span className="text-green-400">FREE</span>
           </h1>
   
           <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-8">
             <div className="bg-green-200 text-black p-5 sm:p-6 rounded-xl w-full sm:w-56 text-center">
               <div className="text-xl sm:text-2xl font-bold mb-1">Land Sold</div>
-              <div className="text-lg">Every <strong>30</strong> Minutes</div>
+              <div className="text-lg">100<strong>+</strong> Acres</div>
             </div>
             <div className="bg-blue-200 text-black p-5 sm:p-6 rounded-xl w-full sm:w-56 text-center">
               <div className="text-xl sm:text-2xl font-bold mb-1">Land Rented</div>
-              <div className="text-lg">Every <strong>10</strong> Minutes</div>
+              <div className="text-lg">80<strong>+</strong> Hours</div>
             </div>
           </div>
   
@@ -273,13 +273,13 @@ const sendverification = async () => {
         {[
           {
             img: "https://cdn-icons-png.flaticon.com/512/9187/9187604.png",
-            title: "Show off your property",
+            title: "Show off your Land",
             desc:
               "Sign up or log in and create a free ad post with pictures, video, and other info like type, price, size, location, etc.",
           },
           {
             img: "https://cdn-icons-png.flaticon.com/512/942/942748.png",
-            title: "Property Proposal",
+            title: "Land Proposal",
             desc:
               "Attract buyers/renters by listing key advantages and benefits they may want to avail of.",
           },

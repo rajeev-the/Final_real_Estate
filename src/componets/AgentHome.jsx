@@ -16,7 +16,7 @@ const AgentHome = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-700 mb-8">
-            Post your residential / commercial property
+        
           </p>
 
           {/* Stats */}

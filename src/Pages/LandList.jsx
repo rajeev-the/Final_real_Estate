@@ -16,6 +16,7 @@ import {useAppContext } from "../Context/Poperty_context"
 
 
 
+
 const LandList = () => {
 
   const [data, setData] = useState(); // ✅ Initialize as empty array
@@ -76,13 +77,16 @@ const LandList = () => {
             </p>
 
             {/* CTA Button */}
+
+            <a href="#topage">
             <button
-            
+         
               className="bg-amber-600 hover:bg-amber-700 h-14 px-10 rounded-lg flex items-center gap-3 text-lg shadow-xl"
             >
               <span>Explore </span>
               <ArrowRightOutlined />
             </button>
+            </a>
           </div>
         </div>
       </div>
@@ -168,7 +172,7 @@ const LandList = () => {
 
 
 
-  <div className='overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden'>
+  <div  className='overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden'>
   <div className="grid grid-cols-2 sm:gap-4 gap-1  sm:p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
     {dumy?.featured.map((f, i) => (
     <Link 
@@ -189,7 +193,7 @@ const LandList = () => {
 </div>
 
 {/* Premium Search Filter */}
-<div className="mx-auto max-w-4xl px-4 mb-16">
+<section id='topage' className="mx-auto max-w-4xl px-4 mb-16">
   <div className="relative group">
     <Input
       placeholder="Search luxury properties..."
@@ -208,12 +212,15 @@ const LandList = () => {
       Press <kbd className="ml-1 px-2 py-1 bg-slate-100 rounded">⌘</kbd> + <kbd className="px-2 py-1 bg-slate-100 rounded">K</kbd>
     </span>
   </div>
-</div>
+</section>
 
 {/* State Listings Section - Preserved as requested */}
 
   {/* ... existing state listings content ... */}
-  <div className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  <section 
+  
+  
+  className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
 
   <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6">
   {locations.map((name, index) => (
@@ -271,7 +278,7 @@ const LandList = () => {
       </div>
     ))}
   </div>
-</div>
+</section>
 </div>
 
   )
