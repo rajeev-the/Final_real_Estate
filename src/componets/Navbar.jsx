@@ -98,7 +98,7 @@ const Navbar = ({ data ,openLogin  }) => {
         ref={secondRef} 
         src={logoimg} 
         alt="Real Estate Logo" 
-        className="sm:h-15 sm:w-15 h-12 w-12 rounded-md border-2 border-[#4B2E83]" 
+        className="sm:h-16 sm:w-26 h-15 w-20 rounded-md " 
       />
     </div>
   

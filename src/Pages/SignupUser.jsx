@@ -35,6 +35,41 @@ const userpresent = async (phone1) => {
   }
 };
 
+const validateOtp = async (phonei, verifi, ootp) => {
+  try {
+    const response = await axios.post(`${url}validate_otp/`, {
+      phone: phonei,
+      verificationId: verifi, // from send-otp response
+      code: ootp           // user-entered OTP
+    });
+
+   showSuccessToast('✅ OTP Verified:', response.message)
+   return response;
+  } catch (error) {
+    showErrorToast('❌ Verification failed:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+const sendverification = async () => {
+  try {
+    const response = await axios.post(`${url}send-otp/`, {
+      phone: phone.slice(2),
+    });
+
+    if (response.responseCode === 200) {
+      setCustomerid(response.data.verificationId)
+
+      showSuccessToast("OTP sent!");
+    } else {
+      showErrorToast("Unexpected response", response.data);
+    }
+  } catch (err) {
+    console.error("OTP send error:", err);
+    showErrorToast("Failed to send OTP", err.message);
+  }
+};
+
 const handleVerifyOTP =async () => {
   // Implement OTP verification and registration
  
@@ -74,42 +109,6 @@ const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
    console.log("An error occurred. Please try again.");}
   
 }
-
-
-const validateOtp = async (phonei,verifi,ootp) => {
-  try {
-    const response = await axios.post(`${url}/api/validate_otp/`, {
-      phone: phonei,
-      verificationId: verifi, // from send-otp response
-      code: ootp           // user-entered OTP
-    });
-
-   showSuccessToast('✅ OTP Verified:', response.message)
-  } catch (error) {
-    showErrorToast('❌ Verification failed:', error.response?.data || error.message);
-  }
-};
- 
-const sendverification = async () => {
-  try {
-    const response = await axios.post(`${url}send-otp/`, {
-      phone: phone.slice(2),
-    });
-
-    if (response.responseCode === 200) {
-      setCustomerid(response.data.verificationId)
-
-      showSuccessToast("OTP sent!");
-    } else {
-      showErrorToast("Unexpected response", response.data);
-    }
-  } catch (err) {
-    console.error("OTP send error:", err);
-    showErrorToast("Failed to send OTP", err.message);
-  }
-};
-
-
  
 };
   return (
