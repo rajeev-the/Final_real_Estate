@@ -18,7 +18,9 @@ export const AppProvider = ({ children }) => {
         setMaindata(reb?.data[0])
 
         if (res.status === 200) {
-          setProperty(res?.data);
+          // setProperty(res?.data);
+          setProperty(res?.data.filter((item)=>item.isvaild))
+
         }
       } catch (error) {
         console.log("Error fetching property data:", error);
