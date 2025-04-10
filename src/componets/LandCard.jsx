@@ -18,9 +18,15 @@ const LandCard = ({ acre, address, acre_price, img }) => {
       {/* Details Section */}
       <div className="p-4 md:p-5 space-y-3 md:space-y-4">
         <div>
-          <h3 className="text-black text-lg md:text-xl font-medium font-serif leading-tight">
-          {address.length > 10 ? `${address.slice(0, 10)}...` : address}
-          </h3>
+        {/* Full address on medium screens and above */}
+<h3 className="hidden md:block text-black text-lg md:text-xl font-medium font-serif leading-tight">
+  {address}
+</h3>
+
+{/* Truncated address on small screens */}
+<h3 className="block md:hidden text-black text-lg md:text-xl font-medium font-serif leading-tight">
+  {address.length > 10 ? `${address.slice(0, 10)}...` : address}
+</h3>
         </div>
 
         <div className="flex justify-between items-center border-t border-b border-[#1C2B2D]/10 py-2 md:py-3">
