@@ -3,7 +3,7 @@ import React from 'react';
 const JointVentureStructuring = () => {
     const services = [
         {
-          title: "Strategic JV Advisory",
+          title: "Joint Venture Structuring",
           description: "Assess development potential and structure JVs tailored to objectives including capital appreciation or development partnerships.",
           cta: "Explore Advisory",
           icon: (
