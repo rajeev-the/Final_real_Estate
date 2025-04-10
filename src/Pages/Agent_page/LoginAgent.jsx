@@ -176,8 +176,8 @@ const sendverification = async () => {
               <div className="text-lg">100<strong>+</strong> Acres</div>
             </div>
             <div className="bg-blue-200 text-black p-5 sm:p-6 rounded-xl w-full sm:w-56 text-center">
-              <div className="text-xl sm:text-2xl font-bold mb-1">Land Rented</div>
-              <div className="text-lg">80<strong>+</strong> Hours</div>
+              <div className="text-xl sm:text-2xl font-bold mb-1">Land Lease</div>
+              <div className="text-lg">200<strong>+</strong>Acres</div>
             </div>
           </div>
   
