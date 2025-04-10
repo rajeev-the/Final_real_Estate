@@ -218,7 +218,7 @@ const Navbar = ({ data ,openLogin  }) => {
 >
   <span className="flex items-center  justify-center gap-2">
     
-    <span>Post Land</span>
+    <span>Post your land</span>
     {/* FREE Badge */}
     <span className="relative mb-1">
       <span className="inline-flex items-center bg-[#219653] px-[5px] py-[4px] rounded-[3px] text-white text-[9px] font-bold leading-[6px] overflow-hidden relative">
