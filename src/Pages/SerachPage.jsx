@@ -24,16 +24,18 @@ const SerachPage = () => {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filterlist.map((item) => (
-              <Link to={ `/land/${item.id}`}>
-            <LandCard
-
-              key={item.id || Math.random()}
-              acre={item.acre}
-              address={item.address}
-              acre_price={item.acre_price}
-              img={item.img}
-            />
-            </Link>
+               <Link
+               to={`/land/${item.id}`}
+               className="block"  // Ensure Link is block-level but doesn't interfere with layout
+               key={item.id || Math.random()}
+             >
+               <LandCard
+                 acre={item.acre}
+                 address={item.address}
+                 acre_price={item.acre_price}
+                 img={item.img}
+               />
+             </Link>
           ))}
         </div>
       )}
