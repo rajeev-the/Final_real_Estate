@@ -44,6 +44,7 @@ const App = () => {
               <Route path="agents/:state" element={<StateAgenet />} />
               <Route path="land/:id" element={<ViewLand />} />
               <Route path="search" element={<SerachPage />} />
+              <Route path="search/land/:id" element={<ViewLand />} />
              
               <Route path='Careers'  element={<Careers/>}/>
             </Route>
