@@ -19,7 +19,7 @@ const LandCard = ({ acre, address, acre_price, img }) => {
       <div className="p-4 md:p-5 space-y-3 md:space-y-4">
         <div>
           <h3 className="text-black text-lg md:text-xl font-medium font-serif leading-tight">
-            {address}
+          {address.length > 10 ? `${address.slice(0, 10)}...` : address}
           </h3>
         </div>
 
