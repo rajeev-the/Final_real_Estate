@@ -11,6 +11,8 @@ const LoginUser = ({setIsLogin , isOpen}) => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const[cutomerid ,setCustomerid] = useState("")
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [timer, setTimer] = useState(0);
  
 
  
@@ -121,6 +123,19 @@ const LoginUser = ({setIsLogin , isOpen}) => {
           setCustomerid(response.data.verificationId)
 
           showSuccessToast("OTP sent!");
+          setIsDisabled(true);
+          setTimer(60);
+      
+          const countdown = setInterval(() => {
+            setTimer((prev) => {
+              if (prev <= 1) {
+                clearInterval(countdown);
+                setIsDisabled(false);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
         } else {
           showErrorToast("Unexpected response", response.data);
         }
@@ -176,14 +191,19 @@ const LoginUser = ({setIsLogin , isOpen}) => {
 
         {/* Action Buttons */}
         <div className="space-y-4">
-          <button  className="w-full bg-[#FF6F61] hover:bg-[#FF4638] text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"  
-          onClick={sendverification}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-            </svg>
-            Send OTP
-          </button>
+        <button
+      onClick={sendverification}
+      disabled={isDisabled}
+      className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 
+      hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg 
+      font-semibold transition-all flex items-center justify-center gap-2
+      ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+      </svg>
+      {isDisabled ? `Wait ${timer}s` : "Send OTP"}
+    </button>
 
        
             <button onClick={handleSubmit} className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">

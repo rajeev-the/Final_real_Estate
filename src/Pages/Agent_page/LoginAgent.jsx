@@ -47,6 +47,8 @@ const faqData = [
 
 const LoginAgent = () => {
   const [phone, setPhone] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [timer, setTimer] = useState(0);
   const [otp, setOtp] = useState("");
   const [otpcheck, setOtpCheck] = useState(true);
   const navigation = useNavigate();
@@ -56,6 +58,7 @@ const LoginAgent = () => {
   const toggleAccordion = (index) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? -1 : index));
   };
+  
   
 
   
@@ -119,6 +122,19 @@ const sendverification = async () => {
       setCustomerid(response.data.verificationId)
 
       showSuccessToast("OTP sent!");
+      setIsDisabled(true);
+      setTimer(60);
+  
+      const countdown = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(countdown);
+            setIsDisabled(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     } else {
       showErrorToast("Unexpected response", response.data);
     }
@@ -220,12 +236,19 @@ const sendverification = async () => {
   
             {/* Buttons */}
             <div  className="space-y-4">
-              <button onClick={sendverification} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-                Send OTP
-              </button>
+            <button
+      onClick={sendverification}
+      disabled={isDisabled}
+      className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 
+      hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg 
+      font-semibold transition-all flex items-center justify-center gap-2
+      ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+      </svg>
+      {isDisabled ? `Wait ${timer}s` : "Send OTP"}
+    </button>
   
               <button
                 onClick={handleSubmit}
