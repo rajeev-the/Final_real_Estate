@@ -18,7 +18,7 @@ const Layout = () => {
       
     <Navbar data={data1 }  openLogin={() => setShowLogin(true)}/>
       <div>
-        <Outlet  openLogin={() => setShowLogin(true)} /> {/* This renders the current page */}
+        <Outlet  /> {/* This renders the current page */}
       </div>
   
       <Footer/>
