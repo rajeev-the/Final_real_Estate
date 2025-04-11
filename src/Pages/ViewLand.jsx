@@ -8,7 +8,7 @@ import axios from "axios";
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ViewLand = () => {
+const ViewLand = ({openLogin}) => {
   const { id } = useParams();
   const { property } = useAppContext();
   const url = "https://finalbackend111.pythonanywhere.com/api/";
@@ -60,7 +60,7 @@ const ViewLand = () => {
     if (!isUser) {
       
       showErrorToast("Please login to continue.");
-      navigate("/login");
+      openLogin()
       return;
     }
 
