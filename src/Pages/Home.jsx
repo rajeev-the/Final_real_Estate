@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import xxxp from "../assets/xxxp.mp4";
 import CityCard from "../componets/CityCard";
 import Realcompo from "../componets/Realcompo"
-import ToggleCard from "../componets/ToggleCard";
+
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
 import  AgentHome  from "../componets/AgentHome";
@@ -29,6 +29,7 @@ const Home = ({agent}) => {
   const resvideo = useRef()
   const seoref = useRef(null);
   const searchcart = useRef(null);
+    const [active, setActive] = useState("top-rated");
   
   // Ref for the cities section
  
@@ -114,7 +115,11 @@ const Home = ({agent}) => {
   
 
 
-
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+  
+  const shuffledData = shuffleArray(data || []).slice(0, 4);
 
 
 
@@ -157,15 +162,65 @@ const Home = ({agent}) => {
 
         <div  ref={seoref} className="flex flex-col items-center px-4 py-8 bg-gradient-to-b from-white to-gray-50">
   {/* Premium Toggle Buttons (unchanged) */}
- <ToggleCard/>
-  
- 
+  <div className="flex flex-col items-center justify-center sm:mt-10 md:mb-14 relative">
+      <div className="bg-[#000000] dark:bg-[#000000] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
+        <button
+          onClick={() => setActive("top-rated")}
+          className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
+            active === "top-rated"
+              ? "bg-[#4B2E83] text-white shadow-lg"
+              : "text-white"
+          }`}
+        >
+          Top Rated
+        </button>
 
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4  sm:gap-10 p-3 ">
+        <button
+          onClick={() => setActive("suggestions")}
+          className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
+            active === "suggestions"
+              ? "bg-[#4B2E83] text-white shadow-lg"
+              : " text-white "
+          }`}
+        >
+          Suggestions
+        </button>
+      </div>
+
+      {/* Subtle Background Divider */}
+      <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent -z-10"></div>
+    </div>
+
+
+
+{ 
+  active === "suggestions" ? (
+    <div className="grid grid-cols-2 gap-4 p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
+    {shuffledData.map((e, i) => (
+      <Link 
+        to={`/Land/${e.id}`} 
+        key={e.id}
+        className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
+      >  
+        <LandCard 
+          acre={e.acre} 
+          address={e.address} 
+          acre_price={e.acre_price}  
+          img={e.img}  
+        /> 
+      </Link>
+    ))}
+</div>
+  ) : (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-10 p-3">
       {cities.map((city, index) => (
         <CityCard key={index} {...city} />
       ))}
     </div>
+  )
+}
+
+
 </div>
 
 
