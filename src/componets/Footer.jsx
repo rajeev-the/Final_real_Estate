@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <div className="relative bg-[black]  text-white pt-20 pb-48 px-6 mt-19  border-t border-[#4B2E83]/50    ">
       {/* Footer Content */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-40 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 relative z-10">
         {footerLinks.map((section, index) => (
           <div key={index} className="group">
             <h2 className="font-semibold text-xl mb-5 uppercase tracking-wider text-white border-l-4 border-[#4B2E83] pl-3">
