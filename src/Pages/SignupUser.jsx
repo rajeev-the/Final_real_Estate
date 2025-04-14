@@ -10,6 +10,7 @@ const [phone, setPhone] = useState("");
 const [email,setemail] = useState("")
 const [otp, setOtp] = useState("");
   const[cutomerid ,setCustomerid] = useState("")
+    const [isDisabled, setIsDisabled] = useState(false);
 
 
   const url = "https://finalbackend111.pythonanywhere.com/api/"
