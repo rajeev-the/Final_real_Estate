@@ -278,7 +278,7 @@ const ViewLand = () => {
 <div className="w-full flex flex-col items-center gap-4 py-4">
   {/* Label */}
   <label className="text-lg font-semibold text-gray-800">
-    📍 Location
+    📍 Proximity location
   </label>
 
   {/* Responsive Map */}

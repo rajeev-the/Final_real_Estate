@@ -49,7 +49,7 @@ const Footer = () => {
           <img 
             src={logoimg} 
             alt="Company Logo" 
-            className="h-24 w-24 mx-auto mb-6 rounded-xl border-2  p-1" 
+            className="h-24 w-36 mx-auto mb-6 rounded-xl border-2  p-1" 
           />
           <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed font-light italic">
             "Crafting exceptional real estate experiences through innovation and integrity."

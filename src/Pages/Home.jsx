@@ -13,8 +13,7 @@ import Realcompo from "../componets/Realcompo"
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
 import  AgentHome  from "../componets/AgentHome";
-import axios from "axios";
-import JointVentureStructuring from '../componets/JointVentureStructuring'
+
 
 import Reviewsection from "../componets/Reviewsection"
 import SerachFilter from "../componets/SerachFilter";
@@ -125,7 +124,7 @@ const Home = ({agent}) => {
 
 
 
-  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh"];
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh",];
  
 
   return (

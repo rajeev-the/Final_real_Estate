@@ -128,7 +128,8 @@ const sendverification = async () => {
     });
 
     if (response.responseCode === 200) {
-      setCustomerid(response.data.verificationId)
+      const verifed = response.data.data?.verificationId;
+      setCustomerid(verifed);
       showSuccessToast("OTP sent!");
       setIsDisabled(true);
       setTimer(60);

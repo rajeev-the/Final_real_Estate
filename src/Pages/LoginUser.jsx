@@ -13,7 +13,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
   const[cutomerid ,setCustomerid] = useState("")
   const [isDisabled, setIsDisabled] = useState(false);
   const [timer, setTimer] = useState(0);
-  const [verified , setverified] = useState("")
+
  
 
  
@@ -36,8 +36,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
       const res = await axios.get(
         `${url}users/search-by-phone/?phone=${encodeURIComponent(phone)}`
       );
-      console.log(res)
-      console.log( phone.slice(2) ,cutomerid , otp)
+
       const res2 = await validateOtp(phone.slice(2) ,cutomerid , otp);
   
       if (res.status === 200 && res2.responseCode === 200 ) {
@@ -127,7 +126,11 @@ const LoginUser = ({setIsLogin , isOpen}) => {
         });
     
         if (response.data.responseCode === 200) {
-          setCustomerid(response.data.verificationId);
+
+          const verifed = response.data.data?.verificationId;
+    
+          setCustomerid(verifed);
+         
           showSuccessToast("OTP sent!");
           setIsDisabled(true);
           setTimer(60);

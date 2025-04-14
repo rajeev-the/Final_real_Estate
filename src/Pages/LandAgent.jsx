@@ -39,8 +39,8 @@ const LandAgent = () => {
   
   
   return (
-    <div className=' flex-start p-5 sm:mt-[100px]  w-full '>
-      <div className='w-full flex-wrap   justify-center flex gap-[30px]'>
+    <div className='  p-10 sm:mt-[100px] flex  justify-center  items-center w-full '>
+      <div className='w-full flex-wrap    justify-start   items-center flex gap-[30px]'>
 
         {
           data?.map((item,i)=>(

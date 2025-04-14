@@ -119,7 +119,9 @@ const sendverification = async () => {
     });
 
     if (response.responseCode === 200) {
-      setCustomerid(response.data.verificationId)
+      const verifed = response.data.data?.verificationId;
+    
+      setCustomerid(verifed);
 
       showSuccessToast("OTP sent!");
       setIsDisabled(true);
@@ -183,7 +185,7 @@ const sendverification = async () => {
         {/* Left Side */}
         <div className="text-white text-center md:text-left p-4 md:p-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-snug">
-            Post Land for Sell or Rent <br /> Online for <span className="text-green-400">FREE</span>
+          Post Your Land With Us <br /> Online for <span className="text-green-400">FREE</span>
           </h1>
   
           <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-8">
@@ -192,7 +194,7 @@ const sendverification = async () => {
               <div className="text-lg">100<strong>+</strong> Acres</div>
             </div>
             <div className="bg-blue-200 text-black p-5 sm:p-6 rounded-xl w-full sm:w-56 text-center">
-              <div className="text-xl sm:text-2xl font-bold mb-1">Land Lease</div>
+              <div className="text-xl sm:text-2xl font-bold mb-1">Land Leased</div>
               <div className="text-lg">200<strong>+</strong>Acres</div>
             </div>
           </div>

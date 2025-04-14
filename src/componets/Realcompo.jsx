@@ -41,6 +41,17 @@ const Realcompo = () => {
             </svg>
           )
         },
+        {
+          title: "Land Advisory & Paper Consultancy",
+          description: "Expert support for all your land documents, due diligence, and legal paperwork.",
+          cta: "Explore Advisory",
+          icon: (
+            <svg  className="w-6 h-6 text-white"  fill="none" stroke="currentColor" viewBox="0 0 24 24 ">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6M9 16h6M9 8h6M4 6h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
+          </svg>
+          
+          )
+        },
       ];
     
   return (
@@ -64,12 +75,7 @@ const Realcompo = () => {
             <h3 className="text-2xl font-bold text-black mb-4">{service.title}</h3>
             <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
             <div className="mt-6">
-              <button className="flex items-center gap-2 text-sm font-semibold text-[#1C2B2D] hover:text-black transition-colors">
-                {service.cta}
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
+             
             </div>
           </div>
         ))}

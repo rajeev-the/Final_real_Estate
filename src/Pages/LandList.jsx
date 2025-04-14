@@ -47,7 +47,7 @@ const LandList = () => {
   
 
   
-  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh"];
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh" ,"Rajasthan"];
 
   return (
     <div className='mt-[50px] md:mt-[100px] sm:p-2 md:p-[15px] w-full'>
@@ -59,9 +59,9 @@ const LandList = () => {
           <div className="max-w-2xl space-y-6">
             {/* Section Label */}
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-amber-600"></div>
-              <span className="text-amber-600 uppercase tracking-widest text-sm">
-              Landsathi
+              <div className="w-16 h-px  bg-white "></div>
+              <span className="text-white uppercase tracking-widest text-sm">
+              Landsathi.com
               </span>
             </div>
 
@@ -114,7 +114,7 @@ const LandList = () => {
       className='text-2xl md:text-3xl font-serif !mb-0 !text-slate-800 !font-medium'
       style={{ borderLeft: '4px solid #D65F00', paddingLeft: '1rem' }}
     >
-      Top Rated Estates
+      Top Rated 
       <span className='ml-4' style={{ color: '#D65F00' }}>✦✦✦</span>
     </Title>
   </div>
