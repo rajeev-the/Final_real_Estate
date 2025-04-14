@@ -395,7 +395,7 @@ const handleSuggestionClick = (suggestion) => {
           
 
         </div>
-        <button className="w-full mt-2 flex items-center justify-center gap-1 bg-gradient-to-r from-[#D65F00] to-[#3A1F6B] text-white rounded-xl text-xs py-2 px-3 sm:hidden">
+        <button className="w-full mt-2 flex items-center justify-center gap-1 bg-gradient-to-r from-[#D65F00] to-[#FF8C42] text-white rounded-xl text-xs py-2 px-3 sm:hidden">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-4 w-4"
