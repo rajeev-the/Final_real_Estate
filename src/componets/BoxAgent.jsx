@@ -13,7 +13,7 @@ const BoxAgent = ({ image, text }) => {
     className="bg-white rounded-xl shadow-sm  border border-gray-100 p-6 flex flex-col items-center w-full sm:w-64 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
   >
     {/* Image container with elegant frame */}
-    <div className="w-40 h-40 rounded-full bg-gray-50 p-1 border-2 border-gray-200 group-hover:border-[#826CB0] transition-colors duration-300 flex items-center justify-center overflow-hidden">
+    <div className="w-40 h-40 rounded-full bg-gray-50 p-1 border-2 border-gray-200 group-hover:border-[#D65F00] transition-colors duration-300 flex items-center justify-center overflow-hidden">
       <img 
         src={image} 
         alt={text} 
@@ -23,7 +23,7 @@ const BoxAgent = ({ image, text }) => {
   
     {/* Text content with refined typography */}
     <div className="mt-6 text-center">
-      <p className="text-xl font-medium text-gray-800 group-hover:text-[#826CB0] transition-colors duration-300">
+      <p className="text-xl font-medium text-gray-800 group-hover:text-[#36383D] transition-colors duration-300">
         {text}
       </p>
       <p className="text-sm text-gray-500 mt-1">

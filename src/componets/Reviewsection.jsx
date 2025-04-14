@@ -41,15 +41,15 @@ const Reviewsection = () => {
               className="bg-white rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow"
             >
               <div className="mb-6">
-                <span className="text-[#4B2E83] text-4xl font-bold">“</span>
+                <span className="text-[#D65F00] text-4xl font-bold">“</span>
                 <p className="text-[#1C2B2D] text-base sm:text-lg leading-relaxed mb-4">
                   {review.quote}
                 </p>
-                <span className="text-[#4B2E83] text-4xl font-bold float-right">”</span>
+                <span className="text-[#D65F00] text-4xl font-bold float-right">”</span>
               </div>
               
               <div className="flex items-center gap-4 border-t pt-6">
-                <div className="w-12 h-12 rounded-full bg-[#4B2E83] flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-full bg-[#D65F00] flex items-center justify-center text-white">
                   {review.initials}
                 </div>
                 <div>

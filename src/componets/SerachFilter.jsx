@@ -177,7 +177,7 @@ const handleSuggestionClick = (suggestion) => {
             key={tab}
             className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors duration-200 ${
               tab === buyorlesese
-                ? 'bg-[#4B2E83] text-white shadow-md'
+                ? 'bg-[#D65F00] text-white shadow-md'
                 : 'bg-white/80 text-gray-800 hover:bg-white shadow-sm'
             }`}
             onClick={() => setbuyorlesese(tab)}
@@ -205,7 +205,7 @@ const handleSuggestionClick = (suggestion) => {
               />
               <button 
                 onClick={handleFilterChange}
-                className="w-full sm:w-auto bg-[#4B2E83] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base hover:bg-[#3A1F6B] transition-colors"
+                className="w-full sm:w-auto bg-[#D65F00] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base hover:bg-[#3A1F6B] transition-colors"
               >
                 Search
               </button>
@@ -263,7 +263,7 @@ const handleSuggestionClick = (suggestion) => {
             value={type}
             className={({ active, selected }) =>
               `cursor-pointer select-none sm:py-2  sm:px-4  px-2 py-1  ${
-                active ? 'bg-[#4B2E83] text-white' : 'text-gray-700'
+                active ? 'bg-[#D65F00] text-white' : 'text-gray-700'
               } ${selected ? 'font-semibold' : ''}`
             }
           >
@@ -286,7 +286,7 @@ const handleSuggestionClick = (suggestion) => {
   className={`
     h-4 w-4 
     sm:h-5 sm:w-5 
-    text-[#4B2E83] 
+    text-[#D65F00] 
     transform transition-transform duration-200 
     ${open ? 'rotate-180' : ''}
   `}
@@ -310,7 +310,7 @@ const handleSuggestionClick = (suggestion) => {
       value={type}
       className={({ active }) =>
         `cursor-pointer select-none px-2 py-1 sm:px-4 sm:py-2 transition-colors duration-150 ${
-          active ? 'bg-[#4B2E83] text-white' : 'text-gray-700'
+          active ? 'bg-[#D65F00] text-white' : 'text-gray-700'
         }`
       }
     >
@@ -325,7 +325,8 @@ const handleSuggestionClick = (suggestion) => {
 
           {/* Near Me and Zone Selection - Full width on mobile */}
           <div className="flex flex-col sm:flex-row gap-2    ">
-          <button className="hidden sm:flex flex-1 items-center justify-center gap-2 sm:gap-4 bg-gradient-to-r from-[#4B2E83] to-[#3A1F6B] text-white py-3 sm:py-4 px-2 rounded-xl text-xs sm:text-sm">
+          <button className="hidden sm:flex flex-1 items-center justify-center gap-2 sm:gap-4 bg-gradient-to-r from-[#D65F00] to-[#FF8C42]
+ text-white py-3 sm:py-4 px-2 rounded-xl text-xs sm:text-sm">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-4 w-4 sm:h-5 sm:w-5"
@@ -353,7 +354,7 @@ const handleSuggestionClick = (suggestion) => {
   className={`
     h-4 w-4 
     sm:h-5 sm:w-5 
-    text-[#4B2E83] 
+    text-[#D65F00] 
     transform transition-transform duration-200 
     ${open ? 'rotate-180' : ''}
   `}
@@ -378,8 +379,8 @@ const handleSuggestionClick = (suggestion) => {
             value={type}
             className={({ active, selected }) =>
               `cursor-pointer select-none sm:py-3  sm:px-6  px-2  py-1 text-[#1C2B2D] transition-colors ${
-                active || selected ? 'bg-[#4B2E83]/10' : 'hover:bg-gray-50'
-              } ${selected ? 'font-semibold text-[#4B2E83]' : ''}`
+                active || selected ? 'bg-[#D65F00]/10' : 'hover:bg-gray-50'
+              } ${selected ? 'font-semibold text-[#D65F00]' : ''}`
             }
           >
             {type.label}
@@ -394,7 +395,7 @@ const handleSuggestionClick = (suggestion) => {
           
 
         </div>
-        <button className="w-full mt-2 flex items-center justify-center gap-1 bg-gradient-to-r from-[#4B2E83] to-[#3A1F6B] text-white rounded-xl text-xs py-2 px-3 sm:hidden">
+        <button className="w-full mt-2 flex items-center justify-center gap-1 bg-gradient-to-r from-[#D65F00] to-[#3A1F6B] text-white rounded-xl text-xs py-2 px-3 sm:hidden">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-4 w-4"

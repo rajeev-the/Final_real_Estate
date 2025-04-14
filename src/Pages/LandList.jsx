@@ -107,15 +107,15 @@ const LandList = () => {
   <div className='flex items-center gap-4 mb-8 md:mb-12'>
     <div 
       className='h-px w-16 hidden md:block'
-      style={{ backgroundColor: '#826CB0' }}
+      style={{ backgroundColor: '#D65F00' }}
     ></div>
     <Title 
       level={3} 
       className='text-2xl md:text-3xl font-serif !mb-0 !text-slate-800 !font-medium'
-      style={{ borderLeft: '4px solid #826CB0', paddingLeft: '1rem' }}
+      style={{ borderLeft: '4px solid #D65F00', paddingLeft: '1rem' }}
     >
       Top Rated Estates
-      <span className='ml-4' style={{ color: '#826CB0' }}>✦✦✦</span>
+      <span className='ml-4' style={{ color: '#D65F00' }}>✦✦✦</span>
     </Title>
   </div>
 
@@ -132,7 +132,7 @@ const LandList = () => {
             acre={f?.acre} 
             address={f?.address} 
             acre_price={f?.acre_price}  
-            img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
+            img={f?.img}  
           /> 
         </Link>
       ))}
@@ -147,26 +147,12 @@ const LandList = () => {
       <Title 
         level={3} 
         className='text-2xl md:text-3xl font-serif !text-slate-800 !font-medium'
-        style={{ borderLeft: '4px solid #826CB0', paddingLeft: '1rem' }}
+        style={{ borderLeft: '4px solid #D65F00', paddingLeft: '1rem' }}
       >
         Featured Properties
       </Title>
     </div>
-    <Button 
-      type="text" 
-      style={{ 
-        color: '#826CB0',
-        border: '2px solid #826CB0',
-        borderRadius: '0.5rem',
-        padding: '0.5rem 1rem',
-        background: 'transparent',
-        transition: 'all 0.3s ease'
-      }}
-      className='flex items-center gap-2 hover:!bg-[#826CB0] hover:!text-white'
-    >
-      View All
-      <ArrowRightOutlined style={{ color: 'inherit' }} />
-    </Button>
+ 
   </div>
 
 
@@ -231,8 +217,8 @@ const LandList = () => {
       className={`  text-sm md:text-lg font-medium py-1  px-3   md:px-8 rounded-full transition-all duration-300 
         ${
           selectedLocation === name
-            ? "bg-[#4B2E83] text-white shadow-lg scale-105"
-            : "  bg-[#000000]    hover:text-xl text-[white]   "
+            ? "bg-[#D65F00] text-white shadow-lg scale-105"
+            : "  bg-[#36383D]    hover:text-xl text-[white]   "
         }`}
     >
       {name}

@@ -91,7 +91,7 @@ const Navbar = ({ data ,openLogin  }) => {
   
 
   return (
-    <nav ref={boxRef} className="fixed top-0 left-0 w-full z-50 bg-black py-2 px-6 md:px-2 flex justify-between items-center">
+    <nav ref={boxRef} className="fixed top-0 left-0 w-full z-50 bg-[#36383D] py-2 px-6 md:px-2 flex justify-between items-center">
     {/* Logo */}
     <div>
       <img 
@@ -119,7 +119,7 @@ const Navbar = ({ data ,openLogin  }) => {
             onClick={() => setActive(item.name)}
             className={`relative px-4 py-2 transition duration-300 ease-in-out rounded-2xl ${
               active === item.name
-                ? "bg-[#4B2E83] text-white shadow-lg"
+                ? "bg-[#D65F00] text-white shadow-lg"
                 : "text-white hover:bg-white/40"
             }`}
           >
@@ -135,7 +135,7 @@ const Navbar = ({ data ,openLogin  }) => {
      <Link
   ref={forthref}
   to="/login/agent"
-  className="hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#4B2E83]"
+  className="hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
   <span className="flex items-center  justify-center gap-2">
     
@@ -172,7 +172,7 @@ const Navbar = ({ data ,openLogin  }) => {
 
 
       }}
-    className="bg-[#4B2E83] hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2 border-[#4B2E83] transition-colors hover:bg-white hover:text-[#4B2E83]"
+    className="bg-[#D65F00] hidden sm:flex text-white px-6 py-2 rounded-lg font-medium border-2 border-[#D65F00] transition-colors hover:bg-white hover:text-[#D65F00]"
   >
     Log In
   </button>
@@ -187,12 +187,12 @@ const Navbar = ({ data ,openLogin  }) => {
   <Tooltip
     title={
       <div className="p-4 space-y-2 bg-white rounded-lg shadow-lg">
-        <li className="pb-2 text-[#4B2E83] list-none">
+        <li className="pb-2 text-[#D65F00] list-none">
           {data.user ? data.user.name : data.name}
         </li>
         <button
           onClick={handleLogout}
-          className="mt-2 bg-[#4B2E83] text-white px-4 py-2 rounded-lg w-full transition-colors hover:bg-red-600"
+          className="mt-2 bg-[#D65F00] text-white px-4 py-2 rounded-lg w-full transition-colors hover:bg-red-600"
         >
           Logout
         </button>
@@ -201,7 +201,7 @@ const Navbar = ({ data ,openLogin  }) => {
   >
     <button
       ref={thridref} // Attach ref here instead of inside Tooltip content
-      className="border-2 border-[#4B2E83] hidden sm:flex p-2 rounded-lg transition-colors hover:bg-[#4B2E83]"
+      className="border-2 border-[#D65F00] hidden sm:flex p-2 rounded-lg transition-colors hover:bg-[#D65F00]"
     >
       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
@@ -220,7 +220,7 @@ const Navbar = ({ data ,openLogin  }) => {
      <Link
   ref={forthref}
   to="/login/agent"
-  className="md:hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#4B2E83]"
+  className="md:hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
   <span className="flex items-center  justify-center gap-2">
     
@@ -245,7 +245,7 @@ const Navbar = ({ data ,openLogin  }) => {
       {/* Mobile Menu Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="md:hidden text-white transition-colors hover:text-[#4B2E83]"
+        className="md:hidden text-white transition-colors hover:text-[#D65F00]"
       >
         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
       </button>
@@ -290,7 +290,7 @@ const Navbar = ({ data ,openLogin  }) => {
 
 
           }}
-        className="w-full text-center py-2 text-white bg-[#4B2E83] hover:bg-[#3a2166] rounded-lg transition-colors"
+        className="w-full text-center py-2 text-white bg-[#D65F00] hover:bg-[#3a2166] rounded-lg transition-colors"
       >
         Log In
       </button>

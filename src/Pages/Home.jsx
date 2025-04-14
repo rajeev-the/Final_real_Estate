@@ -163,12 +163,12 @@ const Home = ({agent}) => {
         <div  ref={seoref} className="flex flex-col items-center px-4 py-8 bg-gradient-to-b from-white to-gray-50">
   {/* Premium Toggle Buttons (unchanged) */}
   <div className="flex flex-col items-center justify-center sm:mt-10 md:mb-14 relative">
-      <div className="bg-[#000000] dark:bg-[#000000] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
+      <div className="bg-[#36383D] dark:bg-[#36383D] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
         <button
           onClick={() => setActive("top-rated")}
           className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
             active === "top-rated"
-              ? "bg-[#4B2E83] text-white shadow-lg"
+              ? "bg-[#D65F00] text-white shadow-lg"
               : "text-white"
           }`}
         >
@@ -179,7 +179,7 @@ const Home = ({agent}) => {
           onClick={() => setActive("suggestions")}
           className={`w-1/2 py-3 text-sm md:text-xl font-medium transition-all duration-300 rounded-full ${
             active === "suggestions"
-              ? "bg-[#4B2E83] text-white shadow-lg"
+              ? "bg-[#D65F00] text-white shadow-lg"
               : " text-white "
           }`}
         >
@@ -240,8 +240,8 @@ const Home = ({agent}) => {
       className={`  text-sm md:text-lg font-medium py-1  px-3   md:px-8 rounded-full transition-all duration-300 
         ${
           selectedLocation === name
-            ? "bg-[#4B2E83] text-white shadow-lg scale-105"
-            : "  bg-[#000000]    hover:text-xl text-[white]   "
+            ? "bg-[#D65F00] text-white shadow-lg scale-105"
+            : "  bg-[#36383D]    hover:text-xl text-[white]   "
         }`}
     >
       {name}
