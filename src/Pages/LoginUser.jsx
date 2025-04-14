@@ -35,6 +35,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
       const res = await axios.get(
         `${url}users/search-by-phone/?phone=${encodeURIComponent(phone)}`
       );
+      console.log(res)
       console.log( phone.slice(2) , res.data.verificationId , otp)
       const res2 = await validateOtp(phone.slice(2) , res.data.verificationId , otp);
   
