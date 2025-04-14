@@ -13,6 +13,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
   const[cutomerid ,setCustomerid] = useState("")
   const [isDisabled, setIsDisabled] = useState(false);
   const [timer, setTimer] = useState(0);
+  const [verified , setverified] = useState("")
  
 
  
@@ -36,8 +37,8 @@ const LoginUser = ({setIsLogin , isOpen}) => {
         `${url}users/search-by-phone/?phone=${encodeURIComponent(phone)}`
       );
       console.log(res)
-      console.log( phone.slice(2) , res.data.verificationId , otp)
-      const res2 = await validateOtp(phone.slice(2) , res.data.verificationId , otp);
+      console.log( phone.slice(2) ,cutomerid , otp)
+      const res2 = await validateOtp(phone.slice(2) ,cutomerid , otp);
   
       if (res.status === 200 && res2.responseCode === 200 ) {
       
@@ -130,6 +131,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
           showSuccessToast("OTP sent!");
           setIsDisabled(true);
           setTimer(60);
+          
     
           const countdown = setInterval(() => {
             setTimer((prev) => {
