@@ -48,6 +48,14 @@ const SignupAgent = () => {
       if (file) {
         formData.append('img', file);
       }
+      const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
+
+      if(res2.responseCode !=200){
+        showErrorToast("Incorrect OTP")
+      }
+
+
+      
     
       try {
         const res = await axios.post(`${url}agent/`, formData, {
@@ -55,9 +63,9 @@ const SignupAgent = () => {
             'Content-Type': 'multipart/form-data',
           },
         });
-        const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
+       
     
-        if (res.status === 200 || res.status === 201 && res2.responseCode === 200 ) {
+        if (res.status === 200 || res.status === 201 &&  res2.responseCode === 200 ) {
           console.log("Registration successful");
           showSuccessToast("Agent is created")
           // Reset form states
@@ -70,7 +78,7 @@ const SignupAgent = () => {
           navigation("/agent");
         }
         else{
-          showErrorToast(res2.message || res.data.message);
+          showErrorToast( res.data.message);
         }
 
         localStorage.setItem("Agent", JSON.stringify(res.data));
@@ -109,19 +117,20 @@ const SignupAgent = () => {
       
 const validateOtp = async (phonei,verifi,ootp) => {
   try {
-    const response = await axios.post(`${url}/api/validate_otp/`, {
+    const response = await axios.post(`${url}api/validate_otp/`, {
       phone: phonei,
       verificationId: verifi, // from send-otp response
       code: ootp           // user-entered OTP
     });
-
+    return response.data;
    showSuccessToast('✅ OTP Verified:', response.message)
   } catch (error) {
     showErrorToast('❌ Verification failed:', error.response?.data || error.message);
   }
 };
  
-const sendverification = async () => {
+const sendverification = async (e) => {
+  e.preventDefault();
   try {
     const response = await axios.post(`${url}send-otp/`, {
       phone: phone.slice(2),
@@ -302,19 +311,14 @@ const sendverification = async () => {
         <div className="mt-4 text-center">
           <p className="text-gray-600">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 font-semibold hover:underline">
+            <Link to="/login/agent" className="text-blue-600 font-semibold hover:underline">
               Login
             </Link>
           </p>
         </div>
 
         {/* Security Assurance */}
-        <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-2">
-          <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-          </svg>
-          <span>Bank-level Security Encryption</span>
-        </div>
+      
       </form>
     </div>
   </div>

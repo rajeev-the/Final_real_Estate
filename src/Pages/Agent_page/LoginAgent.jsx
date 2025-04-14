@@ -72,15 +72,23 @@ const LoginAgent = () => {
 
     try {
         const res = await axios.get(`${url}agent/search-by-phone/?phone=${encodeURIComponent(phone)}`);
-        const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
+       
 
-        if (res.status === 200 && res2.responseCode ===  200) {
-            localStorage.setItem("Agent", JSON.stringify(res.data.agent));
+        const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
+      
+
+        if(res2.responseCode !=200){
+          showErrorToast(res2.message)
+          return;
+        }
+
+        if (res.status === 200  && res2.responseCode === 200 ) {
+            localStorage.setItem("Agent", JSON.stringify(res.data.agent))
             showSuccessToast("Successfully Logged In");
             navigation("/agent");
         }
         else{
-          showErrorToast(res2.message || res.data.message);
+          showErrorToast(res.data.message );
         }
     } catch (error) {
        
@@ -93,22 +101,20 @@ const LoginAgent = () => {
             } else {
                 showErrorToast(error.response.data?.error || "An unexpected error occurred.");
             }
-        } else {
-            showErrorToast("Something went wrong. Check your internet connection.");
         }
     }
 };
 const validateOtp = async (phonei,verifi,ootp) => {
   try {
-    const response = await axios.post(`${url}/api/validate_otp/`, {
+    const response = await axios.post(`${url}validate_otp/`, {
       phone: phonei,
       verificationId: verifi, // from send-otp response
       code: ootp           // user-entered OTP
     });
-
+    return response.data;
    showSuccessToast('✅ OTP Verified:', response.message)
   } catch (error) {
-    showErrorToast('❌ Verification failed:', error.response?.data || error.message);
+    showErrorToast('❌ Verification failed:',  error.message);
   }
 };
  
@@ -118,8 +124,10 @@ const sendverification = async () => {
       phone: phone.slice(2),
     });
 
-    if (response.responseCode === 200) {
+    if (response.data.responseCode === 200) {
       const verifed = response.data.data?.verificationId;
+      console.log(verifed)
+      console.log(response.data.data)
     
       setCustomerid(verifed);
 
@@ -139,6 +147,7 @@ const sendverification = async () => {
       }, 1000);
     } else {
       showErrorToast("Unexpected response", response.data);
+       console.log(response.data)
     }
   } catch (err) {
     console.error("OTP send error:", err);
@@ -233,6 +242,7 @@ const sendverification = async () => {
                 type="number"
                 placeholder="Enter 6-digit OTP"
                 className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                onChange={(e)=>setOtp(e.target.value)}
               />
             </div>
   

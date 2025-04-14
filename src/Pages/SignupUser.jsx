@@ -60,6 +60,8 @@ const sendverification = async () => {
 
     if (response.responseCode === 200) {
       const verifed = response.data.data?.verificationId;
+      console.log(verifed)
+      console.log(response.data.data)
     
       setCustomerid(verifed);
 

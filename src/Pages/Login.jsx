@@ -67,7 +67,7 @@ const Login = () => {
       {/* Enhanced buttons with hover effects */}
       <div className="space-y-4 sm:space-y-5 relative z-10">
         <Link 
-          to={"user"} 
+          to={"/"} 
           className="block w-full py-3 px-4 sm:py-3.5 sm:px-6 bg-[#826CB0] text-white rounded-xl text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:from-blue-700 hover:to-blue-800 active:scale-95"
         >
           <div className="flex items-center justify-center space-x-2">

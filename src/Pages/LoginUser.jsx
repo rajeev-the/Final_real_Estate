@@ -85,7 +85,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
       return response.data;
     } catch (error) {
       showErrorToast(
-        "❌ Verification failed: " + (error.response?.data?.message || error.message)
+        "❌ Verification failed: " + (error.response.data?.message || error.message)
       );
       return { responseCode: 400 }; // fallback error response
     }
