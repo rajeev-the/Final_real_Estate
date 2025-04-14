@@ -271,8 +271,7 @@ const Home = ({agent}) => {
 
 
     <Realcompo/>
-    <JointVentureStructuring/>
-  <AgentHome/>
+     <AgentHome/>
     <Reviewsection/>
 
         </div>
