@@ -205,7 +205,7 @@ const handleSuggestionClick = (suggestion) => {
               />
               <button 
                 onClick={handleFilterChange}
-                className="w-full sm:w-auto bg-[#D65F00] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base hover:bg-[#3A1F6B] transition-colors"
+                className="w-full sm:w-auto bg-gradient-to-r from-[#D65F00] to-[#FF8C42] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base hover:bg-[#3A1F6B] transition-colors"
               >
                 Search
               </button>
