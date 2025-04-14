@@ -71,17 +71,21 @@ const LoginUser = ({setIsLogin , isOpen}) => {
     }
   };
 
-  const validateOtp = async (phonei,verifi,ootp) => {
+  const validateOtp = async (phonei, verifi, ootp) => {
     try {
-      const response = await axios.post(`${url}/api/validate_otp/`, {
+      const response = await axios.post(`${url}validate_otp/`, {
         phone: phonei,
-        verificationId: verifi, // from send-otp response
-        code: ootp           // user-entered OTP
+        verificationId: verifi,
+        code: ootp,
       });
   
-     showSuccessToast('✅ OTP Verified:', response.message)
+      showSuccessToast("✅ OTP Verified");
+      return response.data;
     } catch (error) {
-      showErrorToast('❌ Verification failed:', error.response?.data || error.message);
+      showErrorToast(
+        "❌ Verification failed: " + (error.response?.data?.message || error.message)
+      );
+      return { responseCode: 400 }; // fallback error response
     }
   };
   
@@ -119,13 +123,12 @@ const LoginUser = ({setIsLogin , isOpen}) => {
           phone: phone.slice(2),
         });
     
-        if (response.responseCode === 200) {
-          setCustomerid(response.data.verificationId)
-
+        if (response.data.responseCode === 200) {
+          setCustomerid(response.data.verificationId);
           showSuccessToast("OTP sent!");
           setIsDisabled(true);
           setTimer(60);
-      
+    
           const countdown = setInterval(() => {
             setTimer((prev) => {
               if (prev <= 1) {
@@ -137,15 +140,13 @@ const LoginUser = ({setIsLogin , isOpen}) => {
             });
           }, 1000);
         } else {
-          showErrorToast("Unexpected response", response.data);
+          showErrorToast("Unexpected response: " + response.data.message);
         }
       } catch (err) {
         console.error("OTP send error:", err);
-        showErrorToast("Failed to send OTP", err.message);
+        showErrorToast("Failed to send OTP: " + err.message);
       }
     };
-    
-  
   return (
     <div className=" flex items-center justify-center bg-gray-100 relative">
       
