@@ -170,7 +170,7 @@ const LandList = () => {
       acre={f?.acre} 
       address={f?.address} 
       acre_price={f?.acre_price}  
-      img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
+      img={f?.img}  
     /> 
   </Link>
     ))}
@@ -254,7 +254,7 @@ const LandList = () => {
                   acre={property.acre} 
                   address={property.address} 
                   acre_price={property.acre_price}  
-                  img={"https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"}  
+                  img={property.img}  
                 /> 
               </Link>
           ))}
