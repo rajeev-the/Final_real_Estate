@@ -22,7 +22,7 @@ const LandCard = ({ acre, address, acre_price, img , Unit_of_land ,Money_unit })
 
 
 {/* Truncated address on small screens */}
-<h3 className="block h-7  text-md md:text-xl font-medium font-serif leading-tight">
+<h3 className="block h-4  text-sm md:text-xl font-medium font-serif leading-tight">
 {
     address.includes(" ")
       ? <>
