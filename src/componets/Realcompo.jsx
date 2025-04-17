@@ -52,6 +52,38 @@ const Realcompo = () => {
           
           )
         },
+        {
+          title: "Government Liaison & CLU Approvals",
+          description: "  Government Liaison & CLU Approvals Navigate zoning, CLU (Change of Land Use), and local authority approvals with ease.",
+          cta: "Explore Advisory",
+          icon: (
+            <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Shield Outline */}
+            <path
+              d="M12 2L4 5v6c0 5.55 3.84 10.74 8 11 4.16-.26 8-5.45 8-11V5l-8-3z"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Checkmark */}
+            <path
+              d="M9 13l2 2 4-4"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          
+          
+          )
+        },
       ];
     
   return (
