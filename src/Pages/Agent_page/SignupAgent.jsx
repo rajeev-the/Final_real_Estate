@@ -203,7 +203,14 @@ const sendverification = async (e) => {
         <div className="grid grid-cols-1 gap-4">
           {/* Name Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg></label>
             <input
               type="text"
               placeholder="Enter Name"
@@ -214,7 +221,14 @@ const sendverification = async (e) => {
 
           {/* Estate Name Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Company Name   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg></label>
             <input
               type="text"
               placeholder="Prime Properties"
@@ -226,7 +240,14 @@ const sendverification = async (e) => {
 
         {/* Phone Input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg></label>
           <div className="border rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
           <PhoneInput
   country="in"
@@ -280,7 +301,14 @@ const sendverification = async (e) => {
 
         {/* State Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">State   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg></label>
           <select value={state} onChange={(e)=>setState(e.target.value)} className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
             <option value="">Select your state</option>
             {['Haryana', 'Uttar pradesh', 'Delhi','Punjab'].map((state) => (

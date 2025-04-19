@@ -247,7 +247,14 @@ const sendverification = async () => {
               {
                    LoginIn ?      <div>
                    <div className="mb-6">
-                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg></label>
                      <div className="border rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
                        <PhoneInput
                          country={"in"}

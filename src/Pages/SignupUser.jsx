@@ -208,7 +208,8 @@ const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
         <div className="space-y-6">
           {/* Name Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name <svg
+            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name
+               <svg
     xmlns="http://www.w3.org/2000/svg"
     className="inline w-3 h-3 text-red-500 ml-1"
     fill="currentColor"
