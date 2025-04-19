@@ -1,13 +1,28 @@
 import React,{useState} from 'react'
 import { useFilterContext } from '../Context/FilterContext'
 import { useAppContext } from '../Context/Poperty_context'
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom'
 
 import { Listbox } from '@headlessui/react'
 
 
 const SerachFilter = ({searchcart}) => {
-   
+
+   const showSuccessToast = (data1) => {
+          toast.success(data1 , {
+            position: "top-right",
+            autoClose: 3000, // Closes after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        };
+
     const price = [
         { label: "Price Range", value: null },
         { label: "0-5 Cr", value: [0, 5] },
@@ -56,6 +71,7 @@ const {filterlist , setfilterlist } = useFilterContext()
 
 const dummyData =[
     "Haryana",
+    "New Delhi",
     "Delhi",
     "Punjab", 
     "Uttar pradesh",
@@ -162,6 +178,77 @@ const handleSuggestionClick = (suggestion) => {
   setsearchlist(suggestion);
   setSuggestions([]);
 };
+
+const getCurrentLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        const locationData = await getCityCountryFromCoords(latitude, longitude);
+        const { city, state } = locationData;
+
+        const match = dummyData.find(item =>
+          item.toLowerCase() === city?.toLowerCase() ||
+          item.toLowerCase() === state?.toLowerCase()
+        );
+
+
+        if (match) {
+          const filteredData = property.filter((item) =>
+            item.state.toLowerCase() === match.toLowerCase()
+          );
+
+          if (!setfilterlist) {
+            console.error('setfilterlist is undefined');
+            return;
+          }
+
+          setfilterlist(filteredData);
+          showSuccessToast(`Exploring Land in ${match}`);
+
+
+          setTimeout(() => {
+            navigate('search');
+          }, 0);
+        } else {
+          console.log("No match found in dummyData ❌");
+        }
+      },
+      (err) => {
+        console.log("Location access denied or unavailable.");
+      }
+    );
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+};
+
+const getCityCountryFromCoords = async (lat, lon) => {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+    );
+    const data = await response.json();
+
+    const cityName =
+      data.address.city ||
+      data.address.town ||
+      data.address.village ||
+      data.address.state;
+
+
+
+
+    return {
+      city: cityName,
+      state: data.address.state,
+    };
+  } catch (err) {
+    console.log("Failed to reverse geocode location.");
+    return {};
+  }
+};
+
 
   return (
     <>
@@ -395,7 +482,7 @@ const handleSuggestionClick = (suggestion) => {
           
 
         </div>
-        <button className="w-full mt-2 flex items-center justify-center gap-1 bg-gradient-to-r from-[#D65F00] to-[#FF8C42] text-white rounded-xl text-xs py-2 px-3 sm:hidden">
+        <button   onClick={getCurrentLocation} className="w-full mt-2 flex items-center justify-center gap-1 bg-gradient-to-r from-[#D65F00] to-[#FF8C42] text-white rounded-xl text-xs py-2 px-3 sm:hidden">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-4 w-4"

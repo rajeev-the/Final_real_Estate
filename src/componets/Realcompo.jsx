@@ -47,7 +47,7 @@ const Realcompo = () => {
           cta: "Explore Advisory",
           icon: (
             <svg  className="w-6 h-6 text-white"  fill="none" stroke="currentColor" viewBox="0 0 24 24 ">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6M9 16h6M9 8h6M4 6h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6M9 16h6M9 8h6M4 6h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
           </svg>
           
           )
