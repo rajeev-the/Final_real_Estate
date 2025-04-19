@@ -127,7 +127,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
     </div>
 
     <div className="flex flex-col items-end gap-2">
-    <p className="text-xl font-semibold text-white bg-[#D65F00] px-2 py-1 rounded inline-block mb-1">
+    <p className="text-xl font-semibold text-[#D65F00] px-2 py-1 rounded inline-block mb-1">
   ACRE GROUP
 </p>
 
@@ -175,7 +175,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
 
   {/* Property Layout Image */}
   {idData && (
-    <div  onClick={()=> window.open(data?.img, "_blank")} className="relative h-64 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
+    <div  onClick={()=> window.open(data?.img, "_blank")} className="relative h-120 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
       <img 
         src={data?.layout} 
         alt="Property Layout" 

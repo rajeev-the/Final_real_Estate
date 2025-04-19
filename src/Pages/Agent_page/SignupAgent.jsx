@@ -36,16 +36,14 @@ const SignupAgent = () => {
     
     const userpresent = async (phone1) => {
       try {
-        const res1 = await axios.get(
-          `${url}agent/search-by-phone/?phone=${phone1}`
-        );
-        return res1.data.exists; // Returns true if user exists
+        const res = await axios.get(`${url}agent/search-by-phone/?phone=${phone1}`);
+        return res.data.exists;
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-          return false; // User does not exist
+        if (error.response?.status === 404) {
+          return false;
         }
         console.error("Error checking user presence:", error);
-        return false; // Return false in case of other errors
+        return false;
       }
     };
 
@@ -74,7 +72,7 @@ const SignupAgent = () => {
 
       const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
 
-      if(res2.responseCode !=200){
+      if(res2.data.responseCode !=200){
         showErrorToast("Incorrect OTP")
       }
     
@@ -136,60 +134,83 @@ const SignupAgent = () => {
         });
       };
 
-      
-const validateOtp = async (phonei,verifi,ootp) => {
-  try {
-    const response = await axios.post(`${url}api/validate_otp/`, {
-      phone: phonei,
-      verificationId: verifi, // from send-otp response
-      code: ootp           // user-entered OTP
-    });
-    return response.data;
-   showSuccessToast('✅ OTP Verified:', response.message)
-  } catch (error) {
-    showErrorToast('❌ Verification failed:', error.response?.data || error.message);
-  }
-};
- 
+
+      const validateOtp = async (phonei, verifi, ootp) => {
+        try {
+          const response = await toast.promise(
+            axios.post(`${url}validate_otp/`, {
+              phone: phonei,
+              verificationId: verifi,
+              code: ootp,
+            }),
+            {
+              loading: "Verifying OTP...",
+              success: (res) => {
+                if (res.data.responseCode === 200) {
+                  return "✅ OTP Verified!";
+                } else {
+                  throw new Error(res.data.message || "OTP verification failed");
+                }
+              },
+              error: "❌ OTP Verification failed",
+            }
+          );
+          return response.data;
+        } catch (error) {
+          console.error("OTP verification error:", error);
+          return { responseCode: 400 };
+        }
+      };
+
 const sendverification = async (e) => {
   e.preventDefault();
 
-  if (await userpresent(phone)) {
-    showErrorToast("User already Exist")
-    return;
+  const userExists = await toast.promise(userpresent(phone), {
+    loading: "Checking user existence...",
+    success: (exists) => {
+      if (exists) throw new Error("User already exists!");
+      return "Phone is available. Sending OTP...";
+    },
+    error: "Error checking user",
+  });
 
-  }
+  if (userExists) return;
+
   try {
-    const response = await axios.post(`${url}send-otp/`, {
-      phone: phone.slice(2),
-    });
+    await toast.promise(
+      axios.post(`${url}send-otp/`, { phone: phone.slice(2) }),
+      {
+        loading: "Sending OTP...",
+        success: (res) => {
+          if (res.data.responseCode === 200) {
+            const verifed = res.data.data?.verificationId;
+            setCustomerid(verifed);
+            setIsDisabled(true);
+            setTimer(60);
 
-    if (response.responseCode === 200) {
-      const verifed = response.data.data?.verificationId;
-      setCustomerid(verifed);
-      showSuccessToast("OTP sent!");
-      setIsDisabled(true);
-      setTimer(60);
-  
-      const countdown = setInterval(() => {
-        setTimer((prev) => {
-          if (prev <= 1) {
-            clearInterval(countdown);
-            setIsDisabled(false);
-            return 0;
+            const countdown = setInterval(() => {
+              setTimer((prev) => {
+                if (prev <= 1) {
+                  clearInterval(countdown);
+                  setIsDisabled(false);
+                  return 0;
+                }
+                return prev - 1;
+              });
+            }, 1000);
+
+            return "✅ OTP Sent!";
+          } else {
+            throw new Error("Unexpected response from OTP API");
           }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      showErrorToast("Unexpected response", response.data);
-    }
-  } catch (err) {
-    console.error("OTP send error:", err);
-    showErrorToast("Failed to send OTP", err.message);
+        },
+        error: "❌ Failed to send OTP",
+      }
+    );
+  } catch (error) {
+    console.error("OTP send error:", error);
   }
 };
-
 
 
 

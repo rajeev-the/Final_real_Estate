@@ -56,7 +56,7 @@ const data = JSON.parse(localStorage.getItem("Agent"))
           </svg>
         </button>
       </div>
-      <div className=" md:flex">
+      <div className="  md:hidden  ">
        <Tooltip 
        
       title={

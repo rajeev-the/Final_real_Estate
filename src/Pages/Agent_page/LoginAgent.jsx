@@ -106,57 +106,68 @@ const LoginAgent = () => {
         }
     }
 };
-const validateOtp = async (phonei,verifi,ootp) => {
+
+
+const validateOtp = async (phonei, verifi, ootp) => {
   try {
-    const response = await axios.post(`${url}validate_otp/`, {
-      phone: phonei,
-      verificationId: verifi, // from send-otp response
-      code: ootp           // user-entered OTP
-    });
+    const response = await toast.promise(
+      axios.post(`${url}validate_otp/`, {
+        phone: phonei,
+        verificationId: verifi,
+        code: ootp,
+      }),
+      {
+        loading: "Verifying OTP...",
+        success: "✅ OTP Verified",
+        error: "❌ OTP verification failed",
+      }
+    );
+
     return response.data;
-   showSuccessToast('✅ OTP Verified:', response.message)
   } catch (error) {
-    showErrorToast('❌ Verification failed:',  error.message);
+    return { responseCode: 400 }; // fallback error object
   }
 };
- 
+
+
 const sendverification = async () => {
+  if (!phone || phone.trim() === "") {
+    showErrorToast("Please enter a valid phone number.");
+    return;
+  }
+
   try {
-    const response = await axios.post(`${url}send-otp/`, {
-      phone: phone.slice(2),
-    });
+    const response = await toast.promise(
+      axios.post(`${url}send-otp/`, {
+        phone: phone.slice(2),
+      }),
+      {
+        loading: "Sending OTP...",
+        success: "OTP sent successfully!",
+        error: "Failed to send OTP",
+      }
+    );
 
-    if (response.data.responseCode === 200) {
-      const verifed = response.data.data?.verificationId;
-      console.log(verifed)
-      console.log(response.data.data)
-    
-      setCustomerid(verifed);
+    const verificationId = response.data.data?.verificationId;
+    setCustomerid(verificationId);
+    setIsDisabled(true);
+    setTimer(60);
 
-      showSuccessToast("OTP sent!");
-      setIsDisabled(true);
-      setTimer(60);
-  
-      const countdown = setInterval(() => {
-        setTimer((prev) => {
-          if (prev <= 1) {
-            clearInterval(countdown);
-            setIsDisabled(false);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      showErrorToast("Unexpected response", response.data);
-       console.log(response.data)
-    }
+    const countdown = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(countdown);
+          setIsDisabled(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
   } catch (err) {
     console.error("OTP send error:", err);
-    showErrorToast("Failed to send OTP", err.message);
+    // error already handled by toast.promise
   }
 };
-
 
 
 
