@@ -11,7 +11,7 @@ const SerachPage = () => {
   return (
     <section className="container mx-auto px-4 mt-25">
       <h2 className="text-2xl font-semibold mb-4 text-[#1C2B2D]">
-        Search Results ({filterlist?.length || 0} properties found)
+        Search Results ({filterlist?.length || 0} Matches found)
       </h2>
   
       {!filterlist ? (

@@ -36,8 +36,8 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
       const res = await axios.get(
         `${url}users/search-by-phone/?phone=${encodeURIComponent(phone)}`
       );
-      if(!res.status === 200){
-        showSuccessToast("User Don't exist");
+      if(res.exists){
+        showErrorToast("User Don't exist");
         return;
       }
 

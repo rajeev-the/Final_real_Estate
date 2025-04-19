@@ -127,22 +127,27 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
     </div>
 
     <div className="flex flex-col items-end gap-2">
-      <p className="text-xl font-semibold text-white mb-1">ACRE GROUP</p>
+    <p className="text-xl font-semibold text-white bg-[#D65F00] px-2 py-1 rounded inline-block mb-1">
+  ACRE GROUP
+</p>
 
-      <div className="flex gap-4">
-        <button
-          onClick={handleWhatsappClick}
-          className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full flex items-center gap-2 transition-colors shadow-md"
-        >
-          <FaWhatsapp /> WhatsApp
-        </button>
-        <button
-          onClick={handleShareClick}
-          className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-colors shadow-md flex items-center gap-2"
-        >
-          <FaShareAlt /> Share
-        </button>
-      </div>
+
+      <div className="flex gap-3 flex-wrap">
+  <button
+    onClick={handleWhatsappClick}
+    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 text-xs sm:px-4 sm:py-2 sm:text-sm rounded-full flex items-center gap-1.5 transition-colors shadow-md"
+  >
+    <FaWhatsapp className="text-sm sm:text-base" /> WhatsApp
+  </button>
+
+  <button
+    onClick={handleShareClick}
+    className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 text-xs sm:px-4 sm:py-2 sm:text-sm rounded-full flex items-center gap-1.5 transition-colors shadow-md"
+  >
+    <FaShareAlt className="text-sm sm:text-base" /> Share
+  </button>
+</div>
+
     </div>
   </div>
 </div>
@@ -153,11 +158,11 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
   }`}
 >
   {/* Main Property Image */}
-  <div onClick={()=> window.open(data?.img, "_blank")}  className="relative h-64 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
+  <div onClick={()=> window.open(data?.img, "_blank")}  className="relative h-120 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
     <img 
       src={data?.img} 
       alt="Property" 
-      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+      className="w-full h-full     object-cover   transition-transform duration-300 group-hover:scale-105"
     />
     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
     

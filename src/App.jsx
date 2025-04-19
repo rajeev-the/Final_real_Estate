@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SerachPage from './Pages/SerachPage';
 
 import Careers from './Pages/Careers';
+import Terms from './componets/Terms';
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
               <Route path="land/:id" element={<ViewLand />} />
               <Route path="search" element={<SerachPage />} />
               <Route path="search/land/:id" element={<ViewLand />} />
+              <Route path='terms' element={<Terms/>}/>
              
               <Route path='Careers'  element={<Careers/>}/>
             </Route>

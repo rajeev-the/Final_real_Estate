@@ -16,7 +16,7 @@ const AboutUs = () => {
 
         {/* Text content */}
         <div className="space-y-6">
-          <h2 className="text-4xl sm:text-5xl font-bold text-[#4B2E83] leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#D65F00] leading-tight">
             About <span className="text-[#3A1F6B]">Landsathi</span>
           </h2>
 
@@ -26,25 +26,25 @@ const AboutUs = () => {
 
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
-              <FaSearchLocation className="text-[#4B2E83] text-xl mt-1" />
+              <FaSearchLocation className="text-[#D65F00] text-xl mt-1" />
               <span className="text-gray-800">
                 Verified listings backed by real market insights and location expertise.
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <MdVerified className="text-[#4B2E83] text-xl mt-1" />
+              <MdVerified className="text-[#D65F00] text-xl mt-1" />
               <span className="text-gray-800">
                 Trusted platform with a seamless process—from inquiry to acquisition.
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <FaMapMarkedAlt className="text-[#4B2E83] text-xl mt-1" />
+              <FaMapMarkedAlt className="text-[#D65F00] text-xl mt-1" />
               <span className="text-gray-800">
                 Access to CLU, free zone, agricultural, industrial, and warehouse lands.
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <FaHandshake className="text-[#4B2E83] text-xl mt-1" />
+              <FaHandshake className="text-[#D65F00] text-xl mt-1" />
               <span className="text-gray-800">
                 Built on transparency, trust, and decades of real estate experience.
               </span>

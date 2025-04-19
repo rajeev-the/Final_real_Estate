@@ -11,8 +11,9 @@ const Footer = () => {
     { icon: <FaLinkedin />, link: "#", name: "LinkedIn" },
   ];
   const footerLinks = [
-    { title: "COMPANY", links: ["AboutUs", "Careers", "ContactUs",  "Terms"] },
-    { title: "SOLUTIONS", links: ["landlist", "home", "agents", "ContactUs"] },
+    { title: "COMPANY", links: ["AboutUs" , "Careers",  "Terms"]  ,values:["AboutUs", "Careers", "terms"]},
+
+    { title: "SOLUTIONS", links: ["landlist", "Home", "Agents", "ContactUs"]  , values:["landlist", "home", "agents", "ContactUs"]} ,
    
   ];
 
@@ -38,7 +39,7 @@ const Footer = () => {
           </p>
           <div className="flex space-x-4">
             {socialIcons.map((social, i) => (
-              <a
+              <Link
                 key={i}
                 href={social.link}
                 className="p-2 rounded-full bg-[#1a1a1a] hover:bg-[#D65F00] transition-all duration-300 group"
@@ -46,7 +47,7 @@ const Footer = () => {
                 {React.cloneElement(social.icon, { 
                   className: "w-5 h-5 text-gray-400 group-hover:text-black" 
                 })}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -58,17 +59,17 @@ const Footer = () => {
               {section.title}
             </h3>
             <ul className="space-y-3">
-              {section.links.map((link, i) => (
-                <li key={i}>
-                  <Link
-                    to="#"
-                    className="text-gray-400 hover:text-[#D65F00] text-sm transition-all duration-300 flex items-center group"
-                  >
-                    <span className="w-2 h-px bg-[#D65F00] mr-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {link}
-                  </Link>
-                </li>
-              ))}
+            {section.links.map((link, i) => (
+  <li key={i}>
+    <Link
+      to={section.values ? section.values[i] : "#"}
+      className="text-gray-400 hover:text-[#D65F00] text-sm transition-all duration-300 flex items-center group"
+    >
+      <span className="w-2 h-px bg-[#D65F00] mr-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+      {link}
+    </Link>
+  </li>
+))}
             </ul>
           </div>
         ))}
