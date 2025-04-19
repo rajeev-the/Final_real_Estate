@@ -42,6 +42,10 @@ const ViewLand = () => {
     getAgent();
   }, [data]); // Runs only when data is set
 
+  const handleShareClick = async () => { const shareUrl = window.location.href ; const shareText =` ${data?.address} - ${data?.acre} ${data?.unit_of_land}, ₹${data?.acre_price} ${data?.money_unit} / ${data?.unit_of_land}`;
+
+if (navigator.share) { try { await navigator.share({ title: document.title, text: shareText, url: shareUrl, }); } catch (err) { console.error("Sharing failed:", err); } } else { try { await navigator.clipboard.writeText(shareUrl); toast.success("Link copied to clipboard!", { position: "top-right", autoClose: 2000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, theme: "colored", }); } catch (err) { toast.error("Failed to copy link."); } } };
+
  const showErrorToast = (message) => {
        toast.error(message, {
          position: "top-right",
@@ -126,7 +130,7 @@ const ViewLand = () => {
             >
               <FaWhatsapp   /> WhatsApp
             </button>
-            <button className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-colors shadow-md flex items-center gap-2">
+            <button onClick={handleShareClick} className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-colors shadow-md flex items-center gap-2">
               <FaShareAlt /> Share
             </button>
           </div>
@@ -234,46 +238,7 @@ const ViewLand = () => {
 
       </div>
 
-      {/* Location Button Section */}
-      {/* <div className="p-6 flex justify-center bg-gradient-to-b from-white to-gray-50/80">
-        <button 
-          onClick={() => window.open(data.locations_link, "_blank")} 
-          className="
-            bg-gradient-to-r from-blue-700 to-blue-600
-            hover:from-blue-800 hover:to-blue-700
-            text-white px-8 py-4
-            rounded-full
-            shadow-lg
-            hover:shadow-xl
-            transition-all
-            duration-300
-            transform
-            hover:scale-[1.02]
-            font-semibold
-            tracking-wide
-            text-lg
-            relative
-            overflow-hidden
-            group
-            flex items-center gap-3
-            border-2 border-blue-800/20
-          "
-        >
-          <div className="
-            absolute
-            inset-0
-            bg-gradient-to-r
-            from-white/10
-            to-transparent
-            -translate-x-full
-            group-hover:animate-shine
-          "></div>
-          
-          <FaMapMarkerAlt className="w-5 h-5 text-white/90" />
-          View Location
-          <FaChevronRight className="w-4 h-4 text-white/90 ml-1" />
-        </button>
-      </div> */}
+
 
 <div className="w-full flex flex-col items-center gap-4 py-4">
   {/* Label */}
