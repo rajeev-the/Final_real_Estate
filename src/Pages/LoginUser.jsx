@@ -36,6 +36,10 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
       const res = await axios.get(
         `${url}users/search-by-phone/?phone=${encodeURIComponent(phone)}`
       );
+      if(!res.status === 200){
+        showSuccessToast("User Don't exist");
+        return;
+      }
 
       const res2 = await validateOtp(phone.slice(2) ,cutomerid , otp);
   
@@ -74,6 +78,10 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
   };
 
   const validateOtp = async (phonei, verifi, ootp) => {
+    if(!res.status === 200){
+      showSuccessToast("User Don't exist");
+      return;
+    }
     try {
       const response = await axios.post(`${url}validate_otp/`, {
         phone: phonei,

@@ -79,8 +79,8 @@ const LoginAgent = () => {
         const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
       
 
-        if(res2.responseCode !=200){
-          showErrorToast(res2.message)
+        if(res.status !=200){
+          showErrorToast("Signup User Not Exist")
           return;
         }
 
