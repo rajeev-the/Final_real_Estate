@@ -144,7 +144,7 @@ const Home = ({agent}) => {
 
 
 
-<video ref={resvideo} className="w-full h-full object-cover"  src={xxxp}
+<video  loading="lazy"  ref={resvideo} className="w-full h-full object-cover"  src={xxxp}
  autoPlay 
  loop 
  muted 
