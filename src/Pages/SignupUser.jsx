@@ -3,6 +3,8 @@ import { Link ,useNavigate } from 'react-router-dom'
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from 'axios';
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupUser = ({setIsLogin , isOpen , isLogin}) => {
     const [name, setName] = useState("");
@@ -53,6 +55,10 @@ const validateOtp = async (phonei, verifi, ootp) => {
 };
 
 const sendverification = async () => {
+  if (await userpresent(phone)) {
+    showErrorToast("User already Exist")
+    return;
+  }
   try {
     const response = await axios.post(`${url}send-otp/`, {
       phone: phone.slice(2),
@@ -89,11 +95,38 @@ const sendverification = async () => {
   }
 };
 
+  const showSuccessToast = (data) => {
+    toast.success(data , {
+      position: "top-right",
+      autoClose: 3000, // Closes after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+      const showErrorToast = (message) => {
+          toast.error(message, {
+            position: "top-right",
+            autoClose: 3000, // Closes after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        };
+  
+  
+
 const handleVerifyOTP =async () => {
   // Implement OTP verification and registration
  
   if (await userpresent(phone)) {
-    console.log("User already exists");
+    showErrorToast("User already Exist")
     return;
   }
   

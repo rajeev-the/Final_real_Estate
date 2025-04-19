@@ -33,6 +33,22 @@ const SignupAgent = () => {
         }
     }
 
+    
+    const userpresent = async (phone1) => {
+      try {
+        const res1 = await axios.get(
+          `${url}agent/search-by-phone/?phone=${phone1}`
+        );
+        return res1.data.exists; // Returns true if user exists
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          return false; // User does not exist
+        }
+        console.error("Error checking user presence:", error);
+        return false; // Return false in case of other errors
+      }
+    };
+
     const handleSign = async (e) => {
       e.preventDefault();
     
@@ -47,15 +63,21 @@ const SignupAgent = () => {
       
       if (file) {
         formData.append('img', file);
+
       }
+      if (await userpresent(phone)) {
+        showErrorToast("User already Exist")
+        return;
+
+      }
+
+
       const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
 
       if(res2.responseCode !=200){
         showErrorToast("Incorrect OTP")
       }
-
-
-      
+    
     
       try {
         const res = await axios.post(`${url}agent/`, formData, {
@@ -131,6 +153,12 @@ const validateOtp = async (phonei,verifi,ootp) => {
  
 const sendverification = async (e) => {
   e.preventDefault();
+
+  if (await userpresent(phone)) {
+    showErrorToast("User already Exist")
+    return;
+
+  }
   try {
     const response = await axios.post(`${url}send-otp/`, {
       phone: phone.slice(2),
