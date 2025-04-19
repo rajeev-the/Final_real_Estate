@@ -194,7 +194,7 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
         
         {/* Phone Input */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Numbe   <svg
+          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number <svg
     xmlns="http://www.w3.org/2000/svg"
     className="inline w-3 h-3 text-red-500 ml-1"
     fill="currentColor"
