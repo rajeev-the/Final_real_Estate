@@ -30,7 +30,7 @@ const Footer = () => {
             <img 
               src={logoimg} 
               alt="EstatePrime" 
-              className="h-30 w-50 rounded-lg   border-2  border-[#D65F00] p-3 "
+              className="h-30 w-40 rounded-lg    p-3 "
             />
           </div>
           <p className="text-sm leading-relaxed text-gray-400">

@@ -22,15 +22,15 @@ const AgentHome = () => {
           {/* Stats */}
           <div className="flex flex-wrap gap-8 mb-8">
             <div>
-              <p className="text-2xl font-bold text-gray-900">10L+</p>
+              <p className="text-2xl font-bold text-gray-900">2k+</p>
               <p className="text-sm text-gray-600">Land Listings</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">45L+</p>
+              <p className="text-2xl font-bold text-gray-900">50k+</p>
               <p className="text-sm text-gray-600">Monthly Searches</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">2L+</p>
+              <p className="text-2xl font-bold text-gray-900">100+</p>
               <p className="text-sm text-gray-600">Owners advertise monthly</p>
             </div>
           </div>
@@ -55,7 +55,7 @@ const AgentHome = () => {
               WhatsApp
             </span>
             , send a “hi” to{" "}
-            <span className="font-semibold text-gray-900">+91 7428197035</span>
+            <span className="font-semibold text-gray-900">+91 9625744005</span>
           </p>
         </div>
 

@@ -124,7 +124,7 @@ const Home = ({agent}) => {
 
 
 
-  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh",];
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh", "Rajasthan"];
  
 
   return (

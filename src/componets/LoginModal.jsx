@@ -22,7 +22,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       </button>
   
       {/* Form Content */}
-      {isLogin ? <LoginUser isOpen={onClose} setIsLogin={setIsLogin} /> : <SignupUser  isOpen={onClose} setIsLogin={setIsLogin} />}
+      {isLogin ? <LoginUser isOpen={onClose} isLogin={isLogin} setIsLogin={setIsLogin} /> : <SignupUser  isLogin={isLogin} isOpen={onClose} setIsLogin={setIsLogin} />}
     </div>
   </div>
   

@@ -166,23 +166,7 @@ const sendverification = async (e) => {
 
 
   return (
-<div className="min-h-screen flex items-center justify-center bg-gray-100 relative ">
-  {/* Background with buildings overlay */}
-  <div className="absolute inset-0 bg-black/50 z-0">
-    <img 
-      src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-      alt="City Background"
-      className="w-full h-full object-cover blur-sm"
-    />
-  </div>
-
-  {/* Auth Container - Wider version */}
-  <div className="relative z-10 bg-white mt-2 mb-3 rounded-2xl shadow-2xl overflow-hidden max-w-xl w-full mx-4 sm:mx-6 md:mx-8">
-    {/* Form Header */}
-    <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center">
-      <h1 className="text-3xl font-bold text-white mb-2">Agent Registration</h1>
-      <p className="text-white/90">Create Your Professional Account</p>
-    </div>
+<>
 
     {/* Form Content */}
     <div className="p-6 sm:p-8">
@@ -202,7 +186,7 @@ const sendverification = async (e) => {
 
           {/* Estate Name Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Estate Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
             <input
               type="text"
               placeholder="Prime Properties"
@@ -230,7 +214,7 @@ const sendverification = async (e) => {
 
         {/* Image Upload */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Profile Image</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Profile Image (Optional)</label>
           <div className="flex items-center justify-center w-full">
          
             <label className="flex flex-col w-full border-2 border-dashed rounded-lg hover:border-gray-400 transition-colors">
@@ -321,8 +305,8 @@ const sendverification = async (e) => {
       
       </form>
     </div>
-  </div>
-</div>
+    </>   
+ 
   )
 }
 

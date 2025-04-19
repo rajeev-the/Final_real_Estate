@@ -10,7 +10,7 @@ const LandCard = ({ acre, address, acre_price, img , Unit_of_land ,Money_unit })
         <img 
           src={img}
           alt="Land Plot" 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full  object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C2B2D]/10 to-[#1C2B2D]/30" />
       </div>

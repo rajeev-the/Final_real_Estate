@@ -7,7 +7,7 @@ import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-const LoginUser = ({setIsLogin , isOpen}) => {
+const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const[cutomerid ,setCustomerid] = useState("")
@@ -165,11 +165,45 @@ const LoginUser = ({setIsLogin , isOpen}) => {
 
       {/* Form Content */}
       <div className="">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Login In</h2>
+     
+      <div className="flex flex-col items-center justify-center relative">
+  <div className="bg-[#36383D] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
+    <button
+      onClick={() => setIsLogin(true)}
+      className={`w-1/2 py-3 text-sm md:text-xl font-bold transition-all duration-300 rounded-full ${
+        isLogin
+          ? "bg-[#D65F00] text-white shadow-lg"
+          : "text-white"
+      }`}
+    >
+      Login
+    </button>
+
+    <button
+      onClick={() => setIsLogin(false)}
+      className={`w-1/2 py-3 text-sm md:text-xl font-bold transition-all duration-300 rounded-full ${
+        !isLogin
+          ? "bg-[#D65F00] text-white shadow-lg"
+          : "text-white"
+      }`}
+    >
+      Sign Up
+    </button>
+  </div>
+</div>
         
         {/* Phone Input */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Numbe   <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg> 
+  
+  </label>
           <div className="border rounded-lg focus-within:border-coral-500 focus-within:ring-1 focus-within:ring-coral-500 transition-colors">
             <PhoneInput
               country={"in"}
@@ -187,7 +221,7 @@ const LoginUser = ({setIsLogin , isOpen}) => {
 
         {/* OTP Input */}
         <div className="mb-8">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code </label>
           <input
             type="number"
             placeholder="Enter 6-digit OTP"

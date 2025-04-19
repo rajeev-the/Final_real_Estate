@@ -4,10 +4,10 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from 'axios';
 
-const SignupUser = ({setIsLogin , isOpen}) => {
+const SignupUser = ({setIsLogin , isOpen , isLogin}) => {
     const [name, setName] = useState("");
 const [phone, setPhone] = useState("");
-const [email,setemail] = useState("")
+
 const [otp, setOtp] = useState("");
   const[cutomerid ,setCustomerid] = useState("")
     const [isDisabled, setIsDisabled] = useState(false);
@@ -103,7 +103,7 @@ try {
 let formData = new FormData();
 formData.append("name", name);
 formData.append("phone", phone);
-formData.append("email",email);
+
 
 const res = await axios.post(`${url}users/`, formData);
 const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
@@ -143,11 +143,46 @@ const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
     
       {/* Form Content */}
       <div className="">
-      <h1 className="text-3xl font-bold text-black mb-2">User Signup</h1>
+
+
+      <div className="flex flex-col items-center justify-center relative">
+  <div className="bg-[#36383D] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
+    <button
+      onClick={() => setIsLogin(true)}
+      className={`w-1/2 py-3 text-sm md:text-xl font-bold transition-all duration-300 rounded-full ${
+        isLogin
+          ? "bg-[#D65F00] text-white shadow-lg"
+          : "text-white"
+      }`}
+    >
+      Login
+    </button>
+
+    <button
+      onClick={() => setIsLogin(false)}
+      className={`w-1/2 py-3 text-sm md:text-xl font-bold transition-all duration-300 rounded-full ${
+        !isLogin
+          ? "bg-[#D65F00] text-white shadow-lg"
+          : "text-white"
+      }`}
+    >
+      Sign Up
+    </button>
+  </div>
+</div>
+
+
         <div className="space-y-6">
           {/* Name Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg> </label>
             <input
               type="text"
               placeholder="Enter your full name"
@@ -157,20 +192,18 @@ const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email ID</label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors"
-              value={name}
-              onChange={(e) => setemail(e.target.value)}
-            />
-          </div>
+          
   
           {/* Phone Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg> </label>
             <div className="border rounded-lg focus-within:border-teal-500 focus-within:ring-1 focus-within:ring-teal-500 transition-colors">
               <PhoneInput
                 country={"in"}

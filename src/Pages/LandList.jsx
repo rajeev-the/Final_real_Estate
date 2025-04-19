@@ -206,7 +206,7 @@ const LandList = () => {
   <section 
   
   
-  className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
 
   <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6">
   {locations.map((name, index) => (
@@ -242,23 +242,26 @@ const LandList = () => {
             <span className='ml-3 text-[#826CB0] text-lg'>✧</span>
           </Title>
         </div>
-        
-        <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6  gap-1.5 '>
-          {groupedProperties[stateId].map(property => (
-                <Link 
-                to={`/Land/${property.id}`} 
-                key={property.id}
-                className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
-              >  
-                <LandCard 
-                  acre={property.acre} 
-                  address={property.address} 
-                  acre_price={property.acre_price}  
-                  img={property.img}  
-                /> 
-              </Link>
-          ))}
-        </div>
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full max-w-screen-2xl mx-auto px-4">
+  {groupedProperties[stateId].map(property => (
+    <Link 
+      to={`/Land/${property.id}`} 
+      key={property.id}
+      className="w-full min-w-0 hover:scale-[99%] transition-transform"  
+    >  
+      <LandCard 
+        acre={property.acre} 
+        address={property.address} 
+        acre_price={property.acre_price}  
+        img={property.img}  
+        className="w-full h-full"
+      /> 
+    </Link>
+  ))}
+</div>
+
+
+
         
         <div className='mt-8 md:mt-12 border-t border-slate-100 group-last:border-0'></div>
       </div>

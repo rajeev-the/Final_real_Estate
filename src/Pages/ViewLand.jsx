@@ -115,27 +115,37 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
       style={{ fontFamily: "Krub, sans-serif" }}
       className="max-w-6xl mt-[100px] mx-auto bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
     >
-      {/* Header Section */}
-      <div className="bg-[#1C2B2D] p-6">
-        <h1 className="text-2xl font-bold text-white mb-2">{data.address}</h1>
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xl font-semibold text-white">{data.acre} {data.unit_of_land}</p>
-            <p className="text-md text-purple-200">₹{data.acre_price}  {data.money_unit} / {data.unit_of_land}</p>
-          </div>
-          <div className="flex gap-4">
-            <button
-           onClick={handleWhatsappClick}
-              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full flex items-center gap-2 transition-colors shadow-md"
-            >
-              <FaWhatsapp   /> WhatsApp
-            </button>
-            <button onClick={handleShareClick} className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-colors shadow-md flex items-center gap-2">
-              <FaShareAlt /> Share
-            </button>
-          </div>
-        </div>
+    <div className="bg-[#1C2B2D] p-6">
+  <h1 className="text-2xl font-bold text-white mb-2">{data.address}</h1>
+
+  <div className="flex items-center justify-between">
+    <div>
+      <p className="text-xl font-semibold text-white">{data.acre} {data.unit_of_land}</p>
+      <p className="text-md text-purple-200">
+        ₹{data.acre_price} {data.money_unit} / {data.unit_of_land}
+      </p>
+    </div>
+
+    <div className="flex flex-col items-end gap-2">
+      <p className="text-xl font-semibold text-white mb-1">ACRE GROUP</p>
+
+      <div className="flex gap-4">
+        <button
+          onClick={handleWhatsappClick}
+          className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full flex items-center gap-2 transition-colors shadow-md"
+        >
+          <FaWhatsapp /> WhatsApp
+        </button>
+        <button
+          onClick={handleShareClick}
+          className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-colors shadow-md flex items-center gap-2"
+        >
+          <FaShareAlt /> Share
+        </button>
       </div>
+    </div>
+  </div>
+</div>
 
       <div
   className={`grid gap-4 p-6 bg-gray-50 ${
@@ -150,7 +160,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-      <span className="text-white font-medium">Main Property Image</span>
+    
     </div>
     {/* Hover overlay */}
     <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

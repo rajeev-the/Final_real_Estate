@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import axios from 'axios';
 import { useNavigate ,Link } from 'react-router-dom';
+import SignupAgent from './SignupAgent';
 const faqData = [
   {
     question: "What are advantages of taking owner subscription?",
@@ -48,6 +49,7 @@ const faqData = [
 const LoginAgent = () => {
   const [phone, setPhone] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const [LoginIn ,setLoginIn] = useState(true)
   const [timer, setTimer] = useState(0);
   const [otp, setOtp] = useState("");
   const [otpcheck, setOtpCheck] = useState(true);
@@ -215,72 +217,106 @@ const sendverification = async () => {
         {/* Right Side */}
         <div className="flex justify-center">
           <div className="relative z-10 bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 sm:p-8">
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">Phone Authentication</h2>
-  
-            {/* Phone Input */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-              <div className="border rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
-                <PhoneInput
-                  country={"in"}
-                  value={phone}
-                  onChange={(e) => setPhone(e)}
-                  inputClass="!border-0 !ring-0 !w-full !py-3 !px-4"
-                  containerClass="!w-full"
-                  dropdownClass="!z-20"
-                />
-              </div>
-            </div>
-  
-            {/* reCAPTCHA */}
-            <div className="mb-6" id="recaptcha-container"></div>
-  
-            {/* OTP Input */}
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code</label>
-              <input
-                type="number"
-                placeholder="Enter 6-digit OTP"
-                className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                onChange={(e)=>setOtp(e.target.value)}
-              />
-            </div>
-  
-            {/* Buttons */}
-            <div  className="space-y-4">
-            <button
-      onClick={sendverification}
-      disabled={isDisabled}
-      className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 
-      hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg 
-      font-semibold transition-all flex items-center justify-center gap-2
-      ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+
+          <div className="flex flex-col items-center justify-center mb-2
+ relative">
+  <div className="bg-[#36383D] p-1 mb-3 rounded-full flex items-center w-[220px] md:w-[300px] lg:w-[320px]">
+    <button
+      onClick={() => setLoginIn(true)}
+      className={`w-1/2 py-3 text-sm md:text-xl font-bold transition-all duration-300 rounded-full ${
+        LoginIn
+          ? "bg-[#D65F00] text-white shadow-lg"
+          : "text-white"
+      }`}
     >
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-      </svg>
-      {isDisabled ? `Wait ${timer}s` : "Send OTP"}
+      Login
     </button>
-  
-              <button
-                onClick={handleSubmit}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Verify OTP
-              </button>
-            </div>
-  
-            <div className="mt-4 text-center">
-              <p className="text-gray-600">
-                Don't have an account?{" "}
-                <Link to="/signup/agent" className="text-blue-600 font-semibold hover:underline">
-                  Sign Up
-                </Link>
-              </p>
-            </div>
+
+    <button
+      onClick={() => setLoginIn(false)}
+      className={`w-1/2 py-3 text-sm md:text-xl font-bold transition-all duration-300 rounded-full ${
+        !LoginIn
+          ? "bg-[#D65F00] text-white shadow-lg"
+          : "text-white"
+      }`}
+    >
+      Sign Up
+    </button>
+  </div>
+</div>
+              {
+                   LoginIn ?      <div>
+                   <div className="mb-6">
+                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                     <div className="border rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
+                       <PhoneInput
+                         country={"in"}
+                         value={phone}
+                         onChange={(e) => setPhone(e)}
+                         inputClass="!border-0 !ring-0 !w-full !py-3 !px-4"
+                         containerClass="!w-full"
+                         dropdownClass="!z-20"
+                       />
+                     </div>
+                   </div>
+         
+                   {/* reCAPTCHA */}
+                   <div className="mb-6" id="recaptcha-container"></div>
+         
+                   {/* OTP Input */}
+                   <div className="mb-8">
+                     <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code</label>
+                     <input
+                       type="number"
+                       placeholder="Enter 6-digit OTP"
+                       className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                       onChange={(e)=>setOtp(e.target.value)}
+                     />
+                   </div>
+         
+                   {/* Buttons */}
+                   <div  className="space-y-4">
+                   <button
+             onClick={sendverification}
+             disabled={isDisabled}
+             className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 
+             hover:from-blue-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg 
+             font-semibold transition-all flex items-center justify-center gap-2
+             ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+           >
+             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+             </svg>
+             {isDisabled ? `Wait ${timer}s` : "Send OTP"}
+           </button>
+         
+                     <button
+                       onClick={handleSubmit}
+                       className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                     >
+                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                       </svg>
+                       Verify OTP
+                     </button>
+                   </div>
+         
+                   <div className="mt-4 text-center">
+                     <p className="text-gray-600">
+                       Don't have an account?{" "}
+                       <Link to="/signup/agent" className="text-blue-600 font-semibold hover:underline">
+                         Sign Up
+                       </Link>
+                     </p>
+                   </div>
+       
+                   </div> :<SignupAgent/>
+
+
+              }
+
+
+
   
             <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-2">
               <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
