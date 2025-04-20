@@ -228,9 +228,9 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
           </div>
 
           <div className="space-y-4">
-            
-            
-            <DetailItem label="CLU Eligible" value={data.eligible_for_clu ? 'Yes' : 'No'} />
+          <DetailItem label="CLU Eligible" value={data.eligible_for_clu ? 'Yes' : 'No'} />
+          <DetailItem label="Distance from MSIL" value={`${data.Distance_from_MSIL ?`${ data.Distance_from_MSIL}Km` : " "  } `} />
+          <DetailItem label="Frontage" value={`${data.Frontage ?`${ data.Frontage}Km` : " "  } `} />
           </div>
         </div>
 
