@@ -30,7 +30,7 @@ const Reviewsection = () => {
   return (
     <section className="py-16 px-4 sm:px-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-bold text-[#1C2B2D] text-center mb-12">
+        <h2  className="sm:text-4xl text-2xl  font-bold text-center text-[#1C2B2D] mb-12"  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>
           What Our Users Say
         </h2>
 

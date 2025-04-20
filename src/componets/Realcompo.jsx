@@ -89,8 +89,8 @@ const Realcompo = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-black mb-4 tracking-tight">
-           <span className="text-[#1C2B2D]">Our Services</span> 
+        <h2 className="sm:text-4xl text-2xl  font-bold text-center text-[#1C2B2D] "  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>
+           Our Services
         </h2>
         
       </div>

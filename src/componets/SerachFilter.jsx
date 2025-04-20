@@ -3,77 +3,72 @@ import { useFilterContext } from '../Context/FilterContext'
 import { useAppContext } from '../Context/Poperty_context'
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,Link } from 'react-router-dom'
 
 import { Listbox } from '@headlessui/react'
 
 
+
 const SerachFilter = ({searchcart}) => {
 
-   const showSuccessToast = (data1) => {
-          toast.success(data1 , {
-            position: "top-right",
-            autoClose: 3000, // Closes after 3 seconds
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        };
-
-    const price = [
-        { label: "Price Range", value: null },
-        { label: "0-5 Cr", value: [0, 5] },
-        { label: "5-7 Cr", value: [5, 7] },
-        { label: "7-12 Cr", value: [7, 12] },
-        { label: "12+ Cr", value: [12, null] },
-      ];
-      
-   const { property } = useAppContext();
-   const navigate = useNavigate()
-
-
-
-const Zone = [
-    { label: "Zone Area", value: null },
-    { label: "Orange", value:"Orange" },
-    { label: "blue", value:"blue" },
-    { label: "green", value:"green" },
-   
+  const showSuccessToast = (data1) => {
+    toast.success(data1, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+  
+  const price = [
+    { label: "Price Range", value: null },
+    { label: "0-5 Cr", value: [0, 5] },
+    { label: "5-7 Cr", value: [5, 7] },
+    { label: "7-12 Cr", value: [7, 12] },
+    { label: "12+ Cr", value: [12, null] },
   ];
-
+  
+  const { property } = useAppContext();
+  const navigate = useNavigate();
+  
+  const Zone = [
+    { label: "Zone Area", value: null },
+    { label: "Orange", value: "Orange" },
+    { label: "blue", value: "blue" },
+    { label: "green", value: "green" },
+  ];
+  
   const propertyTypes = [
     { label: "Land Type", value: null },
-    { label: "Residential", value:"Residential" },
-    { label: "Industrial", value:"Industrial" },
-    { label: "Agricultural", value:"Agricultural" },
-    { label: "Institutional", value:"Institutional" },
-   
+    { label: "Residential", value: "Residential" },
+    { label: "Industrial", value: "Industrial" },
+    { label: "Agricultural", value: "Agricultural" },
+    { label: "Institutional", value: "Institutional" },
   ];
-
-const [selected, setSelected] = useState(propertyTypes[0])
-const [selected2, setSelected2] = useState(price[0]);
-
-const [selected3, setSelected3] = useState(Zone[0])
-const [searchlist, setsearchlist] = useState('');
-const [suggestions, setSuggestions] = useState([]);
-const buydata =[
-    {label:"Buy", value:"sale"},
-    {label:"Lenses", value:"lease"},
-]
-
-const [buyorlesese, setbuyorlesese] = useState(buydata[0])
-const {filterlist , setfilterlist } = useFilterContext()
-
-
-
-const dummyData =[
+  
+  const [selected, setSelected] = useState(propertyTypes[0]);
+  const [selected2, setSelected2] = useState(price[0]);
+  const [selected3, setSelected3] = useState(Zone[0]);
+  const [searchlist, setsearchlist] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  
+  const buydata = [
+    { label: "Buy", value: "sale" },
+    { label: "Lenses", value: "lease" },
+  ];
+  
+  const [buyorlesese, setbuyorlesese] = useState(buydata[0]);
+  const { filterlist, setfilterlist } = useFilterContext();
+  
+  const dummyData = [
     "Haryana",
     "New Delhi",
     "Delhi",
-    "Punjab", 
+    "Punjab",
     "Uttar pradesh",
     "Gurgaon",
     "Faridabad",
@@ -84,171 +79,157 @@ const dummyData =[
     "Panipat",
     "Ambala",
     "Kurukshetra",
-]
-
-const getfilterdata = (land_category, acre_price, zone, state,sale_or_lease) => {
-  // Check if land_category exists and selected has a value
-  const matchLandCategory = 
-    !selected?.value || 
-    (land_category && land_category.toLowerCase() === selected.value.toLowerCase());
-
-  // Check if zone exists and selected3 has a value
-  const matchZone =
-    !selected3?.value || 
-    (zone && zone.toLowerCase() === selected3.value.toLowerCase());
-
-  // Check if acre_price exists and selected2 has value array
-  const matchPrice =
-    !selected2?.value || (
-      acre_price !== undefined &&
-      acre_price >= selected2.value[0] &&
-      (selected2.value[1] === null || acre_price <= selected2.value[1])
+    "Sisana"
+  ];
+  
+  const getfilterdata = (land_category, acre_price, zone, address, sale_or_lease) => {
+    const matchLandCategory =
+      !selected?.value ||
+      (land_category && land_category.toLowerCase() === selected.value.toLowerCase());
+  
+    const matchZone =
+      !selected3?.value ||
+      (zone && zone.toLowerCase() === selected3.value.toLowerCase());
+  
+    const matchPrice =
+      !selected2?.value || (
+        acre_price !== undefined &&
+        acre_price >= selected2.value[0] &&
+        (selected2.value[1] === null || acre_price <= selected2.value[1])
+      );
+  
+    const matchAddress = !searchlist || (
+      address && address.toLowerCase().split(" ").some(word =>
+        word.includes(searchlist.toLowerCase())
+      )
     );
-
-  // Check if state exists and searchlist has value
-  const matchState =
-    !searchlist || 
-    (state && state.toLowerCase().includes(searchlist.toLowerCase()));
-
+  
     const matchBuyorlease =
-    !buyorlesese?.value ||sale_or_lease && sale_or_lease.toLowerCase().includes(buyorlesese.value.toLowerCase())
-
-  return matchLandCategory && matchZone && matchPrice && matchState && matchBuyorlease;
-};
+      !buyorlesese?.value ||
+      (sale_or_lease && sale_or_lease.toLowerCase().includes(buyorlesese.value.toLowerCase()));
   
-
-const handleFilterChange = () => {
-
-    setfilterlist([])
-
-  try {
-    if (!property || !Array.isArray(property)) {
-      console.error('Property data is invalid:', property);
-      return;
-    }
-
-    const filteredData = property.filter((item) =>
-      getfilterdata(item.land_category, item.acre_price, item.zone, item.state, item.sale_or_lease)
-    );
-
-    if (!setfilterlist) {
-      console.error('setfilterlist is undefined');
-      return;
-    }
-
-    // Set the filtered data
-    setfilterlist(filteredData);
+    return matchLandCategory && matchZone && matchPrice && matchAddress && matchBuyorlease;
+  };
   
-    
-    // Navigate after state is updated
-    setTimeout(() => {
-      navigate('search');
-    }, 0);
-
-    // Reset filters
-    setsearchlist('');
-    setSuggestions([]);
-    setSelected(propertyTypes[0]);
-    setSelected2(price[0]);
-    setSelected3(Zone[0]);
-    setbuyorlesese(buydata[0]);
-  } catch (error) {
-    console.error('Error in handleFilterChange:', error);
-  }
-};
+  const handleFilterChange = () => {
+    setfilterlist([]);
   
-
-
-
-const handleInputChange = (e) => {
-  const input = e.target.value;
-  setsearchlist(input);
-
-  if (input.length > 0) {
-    const filtered = dummyData.filter((item) =>
-      item.toLowerCase().includes(input.toLowerCase())
-    );
-    setSuggestions(filtered);
-  } else {
-    setSuggestions([]);
-  }
-};
-
-const handleSuggestionClick = (suggestion) => {
-  setsearchlist(suggestion);
-  setSuggestions([]);
-};
-
-const getCurrentLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-        const locationData = await getCityCountryFromCoords(latitude, longitude);
-        const { city, state } = locationData;
-
-        const match = dummyData.find(item =>
-          item.toLowerCase() === city?.toLowerCase() ||
-          item.toLowerCase() === state?.toLowerCase()
-        );
-
-
-        if (match) {
-          const filteredData = property.filter((item) =>
-            item.state.toLowerCase() === match.toLowerCase()
-          );
-
-          if (!setfilterlist) {
-            console.error('setfilterlist is undefined');
-            return;
-          }
-
-          setfilterlist(filteredData);
-          showSuccessToast(`Exploring Land in ${match}`);
-
-
-          setTimeout(() => {
-            navigate('search');
-          }, 0);
-        } else {
-          console.log("No match found in dummyData ❌");
-        }
-      },
-      (err) => {
-        console.log("Location access denied or unavailable.");
+    try {
+      if (!property || !Array.isArray(property)) {
+        console.error('Property data is invalid:', property);
+        return;
       }
-    );
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
-};
-
-const getCityCountryFromCoords = async (lat, lon) => {
-  try {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-    );
-    const data = await response.json();
-
-    const cityName =
-      data.address.city ||
-      data.address.town ||
-      data.address.village ||
-      data.address.state;
-
-
-
-
-    return {
-      city: cityName,
-      state: data.address.state,
-    };
-  } catch (err) {
-    console.log("Failed to reverse geocode location.");
-    return {};
-  }
-};
-
+  
+      const filteredData = property.filter((item) =>
+        getfilterdata(item.land_category, item.acre_price, item.zone, item.address, item.sale_or_lease)
+      );
+  
+      if (!setfilterlist) {
+        console.error('setfilterlist is undefined');
+        return;
+      }
+  
+      setfilterlist(filteredData);
+  
+      setTimeout(() => {
+        navigate('search');
+      }, 0);
+  
+      setsearchlist('');
+      setSuggestions([]);
+      setSelected(propertyTypes[0]);
+      setSelected2(price[0]);
+      setSelected3(Zone[0]);
+      setbuyorlesese(buydata[0]);
+    } catch (error) {
+      console.error('Error in handleFilterChange:', error);
+    }
+  };
+  
+  const handleInputChange = (e) => {
+    const input = e.target.value;
+    setsearchlist(input);
+  
+    if (input.length > 0) {
+      const filtered = dummyData.filter((item) =>
+        item.toLowerCase().includes(input.toLowerCase())
+      );
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  };
+  
+  const handleSuggestionClick = (suggestion) => {
+    setsearchlist(suggestion);
+    setSuggestions([]);
+  };
+  
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          const locationData = await getCityCountryFromCoords(latitude, longitude);
+          const { city, state } = locationData;
+  
+          const match = dummyData.find(item =>
+            item.toLowerCase() === city?.toLowerCase() ||
+            item.toLowerCase() === state?.toLowerCase()
+          );
+  
+          if (match) {
+            const filteredData = property.filter((item) =>
+              item.address.toLowerCase().includes(match.toLowerCase())
+            );
+  
+            if (!setfilterlist) {
+              console.error('setfilterlist is undefined');
+              return;
+            }
+  
+            setfilterlist(filteredData);
+            showSuccessToast(`Exploring Land in ${match}`);
+  
+            setTimeout(() => {
+              navigate('search');
+            }, 0);
+          } else {
+            console.log("No match found in dummyData ❌");
+          }
+        },
+        (err) => {
+          console.log("Location access denied or unavailable.");
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
+  
+  const getCityCountryFromCoords = async (lat, lon) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+      );
+      const data = await response.json();
+  
+      const cityName =
+        data.address.city ||
+        data.address.town ||
+        data.address.village ||
+        data.address.state;
+  
+      return {
+        city: cityName,
+        state: data.address.state,
+      };
+    } catch (err) {
+      console.log("Failed to reverse geocode location.");
+      return {};
+    }
+  };
+  
 
   return (
     <>
@@ -272,9 +253,9 @@ const getCityCountryFromCoords = async (lat, lon) => {
             {tab}
           </button>
         ))}
-        <button className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors duration-200 bg-white/80 text-gray-800 hover:bg-white shadow-sm">
+        <Link  to={'/agents'}   className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors duration-200 bg-white/80 text-gray-800 hover:bg-white shadow-sm">
           Agent
-        </button>
+        </Link>
       </div>
 
       {/* Main Search Card - Adjusted padding and layout for mobile */}

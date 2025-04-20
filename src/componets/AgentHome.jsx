@@ -1,4 +1,5 @@
 import React from 'react'
+import hoom from "../assets/hooom.jpg"
 
 const AgentHome = () => {
   return (
@@ -62,7 +63,7 @@ const AgentHome = () => {
         {/* Right Image */}
         <div className="rounded-xl overflow-hidden shadow-lg">
           <img
-            src="https://img.freepik.com/free-photo/young-couple-talking-their-insurance-agent-while-having-consultations-office_637285-849.jpg?t=st=1743933722~exp=1743937322~hmac=a39f12c096b99746ca5a3dc77cc2acb0607274f4cd891a1796221f8213e5801a&w=1380" // Replace with your own image URL if needed
+            src={hoom}
             alt="Couple looking at laptop"
             className="w-full h-full object-cover"
           />

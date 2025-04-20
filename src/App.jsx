@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import { FilterProvider } from './Context/FilterContext';
 import "react-toastify/dist/ReactToastify.css";
 import SerachPage from './Pages/SerachPage';
+import ScrollToTop from './componets/ScrollToTop';
 
 import Careers from './Pages/Careers';
 import Terms from './componets/Terms';
@@ -32,6 +33,7 @@ const App = () => {
       <ToastContainer position="top-right" autoClose={3000} />
       <AppProvider>
         <FilterProvider>
+        <ScrollToTop />
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* Home routes */}
@@ -43,7 +45,12 @@ const App = () => {
               <Route path="AboutUs" element={<AboutUs />} />
               <Route path="landagent/:id" element={<LandAgent />} />
               <Route path="agents/:state" element={<StateAgenet />} />
-              <Route path="land/:id" element={<ViewLand />} />
+
+              
+          
+              <Route path="land/:id" element={   <ViewLand /> } /> 
+
+             
               <Route path="search" element={<SerachPage />} />
               <Route path="search/land/:id" element={<ViewLand />} />
               <Route path='terms' element={<Terms/>}/>

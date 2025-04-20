@@ -149,7 +149,7 @@ const LandList = () => {
         className='text-2xl md:text-3xl font-serif !text-slate-800 !font-medium'
         style={{ borderLeft: '4px solid #D65F00', paddingLeft: '1rem' }}
       >
-        Featured Properties
+        Featured Listing
       </Title>
     </div>
  
@@ -178,37 +178,13 @@ const LandList = () => {
   </div>
 </div>
 
-{/* Premium Search Filter */}
-<section id='topage' className="mx-auto max-w-4xl px-4 mb-16">
-  <div className="relative group">
-    <Input
-      placeholder="Search luxury properties..."
-      prefix={<SearchOutlined className="text-slate-400 !text-lg" />}
-      suffix={
-        <Button
-          type="primary"
-          shape="circle"
-          icon={<FilterOutlined className="!text-white" />}
-          className="!bg-amber-600 !border-none !shadow-lg hover:!bg-amber-700"
-        />
-      }
-      className="h-14 !pl-12 !pr-24 !rounded-2xl !border !border-slate-200 focus:!border-amber-500 hover:!border-amber-400 !text-lg"
-    />
-    <span className="absolute right-28 top-1/2 -translate-y-1/2 text-slate-400">
-      Press <kbd className="ml-1 px-2 py-1 bg-slate-100 rounded">⌘</kbd> + <kbd className="px-2 py-1 bg-slate-100 rounded">K</kbd>
-    </span>
-  </div>
-</section>
-
-{/* State Listings Section - Preserved as requested */}
-
-  {/* ... existing state listings content ... */}
+  
   <section 
   
   
-  className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
+  className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300  '>
 
-  <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6">
+  <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6 sm:p-5">
   {locations.map((name, index) => (
     <button
    

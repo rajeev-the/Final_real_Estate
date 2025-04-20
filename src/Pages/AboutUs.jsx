@@ -1,6 +1,8 @@
 import React from 'react'
 import { FaLandmark, FaHandshake, FaSearchLocation, FaMapMarkedAlt } from 'react-icons/fa';
 import { MdVerified } from 'react-icons/md';
+import employees from "../assets/emplyo.jpg";
+
 const AboutUs = () => {
   return (
     <section className="bg-gradient-to-br mt-[80px] from-[#f8f8ff] to-white py-16 px-6 sm:px-12 md:px-20">
@@ -8,7 +10,7 @@ const AboutUs = () => {
         {/* Image section */}
         <div className="relative">
           <img
-            src="https://img.freepik.com/free-photo/businesspeople-office-meeting_23-2148908967.jpg?t=st=1743928942~exp=1743932542~hmac=bc7cd3dde7d44743d573da3990453b4a8491bc74540257d6340ed58addb55dbb&w=1380"
+            src={employees}
             alt="Land representation"
             className="rounded-3xl shadow-xl object-cover h-full w-full"
           />
@@ -17,11 +19,19 @@ const AboutUs = () => {
         {/* Text content */}
         <div className="space-y-6">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#D65F00] leading-tight">
-            About <span className="text-[#3A1F6B]">Landsathi</span>
+            About landsathi.com 
           </h2>
 
           <p className="text-gray-700 text-base sm:text-lg">
-            At <strong>Landsathi</strong>, we believe that land is not just a piece of property—it’s the foundation of opportunity. Born out of a vision to simplify and streamline land transactions, Landsathi is your trusted partner in discovering, evaluating, and acquiring land parcels across Haryana and beyond.
+            At <strong>Landsathi</strong> is your trusted partner in navigating India’s diverse and dynamic land landscape. From industrial zones to logistics hubs, agri-based holdings to infrastructure-ready parcels, we specialize in connecting you with the right land—strategically, transparently, and efficiently.
+
+India’s land market is vast and often complex. At Landsathi, we simplify the process. With a deep understanding of regional regulations, market trends, and local dynamics, we help businesses, investors, and developers identify and acquire land that aligns with their goals. Whether you're seeking expansion, setting up a manufacturing unit, developing a township, or exploring long-term investments, Landsathi ensures you're never alone in your land journey.
+
+Our network spans across key growth corridors, upcoming development zones, and emerging hotspots across the country. Backed by verified listings, professional due diligence, and personalized support, we aim to bring credibility and confidence to every transaction.
+
+At Landsathi, it’s more than just a deal—it’s a partnership built on trust, insight, and long-term value. Join hands with us and let’s build the future, one parcel at a time.
+
+Landsathi – Har Zameen Ka Saathi.
           </p>
 
           <ul className="space-y-3">
