@@ -52,9 +52,7 @@ const LandCard = ({ acre, address, acre_price, img , Unit_of_land ,Money_unit })
           <div className="text-center">
             <p className="text-xs text-[#1C2B2D]/80 mb-1">Price/{Unit_of_land ?Unit_of_land :"Acre" }</p>
             <div className="flex items-center justify-center gap-1">
-              <svg className="w-4 h-4 text-[#1C2B2D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+              
               <span className="text-black text-base md:text-lg font-medium">₹{acre_price}{Money_unit ? Money_unit.slice(0, 2) : "Cr"  } </span>
             </div>
           </div>

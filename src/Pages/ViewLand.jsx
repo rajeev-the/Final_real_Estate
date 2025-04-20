@@ -248,7 +248,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
     </div>
   </div>
   <div className="mt-4">
-    <h4 className="text-md font-medium text-gray-700 mb-2">Property Details</h4>
+    <h4 className="text-md font-medium text-gray-700 mb-2">Other Details</h4>
     <p className="text-gray-600">{data.details || "No additional details provided"}</p>
   </div>
 </div>
