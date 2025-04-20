@@ -127,9 +127,12 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
     </div>
 
     <div className="flex flex-col items-end gap-2">
-    <p className="text-xl font-semibold text-[#D65F00] px-2 py-1 rounded inline-block mb-1">
+  
+
+    <p className="uppercase text-sm font-semibold text-white px-5 py-1.5 rounded-full inline-block mb-1 bg-white/10 backdrop-blur-md border border-orange-400 shadow-inner shadow-orange-500/20 tracking-widest hover:scale-105 transition-transform duration-300">
   ACRE GROUP
 </p>
+
 
 
       <div className="flex gap-3 flex-wrap">
