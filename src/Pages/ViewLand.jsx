@@ -200,7 +200,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-semibold text-gray-800">Exclusive Details</h2>
-            <p className="text-purple-600 font-medium">•{data.acre_price}{data.money_unit} • {data.acre} {data.unit_of_land}</p>
+            <p className="text-purple-600 font-medium">•{data.acre_price}{data.money_unit}/Acre  </p>
           </div>
           <div className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
             {data.available ? 'Available' : 'Sold'}
