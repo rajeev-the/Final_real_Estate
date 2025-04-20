@@ -1,10 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
 const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,state,clickurl }) => {
+   const showErrorToast = (message) => {
+          toast.error(message, {
+            position: "top-right",
+            autoClose: 3000, // Closes after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        };
+  
   
   const value = name.charAt(0)
   const url = "https://finalbackend111.pythonanywhere.com/api/"
@@ -17,40 +32,38 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
 
   // const whatsappLink = `https://wa.me/${9310650163}`
 
-  const onsubmitWhatsapp = async() => {
-
-    const jsondata = {
-      "phone_User": userdata.User.phone_number,
-      "User_name": userdata.User.name,
-      "Agent_name":name,
-     "phone_Agent":phone_number,
-
-    
-  }
-
-  try{
-
-    const res = await axios.post(`${url}add-to-sheet/`,jsondata)
+  const onsubmitWhatsapp = async () => {
+    const userdata = JSON.parse(localStorage.getItem("User"));
   
-
-  }
-  catch(err){
-    console.log(err)
-  }
-
-
-  window.open(whatsappLink, "_blank");
-
-
-}
-
+    if (!userdata || !userdata.User) {
+      showErrorToast("Sign In To Continue Chatting");
+      return;
+    }
+  
+    const jsondata = {
+      phone_User: userdata.User.phone_number,
+      User_name: userdata.User.name,
+      Agent_name: name,
+      phone_Agent: phone_number,
+    };
+  
+    try {
+      const res = await axios.post(`${url}add-to-sheet/`, jsondata);
+      // Optional: handle res
+    } catch (err) {
+      console.log(err);
+    }
+  
+    window.open(whatsappLink, "_blank");
+  };
+  
   
 
   return (
     <div className="bg-white shadow-lg rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-start items-center space-y-4 sm:space-y-0 sm:space-x-5 w-full max-w-xl transition-all  duration-300 hover:shadow-xl hover:scale-[1.02] transform origin-center">
     {/* Profile Image */}
     <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-purple-600 to-blue-500 flex justify-center  items-center  rounded-2xl text-2xl sm:text-3xl text-white font-bold ring-4 ring-white ring-opacity-30 shadow-md">
-     {img ?  <img className='w-full h-full object-cover  rounded-2xl' src={img} alt="" /> : value } 
+       <img className='w-full h-full object-cover  rounded-2xl' src={`https://ui-avatars.com/api/?name=${estate_name}&background=random`} alt="" /> 
     </div>
     
     {/* Agent Details */}

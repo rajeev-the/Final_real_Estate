@@ -5,7 +5,7 @@ import { Link ,useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Spin } from 'antd';
+
 
 
 const SignupAgent = () => {
@@ -218,7 +218,7 @@ const sendverification = async (e) => {
 <>
 
     {/* Form Content */}
-    <div className="p-6 sm:p-8">
+    <div className="">
       <form className="space-y-4">
         {/* Grid for Name and Estate Name */}
         <div className="grid grid-cols-1 gap-4">

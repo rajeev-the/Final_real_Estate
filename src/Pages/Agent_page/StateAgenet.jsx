@@ -17,10 +17,11 @@ const StateAgenet = () => {
         try {
           const res =await axios.get(`${url}agent/`)
           if(res.status ==200){
-          setvalue(res.data?.filter((p)=>p.state ==  state))
+          setvalue(res.data?.filter((p)=>p.state ===  state))
 
           }
-          console.log(res.data[9].state)
+          
+         
           
         } catch (error) {
           console.log(error)
@@ -58,13 +59,6 @@ const StateAgenet = () => {
       
       </div>
 
-
-      {/* Call to Action */}
-      <div className='mt-10 text-center'>
-        <button className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105'>
-          View All Agents
-        </button>
-      </div>
     </div>
   </div>
  

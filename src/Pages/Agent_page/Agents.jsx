@@ -10,9 +10,9 @@ import main from "../../assets/pppp.jpg"
 const Agents = () => {
     const data = [
         { image: img1, text: "Haryana" },
-        { image: img3, text: "Gurugram" },
-        { image: img2, text: "Noida" },
-        { image: img4, text: "Ghaziabad" },
+        { image: img3, text: "Uttar Pradesh" },
+        { image: img2, text: "Punjab" },
+        { image: img4, text: "Delhi" },
       ];
   return (
     <div className='w-full min-h-screen md:h-[890px] mt-16 md:mt-[60px] p-4 sm:p-5 rounded-xl md:rounded-2xl relative overflow-hidden'>
