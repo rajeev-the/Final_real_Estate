@@ -142,7 +142,7 @@ const sendverification = async () => {
         phone: phone.slice(2),
       }),
       {
-        loading: "Sending OTP...",
+        pending: "Sending OTP...",
         success: "OTP sent successfully!",
         error: "Failed to send OTP",
       }
@@ -286,7 +286,7 @@ const sendverification = async () => {
                      <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code</label>
                      <input
                        type="number"
-                       placeholder="Enter 6-digit OTP"
+                       placeholder="Enter 4-digit OTP"
                        className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                        onChange={(e)=>setOtp(e.target.value)}
                      />

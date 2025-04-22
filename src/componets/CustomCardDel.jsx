@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Typography , Tooltip  } from "antd"; // Import Ant Design Components
-import { DeleteOutlined } from "@ant-design/icons"; // Import delete icon
+
+import { CheckCircleTwoTone, ExclamationCircleTwoTone, DeleteOutlined } from '@ant-design/icons';
 import axios from "axios";
 import {  toast } from "react-toastify";
 
@@ -10,11 +11,13 @@ const CustomCardDel = ({
   property_name,
   acre,
   acre_price,
-  item
+  item,
+  available
 
 }) => {
 
   const url = "https://finalbackend111.pythonanywhere.com/api/"
+  console.log(available)
 
     const handledelete = async(id) => {
 
@@ -137,6 +140,21 @@ const CustomCardDel = ({
       >
         💰 {acre_price || 222} Cr/ Acre (Approx.)
       </Text>
+     
+{/* Verification Status */}
+<div style={{ display: "flex", alignItems: "center", marginTop: "8px" }}>
+  {available ? (
+    <>
+      <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: "16px", marginRight: "6px" }} />
+      <Text style={{ fontSize: "13px", color: "#52c41a", fontWeight: 500 }}>Verified</Text>
+    </>
+  ) : (
+    <>
+      <ExclamationCircleTwoTone twoToneColor="#faad14" style={{ fontSize: "16px", marginRight: "6px" }} />
+      <Text style={{ fontSize: "13px", color: "#faad14", fontWeight: 500 }}>Not Verified</Text>
+    </>
+  )}
+</div>
     </Card>
   );
 };

@@ -71,7 +71,7 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-bold text-lg sm:text-xl text-gray-800">{name}</h2>
         <span className="text-xs font-medium bg-gray-100 text-blue-800 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full mt-1 sm:mt-0">
-          Top Agent
+        Top Partners
         </span>
       </div>
       
@@ -86,12 +86,7 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
         <div className="bg-gray-50 text-gray-700 text-sm px-3 py-1.5 rounded-lg border border-gray-100 flex items-center w-fit">
           🌐 {language[0]} {language[1]  ?  "":  language[1]  }
         </div>
-        <div className="text-gray-600 text-sm flex items-center">
-          <svg className="w-4 h-4 mr-1.5 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M3 4a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V4zm12 12V5H5v11h10zm-4-8h2v2h-2V8zm0 4h2v2h-2v-2zm-4-4h2v2H7V8zm0 4h2v2H7v-2z"/>
-          </svg>
-          71 Listings <span className="text-blue-600 hover:text-blue-800 ml-1.5 cursor-pointer transition-colors block sm:inline">View All →</span>
-        </div>
+  
       </div>
 
       {/* Rating and Action */}

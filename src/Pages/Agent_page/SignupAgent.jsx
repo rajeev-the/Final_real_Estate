@@ -20,6 +20,11 @@ const SignupAgent = () => {
        const[cutomerid ,setCustomerid] = useState("")
        const [isDisabled, setIsDisabled] = useState(false);
        const [timer, setTimer] = useState(0);
+       
+
+        const [selectedRole, setSelectedRole] = useState('Agent'); // Default to 'Agent'
+      
+   
       
       const navigation = useNavigate()
       const url = "https://finalbackend111.pythonanywhere.com/api/"
@@ -32,78 +37,132 @@ const SignupAgent = () => {
           setSelectedLanguages(selectedLanguages.filter((l) => l !== lang)); // Remove if unchecked
         }
     }
+    const handleRoleChange = (role) => {
+      
+      setSelectedRole(role);
+    };
 
     
     const userpresent = async (phone1) => {
       try {
-        const res = await axios.get(`${url}agent/search-by-phone/?phone=${phone1}`);
-        return res.data.exists;
-      } catch (error) {
-        if (error.response?.status === 404) {
-          return false;
+        const response = await axios.get(`${url}agent/search-by-phone/?phone=${phone1}`);
+        
+        if (response.data.exists) {
+          return {
+            exists: true,
+            data: response.data.user, // User data if exists
+          };
+        } else {
+          return {
+            exists: false, // User doesn't exist
+            data: null,
+          };
         }
-        console.error("Error checking user presence:", error);
-        return false;
+      } catch (error) {
+        console.error("Error checking user:", error);
+        return {
+          exists: false,
+          data: null,
+        };
       }
     };
-
-    const handleSign = async (e) => {
+   
+    const dataadding = async (e) => {
       e.preventDefault();
     
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('estate_name', estate);
-      formData.append('phone_number', phone);
-      formData.append('language', JSON.stringify(selectedLanguages));
-      formData.append('state', state ); // Assuming state is a string from dropdown
-      formData.append('verifications', false); // Default to false as per model
-      formData.append('rating', 0.5); // Send as string to match FloatField
-     
-
-      if (await userpresent(phone)) {
-        showErrorToast("User already Exist")
-        return;
-
-      }
-
-
-      const res2 = await validateOtp(phone.slice(2),cutomerid,otp)
-
-      if(res2.data.responseCode !=200){
-        showErrorToast("Incorrect OTP")
-      }
-    
-    
       try {
-        const res = await axios.post(`${url}agent/`, formData, {
-          "headers": {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-       
+        const payload = {
+          name,
+          estate_name: estate,
+          email: null, // or just remove this line to let it default to None
+          phone_number: phone,
+          language: selectedLanguages, // must be array
+          verifications: false,
+          rating: 0.5,
+          state,
+          role:selectedRole
+        };
     
-        if (res.status === 200 || res.status === 201 &&  res2.responseCode === 200 ) {
-          console.log("Registration successful");
-          showSuccessToast("Agent is created")
-          // Reset form states
-          setName("");
-          setEstate("");
-          setPhone("");
-          setOtp("");
-         
-          setSelectedLanguages([]);
-          navigation("/agent");
+      
+        const res = await axios.post(`${url}agent/`, payload);
+    
+        if (res.status === 201 || res.status === 200) {
+          localStorage.setItem("Agent", JSON.stringify(res.data));
+          showSuccessToast("Agent created successfully!");
+        } else {
+          showErrorToast("Agent creation failed. Please try again.");
         }
-        else{
-          showErrorToast( res.data.message);
-        }
-
-        localStorage.setItem("Agent", JSON.stringify(res.data));
+    
+        return res.data;
       } catch (error) {
-        console.error("Error Response:", error.response?.data || error);
-        showErrorToast(error.response?.data)
+      
+        showErrorToast("Something went wrong while adding user.");
+        throw error;
       }
     };
+    
+
+
+    const handleSign = async (e) => {
+      e.preventDefault()
+      if (!name || !phone || !otp) {
+        showErrorToast("All fields are required");
+        return;
+      }
+    
+      const { exists } = await userpresent(phone);
+    
+      if (exists) {
+        showErrorToast("User already exists");
+        return;
+      }
+    
+      try {
+        // Await OTP validation here
+        const validateOTP = axios.post(`${url}validate_otp/`, {
+          phone: phone.slice(2),
+          verificationId: cutomerid,
+          code: otp,
+        });
+    
+        await toast.promise(
+          validateOTP,
+          {
+            pending: "Verifying OTP...",
+            success: "✅ OTP Verified!",
+            error: {
+              render({ data }) {
+                const errorMsg = data?.response?.data?.message || data.message;
+                if (errorMsg === "WRONG_OTP_PROVIDED") {
+                  return "❌ Incorrect OTP. Please try again.";
+                }
+                return `❌ Verification failed: ${errorMsg}`;
+              },
+            }
+          },
+          {
+            position: "top-right",
+            autoClose: 3000,
+            theme: "colored",
+          }
+        );
+    
+        // ✅ Call dataadding after successful OTP verification
+         await dataadding();
+    
+         navigation("/agent");
+    
+        setPhone("");
+        setOtp("");
+        setCustomerid("");
+      } catch (err) {
+        console.error("OTP Verification Error:", err);
+        showErrorToast("OTP verification failed. Please try again.");
+      }
+    };
+
+
+
 
      const showSuccessToast = (data1) => {
         toast.success(data1 , {
@@ -160,53 +219,67 @@ const SignupAgent = () => {
       };
 
 const sendverification = async (e) => {
-  e.preventDefault();
+  e.preventDefault()
+  const userExists =  await userpresent(phone);
+  console.log(userExists)
 
-  const userExists = await toast.promise(userpresent(phone), {
-    loading: "Checking user existence...",
-    success: (exists) => {
-      if (exists) throw new Error("User already exists!");
-      return "Phone is available. Sending OTP...";
-    },
-    error: "Error checking user",
-  });
+    if (userExists.exists) {
+      showErrorToast("User is Already Exit");
+      return;
+    }
 
-  if (userExists) return;
-
-  try {
-    await toast.promise(
-      axios.post(`${url}send-otp/`, { phone: phone.slice(2) }),
+    const sendOTP = axios.post(`${url}send-otp/`, {
+      phone: phone.slice(2),
+    });
+  
+    toast.promise(
+      sendOTP,
       {
-        loading: "Sending OTP...",
-        success: (res) => {
-          if (res.data.responseCode === 200) {
-            const verifed = res.data.data?.verificationId;
-            setCustomerid(verifed);
-            setIsDisabled(true);
-            setTimer(60);
-
-            const countdown = setInterval(() => {
-              setTimer((prev) => {
-                if (prev <= 1) {
-                  clearInterval(countdown);
-                  setIsDisabled(false);
-                  return 0;
-                }
-                return prev - 1;
-              });
-            }, 1000);
-
-            return "✅ OTP Sent!";
-          } else {
-            throw new Error("Unexpected response from OTP API");
-          }
+        pending: "Sending OTP...",
+        success: {
+          render({ data }) {
+            const verificationId = data.data?.data?.verificationId;
+            console.log(verificationId)
+            setCustomerid(verificationId);
+            startTimer();
+            return "OTP sent successfully!";
+          },
         },
-        error: "❌ Failed to send OTP",
+        error: {
+          render({ data }) {
+            return `Failed to send OTP: ${data.response?.data?.message || data.message}`;
+          },
+        },
+      },
+      {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
       }
     );
-  } catch (error) {
-    console.error("OTP send error:", error);
-  }
+  
+    try {
+      const response = await sendOTP;
+      return response;
+    } catch (error) {
+      console.error("OTP Send Error:", error);
+    }
+};
+
+
+const startTimer = () => {
+  setIsDisabled(true);
+  setTimer(60);
+  const countdown = setInterval(() => {
+    setTimer((prev) => {
+      if (prev <= 1) {
+        clearInterval(countdown);
+        setIsDisabled(false);
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
 };
 
 
@@ -216,9 +289,44 @@ const sendverification = async (e) => {
 
     {/* Form Content */}
     <div className="">
+    <div className="flex my-3 items-center gap-4">
+      <span>You are: <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="inline w-3 h-3 text-red-500 ml-1"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
+  </svg></span>
+      
+      {/* Owner Button */}
+      <button
+        onClick={() => handleRoleChange('Owner')}
+        className={`sm:px-6  sm:py-2  px-4 py-1 rounded-full border-2 transition-all duration-300 
+          ${selectedRole === 'Owner' 
+            ? 'bg-black text-white border-black' 
+            : 'bg-white text-black border-gray-300 hover:bg-gray-100'} 
+          font-medium`}
+      >
+        Owner
+      </button>
+
+      {/* Agent Button */}
+      <button
+        onClick={() => handleRoleChange('Agent')}
+        className={`sm:px-6  sm:py-2  px-4 py-1 rounded-full border-2 transition-all duration-300 
+          ${selectedRole === 'Agent' 
+            ? 'bg-black text-white border-black' 
+            : 'bg-white text-black border-gray-300 hover:bg-gray-100'} 
+          font-medium`}
+      >
+        Agent
+      </button>
+    </div>
       <form className="space-y-4">
         {/* Grid for Name and Estate Name */}
         <div className="grid grid-cols-1 gap-4">
+       
           {/* Name Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Full Name   <svg
@@ -228,7 +336,9 @@ const sendverification = async (e) => {
     viewBox="0 0 24 24"
   >
     <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.21l8.2-1.192z" />
-  </svg></label>
+  </svg>
+  
+  </label>
             <input
               type="text"
               placeholder="Enter Name"
@@ -305,7 +415,7 @@ const sendverification = async (e) => {
   </svg></label>
           <select value={state} onChange={(e)=>setState(e.target.value)} className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
             <option value="">Select your state</option>
-            {['Haryana', 'Uttar pradesh', 'Delhi','Punjab'].map((state) => (
+            {['Haryana', 'Uttar Pradesh', 'Delhi','Punjab' , 'Rajasthan'].map((state) => (
               <option   key={state} value={state}>{state}</option>
             ))}
           </select>
@@ -317,7 +427,7 @@ const sendverification = async (e) => {
             <label className="block text-sm font-medium text-gray-700 mb-2">Verification Code</label>
             <input
               type="number"
-              placeholder="Enter 6-digit OTP"
+              placeholder="Enter 4-digit OTP"
               onChange={(e)=>setOtp(e.target.value)}
               className="w-full px-4 py-3 border rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
             />

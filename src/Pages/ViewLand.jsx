@@ -15,7 +15,8 @@ const ViewLand = () => {
   const idData = JSON.parse(localStorage.getItem("Agent")) ? true :false
   const isUser = JSON.parse(localStorage.getItem("User")) 
   const navigate = useNavigate();
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [data, setData] = useState(null);
   const [agent, setAgent] = useState(null);
  console.log("isUser",isUser)
@@ -79,12 +80,10 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
     
     const encodedMessage = encodeURIComponent(message);
     const jsondata = {
-      "phone_User": isUser.user.phone,
-      "User_name": isUser.user.name,
-      "Agent_name": agent?.name,
-     "phone_Agent": agent?.phone_number,
-
-    
+      "phone_User": isUser?.user?.phone || "N/A",
+      "User_name": isUser?.user?.name || "N/A",
+      "Agent_name": agent?.name || "N/A",
+      "phone_Agent": agent?.phone_number || "N/A",
   }
 
   try{
@@ -115,14 +114,15 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
       style={{ fontFamily: "Krub, sans-serif" }}
       className="max-w-6xl mt-[100px] mx-auto bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
     >
+      
     <div className="bg-[#1C2B2D] p-6">
   <h1 className="text-2xl font-bold text-white mb-2">{data.address}</h1>
 
   <div className="flex items-center justify-between">
     <div>
-      <p className="text-xl font-semibold text-white">{data.acre} {data.unit_of_land}</p>
+      <p className="text-xl font-semibold text-white">{data.land_size} {data.unit_of_land}</p>
       <p className="text-md text-purple-200">
-        ₹{data.acre_price} {data.money_unit} / {data.unit_of_land}
+        ₹{data.land_price} {data.money_unit} / {data.unit_of_land}
       </p>
     </div>
 
@@ -130,7 +130,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
   
 
     <p className="uppercase text-sm font-semibold text-white px-5 py-1.5 rounded-full inline-block mb-1 bg-white/10 backdrop-blur-md border border-orange-400 shadow-inner shadow-orange-500/20 tracking-widest hover:scale-105 transition-transform duration-300">
-  ACRE GROUP
+ {agent?.name}
 </p>
 
 
@@ -161,7 +161,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
   }`}
 >
   {/* Main Property Image */}
-  <div onClick={()=> window.open(data?.img, "_blank")}  className="relative h-120 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
+  <div  onClick={() => setIsModalOpen(true)}  className="relative h-120 w-full max-w-xl rounded-lg overflow-hidden shadow-md group cursor-pointer">
     <img 
       src={data?.img} 
       alt="Property" 
@@ -175,6 +175,24 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
       <span className="text-white text-md font-semibold">Click to full view</span>
     </div>
   </div>
+  {isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
+          <div className="relative max-w-6xl w-full p-4">
+            <img
+              src={data?.img}
+              alt="Full View"
+              className="w-full h-auto max-h-[90vh] object-contain rounded-lg"
+            />
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-white text-2xl bg-black/50 p-2 rounded-full hover:bg-black"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
   {/* Property Layout Image */}
   {idData && (
@@ -200,7 +218,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-semibold text-gray-800">Exclusive Details</h2>
-            <p className="text-purple-600 font-medium">•{data.acre_price}{data.money_unit}/Acre  </p>
+            <p className="text-purple-600 font-medium">•{data.land_price}{data.money_unit}/{data.unit_of_land}  </p>
           </div>
           <div className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
             {data.available ? 'Available' : 'Sold'}
@@ -212,9 +230,9 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
             <DetailItem label="Transaction Type" value={data.sale_or_lease === 'sale' ? 'For Sale' : 'For Lease'} />
             <DetailItem label="Land Category" value={data.land_category} />
            
-            <DetailItem label="Road Width" value={`${data.road_width} `} />
-            <DetailItem label="Total Price" value={`${data.acre_price*data.acre} ${data.money_unit} `} />
-            <DetailItem label="Land Size" value={`${data.acre} Acre `} />
+            <DetailItem label="Road Width" value={`${data.road_width} ft`} />
+            <DetailItem label="Total Price" value={`${data.land_price*data.land_size} ${data.money_unit}(Approx.)`} />
+            <DetailItem label="Land Size" value={`${data.land_size} Acre `} />
           </div>
 
           <div className="space-y-4">
@@ -230,7 +248,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
           <div className="space-y-4">
           <DetailItem label="CLU Eligible" value={data.eligible_for_clu ? 'Yes' : 'No'} />
           <DetailItem label="Distance from MSIL" value={`${data.Distance_from_MSIL ?`${ data.Distance_from_MSIL}Km` : " "  } `} />
-          <DetailItem label="Frontage" value={`${data.Frontage ?`${ data.Frontage}Km` : " "  } `} />
+          <DetailItem label="Frontage" value={`${data.Frontage ?`${ data.Frontage} ${data.unit_of_frontage}` : " "  } `} />
           </div>
         </div>
 
@@ -238,18 +256,26 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
       <div className="mt-8 space-y-4">
   <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Additional Information</h3>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    
     <div>
       <h4 className="text-md font-medium text-gray-700 mb-2">Land Facing</h4>
       <p className="text-gray-600">{data.land_facing || "N/A"}</p>
+      <div className="mt-4">
+    <h4 className="text-md font-medium text-gray-700 mb-2">Other Details</h4>
+    <p className="text-gray-600">{data.details || "No additional details provided"}</p>
+  </div>
     </div>
     <div>
       <h4 className="text-md font-medium text-gray-700 mb-2">Nearest Highways</h4>
       <p className="text-gray-600">{data.nearest_highways || "N/A"}</p>
-    </div>
+      <div className="mt-4">
+    <h4 className="text-md font-medium text-gray-700 mb-2">Date</h4>
+    <p className="text-gray-600">
+  {data.created_at ? new Date(data.created_at).toLocaleDateString() : "N/A"}
+</p>
+
   </div>
-  <div className="mt-4">
-    <h4 className="text-md font-medium text-gray-700 mb-2">Other Details</h4>
-    <p className="text-gray-600">{data.details || "No additional details provided"}</p>
+    </div>
   </div>
 </div>
 

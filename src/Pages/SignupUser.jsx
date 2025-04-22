@@ -22,7 +22,7 @@ const SignupUser = ({ setIsLogin, isOpen, isLogin }) => {
       theme: "colored",
     });
   };
-
+  
   const showErrorToast = (msg) => {
     toast.error(msg, {
       position: "top-right",
@@ -31,95 +31,101 @@ const SignupUser = ({ setIsLogin, isOpen, isLogin }) => {
       theme: "colored",
     });
   };
-
+  
   const userPresent = async (phone1) => {
     try {
       const response = await axios.get(`${url}users/search-by-phone/?phone=${phone1}`);
-      return !!response.data.exists;
+      
+      if (response.data.exists) {
+        return {
+          exists: true,
+          data: response.data.user, // User data if exists
+        };
+      } else {
+        return {
+          exists: false, // User doesn't exist
+          data: null,
+        };
+      }
     } catch (error) {
-      if (error.response?.status === 404) return false;
-      // console.error("Unexpected error checking user:", error);
-      return false;
+      console.error("Error checking user:", error);
+      return {
+        exists: false,
+        data: null,
+      };
     }
   };
-
   const sendVerification = async () => {
-    const phoneWithoutCode = phone.slice(2);
-  
-    if (!name || !phone) {
-      showErrorToast("Please enter all required fields");
+    const userExists =  await userPresent(phone);
+
+    if (userExists.exists) {
+      showErrorToast("User is Already Exit");
       return;
     }
-  
-    const exists = await toast.promise(userPresent(phone), {
-      loading: "Checking user existence...",
-      success: (exists) => {
-        if (exists) throw new Error("User already exists");
-        return "User not found. Sending OTP...";
-      },
-      error: "Error checking user",
+
+    const sendOTP = axios.post(`${url}send-otp/`, {
+      phone: phone.slice(2),
     });
   
-    try {
-      await toast.promise(
-        axios.post(`${url}send-otp/`, { phone: phoneWithoutCode }),
-        {
-          loading: "Sending OTP...",
-          success: (res) => {
-            if (res.data.responseCode === 200) {
-              const verificationId = res.data.data?.verificationId;
-              setCustomerId(verificationId);
-              setIsDisabled(true);
-              setTimer(60);
-              const countdown = setInterval(() => {
-                setTimer((prev) => {
-                  if (prev <= 1) {
-                    clearInterval(countdown);
-                    setIsDisabled(false);
-                    return 0;
-                  }
-                  return prev - 1;
-                });
-              }, 1000);
-              return "OTP sent successfully!";
-            } else {
-              throw new Error("Failed to send OTP");
-            }
+    toast.promise(
+      sendOTP,
+      {
+        pending: "Sending OTP...",
+        success: {
+          render({ data }) {
+            const verificationId = data.data?.data?.verificationId;
+            console.log(verificationId)
+            setCustomerId(verificationId);
+            startTimer();
+            return "OTP sent successfully!";
           },
-          error: "Error sending OTP",
-        }
-      );
-    } catch (err) {
-      // Already handled by toast.promise
+        },
+        error: {
+          render({ data }) {
+            return `Failed to send OTP: ${data.response?.data?.message || data.message}`;
+          },
+        },
+      },
+      {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      }
+    );
+  
+    try {
+      const response = await sendOTP;
+      return response;
+    } catch (error) {
+      console.error("OTP Send Error:", error);
+    }
+  };
+ 
+
+  const dataadding = async () => {
+    try {
+      const res = await axios.post(`${url}users/`, {
+        phone: phone,
+        name: name,
+      });
+  
+      if (res.status === 201 || res.status === 200) {
+        localStorage.setItem("User", JSON.stringify(res.data));
+        showSuccessToast("User created successfully!");
+      } else {
+        showErrorToast("User creation failed. Please try again.");
+      }
+  
+      return res.data;
+    } catch (error) {
+      console.error("User creation error:", error);
+      showErrorToast("Something went wrong while adding user.");
+      throw error;
     }
   };
   
-  const validateOtp = async () => {
-    try {
-      const res = await toast.promise(
-        axios.post(`${url}validate_otp/`, {
-          phone: phone.slice(2),
-          verificationId: customerId,
-          code: otp,
-        }),
-        {
-          loading: "Verifying OTP...",
-          success: (res) => {
-            if (res.data.responseCode === 200) {
-              return "✅ OTP Verified";
-            } else {
-              throw new Error(res.data.message || "OTP verification failed");
-            }
-          },
-          error: "❌ OTP verification failed",
-        }
-      );
+
   
-      return res.data.responseCode === 200;
-    } catch {
-      return false;
-    }
-  };
   
   const handleVerifyOTP = async () => {
     if (!name || !phone || !otp) {
@@ -127,52 +133,77 @@ const SignupUser = ({ setIsLogin, isOpen, isLogin }) => {
       return;
     }
   
-    const exists = await toast.promise(userPresent(phone), {
-      loading: "Checking user existence...",
-      success: (exists) => {
-        if (exists) throw new Error("User already exists");
-        return "Proceeding with OTP validation...";
-      },
-      error: "Error checking user",
-    });
+    const { exists } = await userPresent(phone);
   
-    if (!exists) {
-      const otpValid = await validateOtp();
-      if (!otpValid) return;
-  
-      try {
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("phone", phone);
-  
-        await toast.promise(
-          axios.post(`${url}users/`, formData),
-          {
-            loading: "Creating account...",
-            success: "✅ Account created successfully",
-            error: "Failed to create account",
-          }
-        );
-  
-        localStorage.setItem("User", JSON.stringify({ name, phone }));
-  
-        // Reset
-        setName("");
-        setPhone("");
-        setOtp("");
-        setCustomerId("");
-        isOpen(false);
-        window.location.reload();
-      } catch (error) {
-        console.error("Signup error:", error);
-      }
+    if (exists) {
+      showErrorToast("User already exists");
+      return;
     }
+  
+    try {
+      // Await OTP validation here
+      const validateOTP = axios.post(`${url}validate_otp/`, {
+        phone: phone.slice(2),
+        verificationId: customerId,
+        code: otp,
+      });
+  
+      await toast.promise(
+        validateOTP,
+        {
+          pending: "Verifying OTP...",
+          success: "✅ OTP Verified!",
+          error: {
+            render({ data }) {
+              return `❌ Verification failed: ${
+                data.response?.data?.message || data.message
+              }`;
+            },
+          },
+        },
+        {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "colored",
+        }
+      );
+  
+      // ✅ Call dataadding after successful OTP verification
+      await dataadding();
+  
+      localStorage.setItem("User", JSON.stringify({ phone, name }));
+      isOpen(false);
+      window.location.reload();
+  
+      setPhone("");
+      setOtp("");
+      setCustomerId("");
+    } catch (err) {
+      console.error("OTP Verification Error:", err);
+      showErrorToast("OTP verification failed. Please try again.");
+    }
+  };
+  
+  const startTimer = () => {
+    setIsDisabled(true);
+    setTimer(60);
+    const countdown = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(countdown);
+          setIsDisabled(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
   };
   
 
   return (
     <div className="flex items-center justify-center bg-gray-100 relative">
       <div className="relative z-10 bg-white overflow-hidden max-w-md w-full p-6 rounded-lg shadow-lg">
+        
         {/* Login/SignUp Switch */}
         <div className="flex justify-center mb-4">
           <div className="bg-[#36383D] rounded-full flex w-[300px]">
@@ -225,7 +256,7 @@ const SignupUser = ({ setIsLogin, isOpen, isLogin }) => {
             <input
               type="number"
               className="w-full px-4 py-2 border rounded-lg"
-              placeholder="Enter OTP"
+              placeholder="Enter 4-digit OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
             />

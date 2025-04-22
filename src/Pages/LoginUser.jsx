@@ -15,19 +15,31 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
   const [timer, setTimer] = useState(0);
   
   const url = "https://finalbackend111.pythonanywhere.com/api/";
-  
-  const userpresent = async (phone1) => {
-    try {
-      const res1 = await axios.get(`${url}users/search-by-phone/?phone=${phone1}`);
-      return res1.data.exists;
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        return false;
+    const userPresent = async (phone1) => {
+      try {
+        const response = await axios.get(`${url}users/search-by-phone/?phone=${phone1}`);
+        
+        if (response.data.exists) {
+          return {
+            exists: true,
+            data: response.data.user, // User data if exists
+          };
+        } else {
+          return {
+            exists: false, // User doesn't exist
+            data: null,
+          };
+        }
+      } catch (error) {
+        console.error("Error checking user:", error);
+        return {
+          exists: false,
+          data: null,
+        };
       }
-      console.error("Error checking user presence:", error);
-      return false;
-    }
-  };
+    };
+  
+  
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,13 +48,14 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
       showErrorToast("Please enter a valid phone number.");
       return;
     }
-  
-    const userExists = await userpresent(phone);
-    if (!userExists) {
+    const userExists = await  userPresent(phone);
+   
+    if (!userExists.exists) {
       showErrorToast("Phone number not found!");
       return;
     }
   
+   
     const validateOTP = axios.post(`${url}validate_otp/`, {
       phone: phone.slice(2),
       verificationId: cutomerid,
@@ -55,7 +68,8 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
         pending: "Verifying OTP...",
         success: {
           render({ data }) {
-            localStorage.setItem("User", JSON.stringify(userExists.user));
+            localStorage.setItem("User", JSON.stringify(userExists.data));
+
             isOpen(false);
             window.location.reload();
             return "✅ OTP Verified!";
@@ -87,6 +101,13 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
   };
   
   const sendverification = async () => {
+    const userExists =  await userPresent(phone);
+
+    if (!userExists.exists) {
+      showErrorToast("Phone number not found!");
+      return;
+    }
+
     const sendOTP = axios.post(`${url}send-otp/`, {
       phone: phone.slice(2),
     });
@@ -232,7 +253,7 @@ const LoginUser = ({setIsLogin , isOpen , isLogin} ) => {
           <label className="block  mb-1 font-medium">Verification Code </label>
           <input
             type="number"
-            placeholder="Enter 6-digit OTP"
+           placeholder="Enter 4-digit OTP"
             className="w-full px-4 py-2 border rounded-lg"
             value={otp}
             onChange={(e) => setOtp(e.target.value)}

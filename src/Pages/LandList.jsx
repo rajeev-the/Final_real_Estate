@@ -129,9 +129,9 @@ const LandList = () => {
           className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
         >  
           <LandCard 
-            acre={f?.acre} 
+            acre={f?.land_size} 
             address={f?.address} 
-            acre_price={f?.acre_price}  
+            acre_price={f?.land_price}  
             img={f?.img}  
           /> 
         </Link>
@@ -167,9 +167,9 @@ const LandList = () => {
     className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
   >  
     <LandCard 
-      acre={f?.acre} 
+      acre={f?.land_size} 
       address={f?.address} 
-      acre_price={f?.acre_price}  
+      acre_price={f?.land_price}  
       img={f?.img}  
     /> 
   </Link>
@@ -178,6 +178,7 @@ const LandList = () => {
   </div>
 </div>
 
+{/* serach section */}
   
   <section 
   
@@ -226,9 +227,9 @@ const LandList = () => {
       className="w-full min-w-0 hover:scale-[99%] transition-transform"  
     >  
       <LandCard 
-        acre={property.acre} 
+        acre={property.land_size} 
         address={property.address} 
-        acre_price={property.acre_price}  
+        acre_price={property.land_size}  
         img={property.img}  
         className="w-full h-full"
       /> 

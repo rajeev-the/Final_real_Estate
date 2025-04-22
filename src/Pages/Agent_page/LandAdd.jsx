@@ -10,19 +10,19 @@ const LandAdd = () => {
   const [available, setAvailable] = useState(false);
   const [acrePrice, setAcrePrice] = useState("");
   const [acre, setAcre] = useState("");
-  const [file, setFile] = useState(null);
   const [roadWidth, setRoadWidth] = useState("");
   const [category, setCategory] = useState("");
   const [districtName, setDistrictName] = useState("");
   const [address, setAddress] = useState("");
   const [tehsilName, setTehsilName] = useState("");
   const [locationsLink, setLocationsLink] = useState("");
+  const [UnitFrontage,setUnitFrontage] = useState("")
 
-  // Additional Fields
+ 
   const [saleOrLease, setSaleOrLease] = useState('sale');
   const [eligibleForClu, setEligibleForClu] = useState(true);
   const [villageName, setVillageName] = useState("");
-  const [distanceBetweenDelhi, setDistanceBetweenDelhi] = useState("");
+ 
   const [zone, setZone] = useState("");
   const [landFacing, setLandFacing] = useState("");
   const [nearestHighways, setNearestHighways] = useState("");
@@ -40,18 +40,21 @@ const LandAdd = () => {
   const money_units = [
     ['Crore', 'Cr'],
     ['Lakh', 'Lakh'],
-    ['Thousand', 'K']
+    ['Thousand', 'Thousand']
   ];
   
   const unitofland = [
     ['Acres', 'Acres'],
-    ['Square Feet', 'Sq.ft'],
-    ['Square Meter', 'Sq.m'],
-    ['Ghaj', 'Ghaj'],
-    ['Yard', 'Yard'],
+    ['Sq. Ft.','Sq. Ft.'],
+    ['Sq. Yd.', 'Sq. Yd.'],
+    ['Sq. Mtr.', 'Ghaj'],
+    ['Sq. Mtr.', 'Sq. Mtr.'],
   ];
 
-
+const frontageunit=[
+  ['ft','ft'],
+  ['mt','mt']
+]
  
 
   const showSuccessToast = (message) => {
@@ -97,7 +100,7 @@ const LandAdd = () => {
       const numericAcre = parseFloat(acre) || 0;
       const numericRoadWidth = parseInt(roadWidth) || 0;
       const numericFootter = parseInt(footter) || 0;
-      const numericDistance = parseInt(distanceBetweenDelhi) || 0;
+
   
       // Append basic information
       formData.append("state", state);
@@ -119,18 +122,15 @@ const LandAdd = () => {
       formData.append("land_facing", landFacing);
       formData.append("nearest_highways", nearestHighways);
       formData.append("details", details);
-      formData.append("distance_between_delhi", numericDistance);
       formData.append("agent", agent?.id?.toString());
   
       // Append unit information
-      formData.append("unit_of_land", unitOfLand);
+      formData.append("unit_of_frontage",UnitFrontage);
+      formData.append("unit_of_front", unitOfLand);
       formData.append("money_unit", moneyUnit);
-      formData.append("footter", numericFootter);
+      formData.append("frontage", numericFootter);
   
-      // Append files if they exist
-      if (file instanceof File) {
-        formData.append("img", file);
-      }
+      
       if (layout instanceof File) {
         formData.append("layout", layout);
       }
@@ -158,7 +158,7 @@ const LandAdd = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 relative">
+    <div className="min-h-screen mt-[10px] flex items-center justify-center bg-gray-100 relative">
       <div className="relative z-10 bg-white rounded-2xl shadow-2xl overflow-hidden max-w-2xl w-full mx-4">
         <div className="bg-gradient-to-r from-teal-600 to-emerald-600 p-8 text-center">
           <h1 className="text-3xl font-bold text-white mb-2">Property Registration</h1>
@@ -225,13 +225,13 @@ const LandAdd = () => {
             
               {/* Area with Land Unit */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Total Area</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Land Size</label>
                 <div className="flex gap-2">
                   <input
                     type="number"
                     step="0.01"
                     className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-                    placeholder="Enter total area"
+                    placeholder="Enter Land Aera"
                     onChange={(e) => setAcre(e.target.value)}
                     value={acre}
                     required
@@ -251,7 +251,7 @@ const LandAdd = () => {
             
               {/* Road Width */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Road Width (feet)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Road Width (ft)</label>
                 <input
                   type="number"
                   className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
@@ -279,17 +279,39 @@ const LandAdd = () => {
               </div>
             
               {/* New Footter Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Footter</label>
-                <input
-                  type="number"
-                  className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter footter"
-                  onChange={(e) => ((e)=> setFootter(e.target.value))}
-                  value={footter}
-                />
-              </div>
+            
+             
+            
             </div>
+
+            <div className="flex items-end gap-4">
+  {/* Frontage Input */}
+  <div className="flex-1">
+    <label className="block text-sm font-medium text-gray-700 mb-2">Frontage</label>
+    <input
+      type="number"
+      className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+      placeholder="Enter Frontage"
+      onChange={(e) => setFootter(e.target.value)}
+      value={footter}
+    />
+  </div>
+
+  {/* Money Unit Dropdown */}
+  <div className="w-1/3">
+    <label className="block text-sm font-medium text-gray-700 mb-2">Unit</label>
+    <select
+      value={UnitFrontage}
+      onChange={(e) => setUnitFrontage(e.target.value)}
+      className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+      required
+    >
+      {frontageunit.map((unit) => (
+        <option key={unit[0]} value={unit[0]}>{unit[1]}</option>
+      ))}
+    </select>
+  </div>
+</div>
 
             {/* Location Details */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -306,6 +328,7 @@ const LandAdd = () => {
                   <option value="Haryana">Haryana</option>
                   <option value="Delhi">Delhi</option>
                   <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
                 </select>
               </div>
 
@@ -397,17 +420,7 @@ const LandAdd = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Distance from Delhi (km)</label>
-                <input
-                  type="number"
-                  className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter distance"
-                  onChange={(e) => setDistanceBetweenDelhi(e.target.value)}
-                  value={distanceBetweenDelhi}
-                />
-              </div>
-
+        
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -421,7 +434,7 @@ const LandAdd = () => {
 
             {/* Additional Text Fields */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nearest Highways</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Nearest Highways(Optional)</label>
               <textarea
                 className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                 rows="2"
@@ -432,7 +445,7 @@ const LandAdd = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Additional Details</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Additional Details(Optional)</label>
               <textarea
                 className="w-full px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                 rows="3"
@@ -444,44 +457,48 @@ const LandAdd = () => {
 
             {/* Image Uploads - Both Optional */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Property Image</label>
-                <div className="flex items-center justify-center w-full">
-                  <label className="flex flex-col w-full border-2 border-dashed rounded-lg hover:border-gray-400 transition-colors">
-                    <div className="flex flex-col items-center justify-center py-4 sm:py-6">
-                      <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      <span className="mt-2 text-sm text-gray-600">{file ? file.name : "Upload property image (optional)"}</span>
-                    </div>
-                    <input
-                      type="file"
-                      onChange={(e) => setFile(e.target.files[0])}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
+  {/* Layout Image Upload */}
+  <div className="flex flex-col justify-end">
+    <label className="block text-sm font-medium text-gray-700 mb-2">Layout Image</label>
+    <label className="flex flex-col w-full border-2 border-dashed rounded-lg hover:border-gray-400 transition-colors cursor-pointer">
+      <div className="flex flex-col items-center justify-center py-6">
+        <svg
+          className="w-8 h-8 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+          />
+        </svg>
+        <span className="mt-2 text-sm text-gray-600">
+          {layout ? layout.name : "Upload layout image"}
+        </span>
+      </div>
+      <input
+        type="file"
+        onChange={(e) => setLayout(e.target.files[0])}
+        className="hidden"
+      />
+    </label>
+  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Layout Image</label>
-                <div className="flex items-center justify-center w-full">
-                  <label className="flex flex-col w-full border-2 border-dashed rounded-lg hover:border-gray-400 transition-colors">
-                    <div className="flex flex-col items-center justify-center py-4 sm:py-6">
-                      <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      <span className="mt-2 text-sm text-gray-600">{layout ? layout.name : "Upload layout image (optional)"}</span>
-                    </div>
-                    <input
-                      type="file"
-                      onChange={(e) => setLayout(e.target.files[0])}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
+  {/* Agent Field */}
+  <div className="flex flex-col justify-end">
+    <label className="block text-sm font-medium text-gray-700 mb-2">Agent</label>
+    <input
+      type="text"
+      className="w-full px-4 py-3 border rounded-lg bg-gray-100"
+      value={agent?.name || ""}
+      readOnly
+    />
+  </div>
+</div>
+
 
             {/* Availability & Agent Selection */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -493,16 +510,6 @@ const LandAdd = () => {
                   onChange={(e) => setAvailable(e.target.checked)}
                 />
                 <label className="ml-2 text-sm text-gray-700">Currently Available</label>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Agent</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 border rounded-lg bg-gray-100"
-                  value={agent?.name || ""}
-                  readOnly
-                />
               </div>
             </div>
 

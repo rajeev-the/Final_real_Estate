@@ -13,6 +13,7 @@ import Realcompo from "../componets/Realcompo"
 import { useGSAP } from "@gsap/react"; 
 import gsap from "gsap";
 import  AgentHome  from "../componets/AgentHome";
+import { useNavigate } from "react-router-dom";
 
 
 import Reviewsection from "../componets/Reviewsection"
@@ -28,7 +29,8 @@ const Home = ({agent}) => {
   const resvideo = useRef()
   const seoref = useRef(null);
   const searchcart = useRef(null);
-    const [active, setActive] = useState("top-rated");
+  const [active, setActive] = useState("top-rated");
+  const navigator  = useNavigate()
   
   // Ref for the cities section
  
@@ -202,9 +204,9 @@ const Home = ({agent}) => {
         className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
       >  
         <LandCard 
-          acre={e.acre} 
+          acre={e.land_size} 
           address={e.address} 
-          acre_price={e.acre_price}  
+          acre_price={e.land_price}  
           img={e.img}  
         /> 
       </Link>
@@ -258,9 +260,9 @@ const Home = ({agent}) => {
         className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
       >  
         <LandCard 
-          acre={e.acre} 
+          acre={e.land_size} 
           address={e.address} 
-          acre_price={e.acre_price} 
+          acre_price={e.land_price} 
           Unit_of_land ={e.unit_of_land}
           Money_unit = {e.money_unit}
           img={e.img}  
@@ -268,7 +270,48 @@ const Home = ({agent}) => {
       </Link>
     ))}
 </div>
+
+
+
+
+
+
 </div>
+<button
+  onClick={() => navigator('/landlist')}
+  className="w-full max-w-xs sm:max-w-sm md:max-w-xs lg:max-w-xs xl:max-w-xs mx-auto 
+             bg-gradient-to-br from-[#1c2b2d] to-[#2a4a4d] text-[#f0f3f5] 
+             px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg font-medium shadow-lg 
+             hover:shadow-xl hover:bg-gradient-to-br hover:from-[#243739] 
+             hover:to-[#2a4a4d] transition-all duration-300 group relative 
+             border-2 border-[#30494b] overflow-hidden"
+>
+  <div className="absolute inset-0 bg-noise-pattern opacity-10 pointer-events-none"></div>
+  <div className="flex items-center justify-center gap-2 relative">
+    <span style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="font-playfair text-sm sm:text-base tracking-wide">
+      Explore All
+    </span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-4 w-4 sm:h-5 sm:w-5 transform group-hover:translate-x-1 transition-transform"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 5l7 7-7 7"
+        className="stroke-gradient-to-r from-[#9ab7b9] to-[#c2d4d6]"
+      />
+    </svg>
+  </div>
+  <div className="absolute inset-0 border-t-2 border-[#5c7a7d] opacity-30 pointer-events-none"></div>
+</button>
+
+
+
 
 
     <Realcompo/>

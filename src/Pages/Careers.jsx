@@ -1,4 +1,5 @@
 import React from 'react'
+import group from "../assets/group.jpg"
 
 const Careers = () => {
   return (
@@ -13,7 +14,7 @@ const Careers = () => {
 
       <section className="grid md:grid-cols-2 gap-10 items-center">
         <img
-          src="https://img.freepik.com/free-photo/bussiness-people-working-team-office_1303-22863.jpg?t=st=1743929864~exp=1743933464~hmac=82caab85e2ab4d5229a2f924336f3acb0e4cc7b114b5206f87f10f394f8b5413&w=1380"
+          src={group}
           alt="Team working at Landsathi"
           className="w-full rounded-3xl shadow-xl object-cover h-full"
         />

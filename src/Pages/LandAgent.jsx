@@ -50,9 +50,9 @@ const LandAgent = () => {
             data.map((item, i) => (
               <Link key={i} to={`/Land/${item.id}`} className="w-full sm:w-[48%] lg:w-[31%]">
                 <CustomCard 
-                  acre={item.acre}
+                  acre={item.land_size}
                   property_name={item.address}
-                  acre_price={item.acre_price}
+                  acre_price={item.land_price}
                   img={item.img}
                 />
               </Link>

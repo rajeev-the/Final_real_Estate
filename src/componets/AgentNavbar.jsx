@@ -48,19 +48,10 @@ const data = JSON.parse(localStorage.getItem("Agent"))
         <Link to={'contact'} className="text-white hover:text-gray-300">Contact</Link>
       </div>
 
-      
-      <div className="md:hidden">
-        <button onClick={toggleMenu} className="text-white focus:outline-none">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
-      </div>
-      <div className="  md:hidden  ">
-       <Tooltip 
-       
-      title={
-        <ul className="p-4 space-y-4">
+      <div className="hidden sm:block">
+  <Tooltip 
+    title={
+      <ul className="p-4 space-y-4">
         <li className="pb-2">{data.name}</li>
         <button
           onClick={handlelogout}
@@ -69,22 +60,38 @@ const data = JSON.parse(localStorage.getItem("Agent"))
           Logout
         </button>
       </ul>
+    } 
+    style={{
+      position: "absolute",
+      top: 10,
+      right: 10,
+      fontSize: "18px",
+      color: "#ff4d4f",
+      cursor: "pointer",
+      background: "rgba(255, 255, 255, 0.8)",
+      padding: "5px",
+      borderRadius: "50%",
+      transition: "0.3s",
+    }}
+  >
+    <UserOutlined className="text-white text-2xl" />
+  </Tooltip>
+</div>
 
-     
-      } 
-      style={{
-                position: "absolute",
-                top: 10,
-                right: 10,
-                fontSize: "18px",
-                color: "#ff4d4f",
-                cursor: "pointer",
-                background: "rgba(255, 255, 255, 0.8)",
-                padding: "5px",
-                borderRadius: "50%",
-                transition: "0.3s",
-              }}>  <UserOutlined className="text-white text-2xl" /></Tooltip>
+
+
+
+
+
+
+      <div className="md:hidden">
+        <button onClick={toggleMenu} className="text-white focus:outline-none">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
       </div>
+
     </div>
     {isOpen && (
       <div className="md:hidden">

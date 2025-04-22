@@ -105,11 +105,11 @@ const Navbar = ({ data ,openLogin  }) => {
     {/* Right Section: Navigation + Login/Profile + Mobile Button */}
     <div className="flex-1  ml-[40px] flex justify-start items-center space-x-6">
       {/* Navigation Links - Hidden on Small Screens */}
-      <ul className="hidden md:flex items-center space-x-6 text-white font-medium">
+      <ul className="hidden    md:flex items-center space-x-6 text-white font-medium">
         {[
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
-          { name: "Agents", link: "agents" },
+          { name: "Our Partners", link: "agents" },
           { name: "Contact Us", link: "ContactUs" },
         ].map((item, index) => (
           <Link
@@ -141,16 +141,7 @@ const Navbar = ({ data ,openLogin  }) => {
     
     <span>Post Land</span>
     {/* FREE Badge */}
-    <span className="relative mb-1">
-      <span className="inline-flex items-center bg-[#219653] px-[5px] py-[4px] rounded-[3px] text-white text-[9px] font-bold leading-[6px] overflow-hidden relative">
-        <span className="z-10">FREE</span>
-        <span className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay" />
-        <span
-          className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay"
-          style={{ animationDelay: "1s" }}
-        />
-      </span>
-    </span>
+
 
   </span>
 </Link>
@@ -226,16 +217,7 @@ const Navbar = ({ data ,openLogin  }) => {
     
     <span>Post land</span>
     {/* FREE Badge */}
-    <span className="relative mb-1">
-      <span className="inline-flex items-center bg-[#219653] px-[5px] py-[4px] rounded-[3px] text-white text-[9px] font-bold leading-[6px] overflow-hidden relative">
-        <span className="z-10">FREE</span>
-        <span className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay" />
-        <span
-          className="absolute w-[115%] h-full top-0 -left-[2px] bg-gradient-to-r from-transparent via-[#baddc9] to-transparent skew-x-[30deg] opacity-50 animate-backplay"
-          style={{ animationDelay: "1s" }}
-        />
-      </span>
-    </span>
+   
 
   </span>
 </Link>
@@ -253,11 +235,11 @@ const Navbar = ({ data ,openLogin  }) => {
   
     {/* Mobile Menu - Now Placed at the End */}
     {isOpen && (
-      <div className="md:hidden absolute top-full left-0 w-full bg-[#000000] shadow-lg p-4 flex flex-col items-center space-y-4">
+      <div className="md:hidden  absolute top-full left-0 w-full bg-[#000000] shadow-lg p-4 flex flex-col items-center space-y-4">
         {[
           { name: "Home", link: "/" },
           { name: "Land Listing", link: "landlist" },
-          { name: "Agents", link: "agents" },
+          { name: "Our Partners", link: "agents" },
           { name: "Contact Us", link: "ContactUs" }
          
         ].map((item) => (

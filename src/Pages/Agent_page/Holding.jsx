@@ -13,6 +13,7 @@ const Holding = () => {
 
   const [data, setData] = useState([])
   const idData = JSON.parse(localStorage.getItem("Agent"))
+  const [loading, setLoading] = useState(true); // loading state
   const url = "https://finalbackend111.pythonanywhere.com/api/"
 
   
@@ -20,6 +21,7 @@ const Holding = () => {
   useEffect(() => {
 
     const fetchData = async()=>{
+      setLoading(true);
        
       try {
 
@@ -31,6 +33,10 @@ const Holding = () => {
         console.log(error)
         
       }
+      finally {
+        setLoading(false);
+      }
+      
 
      
        
@@ -42,26 +48,28 @@ const Holding = () => {
   }, [])
  
 
+
   
   
   return (
-    <div className=' sm:mt-[50px]'>
-         
-         <div className='flex flex-wrap gap-4   justify-center  items-center'>
-         {
-            data.map((item)=>(
-              <Link
-              to={`land/${item.id}`} 
-              key={item.id}
-              
-              >
-              <CustomCardDel item={item.id} key={item.id}   property_name={item.address} acre={item.acre}  acre_price={item.acre_price}
+    <div className='mt-[40px] mb-[100px]'>
+      <div className='flex flex-wrap gap-4 justify-center items-center'>
+        {loading ? (
+          <div className="text-center mt-[30px] text-gray-600 text-lg py-10 animate-pulse">Loading land listings...</div>
+        ) : (
+          data.map((item) => (
+            <Link to={`land/${item.id}`} key={item.id}>
+              <CustomCardDel
+                item={item.id}
+                property_name={item.address}
+                acre={item.acre}
+                acre_price={item.acre_price}
+                available={item.isvaild}
               />
-             </Link>
-            ))
-         }
-         </div>
-    
+            </Link>
+          ))
+        )}
+      </div>
     </div>
   )
 }
