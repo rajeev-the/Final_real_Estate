@@ -254,7 +254,7 @@ const SerachFilter = ({searchcart}) => {
           </button>
         ))}
         <Link  to={'/agents'}   className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors duration-200 bg-white/80 text-gray-800 hover:bg-white shadow-sm">
-          Agent
+        Partners
         </Link>
       </div>
 
