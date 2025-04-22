@@ -228,7 +228,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="space-y-4">
             
-          <DetailItem label="Date Add" value={data.created_at ? new Date(data.created_at).toLocaleDateString() : "N/A"} />
+          <DetailItem label="Date Added" value={data.created_at ? new Date(data.created_at).toLocaleDateString() : "N/A"} />
             <DetailItem label="Transaction Type" value={data.sale_or_lease === 'sale' ? 'For Sale' : 'For Lease'} />
             <DetailItem label="Land Category" value={data.land_category} />
             <DetailItem label="Road Width" value={`${data.road_width} ft`} />

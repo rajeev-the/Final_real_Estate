@@ -71,7 +71,7 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-bold text-lg sm:text-xl text-gray-800">{name}</h2>
         <span className="text-xs font-medium bg-gray-100 text-blue-800 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full mt-1 sm:mt-0">
-        Top Partners
+        Top Partner
         </span>
       </div>
       
