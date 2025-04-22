@@ -44,7 +44,7 @@ const Agents = () => {
 </h1>
 
                 <p className="mt-4 sm:mt-6 text-base sm:text-xl text-gray-300">
-                    Connect with our network of trusted, professional real estate agents across India's top property markets.
+                    Connect with our network of trusted, professional real estate Partners across India's top property markets.
                 </p>
                 <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <button className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-lg font-medium transition-colors duration-300">
