@@ -227,25 +227,28 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="space-y-4">
+            
+          <DetailItem label="Date Add" value={data.created_at ? new Date(data.created_at).toLocaleDateString() : "N/A"} />
             <DetailItem label="Transaction Type" value={data.sale_or_lease === 'sale' ? 'For Sale' : 'For Lease'} />
             <DetailItem label="Land Category" value={data.land_category} />
-           
             <DetailItem label="Road Width" value={`${data.road_width} ft`} />
             <DetailItem label="Total Price" value={`${data.land_price*data.land_size} ${data.money_unit}(Approx.)`} />
-            <DetailItem label="Land Size" value={`${data.land_size} Acre `} />
+      
           </div>
 
           <div className="space-y-4">
-         
+          <DetailItem label="Land Size" value={`${data.land_size} Acre `} />
             <DetailItem label="District" value={data.district_name} />
             <DetailItem label="Tehsil" value={data.tehsil_name} />
             <DetailItem label="State" value={data.state} />
             <DetailItem label="Zone" value={data.zone || "N/A"} />
-            <DetailItem label="Distance from Delhi" value={`${data.distance_between_delhi} km`} />
+         
+        
             
           </div>
 
           <div className="space-y-4">
+          <DetailItem label="Distance from Delhi" value={`${data.distance_between_delhi} km`} />
           <DetailItem label="CLU Eligible" value={data.eligible_for_clu ? 'Yes' : 'No'} />
           <DetailItem label="Distance from MSIL" value={`${data.Distance_from_MSIL ?`${ data.Distance_from_MSIL}Km` : " "  } `} />
           <DetailItem label="Frontage" value={`${data.Frontage ?`${ data.Frontage} ${data.unit_of_frontage}` : " "  } `} />
@@ -268,13 +271,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
     <div>
       <h4 className="text-md font-medium text-gray-700 mb-2">Nearest Highways</h4>
       <p className="text-gray-600">{data.nearest_highways || "N/A"}</p>
-      <div className="mt-4">
-    <h4 className="text-md font-medium text-gray-700 mb-2">Date</h4>
-    <p className="text-gray-600">
-  {data.created_at ? new Date(data.created_at).toLocaleDateString() : "N/A"}
-</p>
-
-  </div>
+    
     </div>
   </div>
 </div>

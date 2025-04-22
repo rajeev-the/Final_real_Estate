@@ -41,9 +41,9 @@ const StateAgenet = () => {
     <div className='w-full mt-[100px] py-8 bg-gray-50 sm:px-8 rounded-3xl shadow-sm border border-gray-100'>
     {/* Section Heading */}
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-      <h2 className='text-3xl font-bold text-gray-800 mb-6'>Top Real Estate Agents in {state}</h2>
+      <h2 className='text-3xl font-bold text-gray-800 mb-6'>Top Real Estate Professionals in {state}</h2>
       <p className='text-gray-600 text-lg mb-8'>
-        Connect with certified and experienced real estate agents to find your dream property.
+        Connect with certified and experienced real estate Professionals to find your dream property.
       </p>
   
       {/* Agent List */}
