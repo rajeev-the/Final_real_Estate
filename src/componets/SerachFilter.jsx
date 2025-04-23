@@ -82,7 +82,7 @@ const SerachFilter = ({searchcart}) => {
     "Sisana"
   ];
   
-  const getfilterdata = (land_category, acre_price, zone, address, sale_or_lease) => {
+  const getfilterdata = (land_category, land_price, zone, address, sale_or_lease) => {
     const matchLandCategory =
       !selected?.value ||
       (land_category && land_category.toLowerCase() === selected.value.toLowerCase());
