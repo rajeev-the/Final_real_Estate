@@ -54,6 +54,8 @@ const LandAgent = () => {
                   property_name={item.address}
                   acre_price={item.land_price}
                   img={item.img}
+                  money_unit={item.money_unit}
+                  unit_of_land={item.unit_of_land}
                 />
               </Link>
             ))

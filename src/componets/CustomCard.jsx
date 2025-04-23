@@ -7,6 +7,8 @@ const CustomCard = ({
   property_name,
   acre,
   acre_price,img,
+  money_unit,
+  unit_of_land,
   
 
   }) => {
@@ -74,7 +76,7 @@ const CustomCard = ({
           fontSize: "20px"
         }}
       >
-        {acre || 5} Acre Estate
+        {acre || 5} {unit_of_land || "Acre"}
       </Title>
   
       <Divider style={{ margin: "12px 0", backgroundColor: "#f0f0f0" }} />
@@ -98,7 +100,7 @@ const CustomCard = ({
             letterSpacing: "0.5px"
           }}
         >
-          ₹{acre_price ||  0} Cr
+          ₹{acre_price ||  0} {money_unit || "Cr"}
         </Text>
       </div>
   

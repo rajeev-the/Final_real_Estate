@@ -47,7 +47,7 @@ const LandList = () => {
   
 
   
-  const locations = ["Haryana", "Delhi", "Punjab", "Uttar pradesh" ,"Rajasthan"];
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar Pradesh" ,"Rajasthan"];
 
   return (
     <div className='mt-[50px] md:mt-[100px] sm:p-2 md:p-[15px] w-full'>
@@ -231,7 +231,10 @@ const LandList = () => {
         address={property.address} 
         acre_price={property.land_price}  
         img={property.img}  
+        Unit_of_land={property.unit_of_land}
+        Money_unit={property.money_unit}
         className="w-full h-full"
+
       /> 
     </Link>
   ))}
