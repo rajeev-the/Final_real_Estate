@@ -30,9 +30,9 @@ const SerachPage = () => {
                key={item.id || Math.random()}
              >
                <LandCard
-                 acre={item.acre}
+                 acre={item.land_size}
                  address={item.address}
-                 acre_price={item.acre_price}
+                 acre_price={item.land_price}
                  img={item.img}
                />
              </Link>

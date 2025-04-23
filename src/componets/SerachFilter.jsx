@@ -93,9 +93,9 @@ const SerachFilter = ({searchcart}) => {
   
     const matchPrice =
       !selected2?.value || (
-        acre_price !== undefined &&
-        acre_price >= selected2.value[0] &&
-        (selected2.value[1] === null || acre_price <= selected2.value[1])
+        land_price !== undefined &&
+        land_price >= selected2.value[0] &&
+        (selected2.value[1] === null || land_price <= selected2.value[1])
       );
   
     const matchAddress = !searchlist || (
@@ -121,7 +121,7 @@ const SerachFilter = ({searchcart}) => {
       }
   
       const filteredData = property.filter((item) =>
-        getfilterdata(item.land_category, item.acre_price, item.zone, item.address, item.sale_or_lease)
+        getfilterdata(item.land_category, item.land_price, item.zone, item.address, item.sale_or_lease)
       );
   
       if (!setfilterlist) {
