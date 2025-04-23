@@ -196,7 +196,8 @@ const Home = ({agent}) => {
 
 { 
   active === "suggestions" ? (
-    <div className="grid grid-cols-2 gap-4 p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
+    <div className="overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden">
+          <div className="grid grid-cols-2 gap-4 p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
     {shuffledData.map((e, i) => (
       <Link 
         to={`/Land/${e.id}`} 
@@ -211,6 +212,7 @@ const Home = ({agent}) => {
         /> 
       </Link>
     ))}
+</div>
 </div>
   ) : (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-10 p-3">
