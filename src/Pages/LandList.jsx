@@ -229,7 +229,7 @@ const LandList = () => {
       <LandCard 
         acre={property.land_size} 
         address={property.address} 
-        acre_price={property.land_size}  
+        acre_price={property.land_price}  
         img={property.img}  
         className="w-full h-full"
       /> 
