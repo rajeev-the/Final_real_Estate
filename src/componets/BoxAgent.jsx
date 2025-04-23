@@ -27,7 +27,7 @@ const BoxAgent = ({ image, text }) => {
         {text}
       </p>
       <p className="text-sm text-gray-500 mt-1">
-        Certified Real Estate Agent
+        Certified Real Estate Partners
       </p>
     </div>
   
