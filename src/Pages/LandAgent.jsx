@@ -39,8 +39,8 @@ const LandAgent = () => {
   
   
   return (
-    <div className='p-4 sm:p-10  mt-[100px] flex justify-center items-center w-full'>
-      <div className='w-full max-w-[1400px] flex flex-wrap justify-center  items-center gap-4 sm:gap-6 md:gap-[30px]'>
+    <div className='p-4 sm:p-10 mt-[100px] flex justify-center items-center w-full'>
+      <div className='w-full max-w-[1400px] flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6 md:gap-[30px]'>
         {
           !data ? (
             <p className="text-lg sm:text-xl font-semibold text-gray-600">Loading, please wait...</p>
