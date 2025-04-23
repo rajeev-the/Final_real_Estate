@@ -26,7 +26,7 @@ const CustomCard = ({
       <div style={{ position: "relative", overflow: "hidden" }}>
         <img
           alt="Property Image"
-          src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FwV7cHI9yRGPIcT57w6i2%2Fpub%2FauzC7uegAL4sn1cfSKP1.jpg"
+          src={img }
           style={{
             height: "200px",
             width: "100%",
@@ -61,7 +61,7 @@ const CustomCard = ({
           marginBottom: "8px",
         }}
       >
-        {property_name || "Gurugram, Haryana"}
+        {property_name || "NaN"}
       </Text>
       
       <Title 
@@ -98,7 +98,7 @@ const CustomCard = ({
             letterSpacing: "0.5px"
           }}
         >
-          ₹{acre_price || 222} Cr
+          ₹{acre_price ||  0} Cr
         </Text>
       </div>
   
