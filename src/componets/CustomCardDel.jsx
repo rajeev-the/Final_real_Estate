@@ -17,7 +17,7 @@ const CustomCardDel = ({
 }) => {
 
   const url = "https://finalbackend111.pythonanywhere.com/api/"
-  console.log(available)
+
 
     const handledelete = async(id) => {
 

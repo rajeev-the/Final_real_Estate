@@ -72,11 +72,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
 
     const phoneNumber = agent?.phone_number || data?.phone_number;
 
-    const message = `${data?.address}
-    ${data?.acre} Acre
-    ${data?.acre_price} Cr/ Acre
-    ${data?.locations_link}
-    ${data?.details}`;
+    const message = `I am interested to know more about lands available! \n\nHere is the link to the page: ${window.location.href}`;
     
     const encodedMessage = encodeURIComponent(message);
     const jsondata = {

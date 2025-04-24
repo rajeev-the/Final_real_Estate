@@ -36,7 +36,7 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
     const userdata = JSON.parse(localStorage.getItem("User"));
   
     if (!userdata || !userdata.User) {
-      showErrorToast("Sign In To Continue Chatting");
+      showErrorToast("Sign in to connect");
       return;
     }
   
