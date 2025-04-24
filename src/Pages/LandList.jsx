@@ -121,23 +121,24 @@ const LandList = () => {
 
   {/* Land Cards Carousel */}
   <div className="overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden">
-    <div className="grid grid-cols-2 sm:gap-4 gap-1  sm:p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
-      {dumy?.top_rate.map((f, i) => (
-        <Link 
-          to={`/Land/${f?.id}`} 
-          key={f?.id}
-          className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
-        >  
-          <LandCard 
-            acre={f?.land_size} 
-            address={f?.address} 
-            acre_price={f?.land_price}  
-            img={f?.img}  
-          /> 
-        </Link>
-      ))}
-    </div>
+  <div className="flex gap-2 sm:gap-4 sm:p-4 md:gap-6 md:justify-start md:items-center snap-x snap-mandatory">
+    {dumy?.top_rate.map((f, i) => (
+      <Link 
+        to={`/Land/${f?.id}`} 
+        key={f?.id}
+        className="w-1/2 sm:w-[250px] md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"
+      >
+        <LandCard 
+          acre={f?.land_size} 
+          address={f?.address} 
+          acre_price={f?.land_price}  
+          img={f?.img}  
+        /> 
+      </Link>
+    ))}
   </div>
+</div>
+
 </div>
 {/* Featured Section */}
 <div className='bg-slate-50 border border-slate-100 py-8 md:py-12 sm:px-6  md:px-12 rounded-3xl mb-8 mx-4 shadow-xl hover:shadow-2xl transition-shadow duration-300'>
@@ -159,12 +160,12 @@ const LandList = () => {
 
 
   <div  className='overflow-x-auto w-full scrollbar-none [&::-webkit-scrollbar]:hidden'>
-  <div className="grid grid-cols-2 sm:gap-4 gap-1  sm:p-4 md:flex md:flex-nowrap md:gap-6 md:justify-start md:items-center min-w-min">
+  <div className="flex gap-2 sm:gap-4 sm:p-4 md:gap-6 md:justify-start md:items-center snap-x snap-mandatory">
     {dumy?.featured.map((f, i) => (
     <Link 
     to={`/Land/${f?.id}`} 
     key={f?.id}
-    className="md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
+    className="w-1/2 sm:w-[250px] md:min-w-[300px] lg:min-w-[350px] flex-shrink-0 snap-start"  
   >  
     <LandCard 
       acre={f?.land_size} 
