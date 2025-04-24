@@ -13,7 +13,7 @@ const Footer = () => {
   const footerLinks = [
     { title: "COMPANY", links: ["AboutUs" , "Careers",  "Terms"]  ,values:["AboutUs", "Careers", "terms"]},
 
-    { title: "SOLUTIONS", links: ["Land List", "Our Partners", "Contact Us"]  , values:["landlist", "agents", "ContactUs"]} ,
+    { title: "SOLUTIONS", links: ["Land Listing", "Our Partners", "Contact Us"]  , values:["landlist", "agents", "ContactUs"]} ,
    
   ];
 
