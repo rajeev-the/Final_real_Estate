@@ -19,7 +19,7 @@ const ViewLand = () => {
 
   const [data, setData] = useState(null);
   const [agent, setAgent] = useState(null);
- console.log("isUser",isUser)
+ 
   
   useEffect(() => {
     if (property) {
@@ -233,7 +233,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
           </div>
 
           <div className="space-y-4">
-          <DetailItem label="Land Size" value={`${data.land_size} Acre `} />
+          <DetailItem label="Land Size" value={`${data.land_size} ${data.unit_of_land} `} />
             <DetailItem label="District" value={data.district_name} />
             <DetailItem label="Tehsil" value={data.tehsil_name} />
             <DetailItem label="State" value={data.state} />

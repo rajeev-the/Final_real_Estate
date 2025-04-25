@@ -25,6 +25,7 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
   const url = "https://finalbackend111.pythonanywhere.com/api/"
 
   const userdata = JSON.parse(localStorage.getItem("User"))
+  console.log(userdata)
  
   const whatsappLink = phone_number 
   ? `https://wa.me/${phone_number}` 
@@ -33,16 +34,16 @@ const AgentBox = ({ phone_number, estate_name ,language ,rating ,name ,img ,stat
   // const whatsappLink = `https://wa.me/${9310650163}`
 
   const onsubmitWhatsapp = async () => {
-    const userdata = JSON.parse(localStorage.getItem("User"));
+    
   
-    if (!userdata || !userdata.User) {
+    if (!userdata) {
       showErrorToast("Sign in to connect");
       return;
     }
   
     const jsondata = {
-      phone_User: userdata.User.phone_number,
-      User_name: userdata.User.name,
+      phone_User: userdata.phone,
+      User_name: userdata.name,
       Agent_name: name,
       phone_Agent: phone_number,
     };
