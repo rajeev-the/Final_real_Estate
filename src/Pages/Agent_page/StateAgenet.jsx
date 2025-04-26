@@ -17,7 +17,7 @@ const StateAgenet = () => {
         try {
           const res =await axios.get(`${url}agent/`)
           if(res.status ==200){
-          setvalue(res.data?.filter((p)=>p.state ===  state))
+          setvalue(res.data?.filter((p)=>p.state ===  state && p.verifications === true))
 
           }
           
