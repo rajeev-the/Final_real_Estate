@@ -105,8 +105,8 @@ const frontageunit=[
       // Append basic information
       formData.append("state", state);
       formData.append("address", address);
-      formData.append("acre_price", numericAcrePrice);
-      formData.append("acre", numericAcre);
+      formData.append("land_price", numericAcrePrice);
+      formData.append("land_size", numericAcre);
       formData.append("available", available ? "true" : "false");
       formData.append("road_width", numericRoadWidth);
       formData.append("land_category", category);
@@ -128,7 +128,7 @@ const frontageunit=[
       formData.append("unit_of_frontage",UnitFrontage);
       formData.append("unit_of_front", unitOfLand);
       formData.append("money_unit", moneyUnit);
-      formData.append("frontage", numericFootter);
+      formData.append("frontage", footter);
   
       
       if (layout instanceof File) {
@@ -242,8 +242,8 @@ const frontageunit=[
                     className="w-1/3 px-4 py-3 border rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                     required
                   >
-                    {unitofland.map((unit) => (
-                      <option key={unit[0]} value={unit[0]}>{unit[1]}</option>
+                    {unitofland.map((unit,index) => (
+                      <option key={index} value={unit[0]}>{unit[1]}</option>
                     ))}
                   </select>
                 </div>
