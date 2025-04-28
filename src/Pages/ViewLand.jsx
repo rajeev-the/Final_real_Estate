@@ -228,7 +228,7 @@ if (navigator.share) { try { await navigator.share({ title: document.title, text
             <DetailItem label="Transaction Type" value={data.sale_or_lease === 'sale' ? 'For Sale' : 'For Lease'} />
             <DetailItem label="Land Category" value={data.land_category} />
             <DetailItem label="Road Width" value={`${data.road_width} ft`} />
-            <DetailItem label="Total Price" value={`${data.land_price*data.land_size} ${data.money_unit}(Approx.)`} />
+            <DetailItem label="Total Price" value={`${(data.land_price * data.land_size).toFixed(2)} ${data.money_unit}(Approx.)`} />
       
           </div>
 
