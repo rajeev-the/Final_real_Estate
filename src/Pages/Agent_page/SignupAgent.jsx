@@ -67,8 +67,8 @@ const SignupAgent = () => {
       }
     };
    
-    const dataadding = async (e) => {
-      e.preventDefault();
+    const dataadding = async () => {
+      
     
       try {
         const payload = {
@@ -190,33 +190,6 @@ const SignupAgent = () => {
         });
       };
 
-
-      const validateOtp = async (phonei, verifi, ootp) => {
-        try {
-          const response = await toast.promise(
-            axios.post(`${url}validate_otp/`, {
-              phone: phonei,
-              verificationId: verifi,
-              code: ootp,
-            }),
-            {
-              loading: "Verifying OTP...",
-              success: (res) => {
-                if (res.data.responseCode === 200) {
-                  return "✅ OTP Verified!";
-                } else {
-                  throw new Error(res.data.message || "OTP verification failed");
-                }
-              },
-              error: "❌ OTP Verification failed",
-            }
-          );
-          return response.data;
-        } catch (error) {
-          console.error("OTP verification error:", error);
-          return { responseCode: 400 };
-        }
-      };
 
 const sendverification = async (e) => {
   e.preventDefault()
