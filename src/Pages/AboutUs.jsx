@@ -23,7 +23,7 @@ const AboutUs = () => {
           </h2>
 
           <p className="text-gray-700 text-base sm:text-lg">
-            At <strong>Landsathi</strong> is your trusted partner in navigating India’s diverse and dynamic land landscape. From industrial zones to logistics hubs, agri-based holdings to infrastructure-ready parcels, we specialize in connecting you with the right land—strategically, transparently, and efficiently.
+           <strong>Landsathi</strong> is your trusted partner in navigating India’s diverse and dynamic land landscape. From industrial zones to logistics hubs, agri-based holdings to infrastructure-ready parcels, we specialize in connecting you with the right land—strategically, transparently, and efficiently.
 
 India’s land market is vast and often complex. At Landsathi, we simplify the process. With a deep understanding of regional regulations, market trends, and local dynamics, we help businesses, investors, and developers identify and acquire land that aligns with their goals. Whether you're seeking expansion, setting up a manufacturing unit, developing a township, or exploring long-term investments, Landsathi ensures you're never alone in your land journey.
 

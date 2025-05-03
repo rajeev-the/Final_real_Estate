@@ -49,7 +49,7 @@ const SerachFilter = ({searchcart}) => {
     { label: "Agricultural", value: "Agricultural" },
     { label: "Institutional", value: "Institutional" },
   ];
-  
+
   const [selected, setSelected] = useState(propertyTypes[0]);
   const [selected2, setSelected2] = useState(price[0]);
   const [selected3, setSelected3] = useState(Zone[0]);
@@ -63,7 +63,7 @@ const SerachFilter = ({searchcart}) => {
   
   const [buyorlesese, setbuyorlesese] = useState(buydata[0]);
   const { filterlist, setfilterlist } = useFilterContext();
-  
+
   const dummyData = [
     "Haryana",
     "New Delhi",
