@@ -26,6 +26,8 @@ import ScrollToTop from './componets/ScrollToTop';
 
 import Careers from './Pages/Careers';
 import Terms from './componets/Terms';
+import Filter from './componets/Filter';
+import { ListFilterProvider } from './Context/ListFilter';
 
 const App = () => {
   return (
@@ -33,6 +35,7 @@ const App = () => {
       <ToastContainer position="top-right" autoClose={3000} />
       <AppProvider>
         <FilterProvider>
+          <ListFilterProvider>
         <ScrollToTop />
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -52,6 +55,7 @@ const App = () => {
 
              
               <Route path="search" element={<SerachPage />} />
+              <Route path="test" element={<Filter />} />
               <Route path="search/land/:id" element={<ViewLand />} />
               <Route path='terms' element={<Terms/>}/>
              
@@ -79,6 +83,7 @@ const App = () => {
               <Route path="holding/land/:id" element={<ViewLand />} />
             </Route>
           </Routes>
+          </ListFilterProvider>
         </FilterProvider>
       </AppProvider>
     </>

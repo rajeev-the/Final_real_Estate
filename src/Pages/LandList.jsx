@@ -1,16 +1,18 @@
 import React, { useState ,useEffect } from 'react'
-import { Input, Button } from "antd";
-import { FilterOutlined } from "@ant-design/icons";
-import CustomCard  from '../componets/CustomCard'
+
+
+
 import { Typography } from 'antd';
 const { Title } = Typography;
-
+import { useListFilterContext } from '../Context/ListFilter';
 import LandCard from '../componets/LandCard';
 
 import { Link } from 'react-router-dom';
-import { ArrowRightOutlined ,SearchOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined ,CloseOutlined  ,FilterOutlined  } from '@ant-design/icons';
 import xx2 from "../assets/mmm.jpg"
 import {useAppContext } from "../Context/Poperty_context"
+import Filter from '../componets/Filter';
+
 
 
 
@@ -19,35 +21,31 @@ import {useAppContext } from "../Context/Poperty_context"
 
 const LandList = () => {
 
-  const [data, setData] = useState(); // ✅ Initialize as empty array
   const [dumy , setDumy] = useState()
     const { property ,maindata  } = useAppContext();
       const [selectedLocation, setSelectedLocation] = useState("Haryana");
-    
+        const { Listfilterlist, setListfilterlist } = useListFilterContext();
+        const [refreshFilter, setRefreshFilter] = useState(false);
+        const [isopen , setIsopen] = useState(true)
+
+ 
+   
 
   useEffect(() => {
    
 
     
-    setData(property.filter((et)=>et.state == selectedLocation))
+    setListfilterlist(property.filter((et)=>et.state == selectedLocation))
     setDumy(maindata)
 
-  }, [property,maindata ,selectedLocation]);
+  }, [property,maindata ,selectedLocation,refreshFilter ]);
 
 
-  const groupedProperties = (data || []).reduce((acc, property) => {
-    if (property?.state) {  // Ensure state exists
-      if (!acc[property.state]) {
-        acc[property.state] = [];
-      }
-      acc[property.state].push(property);
-    }
-    return acc;
-  }, {});
+
   
 
   
-  const locations = ["Haryana", "Delhi", "Punjab", "Uttar Pradesh" ,"Rajasthan"];
+  const locations = ["Haryana", "Delhi", "Punjab", "Uttar Pradesh" ,"Rajasthan" ];
 
   return (
     <div className='mt-[50px] md:mt-[100px] sm:p-2 md:p-[15px] w-full'>
@@ -180,13 +178,25 @@ const LandList = () => {
 </div>
 
 {/* serach section */}
+
+<button 
+  className="block md:hidden text-[16px] font-bold  mx-3 py-1 px-3 bg-white border rounded hover:bg-[#D65F00] hover:text-white"
+onClick={() => setIsopen(!isopen)}
+>
+  {
+    isopen ? <FilterOutlined/>:<CloseOutlined />
+  }
+ 
+</button>
   
   <section 
   
   
-  className='bg-white border border-slate-100 py-8 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300  '>
+  className='bg-white border relative z-0 border-slate-100 py-8 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300  flex   justify-around  '>
+    <Filter filterdata={Listfilterlist}  setRefreshFilter={setRefreshFilter}  iopen={isopen}  setIsopen={setIsopen} />
+    <div className='w-full '>
 
-  <div className="flex flex-wrap justify-center gap-3 md:gap-8 lg:gap-20 mb-6 sm:p-5">
+  <div className="flex flex-wrap justify-center gap-3 md:gap-2 lg:gap-20 mb-6 sm:p-5">
   {locations.map((name, index) => (
     <button
    
@@ -205,8 +215,8 @@ const LandList = () => {
 </div>
 
   <div className='flex flex-col gap-8 md:gap-12'>
-    {Object.keys(groupedProperties).map(stateId => (
-      <div key={stateId} className='flex flex-col group'>
+   
+      <div  className='flex flex-col group'>
         <div className='flex items-center gap-4 mb-6 md:mb-8'>
           <div className='hidden md:block w-12 h-px bg-[#826CB0]'></div>
           <Title level={3} 
@@ -216,12 +226,14 @@ const LandList = () => {
               paddingLeft: '1rem',
               letterSpacing: '0.05em'
             }}>
-            {groupedProperties[stateId][0].state}
+            {selectedLocation}
             <span className='ml-3 text-[#826CB0] text-lg'>✧</span>
           </Title>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full max-w-screen-2xl mx-auto px-4">
-  {groupedProperties[stateId].map(property => (
+        <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-3  w-full max-w-screen-2xl mx-auto px-4">
+
+
+  {Listfilterlist.map(property => (
     <Link 
       to={`/Land/${property.id}`} 
       key={property.id}
@@ -246,8 +258,12 @@ const LandList = () => {
         
         <div className='mt-8 md:mt-12 border-t border-slate-100 group-last:border-0'></div>
       </div>
-    ))}
+
   </div>
+  </div>
+
+
+
 </section>
 </div>
 
