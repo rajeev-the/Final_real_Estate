@@ -108,7 +108,7 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
     });
 
     setListfilterlist(filtered); // Update filteredList in context
-    setRefreshFilter(prev => !prev); // Trigger refresh in parent component
+
 
   };
 
@@ -148,6 +148,7 @@ const  resetfilterinmobile =()=>{
   setMinRoadWidth("");
   setMaxRoadWidth("");
   setIsopen(!iopen)
+  setRefreshFilter(prev => !prev); // Trigger refresh in parent component
 }
 
 
