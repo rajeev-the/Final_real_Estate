@@ -108,7 +108,7 @@ const Navbar = ({ data ,openLogin  }) => {
       <ul className="hidden    md:flex items-center space-x-6 text-white font-medium">
         {[
           { name: "Home", link: "/" },
-          { name: "Our Explor", link: "landlist" },
+          { name: "Explore Lands", link: "landlist" },
           { name: "Our Partners", link: "agents" },
           { name: "Contact Us", link: "ContactUs" },
         ].map((item, index) => (
@@ -238,7 +238,7 @@ const Navbar = ({ data ,openLogin  }) => {
       <div className="md:hidden  absolute top-full left-0 w-full bg-[#000000] shadow-lg p-4 flex flex-col items-center space-y-4">
         {[
           { name: "Home", link: "/" },
-          { name: "Our Explor", link: "landlist" },
+          { name: "Explore Lands", link: "landlist" },
           { name: "Our Partners", link: "agents" },
           { name: "Contact Us", link: "ContactUs" }
          
