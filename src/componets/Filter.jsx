@@ -132,7 +132,7 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
   
  
   };
-const applyFiltersinmobile =()=>{
+const  resetfilterinmobile =()=>{
   setLocationInput("");
   setLandCategory("Residential");
   setSelectedLandUnit("");
@@ -293,13 +293,13 @@ const applyFiltersinmobile =()=>{
         <h2 className="text-lg font-bold">FILTERS</h2>
         <div className="flex gap-3">
         <button 
-        onClick={resetFilters}
+        onClick={resetfilterinmobile}
         className="text-[16px] font-bold py-1 px-3 bg-white border rounded hover:bg-[#D65F00] hover:text-white"
       >
         Reset
       </button>
           <button
-            onClick={applyFiltersinmobile}
+            onClick={applyFilters}
             className="bg-[#1c2b2d] text-white font-bold py-1 text-sm px-2 rounded hover:bg-[#D65F00]"
           >
             Apply Filter
