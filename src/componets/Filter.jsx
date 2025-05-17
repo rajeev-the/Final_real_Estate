@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import {useAppContext}  from "../Context/Poperty_context"
 import { useListFilterContext } from '../Context/ListFilter';
 
 
 const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
-  const {  ListfilteredList, setListfilterlist } = useListFilterContext(); // Updated context usage
+  const {  Listfilterlist, setListfilterlist } = useListFilterContext(); // Updated context usage
   const [landCategory, setLandCategory] = useState("Residential");
+  const [Blockmain, setBlockmain] = useState("Residential");
+  const { property ,maindata  } = useAppContext();
   const [locationInput, setLocationInput] = useState("");
   const [selectedLandUnit, setSelectedLandUnit] = useState("");
   const [minLandSize, setMinLandSize] = useState("");
@@ -18,6 +21,8 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
   const [minRoadWidth, setMinRoadWidth] = useState("");
   const [maxRoadWidth, setMaxRoadWidth] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+
+
 
   const dummyData = [
     "Haryana", "New Delhi", "Delhi", "Punjab", "Uttar pradesh", 
@@ -35,6 +40,13 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
     "Institutional",
     "Mixed-Use",
     "Recreational / Green Zone",
+  ];
+
+
+   const blockmain = [
+    "Top Rated",
+    "Featured Listing",
+
   ];
 
   const landUnits = ["Acre", "Sq. Ft", "Sq. Yd", "Sq. Mtr."];
@@ -127,6 +139,7 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
     setSelectedFrontageUnit("");
     setMinRoadWidth("");
     setMaxRoadWidth("");
+    setBlockmain("")
     setRefreshFilter(prev => !prev); // Trigger refresh in parent component
     
 
@@ -153,273 +166,308 @@ const  resetfilterinmobile =()=>{
 
 
   return (
-<>
+  <>
       
-
-<div className="hidden md:block w-full max-w-xs text-[#1c2b2d] bg-white p-4 rounded shadow-md">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">FILTERS</h2>
-        <div className="flex gap-3">
-        <button 
+<div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="hidden md:block w-full max-w-xs text-[#1c2b2d] bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100">
+  <div className="flex justify-between items-center mb-6 pb-4 border-b-2 border-gray-100">
+    <h2 className="text-xl font-black tracking-tight">FILTERS</h2>
+    <div className="flex gap-2">
+      <button 
         onClick={resetFilters}
-        className="text-[16px] font-bold py-1 px-3 bg-white border rounded hover:bg-[#D65F00] hover:text-white"
+        className="text-sm font-bold py-2 px-4 bg-white border-2 border-gray-300 rounded-lg hover:bg-[#D65F00] hover:text-white hover:border-transparent transition-colors"
       >
         Reset
       </button>
-          <button
-            onClick={applyFilters}
-            className="bg-[#1c2b2d] text-white font-bold py-1 text-sm px-2 rounded hover:bg-[#D65F00]"
+      <button
+        onClick={applyFilters}
+        className="bg-[#1c2b2d] text-sm font-bold py-2 px-4 text-white rounded-lg hover:bg-[#D65F00] transition-colors"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+
+ <div className="mb-4">
+
+   <div className="grid grid-cols-2 gap-2">
+      {blockmain.map(category => (
+        <button
+          key={category}
+          onClick={() =>{
+          setBlockmain(category)
+          if(category === "Top Rated"){
+             setListfilterlist(maindata.top_rate)
+          }
+          else{
+            setListfilterlist(maindata.featured)
+          }
+          }  }
+          className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors
+            ${Blockmain === category 
+              ? "bg-[#D65F00] text-white border-[#D65F00]"
+              : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"}`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+      
+              </div>
+  {/* Location Input */}
+  <div className="mb-6 relative">
+    <label className="block text-sm font-bold mb-2">Location</label>
+    <input
+      type="text"
+      placeholder="All listed lands"
+      value={locationInput}
+      onChange={handleLocationChange}
+      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-[#1c2b2d] focus:ring-0"
+    />
+    {suggestions.length > 0 && (
+      <ul className="absolute top-full left-0 mt-2 z-50 w-full bg-white border-2 border-[#1c2b2d] rounded-lg shadow-xl max-h-48 overflow-y-auto">
+        {suggestions.map((item, index) => (
+          <li
+            key={index}
+            onClick={() => handleSuggestionClick(item)}
+            className="px-4 py-3 text-sm hover:bg-gray-50 cursor-pointer border-b last:border-b-0 border-gray-100"
           >
-            Apply Filter
-          </button>
-        </div>
-      </div>
+            {item}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
 
-      {/* Location Input */}
-      <div className="mb-4 relative">
-        <label className="block text-sm font-medium mb-1">Location</label>
-        <input
-          type="text"
-          placeholder="All listed lands"
-          value={locationInput}
-          onChange={handleLocationChange}
-          className="w-full border rounded px-3 py-2 text-sm"
-        />
-        {suggestions.length > 0 && (
-          <ul className="absolute top-full left-0 mt-1 z-50 w-full bg-white border border-[#1c2b2d] rounded-xl shadow-md max-h-48 overflow-y-auto">
-            {suggestions.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => handleSuggestionClick(item)}
-                className="px-4 py-2 text-sm hover:bg-[#f2f2ff] cursor-pointer"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* Land Size Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Land Size</label>
-        <select
-          value={selectedLandUnit}
-          onChange={(e) => setSelectedLandUnit(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
-        >
-          <option value="">Select Unit</option>
-          {landUnits.map((unit) => (
-            <option key={unit} value={unit}>{unit}</option>
-          ))}
-        </select>
-        <div className="flex gap-2 mt-3">
-          {renderSelect(landSizeOptions, "Min", minLandSize, setMinLandSize)}
-          {renderSelect(landSizeOptions, "Max", maxLandSize, setMaxLandSize)}
-        </div>
-      </div>
-
-      {/* Price Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mt-1">Price / Acre</label>
-        <select
-          value={selectedPriceUnit}
-          onChange={(e) => setSelectedPriceUnit(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
-        >
-          <option value="">Select Currency</option>
-          {priceUnits.map((unit) => (
-            <option key={unit} value={unit}>{unit}</option>
-          ))}
-        </select>
-        <div className="flex gap-2 mt-3">
-          {renderSelect(priceOptions, "Min", minPrice, setMinPrice)}
-          {renderSelect(priceOptions, "Max", maxPrice, setMaxPrice)}
-        </div>
-      </div>
-
-      {/* Road Width Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Road Width (ft)</label>
-        <div className="flex gap-2">
-          {renderSelect(roadWidthOptions, "Min", minRoadWidth, setMinRoadWidth)}
-          {renderSelect(roadWidthOptions, "Max", maxRoadWidth, setMaxRoadWidth)}
-        </div>
-      </div>
-
-      {/* Frontage Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Frontage</label>
-        <select
-          value={selectedFrontageUnit}
-          onChange={(e) => setSelectedFrontageUnit(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
-        >
-          <option value="">Select Unit</option>
-          {frontageUnits.map((unit) => (
-            <option key={unit} value={unit}>{unit}</option>
-          ))}
-        </select>
-        <div className="flex gap-2 mt-3">
-          {renderSelect(frontageOptions, "Min", minFrontage, setMinFrontage)}
-          {renderSelect(frontageOptions, "Max", maxFrontage, setMaxFrontage)}
-        </div>
-      </div>
-
-      {/* Land Category Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Land Category</label>
-        <div className="grid grid-cols-2 gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setLandCategory(category)}
-              className={`text-sm px-2 py-1 rounded border ${
-                landCategory === category
-                  ? "bg-[#D65F00] text-white"
-                  : "bg-white text-black hover:bg-gray-100"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+  {/* Filter Sections */}
+  {[
+    { 
+      label: "Land Size", 
+      unit: selectedLandUnit, 
+      setUnit: setSelectedLandUnit,
+      units: landUnits,
+      min: minLandSize,
+      setMin: setMinLandSize,
+      max: maxLandSize,
+      setMax: setMaxLandSize,
+      options: landSizeOptions
+    },
+    {
+      label: "Price",
+      unit: selectedPriceUnit,
+      setUnit: setSelectedPriceUnit,
+      units: priceUnits,
+      min: minPrice,
+      setMin: setMinPrice,
+      max: maxPrice,
+      setMax: setMaxPrice,
+      options: priceOptions
+    }
+  ].map((section, idx) => (
+    <div key={idx} className="mb-6 pb-4 border-b-2 border-gray-100">
+      <label className="block text-sm font-bold mb-3">{section.label}</label>
+      <select
+        value={section.unit}
+        onChange={(e) => section.setUnit(e.target.value)}
+        className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
+      >
+        <option value="">Select Unit</option>
+        {section.units.map(unit => (
+          <option key={unit} value={unit}>{unit}</option>
+        ))}
+      </select>
+      <div className="grid grid-cols-2 gap-3">
+        {renderSelect(section.options, "Min", section.min, section.setMin, true)}
+        {renderSelect(section.options, "Max", section.max, section.setMax, true)}
       </div>
     </div>
+  ))}
+
+  {/* Road Width Filter */}
+  <div className="mb-6 pb-4 border-b-2 border-gray-100">
+    <label className="block text-sm font-bold mb-3">Road Width (ft)</label>
+    <div className="grid grid-cols-2 gap-3">
+      {renderSelect(roadWidthOptions, "Min", minRoadWidth, setMinRoadWidth, true)}
+      {renderSelect(roadWidthOptions, "Max", maxRoadWidth, setMaxRoadWidth, true)}
+    </div>
+  </div>
+
+  {/* Frontage Filter */}
+  <div className="mb-6">
+    <label className="block text-sm font-bold mb-3">Frontage</label>
+    <select
+      value={selectedFrontageUnit}
+      onChange={(e) => setSelectedFrontageUnit(e.target.value)}
+      className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
+    >
+      <option value="">Select Unit</option>
+      {frontageUnits.map(unit => (
+        <option key={unit} value={unit}>{unit}</option>
+      ))}
+    </select>
+    <div className="grid grid-cols-2 gap-3">
+      {renderSelect(frontageOptions, "Min", minFrontage, setMinFrontage, true)}
+      {renderSelect(frontageOptions, "Max", maxFrontage, setMaxFrontage, true)}
+    </div>
+  </div>
+
+  {/* Land Category Filter */}
+  <div className="mb-2">
+    <label className="block text-sm font-bold mb-3">Land Category</label>
+    <div className="grid grid-cols-2 gap-2">
+      {categories.map(category => (
+        <button
+          key={category}
+          onClick={() => setLandCategory(category)}
+          className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors
+            ${landCategory === category 
+              ? "bg-[#D65F00] text-white border-[#D65F00]"
+              : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"}`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
 
 {
 
 !iopen ? 
-<div className=" absolute left-0 top-0 z-[999] w-full text-[#1c2b2d] bg-white p-4 rounded shadow-md">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">FILTERS</h2>
-        <div className="flex gap-3">
-        <button 
-        onClick={resetfilterinmobile}
-        className="text-[16px] font-bold py-1 px-3 bg-white border rounded hover:bg-[#D65F00] hover:text-white"
+<div  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className=" absolute left-0 top-0 z-[999] w-full text-[#1c2b2d] bg-white p-4 rounded shadow-md">
+      <div className="flex justify-between items-center mb-6 pb-4 border-b-2 border-gray-100">
+    <h2 className="text-xl font-black tracking-tight">FILTERS</h2>
+    <div className="flex gap-2">
+      <button 
+        onClick={resetFilters}
+        className="text-sm font-bold py-2 px-4 bg-white border-2 border-gray-300 rounded-lg hover:bg-[#D65F00] hover:text-white hover:border-transparent transition-colors"
       >
         Reset
       </button>
-          <button
-            onClick={applyFilters}
-            className="bg-[#1c2b2d] text-white font-bold py-1 text-sm px-2 rounded hover:bg-[#D65F00]"
+      <button
+        onClick={applyFilters}
+        className="bg-[#1c2b2d] text-sm font-bold py-2 px-4 text-white rounded-lg hover:bg-[#D65F00] transition-colors"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+
+  {/* Location Input */}
+  <div className="mb-6 relative">
+    <label className="block text-sm font-bold mb-2">Location</label>
+    <input
+      type="text"
+      placeholder="All listed lands"
+      value={locationInput}
+      onChange={handleLocationChange}
+      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-[#1c2b2d] focus:ring-0"
+    />
+    {suggestions.length > 0 && (
+      <ul className="absolute top-full left-0 mt-2 z-50 w-full bg-white border-2 border-[#1c2b2d] rounded-lg shadow-xl max-h-48 overflow-y-auto">
+        {suggestions.map((item, index) => (
+          <li
+            key={index}
+            onClick={() => handleSuggestionClick(item)}
+            className="px-4 py-3 text-sm hover:bg-gray-50 cursor-pointer border-b last:border-b-0 border-gray-100"
           >
-            Apply Filter
-          </button>
-        </div>
-      </div>
+            {item}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
 
-      {/* Location Input */}
-      <div className="mb-4 relative">
-        <label className="block text-sm font-medium mb-1">Location</label>
-        <input
-          type="text"
-          placeholder="All listed lands"
-          value={locationInput}
-          onChange={handleLocationChange}
-          className="w-full border rounded px-3 py-2 text-sm"
-        />
-        {suggestions.length > 0 && (
-          <ul className="absolute top-full left-0 mt-1 z-50 w-full bg-white border border-[#1c2b2d] rounded-xl shadow-md max-h-48 overflow-y-auto">
-            {suggestions.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => handleSuggestionClick(item)}
-                className="px-4 py-2 text-sm hover:bg-[#f2f2ff] cursor-pointer"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
+  {/* Filter Sections */}
+  {[
+    { 
+      label: "Land Size", 
+      unit: selectedLandUnit, 
+      setUnit: setSelectedLandUnit,
+      units: landUnits,
+      min: minLandSize,
+      setMin: setMinLandSize,
+      max: maxLandSize,
+      setMax: setMaxLandSize,
+      options: landSizeOptions
+    },
+    {
+      label: "Price",
+      unit: selectedPriceUnit,
+      setUnit: setSelectedPriceUnit,
+      units: priceUnits,
+      min: minPrice,
+      setMin: setMinPrice,
+      max: maxPrice,
+      setMax: setMaxPrice,
+      options: priceOptions
+    }
+  ].map((section, idx) => (
+    <div key={idx} className="mb-6 pb-4 border-b-2 border-gray-100">
+      <label className="block text-sm font-bold mb-3">{section.label}</label>
+      <select
+        value={section.unit}
+        onChange={(e) => section.setUnit(e.target.value)}
+        className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
+      >
+        <option value="">Select Unit</option>
+        {section.units.map(unit => (
+          <option key={unit} value={unit}>{unit}</option>
+        ))}
+      </select>
+      <div className="grid grid-cols-2 gap-3">
+        {renderSelect(section.options, "Min", section.min, section.setMin, true)}
+        {renderSelect(section.options, "Max", section.max, section.setMax, true)}
       </div>
+    </div>
+  ))}
 
-      {/* Land Size Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Land Size</label>
-        <select
-          value={selectedLandUnit}
-          onChange={(e) => setSelectedLandUnit(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
+  {/* Road Width Filter */}
+  <div className="mb-6 pb-4 border-b-2 border-gray-100">
+    <label className="block text-sm font-bold mb-3">Road Width (ft)</label>
+    <div className="grid grid-cols-2 gap-3">
+      {renderSelect(roadWidthOptions, "Min", minRoadWidth, setMinRoadWidth, true)}
+      {renderSelect(roadWidthOptions, "Max", maxRoadWidth, setMaxRoadWidth, true)}
+    </div>
+  </div>
+
+  {/* Frontage Filter */}
+  <div className="mb-6">
+    <label className="block text-sm font-bold mb-3">Frontage</label>
+    <select
+      value={selectedFrontageUnit}
+      onChange={(e) => setSelectedFrontageUnit(e.target.value)}
+      className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
+    >
+      <option value="">Select Unit</option>
+      {frontageUnits.map(unit => (
+        <option key={unit} value={unit}>{unit}</option>
+      ))}
+    </select>
+    <div className="grid grid-cols-2 gap-3">
+      {renderSelect(frontageOptions, "Min", minFrontage, setMinFrontage, true)}
+      {renderSelect(frontageOptions, "Max", maxFrontage, setMaxFrontage, true)}
+    </div>
+  </div>
+
+  {/* Land Category Filter */}
+  <div className="mb-2">
+    <label className="block text-sm font-bold mb-3">Land Category</label>
+    <div className="grid grid-cols-2 gap-2">
+      {categories.map(category => (
+        <button
+          key={category}
+          onClick={() => setLandCategory(category)}
+          className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors
+            ${landCategory === category 
+              ? "bg-[#D65F00] text-white border-[#D65F00]"
+              : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"}`}
         >
-          <option value="">Select Unit</option>
-          {landUnits.map((unit) => (
-            <option key={unit} value={unit}>{unit}</option>
-          ))}
-        </select>
-        <div className="flex gap-2 mt-3">
-          {renderSelect(landSizeOptions, "Min", minLandSize, setMinLandSize)}
-          {renderSelect(landSizeOptions, "Max", maxLandSize, setMaxLandSize)}
-        </div>
-      </div>
-
-      {/* Price Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mt-1">Price / Acre</label>
-        <select
-          value={selectedPriceUnit}
-          onChange={(e) => setSelectedPriceUnit(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
-        >
-          <option value="">Select Currency</option>
-          {priceUnits.map((unit) => (
-            <option key={unit} value={unit}>{unit}</option>
-          ))}
-        </select>
-        <div className="flex gap-2 mt-3">
-          {renderSelect(priceOptions, "Min", minPrice, setMinPrice)}
-          {renderSelect(priceOptions, "Max", maxPrice, setMaxPrice)}
-        </div>
-      </div>
-
-      {/* Road Width Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Road Width (ft)</label>
-        <div className="flex gap-2">
-          {renderSelect(roadWidthOptions, "Min", minRoadWidth, setMinRoadWidth)}
-          {renderSelect(roadWidthOptions, "Max", maxRoadWidth, setMaxRoadWidth)}
-        </div>
-      </div>
-
-      {/* Frontage Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Frontage</label>
-        <select
-          value={selectedFrontageUnit}
-          onChange={(e) => setSelectedFrontageUnit(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
-        >
-          <option value="">Select Unit</option>
-          {frontageUnits.map((unit) => (
-            <option key={unit} value={unit}>{unit}</option>
-          ))}
-        </select>
-        <div className="flex gap-2 mt-3">
-          {renderSelect(frontageOptions, "Min", minFrontage, setMinFrontage)}
-          {renderSelect(frontageOptions, "Max", maxFrontage, setMaxFrontage)}
-        </div>
-      </div>
-
-      {/* Land Category Filter */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Land Category</label>
-        <div className="grid grid-cols-2 gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setLandCategory(category)}
-              className={`text-sm px-2 py-1 rounded border ${
-                landCategory === category
-                  ? "bg-[#D65F00] text-white"
-                  : "bg-white text-black hover:bg-gray-100"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>:""
+          {category}
+        </button>
+      ))}
+    </div>
+  </div> 
+    </div>   :""
  
 
 
