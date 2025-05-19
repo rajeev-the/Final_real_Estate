@@ -67,8 +67,19 @@ onClick={() => setIsopen(!isopen)}
   <section 
   
   
-  className='bg-white border relative z-0 border-slate-100 py-2 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300  flex   justify-around  '>
-    <Filter filterdata={Listfilterlist}  setRefreshFilter={setRefreshFilter}  iopen={isopen}  setIsopen={setIsopen} />
+  className='bg-white border relative z-0 border-slate-100 py-2 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300  flex    justify-around  '>
+
+<div className="sticky top-4 self-start max-h-[100vh]  ">
+  <Filter 
+    filterdata={Listfilterlist}  
+    setRefreshFilter={setRefreshFilter}  
+    iopen={isopen}  
+    setIsopen={setIsopen} 
+  />
+</div>
+
+
+   
     <div className='w-full '>
 
   <div className="flex flex-wrap justify-center gap-3 md:gap-2 lg:gap-20 mb-6 sm:p-5">

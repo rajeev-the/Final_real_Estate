@@ -43,6 +43,9 @@ const ViewLand = () => {
     getAgent();
   }, [data]); // Runs only when data is set
 
+
+  console.log(data)
+
   const handleShareClick = async () => { const shareUrl = window.location.href ; const shareText =` ${data?.address} - ${data?.acre} ${data?.unit_of_land}, ₹${data?.acre_price} ${data?.money_unit} / ${data?.unit_of_land}`;
 
 if (navigator.share) { try { await navigator.share({ title: document.title, text: shareText, url: shareUrl, }); } catch (err) { console.error("Sharing failed:", err); } } else { try { await navigator.clipboard.writeText(shareUrl); toast.success("Link copied to clipboard!", { position: "top-right", autoClose: 2000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, theme: "colored", }); } catch (err) { toast.error("Failed to copy link."); } } };
