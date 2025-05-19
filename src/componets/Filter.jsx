@@ -29,7 +29,7 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
   const dummyData = [
     "Haryana", "New Delhi", "Delhi", "Punjab", "Uttar pradesh", 
     "Gurgaon", "Faridabad", "Noida", "Ghaziabad", "Greater Noida", 
-    "Sonipat", "Panipat", "Ambala", "Kurukshetra", "Sisana"
+    "Sonipat", "Panipat", "Ambala", "Kurukshetra", "Sisana","Gurugram"
   ];
 
   const [suggestions, setSuggestions] = useState([]);
