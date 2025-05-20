@@ -79,7 +79,8 @@ const SerachFilter = ({searchcart}) => {
     "Panipat",
     "Ambala",
     "Kurukshetra",
-    "Sisana"
+    "Sisana",
+    "Gurugram"
   ];
   
   const getfilterdata = (land_category, land_price, zone, address, sale_or_lease) => {

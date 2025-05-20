@@ -52,9 +52,9 @@ const LandList = () => {
     <div className='mt-[90px] md:mt-[50px] sm:p-2 md:p-[15px] w-full'>
 
 
-
-
-<button 
+<div className='flex   justify-between     items-center'>
+     
+     <button 
   className="block md:hidden text-[16px] font-bold  mx-3 py-1 px-3 bg-white border rounded hover:bg-[#D65F00] hover:text-white"
 onClick={() => setIsopen(!isopen)}
 >
@@ -63,6 +63,17 @@ onClick={() => setIsopen(!isopen)}
   }
  
 </button>
+
+        <div className='block md:hidden'>
+  <SortDropdown  margin={0} margin1={10} />
+</div>
+
+
+
+
+</div>
+
+
   
   <section 
   
@@ -120,7 +131,11 @@ onClick={() => setIsopen(!isopen)}
 
           </div>
           
-          <SortDropdown />
+        <div className='hidden md:block'>
+  <SortDropdown  margin={60} margin1={0} />
+</div>
+
+        
 
 
         </div>

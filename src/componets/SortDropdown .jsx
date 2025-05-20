@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useListFilterContext } from '../Context/ListFilter';
 
-const SortDropdown = () => {
+const SortDropdown = ({margin,margin1}) => {
 const [selectedSort, setSelectedSort] = useState('Relevance');
 const [isOpen, setIsOpen] = useState(false);
  const { Listfilterlist, setListfilterlist } = useListFilterContext();
@@ -52,7 +52,7 @@ const [isOpen, setIsOpen] = useState(false);
   ];
 
   return (
-    <div className="flex  mr-[60px] items-center gap-2 font-medium text-gray-700">
+    <div className={`flex  mr-[${margin}px]   mr-[${margin1}px]  items-center gap-2 font-medium text-gray-700 `}>
 
       <div className="relative group">
         <div className="relative inline-block">
