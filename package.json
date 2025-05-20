@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
     "@headlessui/react": "^2.2.1",
     "@heroicons/react": "^2.2.0",

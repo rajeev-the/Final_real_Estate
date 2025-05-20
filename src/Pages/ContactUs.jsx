@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import emailjs from "@emailjs/browser"
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqhjwNnCTbEqK0n6U30Isw8R9bUYUShmMx5ASO-jBLe51MInNrMPZFYbcARP8V8FPCiA/exec";
+const SERVICE_ID = 'service_b25yvj8';
+const TEMPLATE_ID = 'template_mvyl40w';
+const PUBLIC_KEY = 'ToYWVFzTB9B4el9Bf';
+
 
 const ContactUs = ({ margin }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +16,31 @@ const ContactUs = ({ margin }) => {
     phone: '',
     message: ''
   });
+   const showSuccessToast = (message) => {
+      toast.success(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    };
+  
+    const showErrorToast = (message) => {
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,22 +53,20 @@ const ContactUs = ({ margin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: { 'Content-Type': 'application/json' }
-      });
+    const templateParams = {
+      from_name: formData.name,
+      phone: formData.phone,
+      message: formData.message,
+    };
 
-      if (res.ok) {
-        alert("Message sent successfully!");
-        setFormData({ name: '', phone: '', message: '' });
-      } else {
-        alert("Something went wrong.");
-      }
+    try {
+      const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      console.log(result.text);
+      showSuccessToast('Message sent successfully!');
+      setFormData({ name: '', phone: '', message: '' });
     } catch (error) {
-      console.error("Error submitting form", error);
-      alert("Failed to send message.");
+      console.error('EmailJS Error:', error);
+      showErrorToast('Failed to send message.');
     }
   };
 
@@ -100,9 +129,6 @@ const ContactUs = ({ margin }) => {
               </svg>
               Send Message
             </button>
-
-            {/* Contact Info Section remains unchanged */}
-            {/* You can keep the 3 contact blocks here */}
           </form>
         </div>
       </div>
