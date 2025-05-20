@@ -20,29 +20,25 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
   const [selectedFrontageUnit, setSelectedFrontageUnit] = useState("");
   const [minRoadWidth, setMinRoadWidth] = useState("");
   const [maxRoadWidth, setMaxRoadWidth] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
-   const minmPrice = 0;
-  const maxmPrice = 500;
-  const [totalPrice, setTotalPrice] = useState(500);
-
+const [selectdumy, setSelectdumy] = useState("")
 
   const dummyData = [
     "Haryana", "New Delhi", "Delhi", "Punjab", "Uttar pradesh", 
-    "Gurgaon", "Faridabad", "Noida", "Ghaziabad", "Greater Noida", 
+    , "Faridabad", "Noida", "Ghaziabad", "Greater Noida", 
     "Sonipat", "Panipat", "Ambala", "Kurukshetra", "Sisana","Gurugram"
   ];
 
   const [suggestions, setSuggestions] = useState([]);
 
   const categories = [
-    "Residential",
-    "Commercial",
-    "Industrial",
-    "Agricultural",
-    "Institutional",
-    "Mixed-Use",
-    "Recreational / Green Zone",
-  ];
+  { value: "residential", name: "Residential" },
+  { value: "commercial", name: "Commercial" },
+  { value: "agricultural", name: "Industrial / Agricultural" },
+  { value: "institutional", name: "Institutional" },
+  { value: "mixed-use", name: "Mixed-Use" },
+  { value: "recreational-green-zone", name: "Recreational / Green Zone" },
+];
+
 
 
    const blockmain = [
@@ -71,20 +67,7 @@ const Filter = ({filterdata , setRefreshFilter , iopen ,setIsopen }) => {
 //   "Hectare": 2.47,
 // };
 
- function matchesFilter(item, maxPriceCr) {
-  const unitMap = {
-    'thousand': 1_000,
-    'lakh': 1_00_000,
-    'crore': 1_00_00_000
-  };
 
-  const itemUnit = item.money_unit?.toLowerCase() || 'crore';
-  const itemPriceInRs = item.land_price * unitMap[itemUnit];
-
-  const maxInRs = maxPriceCr * unitMap['crore']; // Convert to rupees
-
-  return itemPriceInRs <= maxInRs;
-}
 
 
 
@@ -225,10 +208,10 @@ const resetfilterinmobile = () => {
   return (
   <>
       
- <div className="hidden md:block w-full max-w-xs">
+ <div className="hidden md:block w-full max-w-xl  ">
     <div
       style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}
-      className="sticky top-4 max-h-[90vh] overflow-y-auto text-[#1c2b2d] bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100"
+      className="sticky top-4 max-h-[98vh] overflow-y-auto text-[#1c2b2d] bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100"
     >
       {/* Header */}
       <div className="flex justify-between items-center gap-5 mb-6 pb-4 border-b-2 border-gray-100">
@@ -376,23 +359,42 @@ const resetfilterinmobile = () => {
       {/* Land Category */}
       <div className="mb-2">
         <label className="block text-sm font-bold mb-3">Land Category</label>
-        <div className="grid grid-cols-2 gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setLandCategory(category)}
-              className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors ${
-                landCategory === category
-                  ? "bg-[#D65F00] text-white border-[#D65F00]"
-                  : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+      <div className="grid grid-cols-2 gap-2">
+  {categories.map((category) => (
+    <button
+      key={category.value}
+      onClick={() => {
+        setLandCategory(category.value);     // still used for filters
+        setSelectdumy(category.name);        // still available if needed for UI
+      }}
+      className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors ${
+        landCategory === category.value       // <-- tracking by value now
+          ? "bg-[#D65F00] text-white border-[#D65F00]"
+          : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"
+      }`}
+    >
+      {category.name}
+    </button>
+  ))}
+</div>
+
       </div>
+          <div className= "flex  items-end  justify-end gap-3  mt-2">
+          <button
+            onClick={resetFilters}
+            className="text-sm font-bold py-2 px-4 bg-white border-2 border-gray-300 rounded-lg hover:bg-[#D65F00] hover:text-white hover:border-transparent transition-colors"
+          >
+            Reset
+          </button>
+          <button
+            onClick={applyFilters}
+            className="bg-[#1c2b2d] text-sm font-bold py-2 px-4 text-white rounded-lg hover:bg-[#D65F00] transition-colors"
+          >
+            Apply
+          </button>
+        </div>
     </div>
+  
   </div>
 
 {
