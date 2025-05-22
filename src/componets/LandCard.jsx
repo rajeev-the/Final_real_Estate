@@ -2,7 +2,7 @@ import React from 'react';
 
 const LandCard = ({ acre, address, acre_price, img , Unit_of_land ,Money_unit }) => {
   return (
-    <div className="w-full md:w-[320px] bg-white rounded-xl overflow-hidden shadow-lg 
+    <div className="w-full sm:w-[320px] md:w-[320px]  bg-white rounded-xl overflow-hidden shadow-lg 
                     transform transition duration-500 ease-in-out hover:shadow-xl 
                     border border-[#1C2B2D]/10 group relative">
       {/* Image Section */}

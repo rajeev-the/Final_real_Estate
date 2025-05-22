@@ -208,7 +208,7 @@ const resetfilterinmobile = () => {
   return (
   <>
       
- <div className="hidden md:block w-full max-w-xl  ">
+ <div className="hidden md:block w-[30%]   md:w-[40%] max-w-xl  sticky top-4 self-start  mb-6 ">
     <div
       style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}
       className="sticky top-4 max-h-[98vh] overflow-y-auto text-[#1c2b2d] bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100"
@@ -400,145 +400,197 @@ const resetfilterinmobile = () => {
 {
 
 !iopen ? 
-<div  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className=" absolute  left-0 top-0 z-[999] w-full text-[#1c2b2d] bg-white p-4 rounded shadow-md">
-      <div className="flex justify-between items-center mb-6 pb-4 border-b-2 border-gray-100">
-    <h2 className="text-xl font-black tracking-tight">FILTERS</h2>
-    <div className="flex gap-2">
-      <button 
-        onClick={resetFilters}
-        className="text-sm font-bold py-2 px-4 bg-white border-2 border-gray-300 rounded-lg hover:bg-[#D65F00] hover:text-white hover:border-transparent transition-colors"
-      >
-        Reset
-      </button>
-      <button
-        onClick={applyFilters}
-        className="bg-[#1c2b2d] text-sm font-bold py-2 px-4 text-white rounded-lg hover:bg-[#D65F00] transition-colors"
-      >
-        Apply
-      </button>
-    </div>
-  </div>
+<div
+  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}
+  className="w-full absolute top-0 left-0 z-[999] bg-white text-[#1c2b2d] p-5 md:p-6 rounded-xl shadow-lg border    border-gray-100"
+>
 
-  {/* Location Input */}
-  <div className="mb-6 relative">
-    <label className="block text-sm font-bold mb-2">Location</label>
-    <input
-      type="text"
-      placeholder="All listed lands"
-      value={locationInput}
-      onChange={handleLocationChange}
-      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-[#1c2b2d] focus:ring-0"
-    />
-    {suggestions.length > 0 && (
-      <ul className="absolute top-full left-0 mt-2 z-50 w-full bg-white border-2 border-[#1c2b2d] rounded-lg shadow-xl max-h-48 overflow-y-auto">
-        {suggestions.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleSuggestionClick(item)}
-            className="px-4 py-3 text-sm hover:bg-gray-50 cursor-pointer border-b last:border-b-0 border-gray-100"
+    {/* Header */}
+      <div className="flex justify-between items-center gap-5 mb-6 pb-4 border-b-2 border-gray-100">
+        <h2 className="text-xl font-black tracking-tight">FILTERS</h2>
+        <div className="flex gap-2">
+          <button
+            onClick={resetFilters}
+            className="text-sm font-bold py-2 px-4 bg-white border-2 border-gray-300 rounded-lg hover:bg-[#D65F00] hover:text-white hover:border-transparent transition-colors"
           >
-            {item}
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-
-  {/* Filter Sections */}
-  {[
-    { 
-      label: "Land Size", 
-      unit: selectedLandUnit, 
-      setUnit: setSelectedLandUnit,
-      units: landUnits,
-      min: minLandSize,
-      setMin: setMinLandSize,
-      max: maxLandSize,
-      setMax: setMaxLandSize,
-      options: landSizeOptions
-    },
-    {
-      label: "Price",
-      unit: selectedPriceUnit,
-      setUnit: setSelectedPriceUnit,
-      units: priceUnits,
-      min: minPrice,
-      setMin: setMinPrice,
-      max: maxPrice,
-      setMax: setMaxPrice,
-      options: priceOptions
-    }
-  ].map((section, idx) => (
-    <div key={idx} className="mb-6 pb-4 border-b-2 border-gray-100">
-      <label className="block text-sm font-bold mb-3">{section.label}</label>
-      <select
-        value={section.unit}
-        onChange={(e) => section.setUnit(e.target.value)}
-        className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
-      >
-        <option value="">Select Unit</option>
-        {section.units.map(unit => (
-          <option key={unit} value={unit}>{unit}</option>
-        ))}
-      </select>
-      <div className="grid grid-cols-2 gap-3">
-        {renderSelect(section.options, "Min", section.min, section.setMin, true)}
-        {renderSelect(section.options, "Max", section.max, section.setMax, true)}
+            Reset
+          </button>
+          <button
+            onClick={applyFilters}
+            className="bg-[#1c2b2d] text-sm font-bold py-2 px-4 text-white rounded-lg hover:bg-[#D65F00] transition-colors"
+          >
+            Apply
+          </button>
+        </div>
       </div>
-    </div>
-  ))}
 
-  {/* Road Width Filter */}
-  <div className="mb-6 pb-4 border-b-2 border-gray-100">
-    <label className="block text-sm font-bold mb-3">Road Width (ft)</label>
-    <div className="grid grid-cols-2 gap-3">
-      {renderSelect(roadWidthOptions, "Min", minRoadWidth, setMinRoadWidth, true)}
-      {renderSelect(roadWidthOptions, "Max", maxRoadWidth, setMaxRoadWidth, true)}
-    </div>
+      {/* Blockmain Buttons */}
+      <div className="mb-4">
+        <div className="grid grid-cols-2 gap-2">
+          {blockmain.map((category) => (
+            <button
+              key={category}
+              onClick={() => {
+                setBlockmain(category);
+                if (category === "Top Rated") {
+                  setListfilterlist(maindata.top_rate);
+                } else {
+                  setListfilterlist(maindata.featured);
+                }
+              }}
+              className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors ${
+                Blockmain === category
+                  ? "bg-[#D65F00] text-white border-[#D65F00]"
+                  : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      
+
+      {/* Location Input */}
+      <div className="mb-6 relative">
+        <label className="block text-sm font-bold mb-2">Location</label>
+        <input
+          type="text"
+          placeholder="All listed lands"
+          value={locationInput}
+          onChange={handleLocationChange}
+          className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-[#1c2b2d] focus:ring-0"
+        />
+        {suggestions.length > 0 && (
+          <ul className="absolute top-full left-0 mt-2 z-50 w-full bg-white border-2 border-[#1c2b2d] rounded-lg shadow-xl max-h-48 overflow-y-auto">
+            {suggestions.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleSuggestionClick(item)}
+                className="px-4 py-3 text-sm hover:bg-gray-50 cursor-pointer border-b last:border-b-0 border-gray-100"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+     <div className="mb-6 pb-4 border-b-2 border-gray-100">
+  <label className="block text-sm font-bold mb-3">Land Size</label>
+  <select
+    value={selectedLandUnit}
+    onChange={(e) => setSelectedLandUnit(e.target.value)}
+    className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
+  >
+   <option value="">Select Unit</option>
+  <option value="Sq. Yd.">Sq. Yd.</option>
+  <option value="Acre">Acre</option>
+  <option value="Hectare">Hectare</option>
+    {/* Add or remove units as needed */}
+  </select>
+  <div className="grid grid-cols-2 gap-3">
+    {renderSelect(landSizeOptions, "Min", minLandSize, setMinLandSize, true)}
+    {renderSelect(landSizeOptions, "Max", maxLandSize, setMaxLandSize, true)}
   </div>
+</div>
 
-  {/* Frontage Filter */}
-  <div className="mb-6">
-    <label className="block text-sm font-bold mb-3">Frontage</label>
-    <select
-      value={selectedFrontageUnit}
-      onChange={(e) => setSelectedFrontageUnit(e.target.value)}
-      className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
-    >
-      <option value="">Select Unit</option>
-      {frontageUnits.map(unit => (
-        <option key={unit} value={unit}>{unit}</option>
-      ))}
-    </select>
-    <div className="grid grid-cols-2 gap-3">
-      {renderSelect(frontageOptions, "Min", minFrontage, setMinFrontage, true)}
-      {renderSelect(frontageOptions, "Max", maxFrontage, setMaxFrontage, true)}
-    </div>
+{/* Price Section */}
+<div className="mb-6 pb-4 border-b-2 border-gray-100">
+  <label className="block text-sm font-bold mb-3">Price</label>
+  <select
+    value={selectedPriceUnit}
+    onChange={(e) => setSelectedPriceUnit(e.target.value)}
+    className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
+  >
+    <option value="">Select Unit</option>
+    <option value="Thousand">Thousand</option>
+    <option value="Lakh">Lakh</option>
+    <option value="Crore">Crore</option>
+
+    {/* Add or remove currency units as needed */}
+  </select>
+  <div className="grid grid-cols-2 gap-3">
+    {renderSelect(priceOptions, "Min", minPrice, setMinPrice, true)}
+    {renderSelect(priceOptions, "Max", maxPrice, setMaxPrice, true)}
   </div>
+</div>
 
-  {/* Land Category Filter */}
-  <div className="mb-2">
-    <label className="block text-sm font-bold mb-3">Land Category</label>
-    <div className="grid grid-cols-2 gap-2">
-      {categories.map(category => (
-        <button
-          key={category}
-          onClick={() => setLandCategory(category)}
-          className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors
-            ${landCategory === category 
-              ? "bg-[#D65F00] text-white border-[#D65F00]"
-              : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"}`}
+
+      {/* Road Width */}
+      <div className="mb-6 pb-4 border-b-2 border-gray-100">
+        <label className="block text-sm font-bold mb-3">Road Width (ft)</label>
+        <div className="grid grid-cols-2 gap-3">
+          {renderSelect(roadWidthOptions, "Min", minRoadWidth, setMinRoadWidth, true)}
+          {renderSelect(roadWidthOptions, "Max", maxRoadWidth, setMaxRoadWidth, true)}
+        </div>
+      </div>
+
+      {/* Frontage */}
+      <div className="mb-6">
+        <label className="block text-sm font-bold mb-3">Frontage</label>
+        <select
+          value={selectedFrontageUnit}
+          onChange={(e) => setSelectedFrontageUnit(e.target.value)}
+          className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 text-sm mb-4 focus:border-[#1c2b2d]"
         >
-          {category}
-        </button>
-      ))}
-    </div>
-  </div> 
-    </div>   :""
+          <option value="">Select Unit</option>
+          {frontageUnits.map((unit) => (
+            <option key={unit} value={unit}>
+              {unit}
+            </option>
+          ))}
+        </select>
+        <div className="grid grid-cols-2 gap-3">
+          {renderSelect(frontageOptions, "Min", minFrontage, setMinFrontage, true)}
+          {renderSelect(frontageOptions, "Max", maxFrontage, setMaxFrontage, true)}
+        </div>
+      </div>
+
+      {/* Land Category */}
+      <div className="mb-2">
+        <label className="block text-sm font-bold mb-3">Land Category</label>
+      <div className="grid grid-cols-2 gap-2">
+  {categories.map((category) => (
+    <button
+      key={category.value}
+      onClick={() => {
+        setLandCategory(category.value);     // still used for filters
+        setSelectdumy(category.name);        // still available if needed for UI
+      }}
+      className={`text-sm px-4 py-2 rounded-lg border-2 transition-colors ${
+        landCategory === category.value       // <-- tracking by value now
+          ? "bg-[#D65F00] text-white border-[#D65F00]"
+          : "bg-white text-[#1c2b2d] border-gray-200 hover:bg-gray-50"
+      }`}
+    >
+      {category.name}
+    </button>
+  ))}
+</div>
+
+      </div>
+          <div className= "flex  items-end  justify-end gap-3  mt-2">
+          <button
+            onClick={resetFilters}
+            className="text-sm font-bold py-2 px-4 bg-white border-2 border-gray-300 rounded-lg hover:bg-[#D65F00] hover:text-white hover:border-transparent transition-colors"
+          >
+            Reset
+          </button>
+          <button
+            onClick={applyFilters}
+            className="bg-[#1c2b2d] text-sm font-bold py-2 px-4 text-white rounded-lg hover:bg-[#D65F00] transition-colors"
+          >
+            Apply
+          </button>
+        </div>
+    
  
-
-
+</div> 
+: ""
 }
+
     
 
 

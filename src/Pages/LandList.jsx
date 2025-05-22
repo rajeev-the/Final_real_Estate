@@ -65,7 +65,7 @@ onClick={() => setIsopen(!isopen)}
 </button>
 
         <div className='block md:hidden'>
-  <SortDropdown  margin={0} margin1={10} />
+  <SortDropdown  margin={0} margin1={12} />
 </div>
 
 
@@ -78,46 +78,41 @@ onClick={() => setIsopen(!isopen)}
   <section 
   
   
-  className='bg-white border relative z-0 border-slate-100 py-2 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8 shadow-xl hover:shadow-2xl transition-shadow duration-300  flex    justify-around  '>
+  className='  relative   py-2 md:py-12 sm:px-6 md:px-0 rounded-3xl mb-8   transition-shadow duration-300  flex    justify-around  '>
+{/* Filter should come first in the render flow */}
 
-<div className="sticky top-4 self-start max-h-[100vh]  ">
   <Filter 
     filterdata={Listfilterlist}  
     setRefreshFilter={setRefreshFilter}  
     iopen={isopen}  
     setIsopen={setIsopen} 
   />
-</div>
 
 
-   
-    <div className='w-full '>
+<div className='w-full z-10 '>
 
   <div className="flex flex-wrap justify-center gap-3 md:gap-2 lg:gap-20 mb-6 sm:p-5">
-  {locations.map((name, index) => (
-    <button
-   
-      key={index}
-      onClick={() => setSelectedLocation(name)}
-      className={`  text-sm md:text-lg font-medium py-1  px-3   md:px-8 rounded-full transition-all duration-300 
-        ${
-          selectedLocation === name
+    {locations.map((name, index) => (
+      <button
+        key={index}
+        onClick={() => setSelectedLocation(name)}
+        className={`text-sm md:text-lg font-medium py-1 px-3 md:px-8 rounded-full transition-all duration-300 
+          ${selectedLocation === name
             ? "bg-[#D65F00] text-white shadow-lg scale-105"
-            : "  bg-[#36383D]    hover:text-xl text-[white]   "
-        }`}
-    >
-      {name}
-    </button>
-  ))}
-</div>
+            : "bg-[#36383D] hover:text-xl text-[white]"
+          }`}
+      >
+        {name}
+      </button>
+    ))}
+  </div>
 
   <div className='flex flex-col gap-8 md:gap-12'>
-   
-      <div  className='flex flex-col group'>
-        <div className='flex items-center   justify-between   gap-4 mb-6 md:mb-8'>
-          <div className='flex items-center  gap-4'>
-            <div className='hidden md:block w-12 h-px bg-[#826CB0]'></div>
-          <Title level={3} 
+    <div className='flex flex-col group'>
+      <div className='flex items-center justify-between gap-4 mb-6 md:mb-8'>
+        <div className='flex items-center gap-4'>
+          <div className='hidden md:block w-12 h-px bg-[#826CB0]'></div>
+          <Title level={3}
             className='text-xl md:text-2xl font-serif !mb-0 !text-slate-800 !font-medium'
             style={{
               borderLeft: '4px solid #826CB0',
@@ -127,50 +122,34 @@ onClick={() => setIsopen(!isopen)}
             {selectedLocation}
             <span className='ml-3 text-[#826CB0] text-lg'>✧</span>
           </Title>
-
-
-          </div>
-          
-        <div className='hidden md:block'>
-  <SortDropdown  margin={60} margin1={0} />
-</div>
-
-        
-
-
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-3  w-full max-w-screen-2xl mx-auto px-4">
-
-
-  {Listfilterlist.map(property => (
-    <Link 
-      to={`/Land/${property.id}`} 
-      key={property.id}
-      className="w-full min-w-0 hover:scale-[99%] transition-transform"  
-    >  
-      <LandCard 
-        acre={property.land_size} 
-        address={property.address} 
-        acre_price={property.land_price}  
-        img={property.img}  
-        Unit_of_land={property.unit_of_land}
-        Money_unit={property.money_unit}
-        className="w-full h-full"
-
-      /> 
-    </Link>
-  ))}
-</div>
-
-
-
-        
-        <div className='mt-8 md:mt-12 border-t border-slate-100 group-last:border-0'></div>
+        <div className='hidden md:block'>
+          <SortDropdown margin={60} margin1={0} />
+        </div>
       </div>
 
+      <div className="z-10 grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-3 w-full max-w-screen-2xl mx-auto px-4">
+        {Listfilterlist.map(property => (
+          <Link to={`/Land/${property.id}`} key={property.id} className="w-auto min-w-0 hover:scale-[99%] transition-transform">
+            <LandCard 
+              acre={property.land_size}
+              address={property.address}
+              acre_price={property.land_price}
+              img={property.img}
+              Unit_of_land={property.unit_of_land}
+              Money_unit={property.money_unit}
+              className="w-full h-full"
+            />
+          </Link>
+        ))}
+      </div>
+
+      <div className='mt-8 md:mt-12 border-t border-slate-100 group-last:border-0'></div>
+    </div>
   </div>
-  </div>
+</div>
+
 
 
 
