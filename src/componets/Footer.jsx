@@ -1,14 +1,14 @@
 import React from "react";
 import cityscape from "../assets/footer.png";
 import logoimg from "../assets/logoo.jpg";
-import { FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaYoutube, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const socialIcons = [
-    { icon: <FaTwitter />, link: "#", name: "Twitter" },
-    { icon: <FaInstagram />, link: "#", name: "Instagram" },
-    { icon: <FaLinkedin />, link: "#", name: "LinkedIn" },
+    { icon: <FaYoutube />, link: "https://youtube.com/@landsathi_com?si=kt7Dpq4uDnnNH_Zp", name: "Youtube" },
+    { icon: <FaInstagram />, link: "https://www.instagram.com/landsathi.com_?igsh=MXI1ZmdtNmowcTJ5YQ==", name: "Instagram" },
+    { icon: <FaLinkedin />, link: "https://www.linkedin.com/company/landsathi-com/", name: "LinkedIn" },
   ];
   const footerLinks = [
     { title: "COMPANY", links: ["AboutUs" , "Careers",  "Terms"]  ,values:["AboutUs", "Careers", "terms"]},
@@ -111,9 +111,7 @@ const Footer = () => {
             <a href="#" className="text-gray-400 hover:text-[#D65F00] transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="text-gray-400 hover:text-[#D65F00] transition-colors">
-              Cookie Settings
-            </a>
+            
           </div>
         </div>
       </div>
