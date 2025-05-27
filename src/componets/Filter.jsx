@@ -78,7 +78,7 @@ const [selectdumy, setSelectdumy] = useState("")
   const landSizeOptions = rangeOptions(1, 100, 5);
   const priceOptions = rangeOptions(1, 50, 3);
   const frontageOptions = rangeOptions(100, 1500, 200);
-  const roadWidthOptions = rangeOptions(100, 1500, 200);
+  const roadWidthOptions = rangeOptions(33,400 ,30);
 
   const renderSelect = (options, placeholder, value, onChange) => (
     <select
