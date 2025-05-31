@@ -41,7 +41,7 @@ const Footer = () => {
             {socialIcons.map((social, i) => (
               <Link
                 key={i}
-                href={social.link}
+                to={social.link}
                 className="p-2 rounded-full bg-[#1a1a1a] hover:bg-[#D65F00] transition-all duration-300 group"
               >
                 {React.cloneElement(social.icon, { 

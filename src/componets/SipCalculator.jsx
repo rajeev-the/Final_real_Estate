@@ -60,26 +60,34 @@ const ClassicDesign = () => {
       <div className="flex flex-col md:flex-row">
         {/* Left Form Side */}
         <div className="w-full md:w-1/2 p-6 space-y-8">
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-xl font-bold text-gray-800">Monthly Investment</h2>
-              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold">
-                ₹ {monthlyInvestment.toLocaleString('en-IN')}
-              </span>
-            </div>
-            <input
-              type="range"
-              min="1000"
-              max="100000"
-              step="1000"
-              value={monthlyInvestment}
-              onChange={(e) => setMonthlyInvestment(+e.target.value)}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-            />
-            <div className="flex justify-between text-sm text-gray-500 mt-1">
-              <span>₹1K</span>
-              <span>₹1L</span>
-            </div>
+        <div>
+  <div className="flex justify-between items-center mb-2">
+    <h2 className="text-xl font-bold text-gray-800">Monthly Investment</h2>
+    <input
+      type="number"
+      min="1000"
+      max="100000"
+      step="1000"
+      value={monthlyInvestment}
+      onChange={(e) => setMonthlyInvestment(+e.target.value)}
+      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold w-28 text-right focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+  </div>
+  <input
+    type="range"
+    min="1000"
+    max="100000"
+    step="1000"
+    value={monthlyInvestment}
+    onChange={(e) => setMonthlyInvestment(+e.target.value)}
+    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+  />
+  <div className="flex justify-between text-sm text-gray-500 mt-1">
+    <span>₹1K</span>
+    <span>₹1L</span>
+  </div>
+
+
           </div>
           
           <div>
