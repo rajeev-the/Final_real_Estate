@@ -322,10 +322,10 @@ const Home = ({agent}) => {
       <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen    rounded-sm  bg-gray-50  ">
          <div className="border-t border-b border-yellow-400 py-4 px-6 flex justify-between items-center">
       <h2 className="sm:text-3xl  text-2xl    font-bold text-[#1C2B2D] ">Blogs</h2>
-      <button className="flex items-center gap-2 border border-blue-900 text-blue-900 px-4 py-2 rounded-full hover:bg-blue-50 transition">
+      <Link to={"/blog"} className="flex items-center gap-2 border border-blue-900 text-blue-900 px-4 py-2 rounded-full hover:bg-blue-50 transition">
         View More
         <FiArrowUpRight className="w-4 h-4" />
-      </button>
+      </Link>
     </div>
     
       <Blogs />

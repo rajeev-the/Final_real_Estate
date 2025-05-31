@@ -7,7 +7,7 @@ const ProjectableCard = ({ data }) => {
   const { title, subtitle, content, date } = data;
   
   return (
-     <div className="w-[400px]   mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+     <div className="sm:w-[400px] w-[350px]   mx-auto bg-white rounded-xl shadow-md overflow-hidden">
       {/* Image */}
       <div className="w-full h-52 sm:h-64 md:h-60 overflow-hidden">
         <img

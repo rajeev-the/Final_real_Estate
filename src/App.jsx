@@ -28,6 +28,7 @@ import Careers from './Pages/Careers';
 import Terms from './componets/Terms';
 import Filter from './componets/Filter';
 import { ListFilterProvider } from './Context/ListFilter';
+import BlogPage from './Pages/BlogPage';
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
               <Route path="AboutUs" element={<AboutUs />} />
               <Route path="landagent/:id" element={<LandAgent />} />
               <Route path="agents/:state" element={<StateAgenet />} />
+              <Route path="blog" element={<BlogPage/>} />
 
               
           
