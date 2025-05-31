@@ -28,11 +28,16 @@ const Blogs = () => {
 
     <div className="mt-10 ">                                    
 
-  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
-    {blogData.map((item, index) => (
-      <ProjectableCard key={index} data={item} />
-    ))}
-  </div>
+   <div className="flex flex-wrap justify-start  mb-6  sm:space-x-[105px] mt-6">
+        {blogData.map((item, index) => (
+          <div
+            key={index}
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
+          >
+            <ProjectableCard data={item} />
+          </div>
+        ))}
+      </div>
     </div>
 
 
