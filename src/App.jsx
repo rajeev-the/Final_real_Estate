@@ -29,6 +29,7 @@ import Terms from './componets/Terms';
 import Filter from './componets/Filter';
 import { ListFilterProvider } from './Context/ListFilter';
 import BlogPage from './Pages/BlogPage';
+import BlogDetails from './Pages/BlogDetails';
 
 const App = () => {
   return (
@@ -50,6 +51,8 @@ const App = () => {
               <Route path="landagent/:id" element={<LandAgent />} />
               <Route path="agents/:state" element={<StateAgenet />} />
               <Route path="blog" element={<BlogPage/>} />
+                <Route path="blog/:id" element={<BlogDetails/>} />
+
 
               
           

@@ -94,7 +94,8 @@ const Home = ({agent}) => {
   )
 
   }, []);
-  
+
+
  
 
   useEffect(() => {
@@ -108,9 +109,10 @@ const Home = ({agent}) => {
   }, [selectedLocation,property])
 
   const cities = [
+     { name: "HARYANA", image:HR, bg: "bg-gradient-to-t from-orange-800 to-red-300" },
     { name: "PUNJAB", image:PN, bg: "bg-gradient-to-t from-purple-900 to-blue-300" },
     { name: "Uttar Pradesh", image: UP, bg: "bg-gradient-to-t from-yellow-600 to-amber-300" },
-    { name: "HARYANA", image:HR, bg: "bg-gradient-to-t from-orange-800 to-red-300" },
+   
     { name: "Delhi", image:DL, bg: "bg-gradient-to-t from-green-700 to-teal-300" }
   ];
   
@@ -217,7 +219,7 @@ const Home = ({agent}) => {
   ) : (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-10 p-3">
       {cities.map((city, index) => (
-        <CityCard key={index} {...city} />
+        <CityCard  key={index} {...city} />
       ))}
     </div>
   )
@@ -318,10 +320,9 @@ const Home = ({agent}) => {
 
     <Realcompo/>
      <AgentHome/>
-    <Reviewsection/>
-      <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen    rounded-sm  bg-gray-50  ">
+       <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen    rounded-sm  bg-gray-50  ">
          <div className="border-t border-b border-yellow-400 py-4 px-6 flex justify-between items-center">
-      <h2 className="sm:text-3xl  text-2xl    font-bold text-[#1C2B2D] ">Blogs</h2>
+      <h2 className="sm:text-3xl  text-2xl    font-bold text-[#1C2B2D] ">knowledge hub</h2>
       <Link to={"/blog"} className="flex items-center gap-2 border border-blue-900 text-blue-900 px-4 py-2 rounded-full hover:bg-blue-50 transition">
         View More
         <FiArrowUpRight className="w-4 h-4" />
@@ -331,6 +332,8 @@ const Home = ({agent}) => {
       <Blogs />
     </div>
 
+    <Reviewsection/>
+    
         </div>
       </div>
     </>
