@@ -15,6 +15,7 @@ const Navbar = ({ data ,openLogin  }) => {
   const [active, setActive] = useState("Home"); 
   const boxRef = useRef(null);
   const [activeuser, setActiveUser] = useState(data ? false : true);
+   const [isSubOpen, setIsSubOpen] = useState(false);
   const navigation = useNavigate();
   const itemsRef = useRef([]);
   const secondRef = useRef();
@@ -126,6 +127,81 @@ const Navbar = ({ data ,openLogin  }) => {
             {item.name}
           </Link>
         ))}
+       <div className="relative group inline-block">
+         <Link  to={'/blog'}   onClick={() => setActive("blog")}
+            className={`relative px-4 py-2 transition duration-300 ease-in-out   cursor-pointer rounded-2xl ${
+              active === "blog"
+                ? "bg-[#D65F00] text-white shadow-lg"
+                : "text-white " 
+            }`}
+           >
+           Knowledge Hub
+         </Link>
+       
+         {/* Dropdown Panel */}
+        <div className="absolute left-0 w-52 sm:w-56 bg-white border border-gray-200 shadow-2xl rounded-2xl p-4 space-y-3 hidden group-hover:block z-50">
+  {/* Tool 1 */}
+  <div className="flex items-center gap-3 hover:bg-gray-100 p-3 rounded-xl transition-all duration-200 cursor-pointer group/tool">
+    <div className="bg-gradient-to-tr from-blue-500 to-purple-500 p-2 rounded-full text-white">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M12 20h9" />
+        <path d="M12 4h9" />
+        <path d="M4 12h16" />
+      </svg>
+    </div>
+    <div>
+      <h4 className="font-semibold text-sm text-gray-900">Blog</h4>
+      <p className="text-xs text-gray-500">Latest updates and insights</p>
+    </div>
+  </div>
+
+  {/* Tool 2 */}
+  
+   
+      {/* Tools with Submenu */}
+        <div
+          className="relative group/tool"
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent parent toggle
+            toggleSubDropdown();
+          }}
+        >
+          <div className="flex items-center justify-between gap-3 hover:bg-gray-100 p-3 rounded-xl transition cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="bg-gradient-to-tr from-green-500 to-teal-500 p-2 rounded-full text-white">🛠️</div>
+              <div>
+                <h4 className="font-semibold text-sm text-gray-900">Tools</h4>
+                <p className="text-xs text-gray-500">Utilities and resources</p>
+              </div>
+            </div>
+            <span className="text-gray-400 text-xs">▸</span>
+          </div>
+
+          {/* Submenu */}
+          <div
+            className={`
+              absolute top-0 left-full ml-0 w-48 bg-white border border-gray-200 rounded-xl shadow-xl p-2 space-y-2 z-50
+              transition-all duration-300
+              hidden group-hover/tool:block
+              ${isSubOpen ? "block" : ""}
+            `}
+          >
+            <div className="hover:bg-gray-100 p-2 rounded-lg text-sm text-gray-700 cursor-pointer">
+              SIP
+            </div>
+            <div className="cursor-pointer">
+                 <div className="hover:bg-gray-100 p-2 rounded-lg text-sm text-gray-700 ">
+              RERA
+            </div>
+            </div>
+            
+          </div>
+        </div>
+  </div>
+
+
+       </div>
+       
       </ul>
   
       {/* Login / User Profile */}
@@ -227,7 +303,7 @@ const Navbar = ({ data ,openLogin  }) => {
       {/* Mobile Menu Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="md:hidden text-white transition-colors hover:text-[#D65F00]"
+        className="md:hidden  text-white transition-colors hover:text-[#D65F00]"
       >
         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
       </button>
@@ -235,7 +311,7 @@ const Navbar = ({ data ,openLogin  }) => {
   
     {/* Mobile Menu - Now Placed at the End */}
     {isOpen && (
-      <div className="md:hidden  absolute top-full left-0 w-full bg-[#000000] shadow-lg p-4 flex flex-col items-center space-y-4">
+      <div className="md:hidden    absolute top-full left-0 w-full bg-[#000000] shadow-lg p-4 flex flex-col items-center space-y-4">
         {[
           { name: "Home", link: "/" },
           { name: "Explore Lands", link: "landlist" },

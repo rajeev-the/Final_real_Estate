@@ -70,7 +70,7 @@ const ClassicDesign = () => {
       step="1000"
       value={monthlyInvestment}
       onChange={(e) => setMonthlyInvestment(+e.target.value)}
-      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold w-28 text-right focus:outline-none focus:ring-2 focus:ring-blue-400"
+      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold w-30 text-right focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
   </div>
   <input

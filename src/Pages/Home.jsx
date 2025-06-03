@@ -16,6 +16,7 @@ import  AgentHome  from "../componets/AgentHome";
 import { useNavigate } from "react-router-dom";
 import { FiArrowUpRight } from 'react-icons/fi'; // from react-icons
 
+import ExploreTools from "../componets/ExploreTools";
 import Reviewsection from "../componets/Reviewsection"
 import SerachFilter from "../componets/SerachFilter";
 
@@ -321,16 +322,32 @@ const Home = ({agent}) => {
     <Realcompo/>
      <AgentHome/>
        <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen    rounded-sm  bg-gray-50  ">
-         <div className="border-t border-b border-yellow-400 py-4 px-6 flex justify-between items-center">
-      <h2 className="sm:text-3xl  text-2xl    font-bold text-[#1C2B2D] ">knowledge hub</h2>
-      <Link to={"/blog"} className="flex items-center gap-2 border border-blue-900 text-blue-900 px-4 py-2 rounded-full hover:bg-blue-50 transition">
-        View More
-        <FiArrowUpRight className="w-4 h-4" />
-      </Link>
-    </div>
+    <div className="bg-gradient-to-r from-white via-[#fff4ec] to-[#fff0e6] rounded-2xl shadow-lg px-6 sm:px-10 py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+  {/* Title Section */}
+  <div className="flex items-center gap-3 mb-4 sm:mb-0">
+    <div className="w-2 h-10 bg-[#D65F00] rounded-full"></div>
+    <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
+      Knowledge <span className="text-[#D65F00]">Hub</span>
+    </h2>
+  </div>
+
+  {/* CTA Button */}
+  <Link
+    to="/blog"
+    className="inline-flex items-center gap-2 bg-[#D65F00] text-white font-medium px-5 py-2.5 rounded-full shadow-md hover:bg-opacity-90 transition duration-200"
+  >
+    View More
+    <FiArrowUpRight className="w-4 h-4" />
+  </Link>
+</div>
+
+
+
     
       <Blogs />
     </div>
+        <ExploreTools/>
+        
 
     <Reviewsection/>
     

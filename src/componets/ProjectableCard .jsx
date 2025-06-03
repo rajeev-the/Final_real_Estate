@@ -32,9 +32,10 @@ const ProjectableCard = ({ title, subtitle, content, date ,img  }) => {
       {/* Content */}
       <div className="p-5 space-y-3">
         {/* Tag */}
-        <span className="inline-block bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">
-          Real Estate 
-        </span>
+<span className="inline-block bg-[#FFE9DC] text-[#D65F00] text-sm px-3 py-1 rounded-full font-medium shadow-sm">
+  Real Estate
+</span>
+
 
         {/* Title */}
        <h3 className="text-lg font-semibold text-gray-900">
