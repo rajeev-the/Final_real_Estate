@@ -45,7 +45,7 @@ const BlogDetails = () => {
   return (
 
     <>
-    <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="bg-gray-50 min-h-screen  mt-[50px]  md:px-[420px] py-12 font-sans">
+    <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className=" min-h-screen  mt-[50px]  p-3 md:px-[420px] py-12 font-sans">
       {/* Tag */}
       <div className="flex justify-between items-start flex-wrap gap-4">
         <span className="inline-block  text-gray-500   px-4 py-1 rounded-full text-sm font-normal border border-green-400">
@@ -129,10 +129,10 @@ const BlogDetails = () => {
         
 
     <div className="text-gray-700  text-xl" dangerouslySetInnerHTML={{ __html:blogDetails?.content}} />
-      
+       </div>
 
       </div>
-       <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen   mt-[50px]  rounded-sm  bg-gray-50  ">
+       <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen   md:mx-[200px]     rounded-sm   ">
          <div className="border-t border-b border-yellow-400 py-4 px-6 flex justify-between items-center">
       <h2 className="sm:text-3xl  text-2xl    font-bold text-[#1C2B2D] ">Read More</h2>
       <Link to={"/blog"} className="flex items-center gap-2 border border-blue-900 text-blue-900 px-4 py-2 rounded-full hover:bg-blue-50 transition">
@@ -143,7 +143,7 @@ const BlogDetails = () => {
     
       <Blogs />
     </div>
-    </div>
+   
     
 
     </>

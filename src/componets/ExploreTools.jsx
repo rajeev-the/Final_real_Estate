@@ -8,6 +8,7 @@ import {
   FaFileSignature, 
   FaHome 
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const ExploreTools = () => {
   const tools = [
@@ -16,7 +17,8 @@ const ExploreTools = () => {
       title: "RERA Search 71",
       description: "Access detailed information about real estate projects registered under the Real Estate Regulatory Authority (RERA).",
       icon: <FaSearch className="text-xl" />,
-      color: "bg-blue-500"
+      color: "bg-blue-500",
+      link:"/rera"
     },
     
     {
@@ -24,7 +26,9 @@ const ExploreTools = () => {
       title: "SIP Calculator",
       description: "Systematic Investment Plan calculator tool helps investors estimate the potential returns of their SIP investments over a specified period.",
       icon: <FaChartLine className="text-xl" />,
-      color: "bg-purple-500"
+      color: "bg-purple-500",
+      link:"/sip "
+
     },
     
    
@@ -33,7 +37,8 @@ const ExploreTools = () => {
       title: "Home Loan EMI",
       description: "Stamp duty and registration charges are crucial taxes that a homebuyer must pay to city authorities to register a property under their name.",
       icon: <FaHome className="text-xl" />,
-      color: "bg-indigo-500"
+      color: "bg-indigo-500",
+      link:""
     }
   ];
 
@@ -45,8 +50,9 @@ return (
         </h2>
             <div  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="grid   mb-[50px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                 {tools.map(tool => (
-                    <div
+                    <Link
                         key={tool.id}
+                        to={tool.link}
                         className={`p-12 rounded-lg shadow-md ${tool.color} text-white transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer`}
                     >
                         <div className="flex items-center mb-4">
@@ -54,7 +60,7 @@ return (
                             <h3 className="ml-3 text-xl font-bold">{tool.title}</h3>
                         </div>
                         <p className=" text-normal">{tool.description}</p>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

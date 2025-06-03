@@ -60,11 +60,7 @@ const projects = [
   },
 ];
 
-const Header = () => (
-  <div className=" text-black p-4 text-center text-2xl font-bold">
-    RERA Project Finder
-  </div>
-);
+
 
 const SearchBar = () => (
   <div className="flex justify-center p-4">
@@ -113,7 +109,7 @@ const ProjectTable = () => (
 
 const RERAProjectFinder = () => (
   <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen p-6 bg-white">
-    <Header />
+    <SearchBar />
    
     <ProjectTable />
   </div>

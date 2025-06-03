@@ -50,15 +50,15 @@ const BlogPage = () => {
     <div className="px-2 sm:px-8 md:px-[120px] sm:mt-10  mt-5">
       {/* Header */}
       <div  className="border-t   border-b border-yellow-400 py-4 px-0 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4">
-        <button  onClick={()=>  setValue("main1")} className="text-xl sm:text-2xl  font-bold text-[#1C2B2D]">
+        <h2   className="text-xl sm:text-2xl  font-bold text-[#1C2B2D]">
           Infographics
-        </button>
+        </h2>
     
 
       </div>
-      {
+      
            
-         Value === "main1" ?   <div className="flex flex-wrap justify-start  mb-6   sm:space-y-[50px] sm:space-x-[105px] mt-6">
+       <div className="flex flex-wrap justify-start  mb-6   sm:space-y-[50px] sm:space-x-[105px] mt-6">
         {blogData.map((item, index) => (
           <Link
             key={index}
@@ -68,12 +68,12 @@ const BlogPage = () => {
             <ProjectableCard  key={index} img={item.img} title={item.title}   content={item.content} date={item.date} />
           </Link>
         ))}
-      </div>  : Value === "main2" ?   <SipCalculator/> : Value === "main3" ? <RERAProjectFinder/> : ""
-        
+      {/* </div>    <SipCalculator/> : Value === "main3" ? <RERAProjectFinder/> : "" */}
+        </div>
 
 
 
-      }
+      
 
       {/* Blog Cards Section */}
 

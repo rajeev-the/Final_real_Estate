@@ -4,13 +4,13 @@ const SipCalculator = () => {
 
   
   return (
-    <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
+    <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen py-12 px-4">
       <div className="max-w-6xl mx-auto">
         
         
         <ClassicDesign />
         
-        <div className="mt-16 bg-white rounded-xl p-6 shadow-md">
+        <div className="mt-16 rounded-xl p-6 shadow-md">
           <h2 className="text-xl font-bold text-gray-800 mb-4">What is a SIP Calculator?</h2>
           <p className="text-gray-600 mb-3">
             A SIP (Systematic Investment Plan) calculator helps you estimate the returns on your mutual fund investments. 

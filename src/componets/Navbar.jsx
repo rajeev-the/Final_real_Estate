@@ -21,6 +21,7 @@ const Navbar = ({ data ,openLogin  }) => {
   const secondRef = useRef();
   const thridref = useRef()
   const forthref = useRef()
+   const fivehref = useRef()
   useGSAP(() => {
     const tl = gsap.timeline();
   
@@ -31,6 +32,18 @@ const Navbar = ({ data ,openLogin  }) => {
       duration: 1, 
       ease: "expo.out" 
     });
+     
+      tl.from(
+        forthref.current,
+        { 
+      y: -100, 
+      opacity: 1, 
+      duration: 1, 
+      ease: "expo.out" 
+    }
+      );
+    
+    
   
     // Animate Navigation Items (only when menu is open)
     if (!isOpen) {
@@ -40,11 +53,13 @@ const Navbar = ({ data ,openLogin  }) => {
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
       );
     }
-    if(forthref.current){ 
+ 
+
+       if (fivehref.current) {
       tl.fromTo(
-        forthref.current,
+        fivehref.current,
         { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 1,  stagger: 0.1, ease: "power2.out" }
       );
     }
   
@@ -56,6 +71,7 @@ const Navbar = ({ data ,openLogin  }) => {
         { opacity: 1, y: 0, duration: 1, ease: "expo.out" }
       );
     }
+  
   
     // Animate Logo
     if (secondRef.current) {
@@ -127,7 +143,7 @@ const Navbar = ({ data ,openLogin  }) => {
             {item.name}
           </Link>
         ))}
-       <div className="relative group inline-block">
+       <div ref={fivehref} className="relative group inline-block">
          <Link  to={'/blog'}   onClick={() => setActive("blog")}
             className={`relative px-4 py-2 transition duration-300 ease-in-out   cursor-pointer rounded-2xl ${
               active === "blog"
@@ -141,7 +157,7 @@ const Navbar = ({ data ,openLogin  }) => {
          {/* Dropdown Panel */}
         <div className="absolute left-0 w-52 sm:w-56 bg-white border border-gray-200 shadow-2xl rounded-2xl p-4 space-y-3 hidden group-hover:block z-50">
   {/* Tool 1 */}
-  <div className="flex items-center gap-3 hover:bg-gray-100 p-3 rounded-xl transition-all duration-200 cursor-pointer group/tool">
+  <Link  onClick={() => setActive("blog")} to={'/blog'} className="flex items-center gap-3 hover:bg-gray-100 p-3 rounded-xl transition-all duration-200 cursor-pointer group/tool">
     <div className="bg-gradient-to-tr from-blue-500 to-purple-500 p-2 rounded-full text-white">
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M12 20h9" />
@@ -153,7 +169,7 @@ const Navbar = ({ data ,openLogin  }) => {
       <h4 className="font-semibold text-sm text-gray-900">Blog</h4>
       <p className="text-xs text-gray-500">Latest updates and insights</p>
     </div>
-  </div>
+  </Link>
 
   {/* Tool 2 */}
   
@@ -163,7 +179,7 @@ const Navbar = ({ data ,openLogin  }) => {
           className="relative group/tool"
           onClick={(e) => {
             e.stopPropagation(); // Prevent parent toggle
-            toggleSubDropdown();
+           
           }}
         >
           <div className="flex items-center justify-between gap-3 hover:bg-gray-100 p-3 rounded-xl transition cursor-pointer">
@@ -186,14 +202,59 @@ const Navbar = ({ data ,openLogin  }) => {
               ${isSubOpen ? "block" : ""}
             `}
           >
-            <div className="hover:bg-gray-100 p-2 rounded-lg text-sm text-gray-700 cursor-pointer">
-              SIP
-            </div>
-            <div className="cursor-pointer">
-                 <div className="hover:bg-gray-100 p-2 rounded-lg text-sm text-gray-700 ">
-              RERA
-            </div>
-            </div>
+           <Link
+            to={'/sip'}
+  className="flex items-center gap-2 p-3 rounded-lg text-sm font-medium text-gray-700 cursor-pointer
+             hover:bg-green-50 hover:text-green-800
+             transition-colors duration-200 ease-in-out
+             hover:shadow-sm"
+>
+ 
+  <svg
+    className="w-5 h-5 text-green-600"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 12h6m-6 4h6m-6-8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    ></path>
+  </svg>
+  SIP
+</Link>
+
+<Link
+to={'/rera'}
+  className="flex items-center gap-2 p-3 rounded-lg text-sm font-medium text-gray-700 cursor-pointer
+             hover:bg-green-50 hover:text-green-800
+             transition-colors duration-200 ease-in-out
+             hover:shadow-sm"
+>
+ <svg
+  className="w-5 h-5 text-green-600"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle cx="11" cy="11" r="7" strokeLinecap="round" strokeLinejoin="round" />
+  <line
+    x1="16.65"
+    y1="16.65"
+    x2="21"
+    y2="21"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+</svg>
+
+  RERA
+</Link>
             
           </div>
         </div>
