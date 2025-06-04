@@ -34,7 +34,7 @@ const ExploreTools = () => {
    
     {
       id: 4,
-      title: "Home Loan EMI",
+      title: "Loan EMI Calculator",
       description: "Stamp duty and registration charges are crucial taxes that a homebuyer must pay to city authorities to register a property under their name.",
       icon: <FaHome className="text-xl" />,
       color: "bg-indigo-500",

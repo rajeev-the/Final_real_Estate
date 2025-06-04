@@ -127,7 +127,7 @@ const Navbar = ({ data ,openLogin  }) => {
           { name: "Home", link: "/" },
           { name: "Explore Lands", link: "landlist" },
           { name: "Our Partners", link: "agents" },
-          { name: "Contact Us", link: "ContactUs" },
+        
         ].map((item, index) => (
           <Link
             ref={(el) => (itemsRef.current[index] = el)}
@@ -143,6 +143,8 @@ const Navbar = ({ data ,openLogin  }) => {
             {item.name}
           </Link>
         ))}
+  
+
        <div ref={fivehref} className="relative group inline-block">
          <Link  to={'/blog'}   onClick={() => setActive("blog")}
             className={`relative px-4 py-2 transition duration-300 ease-in-out   cursor-pointer rounded-2xl ${
@@ -262,6 +264,20 @@ to={'/rera'}
 
 
        </div>
+
+        <Link
+            ref={(fivehref) => (itemsRef.current[4] = fivehref)}
+            
+            to={"/ContactUs"}
+            onClick={() => setActive("ContactUs")}
+            className={`relative px-4 py-2 transition duration-300 ease-in-out rounded-2xl ${
+              active === "ContactUs"
+                ? "bg-[#D65F00] text-white shadow-lg"
+                : "text-white hover:bg-white/40"
+            }`}
+          >
+           Contact Us
+          </Link>
        
       </ul>
   
