@@ -34,7 +34,7 @@ const ExploreTools = () => {
    
     {
       id: 4,
-      title: "Loan EMI Calculator",
+      title: "EMI Calculator",
       description: "Stamp duty and registration charges are crucial taxes that a homebuyer must pay to city authorities to register a property under their name.",
       icon: <FaHome className="text-xl" />,
       color: "bg-indigo-500",
@@ -43,11 +43,19 @@ const ExploreTools = () => {
   ];
 
 return (
-    <div className="bg-gray-50 py-2  px-4">
-        <div className="max-w-6xl  mx-auto">
-           <h2 className="sm:text-4xl text-2xl p-6  mb-6 font-bold text-center text-[#1C2B2D] "  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>
-           Explore Tools
-        </h2>
+    <div className=" py-2  px-4">
+        <div className="max-w-7xl  mx-auto">
+         
+            <div className=" mb-5 bg-gradient-to-r from-white via-[#fff4ec] to-[#fff0e6] rounded-2xl shadow-lg px-6 sm:px-10 py-2 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+  {/* Title Section */}
+  <div className="flex items-center gap-3 mb-4 sm:mb-0">
+    <div className="w-2 h-10 bg-[#D65F00] rounded-full"></div>
+    <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
+       Explore <span className="text-[#D65F00]">Tools</span>
+    </h2>
+  </div>
+  </div>
+
             <div  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="grid   mb-[50px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                 {tools.map(tool => (
                     <Link

@@ -234,12 +234,12 @@ const Home = ({agent}) => {
         <div  className="flex flex-col gap-4 md:gap-[40px] w-full sm:mt-[85px] mt-[50px] max-w-7xl mx-auto  sm:mb-[100px]">
         
           
-          <div className="bg-gradient-to-r from-white via-[#fff4ec] to-[#fff0e6] rounded-2xl shadow-lg px-6 sm:px-10 py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <div className="bg-gradient-to-r from-white via-[#fff4ec] to-[#fff0e6] rounded-2xl shadow-lg px-6 sm:px-10 py-2 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
   {/* Title Section */}
   <div className="flex items-center gap-3 mb-4 sm:mb-0">
     <div className="w-2 h-10 bg-[#D65F00] rounded-full"></div>
-    <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
-      Hot Selling Lands in  <span className="text-[#D65F00]">India</span>
+    <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
+      Discover Your Dream <span className="text-[#D65F00]">Land</span>
     </h2>
   </div>
   </div>
@@ -335,7 +335,7 @@ const Home = ({agent}) => {
   {/* Title Section */}
   <div className="flex items-center gap-3 mb-4 sm:mb-0">
     <div className="w-2 h-10 bg-[#D65F00] rounded-full"></div>
-    <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
+    <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
       Knowledge <span className="text-[#D65F00]">Hub</span>
     </h2>
   </div>

@@ -28,11 +28,18 @@ const Reviewsection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-8 bg-gray-50">
+    <section className="py-16 px-4 sm:px-2">
       <div className="max-w-7xl mx-auto">
-        <h2  className="sm:text-4xl text-2xl  font-bold text-center text-[#1C2B2D] mb-12"  style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }}>
-          What Our Users Say
-        </h2>
+       
+          <div className=" mb-5 bg-gradient-to-r from-white via-[#fff4ec] to-[#fff0e6] rounded-2xl shadow-lg px-6 sm:px-10 py-2 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+  {/* Title Section */}
+  <div className="flex items-center gap-3 mb-4 sm:mb-0">
+    <div className="w-2 h-10 bg-[#D65F00] rounded-full"></div>
+    <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1C2B2D] tracking-tight">
+      What Our Users <span className="text-[#D65F00]">Say</span>
+    </h2>
+  </div>
+  </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
           {reviews.map((review) => (

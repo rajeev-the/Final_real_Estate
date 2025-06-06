@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FiBookmark, FiFileText } from "react-icons/fi";
 
 const projects = [
@@ -60,8 +60,6 @@ const projects = [
   },
 ];
 
-
-
 const SearchBar = () => (
   <div className="flex justify-center p-4">
     <input
@@ -72,47 +70,67 @@ const SearchBar = () => (
   </div>
 );
 
-const TableHeader = () => (
-  <div className="grid grid-cols-5 bg-gray-100 font-semibold text-sm p-3">
-    <div>RERA Project Name</div>
-    <div>Developer</div>
-    <div>Location</div>
-    <div>Project Area</div>
-    <div>Proposed Post</div>
-    
-  </div>
-);
+const RERAProjectFinder = () => {
+  const [showScrollHint, setShowScrollHint] = useState(false);
 
-const ProjectRow = ({ project }) => (
-  <div className="grid grid-cols-5 space-x-3 border-b p-3 text-sm items-center">
-    <div>{project.name}</div>
-    <div>{project.developer}</div>
-    <div>{project.location}</div>
-    <div>
-      {project.area}
-      <br />
-      <span className="text-xs text-gray-500">FSI: {project.fsi}</span>
-    </div>
-    <div>{project.date}</div>
-    
-  </div>
-);
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      setShowScrollHint(true);
+      const timer = setTimeout(() => {
+        setShowScrollHint(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
-const ProjectTable = () => (
-  <div className="mx-4">
-    <TableHeader />
+  return (
+    <>
+      <SearchBar />
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+        {/* Grid Header */}
+       
+
+        {/* Scrollable Table Content */}
+     <div className="overflow-x-auto">
+  {/* Header row */}
+  <div className="min-w-[800px] flex justify-between p-4 text-gray-700 font-semibold text-sm bg-gray-100">
+    <div className="w-1/5 min-w-[150px]">Project Name</div>
+    <div className="w-1/5 min-w-[150px]">Developer</div>
+    <div className="w-1/5 min-w-[150px]">Location</div>
+    <div className="w-1/5 min-w-[150px]">Area & FSI</div>
+    <div className="w-1/5 min-w-[100px]">Date</div>
+  </div>
+
+  {/* Data rows */}
+  <div className="min-w-[800px]">
     {projects.map((project, index) => (
-      <ProjectRow key={index} project={project} />
+      <div
+        key={index}
+        className="flex justify-between p-4 text-sm border-b hover:bg-gray-50 transition-colors duration-200"
+      >
+        <div className="w-1/5 min-w-[150px]">{project.name}</div>
+        <div className="w-1/5 min-w-[150px]">{project.developer}</div>
+        <div className="w-1/5 min-w-[150px]">{project.location}</div>
+        <div className="w-1/5 min-w-[150px]">
+          {project.area}
+          <div className="text-gray-500 text-xs">FSI: {project.fsi}</div>
+        </div>
+        <div className="w-1/5 min-w-[100px]">{project.date}</div>
+      </div>
     ))}
   </div>
-);
+</div>
 
-const RERAProjectFinder = () => (
-  <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="min-h-screen p-6 bg-white">
-    <SearchBar />
-   
-    <ProjectTable />
-  </div>
-);
+        {/* Mobile scroll hint */}
+        {showScrollHint && (
+          <div className="md:hidden py-3 text-center text-sm text-blue-600 bg-blue-50 animate-pulse">
+            <span className="mr-2">👉</span> Scroll sideways to see all columns
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default RERAProjectFinder;
