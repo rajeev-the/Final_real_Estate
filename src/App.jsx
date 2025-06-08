@@ -23,7 +23,7 @@ import { FilterProvider } from './Context/FilterContext';
 import "react-toastify/dist/ReactToastify.css";
 import SerachPage from './Pages/SerachPage';
 import ScrollToTop from './componets/ScrollToTop';
-
+import EmIPage from './Pages/EmIPage'
 import RERA from './Pages/RERA'
 
 import Careers from './Pages/Careers';
@@ -56,6 +56,7 @@ const App = () => {
               <Route path="blog" element={<BlogPage/>} />
               <Route path="sip" element={<SIPPage/>} />
                <Route path="rera" element={<RERA/>} />
+               <Route path="emi" element={<EmIPage/>} />
                 <Route path="blog/:id" element={<BlogDetails/>} />
 
 

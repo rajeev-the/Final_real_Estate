@@ -259,6 +259,24 @@ to={'/rera'}
 
   RERA
 </Link>
+
+<Link
+to={'/emi'}
+  className="flex items-center gap-2 p-3 rounded-lg text-sm font-medium text-gray-700 cursor-pointer
+             hover:bg-green-50 hover:text-green-800
+             transition-colors duration-200 ease-in-out
+             hover:shadow-sm"
+>
+
+ <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+
+
+
+
+  EMI
+</Link>
             
           </div>
         </div>
@@ -395,7 +413,7 @@ to={'/rera'}
           { name: "Home", link: "/" },
           { name: "Explore Lands", link: "landlist" },
           { name: "Our Partners", link: "agents" },
-          { name: "Contact Us", link: "ContactUs" }
+        
          
         ].map((item) => (
           <Link
@@ -489,6 +507,7 @@ to={'/rera'}
   </svg>
             SIP
           </Link>
+
           <Link
             to="/rera"
             onClick={() => {
@@ -519,9 +538,39 @@ to={'/rera'}
 </svg>
             RERA
           </Link>
+              <Link
+            to="/emi"
+            onClick={() => {
+              setActive("blog");
+              setIsOpen(false);
+              setIsHubOpen(false);
+              setIsHubSubOpen(false);
+            }}
+            className="text-sm flex items-center gap-2 text-white hover:bg-black/20 py-2 px-2 rounded-lg text-left"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            EMI 
+          </Link>
+
+
+
           </div>
         )
-      }
+      }   <Link
+           
+            to={"/ContactUs"}
+            onClick={() => {
+              setActive("ContactUs");
+              setIsOpen(false);
+            }}
+            className={`w-full text-center py-2 text-white hover:bg-black/20 rounded-lg transition-colors ${
+              active === "ContactUs" ? "bg-black/30" : ""
+            }`}
+          >
+            Contac tUs
+          </Link>
         
         {activeuser ? (
       <button
