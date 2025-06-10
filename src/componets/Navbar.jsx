@@ -329,7 +329,7 @@ to={'/emi'}
      <Link
   ref={forthref}
   to="/login/agent"
-  className="hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
+  className="hidden sm:flex items-center text-white px-2 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
   <span className="flex items-center  justify-center ">
     
@@ -408,7 +408,7 @@ to={'/emi'}
      <Link
   ref={forthref}
   to="/login/agent"
-  className="md:hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
+  className="md:hidden sm:flex items-center text-white px-2 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
   <span className="flex items-center  justify-center ">
     
