@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import logoimg from '../assets/logoo.jpg';
 import { useGSAP  } from "@gsap/react"; 
 import gsap from "gsap";
+import free from "../assets/remove_the_backgroun-removebg-preview.png"
 
 
 const Navbar = ({ data ,openLogin  }) => {
@@ -206,30 +207,7 @@ const Navbar = ({ data ,openLogin  }) => {
               ${isSubOpen ? "block" : ""}
             `}
           >
-           <Link
-            to={'/sip'}
-  className="flex items-center gap-2 p-3 rounded-lg text-sm font-medium text-gray-700 cursor-pointer
-             hover:bg-green-50 hover:text-green-800
-             transition-colors duration-200 ease-in-out
-             hover:shadow-sm"
->
- 
-  <svg
-    className="w-5 h-5 text-green-600"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M9 12h6m-6 4h6m-6-8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-    ></path>
-  </svg>
-  SIP
-</Link>
+         
 
 <Link
 to={'/rera'}
@@ -259,6 +237,30 @@ to={'/rera'}
 
   RERA
 </Link>
+  <Link
+            to={'/sip'}
+  className="flex items-center gap-2 p-3 rounded-lg text-sm font-medium text-gray-700 cursor-pointer
+             hover:bg-green-50 hover:text-green-800
+             transition-colors duration-200 ease-in-out
+             hover:shadow-sm"
+>
+ 
+  <svg
+    className="w-5 h-5 text-green-600"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 12h6m-6 4h6m-6-8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    ></path>
+  </svg>
+  SIP
+</Link>
 
 <Link
 to={'/emi'}
@@ -267,10 +269,29 @@ to={'/emi'}
              transition-colors duration-200 ease-in-out
              hover:shadow-sm"
 >
+<svg
+    className="w-5 h-5 text-green-600"
+    fill="none"
+    stroke="green"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+>
 
- <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
+    <rect x="4" y="4" width="16" height="16" rx="2" ry="2" stroke="green" strokeWidth="2" fill="none"/>
+
+  
+   
+
+    <circle cx="8" cy="12" r="1" fill="green"/>
+    <circle cx="12" cy="12" r="1" fill="green"/>
+    <circle cx="16" cy="12" r="1" fill="green"/>
+    <circle cx="8" cy="16" r="1" fill="green"/>
+    <circle cx="12" cy="16" r="1" fill="green"/>
+    <circle cx="16" cy="16" r="1" fill="green"/>
+</svg>
+
+
 
 
 
@@ -310,10 +331,13 @@ to={'/emi'}
   to="/login/agent"
   className="hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
-  <span className="flex items-center  justify-center gap-2">
+  <span className="flex items-center  justify-center ">
     
     <span>Post Land</span>
-    {/* FREE Badge */}
+    <img src={free}  className="w-[40px] h-[30px] object-contain" alt="lfree" />
+
+
+
 
 
   </span>
@@ -386,9 +410,10 @@ to={'/emi'}
   to="/login/agent"
   className="md:hidden sm:flex items-center text-white px-4 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
-  <span className="flex items-center  justify-center gap-2">
+  <span className="flex items-center  justify-center ">
     
     <span>Post land</span>
+      <img src={free}  className="w-[40px] h-[30px] object-contain" alt="lfree" />
     {/* FREE Badge */}
    
 
@@ -481,32 +506,7 @@ to={'/emi'}
       {
         isHubSubOpen && (
           <div className="w-full flex flex-col space-y-2 pl-4">
-          <Link
-            to="/sip"
-            onClick={() => {
-              setActive("blog");
-              setIsOpen(false);
-              setIsHubOpen(false);
-              setIsHubSubOpen(false);
-            }}
-            className=" flex   items-center  gap-2 text-sm text-white hover:bg-black/20 py-2 px-2 rounded-lg text-left"
-          >
-              <svg
-    className="w-5 h-5 text-orange-400"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M9 12h6m-6 4h6m-6-8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-    ></path>
-  </svg>
-            SIP
-          </Link>
+         
 
           <Link
             to="/rera"
@@ -538,6 +538,32 @@ to={'/emi'}
 </svg>
             RERA
           </Link>
+           <Link
+            to="/sip"
+            onClick={() => {
+              setActive("blog");
+              setIsOpen(false);
+              setIsHubOpen(false);
+              setIsHubSubOpen(false);
+            }}
+            className=" flex   items-center  gap-2 text-sm text-white hover:bg-black/20 py-2 px-2 rounded-lg text-left"
+          >
+              <svg
+    className="w-5 h-5 text-orange-400"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 12h6m-6 4h6m-6-8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    ></path>
+  </svg>
+            SIP
+          </Link>
               <Link
             to="/emi"
             onClick={() => {
@@ -548,9 +574,27 @@ to={'/emi'}
             }}
             className="text-sm flex items-center gap-2 text-white hover:bg-black/20 py-2 px-2 rounded-lg text-left"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
+          <svg
+    className="w-5 h-5 text-orange-500"
+    fill="none"
+    stroke="orange"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+>
+
+    <rect x="4" y="4" width="16" height="16" rx="2" ry="2" stroke="orange" strokeWidth="2" fill="none"/>
+
+  
+   
+
+    <circle cx="8" cy="12" r="1" fill="orange"/>
+    <circle cx="12" cy="12" r="1" fill="orange"/>
+    <circle cx="16" cy="12" r="1" fill="orange"/>
+    <circle cx="8" cy="16" r="1" fill="orange"/>
+    <circle cx="12" cy="16" r="1" fill="orange"/>
+    <circle cx="16" cy="16" r="1" fill="orange"/>
+</svg>
             EMI 
           </Link>
 

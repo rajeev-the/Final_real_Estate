@@ -36,7 +36,11 @@ const LandList = () => {
    
 
     
-    setListfilterlist(property.filter((et)=>et.state == selectedLocation))
+   setListfilterlist(
+  property
+    .filter((et) => et.state === selectedLocation)
+    .sort((a, b) => a.sort_order - b.sort_order)
+);
     setDumy(maindata)
 
   }, [property,maindata ,selectedLocation,refreshFilter ]);

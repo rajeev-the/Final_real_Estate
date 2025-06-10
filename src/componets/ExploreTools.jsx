@@ -36,9 +36,9 @@ const ExploreTools = () => {
       id: 4,
       title: "EMI Calculator",
       description: "Stamp duty and registration charges are crucial taxes that a homebuyer must pay to city authorities to register a property under their name.",
-      icon: <FaHome className="text-xl" />,
+      icon: <FaCalculator className="text-xl" />,
       color: "bg-indigo-500",
-      link:""
+      link:"/emi"
     }
   ];
 

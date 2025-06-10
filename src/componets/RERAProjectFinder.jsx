@@ -1,64 +1,8 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FiBookmark, FiFileText } from "react-icons/fi";
 
-const projects = [
-  {
-    name: "SHANKAR VIHAR PHASE I",
-    developer: "SHANKAR VIHAR ASSOCIATES PHASE I",
-    location: "Nandurbar Shahade Nashik",
-    area: "72028.80",
-    fsi: "70047",
-    date: "Jun 2022",
-  },
-  {
-    name: "Chhoriya Residency Nandurbar Phase - 2",
-    developer: "Chhoriya and Kela Developers",
-    location: "Nandurbar Nandurbar Nashik",
-    area: "2454.12",
-    fsi: "2454.12",
-    date: "Dec 2018",
-  },
-  {
-    name: "BHANUDHAN PLAZA",
-    developer: "SHAH ENTERPRISES",
-    location: "Nandurbar Nandurbar Nashik",
-    area: "5467.95",
-    fsi: "4231.24",
-    date: "Dec 2023",
-  },
-  {
-    name: "K R SUNCITY",
-    developer: "KREATIONS ENTERPRISES PRIVATE LIMITED",
-    location: "Nandurbar Nandurbar Nashik",
-    area: "854.59",
-    fsi: "854.59",
-    date: "Jul 2018",
-  },
-  {
-    name: "Chhoriya Residency Nandurbar Phase -4",
-    developer: "Chhoriya and Kela Developers",
-    location: "Nandurbar Nandurbar Nashik",
-    area: "1173.83",
-    fsi: "1173.83",
-    date: "Mar 2023",
-  },
-  {
-    name: "MADHUBAN RESIDENCY",
-    developer: "INFINITY HEIGHTS PVT LIMITED",
-    location: "Nandurbar Nandurbar Nashik",
-    area: "7128.79",
-    fsi: "7128.79",
-    date: "Dec 2022",
-  },
-  {
-    name: "SWARUPA GOKULDHAM RESIDENCY",
-    developer: "TRINITY BUILDPRO",
-    location: "Nandurbar Nandurbar Nashik",
-    area: "3060.00",
-    fsi: "1004",
-    date: "Dec 2024",
-  },
-];
+
 
 const SearchBar = () => (
   <div className="flex justify-center p-4">
@@ -72,6 +16,7 @@ const SearchBar = () => (
 
 const RERAProjectFinder = () => {
   const [showScrollHint, setShowScrollHint] = useState(false);
+ const [projects,setProjects] = useState([])
 
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -82,7 +27,34 @@ const RERAProjectFinder = () => {
       }, 5000);
       return () => clearTimeout(timer);
     }
+  
+   
+
   }, []);
+
+useEffect(() => {
+   const getdata = async()=>{
+          try {
+
+            const res = await axios.get('https://finalbackend111.pythonanywhere.com/api/rerap/')
+            setProjects(res.data)
+            
+            
+          } catch (error) {
+            console.log(error)
+            
+          }        
+
+    }
+
+    getdata()
+ 
+}, [])
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+}
+
 
   return (
     <>
@@ -109,14 +81,14 @@ const RERAProjectFinder = () => {
         key={index}
         className="flex justify-between p-4 text-sm border-b hover:bg-gray-50 transition-colors duration-200"
       >
-        <div className="w-1/5 min-w-[150px]">{project.name}</div>
-        <div className="w-1/5 min-w-[150px]">{project.developer}</div>
-        <div className="w-1/5 min-w-[150px]">{project.location}</div>
+        <div className="w-1/5 min-w-[150px]">{project.RERA_Project_Name}</div>
+        <div className="w-1/5 min-w-[150px]">{project.Developer}</div>
+        <div className="w-1/5 min-w-[150px]">{project.Location}</div>
         <div className="w-1/5 min-w-[150px]">
-          {project.area}
-          <div className="text-gray-500 text-xs">FSI: {project.fsi}</div>
+          {project.Project_Area}
+          <div className="text-gray-500 text-xs">FSI: {project.Proposed_Post}</div>
         </div>
-        <div className="w-1/5 min-w-[100px]">{project.date}</div>
+        <div className="w-1/5 min-w-[100px]">{ project.date_field ?  formatDate(project.date_field):""}</div>
       </div>
     ))}
   </div>

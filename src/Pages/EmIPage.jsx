@@ -15,9 +15,24 @@ const EmIPage = () => {
     
       
        <div  className="border-t   border-b border-yellow-400 py-4 px-0 flex  justify-start items-start sm:items-center gap-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
+         <svg
+    className="w-10 h-10 text-orange-500"
+    fill="none"
+    stroke="orange"
+   strokeWidth="2"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <rect x="8" y="8" width="32" height="32" rx="4" ry="4" stroke="orange" strokeWidth="2" fill="none"/>
+    <rect x="12" y="12" width="24" height="6" fill="none" stroke="orange" strokeWidth="2"/>
+    <circle cx="14" cy="24" r="2" fill="orange"/>
+    <circle cx="22" cy="24" r="2" fill="orange"/>
+    <circle cx="30" cy="24" r="2" fill="orange"/>
+    <circle cx="14" cy="32" r="2" fill="orange"/>
+    <circle cx="22" cy="32" r="2" fill="orange"/>
+    <circle cx="30" cy="32" r="2" fill="orange"/>
+</svg>
+
         <h2   className="text-xl sm:text-2xl  font-bold text-[#1C2B2D]">
           EMI Calculator
         </h2>
@@ -29,7 +44,19 @@ const EmIPage = () => {
       {/* SIP Calculator Section - Centered and Bounded */}
       <div className="max-w-4xl mt-[20px] mx-auto">
         <HomeEmiCalculator/>
+        <div className="mt-16 rounded-xl p-6 shadow-md">
+  <h2 className="text-xl font-bold text-gray-800 mb-4">What is an EMI Calculator?</h2>
+  <p className="text-gray-600 mb-3">
+    An EMI (Equated Monthly Installment) calculator helps you determine the monthly repayment amount for loans. 
+    It allows you to calculate your EMI based on the loan amount, interest rate, and repayment tenure.
+  </p>
+  <p className="text-gray-600">
+    By adjusting the parameters, you can visualize how different loan terms impact your monthly payments, 
+    enabling better financial planning and loan management.
+  </p>
+</div>
       </div>
+      
     </div>
   </div>
 </>
