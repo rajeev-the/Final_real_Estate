@@ -171,7 +171,7 @@ const Navbar = ({ data ,openLogin  }) => {
       </svg>
     </div>
     <div>
-      <h4 className="font-semibold text-sm text-gray-900">Blog</h4>
+      <h4 className="font-semibold text-sm text-gray-900">Blogs</h4>
       <p className="text-xs text-gray-500">Latest updates and insights</p>
     </div>
   </Link>
@@ -492,7 +492,7 @@ to={'/emi'}
     <path d="M12 4h9" />
     <path d="M4 12h16" />
   </svg>
-            Blog
+            Blogs
 
           </Link>
           <div 
