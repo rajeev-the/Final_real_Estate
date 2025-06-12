@@ -33,8 +33,8 @@ const Blogs = () => {
 
     <div className="mt-2 p-5">                                    
 
-   <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="flex flex-wrap justify-start  mb-6  sm:space-x-[105px] ">
-        {blogData.map((item, index) => (
+   <div style={{ fontFamily: "Ascender Sans Narrow, sans-serif" }} className="flex flex-wrap justify-start  mb-6  sm:space-x-[105px] space-y-5 ">
+        {blogData.slice(0, 3).map((item, index) => (
           <Link 
           to={`/blog/${item.id}`} // Assuming each blog has a unique I`
             key={index}
