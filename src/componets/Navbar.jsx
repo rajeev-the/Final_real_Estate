@@ -334,7 +334,59 @@ to={'/emi'}
   <span className="flex items-center  justify-center ">
     
     <span>Post Land</span>
-    <img src={free}  className="w-[40px] h-[30px] object-contain" alt="lfree" />
+
+    <svg width="50" height="20" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        {/* Shine gradient */}
+        <linearGradient id="shineGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="transparent" />
+          <stop offset="50%" stopColor="#ffffff88" />
+          <stop offset="100%" stopColor="transparent" />
+        </linearGradient>
+
+        {/* Mask with animated shine */}
+        <mask id="shineMask">
+          <rect width="100" height="50" fill="white" />
+          <rect x="-50" y="0" width="50" height="50" fill="url(#shineGradient)">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              from="-100 0"
+              to="200 0"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </rect>
+        </mask>
+      </defs>
+
+      {/* Green background with shine mask */}
+      <rect
+        x="0"
+        y="0"
+        width="100"
+        height="50"
+        rx="8"
+        ry="8"
+        fill="#2E9E5B"
+        mask="url(#shineMask)"
+      />
+
+      {/* White bold text */}
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="white"
+        fontSize="28"
+        fontWeight="bold"
+        fontFamily="Arial, sans-serif"
+      >
+        FREE
+      </text>
+    </svg>
+
 
 
 
@@ -413,9 +465,62 @@ to={'/emi'}
   <span className="flex items-center  justify-center ">
     
     <span>Post land</span>
-      <img src={free}  className="w-[40px] h-[30px] object-contain" alt="lfree" />
-    {/* FREE Badge */}
-   
+    
+    <svg width="50" height="20" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        {/* Shine gradient */}
+        <linearGradient id="shineGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="transparent" />
+          <stop offset="50%" stopColor="#ffffff88" />
+          <stop offset="100%" stopColor="transparent" />
+        </linearGradient>
+
+        {/* Mask with animated shine */}
+        <mask id="shineMask">
+          <rect width="100" height="50" fill="white" />
+          <rect x="-50" y="0" width="50" height="50" fill="url(#shineGradient)">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              from="-100 0"
+              to="200 0"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </rect>
+        </mask>
+      </defs>
+
+      {/* Green background with shine mask */}
+      <rect
+        x="0"
+        y="0"
+        width="100"
+        height="50"
+        rx="8"
+        ry="8"
+        fill="#2E9E5B"
+        mask="url(#shineMask)"
+      />
+
+      {/* White bold text */}
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="white"
+        fontSize="28"
+        fontWeight="bold"
+        fontFamily="Arial, sans-serif"
+      >
+        FREE
+      </text>
+    </svg>
+
+
+
+
 
   </span>
 </Link>
