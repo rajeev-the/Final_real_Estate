@@ -464,9 +464,9 @@ to={'/emi'}
 >
   <span className="flex items-center  gap-1 justify-center ">
     
-    <span className="text-[12px]">Post land</span>
+    <span className="text-[10px]">Post land</span>
     
-    <svg width="30" height="20" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+    <svg width="20" height="10" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
       <defs>
         {/* Shine gradient */}
         <linearGradient id="shineGradient" x1="0" y1="0" x2="1" y2="0">
