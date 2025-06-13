@@ -460,13 +460,13 @@ to={'/emi'}
      <Link
   ref={forthref}
   to="/login/agent"
-  className="md:hidden sm:flex items-center text-white px-2 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
+  className="md:hidden sm:flex items-center text-white px-1 py-1 rounded-lg font-medium border-2 transition-colors bg-black hover:text-white hover:border-[#D65F00]"
 >
-  <span className="flex items-center  justify-center ">
+  <span className="flex items-center  gap-1 justify-center ">
     
-    <span>Post land</span>
+    <span className="text-[12px]">Post land</span>
     
-    <svg width="50" height="20" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+    <svg width="30" height="20" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
       <defs>
         {/* Shine gradient */}
         <linearGradient id="shineGradient" x1="0" y1="0" x2="1" y2="0">
