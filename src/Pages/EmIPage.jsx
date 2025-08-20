@@ -34,7 +34,7 @@ const EmIPage = () => {
 </svg>
 
         <h2   className="text-xl sm:text-2xl  font-bold text-[#1C2B2D]">
-          EMI Calculator
+          ROI Calculator
         </h2>
     
 
@@ -45,10 +45,10 @@ const EmIPage = () => {
       <div className="max-w-4xl mt-[20px] mx-auto">
         <HomeEmiCalculator/>
         <div className="mt-16 rounded-xl p-6 shadow-md">
-  <h2 className="text-xl font-bold text-gray-800 mb-4">What is an EMI Calculator?</h2>
+  <h2 className="text-xl font-bold text-gray-800 mb-4">What is an ROI Calculator?</h2>
   <p className="text-gray-600 mb-3">
-    An EMI (Equated Monthly Installment) calculator helps you determine the monthly repayment amount for loans. 
-    It allows you to calculate your EMI based on the loan amount, interest rate, and repayment tenure.
+    An ROI (Equated Monthly Installment) calculator helps you determine the monthly repayment amount for loans. 
+    It allows you to calculate your ROI based on the loan amount, interest rate, and repayment tenure.
   </p>
   <p className="text-gray-600">
     By adjusting the parameters, you can visualize how different loan terms impact your monthly payments, 

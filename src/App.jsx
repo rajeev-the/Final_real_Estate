@@ -56,7 +56,7 @@ const App = () => {
               <Route path="blog" element={<BlogPage/>} />
               <Route path="sip" element={<SIPPage/>} />
                <Route path="rera" element={<RERA/>} />
-               <Route path="emi" element={<EmIPage/>} />
+               <Route path="roi" element={<EmIPage/>} />
                 <Route path="blog/:id" element={<BlogDetails/>} />
 
 

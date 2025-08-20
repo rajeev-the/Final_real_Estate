@@ -263,7 +263,7 @@ to={'/rera'}
 </Link>
 
 <Link
-to={'/emi'}
+to={'/roi'}
   className="flex items-center gap-2 p-3 rounded-lg text-sm font-medium text-gray-700 cursor-pointer
              hover:bg-green-50 hover:text-green-800
              transition-colors duration-200 ease-in-out
@@ -296,7 +296,7 @@ to={'/emi'}
 
 
 
-  EMI
+  ROI
 </Link>
             
           </div>
@@ -670,7 +670,7 @@ to={'/emi'}
             SIP
           </Link>
               <Link
-            to="/emi"
+            to="/roi"
             onClick={() => {
               setActive("blog");
               setIsOpen(false);
@@ -700,7 +700,7 @@ to={'/emi'}
     <circle cx="12" cy="16" r="1" fill="orange"/>
     <circle cx="16" cy="16" r="1" fill="orange"/>
 </svg>
-            EMI 
+            ROI 
           </Link>
 
 
