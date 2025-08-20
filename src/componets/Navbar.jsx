@@ -718,7 +718,7 @@ to={'/emi'}
               active === "ContactUs" ? "bg-black/30" : ""
             }`}
           >
-            Contac tUs
+            Contact Us
           </Link>
         
         {activeuser ? (
