@@ -5,7 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import logoimg from '../assets/logoo.jpg';
+import logoimg from '../assets/test5.png';
+// E:\test-1\Final_real_Estate\src\assets\WhatsApp Image 2025-12-30 at 9.35.29 PM.jpeg
+// E:\test-1\Final_real_Estate\src\assets\landsathi_no_bg.png
+// E:\test-1\Final_real_Estate\src\assets\new-2.png
+// E:\test-1\Final_real_Estate\src\assets\Gemini_Generated_Image_mgncblmgncblmgnc.png
+// Final_real_Estate\src\assets\new4.png
 import { useGSAP  } from "@gsap/react"; 
 import gsap from "gsap";
 import free from "../assets/remove_the_backgroun-removebg-preview.png"
@@ -113,14 +118,10 @@ const Navbar = ({ data ,openLogin  }) => {
   return (
     <nav ref={boxRef} className="fixed top-0 left-0 w-full z-50 bg-[#36383D] py-2 px-6 md:px-2 flex justify-between items-center">
     {/* Logo */}
-    <div>
-      <img 
-        ref={secondRef} 
-        src={logoimg} 
-        alt="Real Estate Logo" 
-        className="sm:h-16 sm:w-26 h-15 w-20 rounded-md " 
-      />
-    </div>
+<div className="flex items-center overflow-visible">
+<img ref={secondRef} src={logoimg} alt="Real Estate Logo" className="h-20 w-60 object-contain bg-transparent scale-100 origin-left" />
+</div>
+
   
     {/* Right Section: Navigation + Login/Profile + Mobile Button */}
     <div className="flex-1  ml-[40px] flex justify-start items-center space-x-6">
