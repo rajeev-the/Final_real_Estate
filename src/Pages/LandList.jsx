@@ -39,7 +39,14 @@ const LandList = () => {
    setListfilterlist(
   property
     .filter((et) => et.state === selectedLocation)
-    .sort((a, b) => a.sort_order - b.sort_order)
+    .sort((a, b) => {
+      // First sort by sort_order if it exists
+      if (a.sort_order !== b.sort_order) {
+        return a.sort_order - b.sort_order;
+      }
+      // Then sort by id in descending order (most recent first)
+      return b.id - a.id;
+    })
 );
     setDumy(maindata)
 
