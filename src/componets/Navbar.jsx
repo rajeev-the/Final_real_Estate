@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import logoimg from '../assets/test5.png';
+import logoimg from '../assets/logoo.jpg';
 // E:\test-1\Final_real_Estate\src\assets\WhatsApp Image 2025-12-30 at 9.35.29 PM.jpeg
 // E:\test-1\Final_real_Estate\src\assets\landsathi_no_bg.png
 // E:\test-1\Final_real_Estate\src\assets\new-2.png
